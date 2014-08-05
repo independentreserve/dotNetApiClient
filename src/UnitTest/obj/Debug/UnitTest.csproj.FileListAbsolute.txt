@@ -1,0 +1,13 @@
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\UnitTest.dll
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\UnitTest.pdb
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\obj\Debug\UnitTest.dll
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\obj\Debug\UnitTest.pdb
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\IndependentReserve.DotNetClientApi.dll
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\nunit.framework.dll
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\IndependentReserve.DotNetClientApi.pdb
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\nunit.framework.xml
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\obj\Debug\UnitTest.csprojResolveAssemblyReference.cache
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Projects\AAT\IndependentReserve\DotNetClientApi\src\UnitTest\bin\Debug\Newtonsoft.Json.xml
