@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace IndependentReserve.DotNetClientApi
 {
     /// <summary>
-    /// IndependentReserver API client, implements IDisposable
+    /// IndependentReserve API client, implements IDisposable
     /// </summary>
     public class Client:IDisposable
     {
