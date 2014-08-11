@@ -17,9 +17,8 @@ namespace IndependentReserve.DotNetClientApi
     /// </summary>
     public class Client:IDisposable
     {
-        private ulong _nonce;
-        private string _apiKey;
-        private string _apiSecret;
+        private readonly string _apiKey;
+        private readonly string _apiSecret;
 
         private HttpClient _client;
 
@@ -109,40 +108,6 @@ namespace IndependentReserve.DotNetClientApi
             return new Client(apiKey, apiSecret, uri);
         }
         #endregion //Factory
-
-        #region IDisposable
-        private bool _isDisposed;
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_isDisposed)
-            {
-                return;
-            }
-
-            if (disposing)
-            {
-                if (_client != null)
-                {
-                    _client.Dispose();
-                    _client = null;
-                }
-            }
-
-            _isDisposed = true;
-        }
-
-        ~Client()
-        {
-            Dispose(false);
-        }
-        #endregion //IDisposable
 
         #region Public API
         /// <summary>
@@ -766,5 +731,39 @@ namespace IndependentReserve.DotNetClientApi
             return retval;
         }
         #endregion //Helpers
+
+        #region IDisposable
+        private bool _isDisposed;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                if (_client != null)
+                {
+                    _client.Dispose();
+                    _client = null;
+                }
+            }
+
+            _isDisposed = true;
+        }
+
+        ~Client()
+        {
+            Dispose(false);
+        }
+        #endregion //IDisposable
     }
 }
