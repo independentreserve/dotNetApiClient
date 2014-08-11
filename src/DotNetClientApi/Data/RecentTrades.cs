@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace IndependentReserve.DotNetClientApi.Data
 {
+    /// <summary>
+    /// Represents collection of recent trades
+    /// </summary>
     public class RecentTrades
     {
         /// <summary>
@@ -15,12 +16,12 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// <summary>
         /// Primary Currency the trades are in
         /// </summary>
-        public string PrimaryCurrencyCode { get; set; }
+        public CurrencyCode PrimaryCurrencyCode { get; set; }
 
         /// <summary>
         /// Secondary Currency the trades are in
         /// </summary>
-        public string SecondaryCurrencyCode { get; set; }
+        public CurrencyCode SecondaryCurrencyCode { get; set; }
 
         /// <summary>
         /// UTC Timestamp when this was created

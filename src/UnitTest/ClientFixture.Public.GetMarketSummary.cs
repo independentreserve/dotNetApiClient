@@ -8,7 +8,7 @@ namespace UnitTest
         [Test]
         public void GetMarketSummary()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 var marketSummary = client.GetMarketSummary(CurrencyCode.Xbt, CurrencyCode.Usd);
 

@@ -1,5 +1,8 @@
 ﻿namespace IndependentReserve.DotNetClientApi.Data
 {
+    /// <summary>
+    /// Defines possible order types
+    /// </summary>
     public enum OrderType
     {
         MarketBid = 0,

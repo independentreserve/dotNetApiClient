@@ -21,12 +21,12 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// <summary>
         /// Primary Currency this Orderbook is in
         /// </summary>
-        public string PrimaryCurrencyCode { get; set; }
+        public CurrencyCode PrimaryCurrencyCode { get; set; }
 
         /// <summary>
         /// Secondary Currency this Orderbook is in
         /// </summary>
-        public string SecondaryCurrencyCode { get; set; }
+        public CurrencyCode SecondaryCurrencyCode { get; set; }
 
         /// <summary>
         /// UTC Timestamp when this was created

@@ -8,7 +8,7 @@ namespace UnitTest
 		[Test]
         public void GetTradeHistorySummary()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 var tradeHistory = client.GetTradeHistorySummary(CurrencyCode.Xbt, CurrencyCode.Usd, 24);
 

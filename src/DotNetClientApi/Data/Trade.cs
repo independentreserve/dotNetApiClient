@@ -2,6 +2,9 @@
 
 namespace IndependentReserve.DotNetClientApi.Data
 {
+    /// <summary>
+    /// Represent one trade action
+    /// </summary>
     public class Trade
     {
         /// <summary>
