@@ -29,8 +29,6 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="baseUri"></param>
         private Client(Uri baseUri)
         {
-            _nonce = (ulong)DateTime.UtcNow.Ticks;
-
             _client = new HttpClient();
             _client.BaseAddress = baseUri;
         }
@@ -45,8 +43,6 @@ namespace IndependentReserve.DotNetClientApi
         {
             _apiKey = apiKey;
             _apiSecret = apiSecret;
-
-            _nonce = (ulong)DateTime.UtcNow.Ticks;
 
             _client = new HttpClient();
             _client.BaseAddress = baseUri;
