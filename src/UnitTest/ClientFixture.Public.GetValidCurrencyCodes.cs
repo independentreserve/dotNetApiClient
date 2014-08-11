@@ -10,7 +10,7 @@ namespace UnitTest
         [Test]
         public void GetValidPrimaryCurrencyCodes()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 IEnumerable<CurrencyCode> currencyCodes = client.GetValidPrimaryCurrencyCodes();
 
@@ -22,7 +22,7 @@ namespace UnitTest
         [Test]
         public void GetValidSecondaryCurrencyCodes()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 IEnumerable<CurrencyCode> currencyCodes = client.GetValidSecondaryCurrencyCodes();
 

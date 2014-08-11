@@ -8,7 +8,7 @@
         /// <summary>
         /// Buy or Sell order
         /// </summary>
-        public string OrderType { get; set; }
+        public OrderType OrderType { get; set; }
 
         /// <summary>
         /// Price in Secondary Currency

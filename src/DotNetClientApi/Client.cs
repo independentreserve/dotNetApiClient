@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using Newtonsoft.Json;
@@ -315,14 +317,338 @@ namespace IndependentReserve.DotNetClientApi
 
         #endregion //Public API
 
+        #region Private API
+
+        /// <summary>
+        /// Places new limit bid / offer order. A Limit Bid is a buy order and a Limit Offer is a sell order
+        /// </summary>
+        /// <param name="primaryCurrency">The digital currency code of limit order</param>
+        /// <param name="secondaryCurrency">The fiat currency of limit order</param>
+        /// <param name="orderType">The type of limit order</param>
+        /// <param name="price">The price in secondary currency to buy/sell</param>
+        /// <param name="volume">The volume to buy/sell in primary currency</param>
+        /// <returns>newly created limit order</returns>
+        public BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return PlaceLimitOrderAsync(primaryCurrency, secondaryCurrency, orderType, price, volume).Result;
+        }
+
+        /// <summary>
+        /// Places new limit bid / offer order. A Limit Bid is a buy order and a Limit Offer is a sell order
+        /// </summary>
+        /// <param name="primaryCurrency">The digital currency code of limit order</param>
+        /// <param name="secondaryCurrency">The fiat currency of limit order</param>
+        /// <param name="orderType">The type of limit order</param>
+        /// <param name="price">The price in secondary currency to buy/sell</param>
+        /// <param name="volume">The volume to buy/sell in primary currency</param>
+        /// <returns>newly created limit order</returns>
+        public async Task<BankOrder> PlaceLimitOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<BankOrder>("/Private/PlaceLimitOrder", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                primaryCurrencyCode = primaryCurrency.ToString(),
+                secondaryCurrencyCode = secondaryCurrency.ToString(),
+                orderType=orderType.ToString(),
+                price=price,
+                volume=volume
+            });
+        }
+
+        /// <summary>
+        /// Place new market bid / offer order. A Market Bid is a buy order and a Market Offer is a sell order
+        /// </summary>
+        /// <param name="primaryCurrency">The digital currency code of market order</param>
+        /// <param name="secondaryCurrency">The fiat currency of market order</param>
+        /// <param name="orderType">The type of market order</param>
+        /// <param name="volume">The volume to buy/sell in primary currency</param>
+        /// <returns>newly created limit order</returns>
+        public BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency,
+            OrderType orderType, decimal volume)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return PlaceMarketOrderAsync(primaryCurrency, secondaryCurrency, orderType, volume).Result;
+        }
+
+        /// <summary>
+        /// Place new market bid / offer order. A Market Bid is a buy order and a Market Offer is a sell order
+        /// </summary>
+        /// <param name="primaryCurrency">The digital currency code of market order</param>
+        /// <param name="secondaryCurrency">The fiat currency of market order</param>
+        /// <param name="orderType">The type of market order</param>
+        /// <param name="volume">The volume to buy/sell in primary currency</param>
+        /// <returns>newly created limit order</returns>
+        public async Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<BankOrder>("/Private/PlaceMarketOrder", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                primaryCurrencyCode = primaryCurrency.ToString(),
+                secondaryCurrencyCode = secondaryCurrency.ToString(),
+                orderType = orderType.ToString(),
+                volume = volume
+            });
+        }
+
+        /// <summary>
+        /// Cancels a previously placed order
+        /// </summary>
+        /// <param name="orderGuid">The guid of currently open or partially filled order</param>
+        /// <returns>cancelled order</returns>
+        /// <remarks>
+        /// The order must be in either 'Open' or 'PartiallyFilled' status to be valid for cancellation. You can retrieve list of Open and Partially Filled orders via the <see cref="GetOpenOrdersAsync"/> or <see cref="GetOpenOrders"/>  methods.
+        /// </remarks>
+        public BankOrder CancelOrder(Guid orderGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return CancelOrderAsync(orderGuid).Result;
+        }
+
+        /// <summary>
+        /// Cancels a previously placed order
+        /// </summary>
+        /// <param name="orderGuid">The guid of currently open or partially filled order</param>
+        /// <returns>cancelled order</returns>
+        /// <remarks>
+        /// The order must be in either 'Open' or 'PartiallyFilled' status to be valid for cancellation. You can retrieve list of Open and Partially Filled orders via the <see cref="GetOpenOrdersAsync"/> or <see cref="GetOpenOrders"/>  methods.
+        /// </remarks>
+        public async Task<BankOrder> CancelOrderAsync(Guid orderGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<BankOrder>("/Private/CancelOrder", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                orderGuid = orderGuid.ToString()
+            });
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, with your currently Open and Partially Filled orders
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of orders</param>
+        /// <param name="secondaryCurrency">The secondary currency of orders</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your currently Open and Partially Filled orders</returns>
+        public Page<BankHistoryOrder> GetOpenOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetOpenOrdersAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, with your currently Open and Partially Filled orders
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of orders</param>
+        /// <param name="secondaryCurrency">The secondary currency of orders</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your currently Open and Partially Filled orders</returns>
+        public async Task<Page<BankHistoryOrder>> GetOpenOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<Page<BankHistoryOrder>>("/Private/GetOpenOrders", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                primaryCurrencyCode = primaryCurrency.ToString(),
+                secondaryCurrencyCode = secondaryCurrency.ToString(),
+                pageIndex = pageIndex,
+                pageSize = pageSize
+            });
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, with your Closed and Cancelled orders
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of orders</param>
+        /// <param name="secondaryCurrency">The secondary currency of orders</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
+        /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your Closed and Cancelled orders</returns>
+        public Page<BankHistoryOrder> GetClosedOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetClosedOrdersAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, with your Closed and Cancelled orders
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of orders</param>
+        /// <param name="secondaryCurrency">The secondary currency of orders</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
+        /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your Closed and Cancelled orders</returns>
+        public async Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode primaryCurrency,CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<Page<BankHistoryOrder>>("/Private/GetClosedOrders", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                primaryCurrencyCode = primaryCurrency.ToString(),
+                secondaryCurrencyCode = secondaryCurrency.ToString(),
+                pageIndex = pageIndex,
+                pageSize = pageSize
+            });
+        }
+
+        /// <summary>
+        /// Retrieves information about your Independent Reserve accounts in digital and fiat currencies
+        /// </summary>
+        public IEnumerable<Account> GetAccounts()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetAccountsAsync().Result;
+        }
+
+        /// <summary>
+        /// Retrieves information about your Independent Reserve accounts in digital and fiat currencies
+        /// </summary>
+        public async Task<IEnumerable<Account>> GetAccountsAsync()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<IEnumerable<Account>>("/Private/GetAccounts", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+            });
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, containing all transactions made on an account
+        /// </summary>
+        /// <param name="accountGuid">The Guid of your Independent Reseve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
+        /// <param name="fromTimestampUtc">The timestamp in UTC from which you want to retrieve transactions</param>
+        /// <param name="toTimestampUtc">The timestamp in UTC until which you want to retrieve transactions</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, containing all transactions made on an account</returns>
+        public Page<Transaction>  GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetTransactionsAsync(accountGuid, fromTimestampUtc, toTimestampUtc, pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, containing all transactions made on an account
+        /// </summary>
+        /// <param name="accountGuid">The Guid of your Independent Reseve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
+        /// <param name="fromTimestampUtc">The timestamp in UTC from which you want to retrieve transactions</param>
+        /// <param name="toTimestampUtc">The timestamp in UTC until which you want to retrieve transactions</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, containing all transactions made on an account</returns>
+        public async Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc,
+            DateTime? toTimestampUtc, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<Page<Transaction>>("/Private/GetTransactions", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                accountGuid = accountGuid.ToString(),
+                fromTimestampUtc = fromTimestampUtc.HasValue? DateTime.SpecifyKind(fromTimestampUtc.Value,DateTimeKind.Utc):(DateTime?)null,
+                toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc) : (DateTime?)null,
+                pageIndex,
+                pageSize
+            });
+        }
+
+        /// <summary>
+        /// Retrieves the Bitcoin address which should be used for new Bitcoin deposits
+        /// </summary>
+        public BitcoinDepositAddress GetBitcoinDepositAddress()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetBitcoinDepositAddressAsync().Result;
+        }
+
+        /// <summary>
+        /// Retrieves the Bitcoin address which should be used for new Bitcoin deposits
+        /// </summary>
+        public async Task<BitcoinDepositAddress> GetBitcoinDepositAddressAsync()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivate<BitcoinDepositAddress>("/Private/GetBitcoinDepositAddress", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+            });
+        }
+
+        #endregion //Private API
+
         #region Helpers
+        
         /// <summary>
         /// Awaitable helper method to call public api url with set of specified get parameters
         /// </summary>
         /// <typeparam name="T">type to which response should be deserialized</typeparam>
         /// <param name="url">api url (without base url part)</param>
         /// <param name="parameters">set of get parameters</param>
-        /// <returns></returns>
         private async Task<T> QueryPublic<T>(string url, params Tuple<string, string>[] parameters)
         {
             //if we have get parameters - append them to the url
@@ -348,12 +674,96 @@ namespace IndependentReserve.DotNetClientApi
             return JsonConvert.DeserializeObject<T>(result);
         }
 
+        /// <summary>
+        /// Awaitable helper method to call private api url posting specified request object as json content
+        /// </summary>
+        /// <typeparam name="T">type to which response should be deserialized</typeparam>
+        /// <param name="url">api url (without base url part)</param>
+        /// <param name="request">object to post</param>
+        private async Task<T> QueryPrivate<T>(string url, object request)
+        {
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await _client.PostAsync(url, content);
+
+            string result = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
+                throw new Exception(errorMessage.Message);
+            }
+
+            return JsonConvert.DeserializeObject<T>(result);
+        }
+
+        /// <summary>
+        /// Throws InvalidOperationException if client is disposed
+        /// </summary>
         private void ThrowIfDisposed()
         {
             if (_isDisposed)
             {
                 throw new InvalidOperationException("Instance of Client already disposed. Create new instance.");
             }
+        }
+
+        /// <summary>
+        /// Throws InvalidOperationException if client is not configured to call private api
+        /// </summary>
+        private void ThrowIfPublicClient()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey) || string.IsNullOrWhiteSpace(_apiSecret))
+            {
+                throw new InvalidOperationException("This instance of Client can access Public API only. Use CreatePrivate method to create instance of client to call Private API.");
+            }
+        }
+
+        /// <summary>
+        /// Helper method to get signature which can be used to 'sign' private api request
+        /// </summary>
+        /// <returns></returns>
+        private Tuple<string,string> GetNonceAndSignature()
+        {
+            string nonce = DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture);
+            var tuple = new Tuple<string, string>(nonce,
+                HMACSHA256Hash(string.Format("{0}{1}", nonce, _apiKey), _apiSecret));
+
+            return tuple;
+        }
+
+        /// <summary>
+        /// Calculates HMACSHA256 hash of specified message with specified key
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private static string HMACSHA256Hash(string message, string key)
+        {
+            byte[] keyBytes = StringToAscii(key);
+            byte[] messageBytes = StringToAscii(message);
+
+            using (var hmac = new HMACSHA256(keyBytes))
+            {
+                return BitConverter.ToString(hmac.ComputeHash(messageBytes)).Replace("-", "");
+            }
+        }
+
+        /// <summary>
+        /// Helper method to convert string into byte array uasing ASCII encoding
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private static byte[] StringToAscii(string s)
+        {
+            var retval = new byte[s.Length];
+            for (int ix = 0; ix < s.Length; ++ix)
+            {
+                char ch = s[ix];
+                if (ch <= 0x7f) retval[ix] = (byte)ch;
+                else retval[ix] = (byte)'?';
+            }
+            return retval;
         }
         #endregion //Helpers
     }

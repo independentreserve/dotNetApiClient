@@ -11,16 +11,29 @@ namespace UnitTest
         private const string BaseUrl = "http://api.ir.localhost";
 
         [Test]
-        public void CreateClientSucceed()
+        public void CreatePrivateClientSucceed()
         {
             var client = Client.CreatePrivate(ApiKey, ApiSecret, BaseUrl);
 
             Assert.IsNotNull(client);
         }
 
-        private Client CreateClient()
+        [Test]
+        public void CreatePublicClientSucceed()
+        {
+            var client = Client.CreatePublic(BaseUrl);
+
+            Assert.IsNotNull(client);
+        }
+
+        private Client CreatePrivateClient()
         {
             return Client.CreatePrivate(ApiKey, ApiSecret, BaseUrl);
+        }
+
+        private Client CreatePublicClient()
+        {
+            return Client.CreatePublic(BaseUrl);
         }
     }
 }

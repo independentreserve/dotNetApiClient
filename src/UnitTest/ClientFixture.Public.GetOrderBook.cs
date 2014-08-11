@@ -8,7 +8,7 @@ namespace UnitTest
         [Test]
         public void GetOrderBook()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 var orderBook = client.GetOrderBook(CurrencyCode.Xbt, CurrencyCode.Usd);
 

@@ -45,6 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientFixture.cs" />
+    <Compile Include="ClientFixture.Private.GetAccounts.cs" />
+    <Compile Include="ClientFixture.Private.GetBitcoinDepositAddress.cs" />
+    <Compile Include="ClientFixture.Private.GetOrders.cs" />
+    <Compile Include="ClientFixture.Private.GetTransactions.cs" />
+    <Compile Include="ClientFixture.Private.PlaceOrder.cs" />
     <Compile Include="ClientFixture.Public.GetMarketSummary.cs" />
     <Compile Include="ClientFixture.Public.GetOrderBook.cs" />
     <Compile Include="ClientFixture.Public.GetValidCurrencyCodes.cs" />

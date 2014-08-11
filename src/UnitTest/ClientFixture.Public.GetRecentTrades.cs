@@ -8,7 +8,7 @@ namespace UnitTest
 		[Test]
         public void GetRecentTrades()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 var recentTrades = client.GetRecentTrades(CurrencyCode.Xbt, CurrencyCode.Usd, 24);
 				Assert.IsNotNull(recentTrades);

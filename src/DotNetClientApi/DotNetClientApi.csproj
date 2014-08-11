@@ -43,16 +43,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\AccountStatus.cs" />
+    <Compile Include="Data\BankHistoryOrder.cs" />
+    <Compile Include="Data\BankOrder.cs" />
+    <Compile Include="Data\BitcoinDepositAddress.cs" />
     <Compile Include="Data\CurrencyCode.cs" />
     <Compile Include="Data\ErrorMessage.cs" />
     <Compile Include="Data\MarketSummary.cs" />
     <Compile Include="Data\OrderBook.cs" />
     <Compile Include="Data\OrderBookItem.cs" />
+    <Compile Include="Data\OrderStatus.cs" />
     <Compile Include="Data\OrderType.cs" />
+    <Compile Include="Data\Page.cs" />
+    <Compile Include="Data\PageBase.cs" />
     <Compile Include="Data\RecentTrades.cs" />
     <Compile Include="Data\Trade.cs" />
     <Compile Include="Data\TradeHistorySummary.cs" />
     <Compile Include="Data\TradeHistorySummaryItem.cs" />
+    <Compile Include="Data\Transaction.cs" />
+    <Compile Include="Data\TransactionStatus.cs" />
+    <Compile Include="Data\TransactionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +72,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="bouncy_castle_hmac_sha_pcl">
+      <HintPath>..\..\lib\BouncyCastle-PCL.1.0.0.4\lib\bouncy_castle_hmac_sha_pcl.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\..\lib\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>

@@ -10,7 +10,7 @@ namespace UnitTest
         [Test]
         public void GetValidLimitOrderTypes()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 IEnumerable<OrderType> orderTypes = client.GetValidLimitOrderTypes();
 
@@ -23,7 +23,7 @@ namespace UnitTest
         [Test]
         public void GetValidMarketOrderTypes()
         {
-            using (var client = CreateClient())
+            using (var client = CreatePublicClient())
             {
                 IEnumerable<OrderType> orderTypes = client.GetValidMarketOrderTypes();
 

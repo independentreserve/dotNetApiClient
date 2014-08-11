@@ -2,6 +2,9 @@
 
 namespace IndependentReserve.DotNetClientApi.Data
 {
+    /// <summary>
+    /// An item in the TradeHistory Summary
+    /// </summary>
     public class TradeHistorySummaryItem
     {
         /// <summary>
