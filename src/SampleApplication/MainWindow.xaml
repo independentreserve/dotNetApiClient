@@ -75,16 +75,26 @@
                     <TextBox Text="{Binding AccountGuid}"></TextBox>
                 </StackPanel>
 
-                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
+                <!--<StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
                     <TextBlock Style="{StaticResource Label}">From Timestamp (UTC):</TextBlock>
                     <TextBox Text="{Binding FromTimestampUtc}"></TextBox>
+                </StackPanel>-->
+
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
+                    <TextBlock Style="{StaticResource Label}">From Timestamp (UTC):</TextBlock>
+                    <DatePicker SelectedDate="{Binding FromTimestampUtc}"></DatePicker>
                 </StackPanel>
+                
+                <!--<StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=toTimestampUtc}">
+                    <TextBlock Style="{StaticResource Label}">To Timestamp (UTC):</TextBlock>
+                    <TextBox Text="{Binding ToTimestampUtc}"></TextBox>
+                </StackPanel>-->
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=toTimestampUtc}">
                     <TextBlock Style="{StaticResource Label}">To Timestamp (UTC):</TextBlock>
-                    <TextBox Text="{Binding ToTimestampUtc}"></TextBox>
+                    <DatePicker SelectedDate="{Binding ToTimestampUtc}"></DatePicker>
                 </StackPanel>
-                
+
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=pageIndex}">
                     <TextBlock Style="{StaticResource Label}">Page index:</TextBlock>
                     <TextBox Text="{Binding PageIndex}"></TextBox>

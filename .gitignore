@@ -1,0 +1,7 @@
+/src/*.DotSettings
+/src/*.suo
+/src/DotNetClientApi/bin
+/src/DotNetClientApi/obj
+/src/IRDotNetClientApi.sln.DotSettings.user
+/src/UnitTest/bin
+/src/UnitTest/obj
