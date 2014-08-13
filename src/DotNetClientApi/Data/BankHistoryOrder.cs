@@ -28,6 +28,11 @@ namespace IndependentReserve.DotNetClientApi.Data
         public decimal? Outstanding { get; set; }
 
         /// <summary>
+        /// The limit order's ask/bid price; null for market orders
+        /// </summary>
+        public decimal? Price { get; set; }
+
+        /// <summary>
         /// The order's overall price (weighted average).
         /// </summary>
         public decimal? AvgPrice { get; set; }

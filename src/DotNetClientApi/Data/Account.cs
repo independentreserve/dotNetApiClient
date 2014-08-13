@@ -8,10 +8,9 @@ namespace IndependentReserve.DotNetClientApi.Data
     public class Account
     {
         /// <summary>
-        /// Gets account guid
+        /// Account guid
         /// </summary>
         public Guid AccountGuid { get; set; }
-
 
         /// <summary>
         /// Gets account status
