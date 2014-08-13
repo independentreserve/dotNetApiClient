@@ -5,3 +5,5 @@
 /src/IRDotNetClientApi.sln.DotSettings.user
 /src/UnitTest/bin
 /src/UnitTest/obj
+/src/SampleApplication/bin
+/src/SampleApplication/obj
