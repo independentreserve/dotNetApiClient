@@ -16,9 +16,18 @@ namespace SampleApplication
         {
             InitializeComponent();
 
+            if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["apiKey"]) || string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["apiUrl"]) || string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["apiSecret"]))
+            {
+                MessageBoxResult result = MessageBox.Show("Some or all of the following required API key details are empty: ApiKey, ApiUrl, ApiSecret.\n\nPlease set them to the correct values in application configuration file.", "Please specify your API key details", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+                return;
+            }
+
             this.DataContext = new AppViewModel()
             {
-                SelectedMethod = MethodMetadata.Null
+                SelectedMethod = MethodMetadata.Null,
+                ApiKey = ConfigurationManager.AppSettings["apiKey"],
+                ApiUrl = ConfigurationManager.AppSettings["apiUrl"]
             };
         }
 
@@ -34,7 +43,6 @@ namespace SampleApplication
         /// <param name="e"></param>
         private async void CallIt_OnClick(object sender, RoutedEventArgs e)
         {
-
             if (ViewModel.SelectedMethod == MethodMetadata.Null)
             {
                 return;
@@ -44,6 +52,7 @@ namespace SampleApplication
             string apiSecret =ConfigurationManager.AppSettings["apiSecret"];
             string apiUrl = ConfigurationManager.AppSettings["apiUrl"];
 
+            //create instane of API client capable to call both private and public api methods
             using (var client = Client.CreatePrivate(apiKey, apiSecret, apiUrl))
             {
                 ViewModel.LastRequestParameters = string.Empty;
@@ -52,6 +61,7 @@ namespace SampleApplication
 
                 try
                 {
+                    //call selected method with current parameters
                     if (ViewModel.SelectedMethod == MethodMetadata.GetValidPrimaryCurrencyCodes)
                     {
                         await client.GetValidPrimaryCurrencyCodesAsync();
@@ -94,7 +104,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrder)
                     {
-                        await client.CancelOrderAsync(Guid.Parse(ViewModel.OrderGuid));
+                        await client.CancelOrderAsync(ParseGuid(ViewModel.OrderGuid));
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetAccounts)
                     {
@@ -110,7 +120,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactions)
                     {
-                        await client.GetTransactionsAsync(Guid.Parse(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                        await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetBitcoinDepositAddress)
                     {
@@ -127,10 +137,7 @@ namespace SampleApplication
                 ViewModel.LastRequestUrl = string.Format("{0} {1}", client.LastRequestHttpMethod, client.LastRequestUrl);
                 ViewModel.LastRequestParameters = client.LastRequestHttpMethod == "GET" ? (
                     
-                    
-                    string.IsNullOrWhiteSpace(client.LastRequestParameters)?"no parameters": client.LastRequestParameters 
-                    
-                    ) : 
+                    string.IsNullOrWhiteSpace(client.LastRequestParameters)?"no parameters": client.LastRequestParameters ) : 
                     
                     
                     (string.IsNullOrWhiteSpace(client.LastRequestParameters) ? "no parameters" : FormatJson(client.LastRequestParameters));
@@ -147,6 +154,17 @@ namespace SampleApplication
             dynamic parsedJson = JsonConvert.DeserializeObject(json);
 
             return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+        }
+
+        private static Guid ParseGuid(string guidString)
+        {
+            Guid guid;
+            if (Guid.TryParse(guidString, out guid))
+            {
+                return guid;
+            }
+
+            return Guid.Empty;
         }
     }
 }

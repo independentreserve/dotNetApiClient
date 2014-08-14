@@ -57,7 +57,7 @@ namespace SampleApplication.ViewModels
             _secondaryCurrency = CurrencyCode.Usd;
             _numberOfHoursInThePastToRetrieve = 96;
             _numberOfRecentTradesToRetrieve = 10;
-            _pageIndex = 0;
+            _pageIndex = 1;
             _pageSize = 10;
             _limitOrderType = OrderType.LimitBid;
             _marketOrderType = OrderType.MarketOffer;
@@ -88,6 +88,9 @@ namespace SampleApplication.ViewModels
                 }
             }
         }
+
+        public string ApiKey { get; set; }
+        public string ApiUrl { get; set; }
 
         #region client profiler information
         /// <summary>

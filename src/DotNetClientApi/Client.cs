@@ -706,9 +706,8 @@ namespace IndependentReserve.DotNetClientApi
         /// <returns></returns>
         private Tuple<string,string> GetNonceAndSignature()
         {
-            string nonce = DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture);
-            var tuple = new Tuple<string, string>(nonce,
-                HMACSHA256Hash(string.Format("{0}{1}", nonce, _apiKey), _apiSecret));
+            string nonce = (DateTime.UtcNow.Ticks*10).ToString(CultureInfo.InvariantCulture);
+            var tuple = new Tuple<string, string>(nonce, HMACSHA256Hash(string.Format("{0}{1}", nonce, _apiKey), _apiSecret));
 
             return tuple;
         }
