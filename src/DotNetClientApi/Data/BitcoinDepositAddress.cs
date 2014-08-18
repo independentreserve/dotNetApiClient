@@ -13,11 +13,6 @@ namespace IndependentReserve.DotNetClientApi.Data
         public string BitcoinAddress { get; set; }
         
         /// <summary>
-        /// true if this bitcoin address was used previously for deposits
-        /// </summary>
-        public bool IsUsed { get; set; }
-        
-        /// <summary>
         /// Timestamp in UTC of when IR last checked this address for new deposits
         /// </summary>
         public DateTime? LastCheckedTimestampUtc { get; set; }
