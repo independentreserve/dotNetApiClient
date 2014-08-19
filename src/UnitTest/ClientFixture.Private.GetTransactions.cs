@@ -22,7 +22,7 @@ namespace UnitTest
 
                 Assert.IsNotNull(usdAccount);
 
-                Page<Transaction> transactions = client.GetTransactions(usdAccount.AccountGuid, new DateTime(2014, 7, 1),new DateTime(2014, 8, 1), 0, 25);
+                Page<Transaction> transactions = client.GetTransactions(usdAccount.AccountGuid, new DateTime(2014, 7, 1),new DateTime(2014, 8, 1), 1, 25);
 
                 Assert.IsNotNull(transactions);
 

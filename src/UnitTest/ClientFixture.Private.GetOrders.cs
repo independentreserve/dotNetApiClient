@@ -11,7 +11,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                Page<BankHistoryOrder> page = client.GetOpenOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 0, 10);
+                Page<BankHistoryOrder> page = client.GetOpenOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10);
 
                 Assert.IsNotNull(page);
 
@@ -28,7 +28,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                Page<BankHistoryOrder> page = client.GetClosedOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 0, 10);
+                Page<BankHistoryOrder> page = client.GetClosedOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10);
 
                 Assert.IsNotNull(page);
 
