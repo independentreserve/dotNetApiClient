@@ -13,7 +13,7 @@ Refer to https://www.independentreserve.com/API  for API documentation
 ###System Requirements
 
 * Visual Studio 2013 Update 2 and .NET 4.0 or later are required to open Visual Studio solution
-* .NET client assembly is portable class library which can be used on the following platforms: .NET Framework 4, Silverlight 5, Windows Phone 8.1, Windows Phone Silverlight 8
+* .NET client assembly is a portable class library which can be used on the following platforms: .NET Framework 4, Silverlight 5, Windows Phone 8.1, Windows Phone Silverlight 8
 
 ###Steps to build
 
