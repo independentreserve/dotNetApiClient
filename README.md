@@ -18,11 +18,11 @@ Refer to https://www.independentreserve.com/API  for API documentation
 ###Steps to build
 
 * Precompiled client dll and sample application can be found in the 'binaries' folder
-* You can comiple both the client and the sample application in Visual Studio 2013 Update 2 or later version
+* You can compile both the client and the sample application in Visual Studio 2013 Update 2 or a later version
 
 ###Configuring Sample Application
 
-You need to specify your API Key and API Secret in .NET Sample Application configuration file SampleApplication.exe.config, in the appSettings section.
+You need to specify your API Key and API Secret in .NET Sample Application configuration file 'SampleApplication.exe.config', in the appSettings section.
 
 ##Need help?
 
