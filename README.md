@@ -1,7 +1,12 @@
-DotNetApiClient
+Independent Reserve .Net API Client
 ===============
 
-Independent Reserve C# API Client and sample application
+Independent Reserve C# API client and sample application.
+
+The client wraps up all of the private and public methods exposed by the Independent Reserve API, and handles authentication when it is configured with a valid API Key and API Secret.
+It is designed to be easily plugged in by 3rd party developers into their own applications.
+
+The sample application shows how to use the client in a simple WPF application.
 
 Refer to https://www.independentreserve.com/API  for API documentation
 
@@ -12,13 +17,12 @@ Refer to https://www.independentreserve.com/API  for API documentation
 
 ###Steps to build
 
-* You can get precompiled .NET Client from binaries folder
-* You can get precompiled .NET Sample Application from binaries folder
-* You can comiple both .NET client and .NET Sample Application in Visual Studio 2013 Update 2 or later version
+* Precompiled client dll and sample application can be found in the 'binaries' folder
+* You can comiple both the client and the sample application in Visual Studio 2013 Update 2 or later version
 
 ###Configuring Sample Application
 
-You need to specify your API Key and API Secret in .NET Sample Application configuration file SampleApplication.exe.config in appSettings section
+You need to specify your API Key and API Secret in .NET Sample Application configuration file SampleApplication.exe.config, in the appSettings section.
 
 ##Need help?
 
