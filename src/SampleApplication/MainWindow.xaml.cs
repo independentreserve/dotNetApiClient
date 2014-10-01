@@ -118,6 +118,10 @@ namespace SampleApplication
                     {
                         await client.GetClosedOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderDetails)
+                    {
+                        await client.GetOrderDetailsAsync(ParseGuid(ViewModel.OrderGuid));
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactions)
                     {
                         await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);

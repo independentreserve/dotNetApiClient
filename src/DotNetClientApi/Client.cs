@@ -503,6 +503,40 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves order details by order Id.
+        /// </summary>
+        /// <param name="orderGuid">The guid of order</param>
+        /// <returns>order object</returns>
+        public BankOrder GetOrderDetails(Guid orderGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetOrderDetailsAsync(orderGuid).Result;
+        }
+
+        /// <summary>
+        /// Retrieves order details by order Id.
+        /// </summary>
+        /// <param name="orderGuid">The guid of order</param>
+        /// <returns>order object</returns>
+        public async Task<BankOrder> GetOrderDetailsAsync(Guid orderGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivateAsync<BankOrder>("/Private/GetOrderDetails", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                orderGuid = orderGuid.ToString()
+            }).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves information about your Independent Reserve accounts in digital and fiat currencies
         /// </summary>
         public IEnumerable<Account> GetAccounts()

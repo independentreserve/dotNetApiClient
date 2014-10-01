@@ -149,6 +149,20 @@ namespace SampleApplication.ViewModels
                 };
             }
         }
+
+        //GetOrderDetails(Guid orderGuid)
+        public static MethodMetadata GetOrderDetails
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetOrderDetails",
+                    Description = "GetOrderDetails",
+                    Parameters = new[] { "orderGuid" }
+                };
+            }
+        }
         
         //GetAccounts()
         public static MethodMetadata GetAccounts
