@@ -16,5 +16,6 @@
         GST = 8,
         Unclaimed = 9,
         Error = 10,
+        DepositFee = 11
     }
 }
