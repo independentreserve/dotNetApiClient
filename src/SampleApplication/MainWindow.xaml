@@ -40,6 +40,7 @@
                     <ComboBox SelectedValue="{Binding PrimaryCurrency}" SelectedValuePath="Tag">
                         <ComboBoxItem Tag="Xbt" IsSelected="True">Xbt</ComboBoxItem>
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
+						<ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=secondaryCurrency}">
