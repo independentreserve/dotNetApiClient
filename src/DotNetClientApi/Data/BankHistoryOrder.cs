@@ -61,5 +61,10 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Order's fiat currency
         /// </summary>
         public CurrencyCode SecondaryCurrencyCode { get; set; }
+
+        /// <summary>
+        /// Order fee percent
+        /// </summary>
+        public decimal FeePercent { get; set; }
     }
 }
