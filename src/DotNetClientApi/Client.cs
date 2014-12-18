@@ -503,6 +503,49 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves a page of a specified size, with your Closed filled orders
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of orders</param>
+        /// <param name="secondaryCurrency">The secondary currency of orders</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your Closed filled orders</returns>
+        public Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetClosedFilledOrdersAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, with your Closed filled orders
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of orders</param>
+        /// <param name="secondaryCurrency">The secondary currency of orders</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your Closed filled orders</returns>
+        public async Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedFilledOrders", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                primaryCurrencyCode = primaryCurrency.ToString(),
+                secondaryCurrencyCode = secondaryCurrency.ToString(),
+                pageIndex = pageIndex,
+                pageSize = pageSize
+            }).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves order details by order Id.
         /// </summary>
         /// <param name="orderGuid">The guid of order</param>
