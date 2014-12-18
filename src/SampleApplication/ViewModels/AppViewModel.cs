@@ -28,6 +28,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetAccounts, 
             MethodMetadata.GetOpenOrders, 
             MethodMetadata.GetClosedOrders, 
+            MethodMetadata.GetClosedFilledOrders, 
             MethodMetadata.GetOrderDetails,
             MethodMetadata.GetTransactions, 
             MethodMetadata.GetBitcoinDepositAddress, 

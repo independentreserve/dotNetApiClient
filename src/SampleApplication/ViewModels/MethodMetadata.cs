@@ -150,6 +150,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //GetClosedFilledOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        public static MethodMetadata GetClosedFilledOrders
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetClosedFilledOrders",
+                    Description = "GetClosedFilledOrders",
+                    Parameters = new[] { "primaryCurrency", "secondaryCurrency", "pageIndex", "pageSize" }
+                };
+            }
+        }
+
         //GetOrderDetails(Guid orderGuid)
         public static MethodMetadata GetOrderDetails
         {
