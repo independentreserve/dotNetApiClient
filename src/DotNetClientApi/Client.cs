@@ -684,6 +684,46 @@ namespace IndependentReserve.DotNetClientApi
             }).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Creates a withdrawal request for a Fiat currency withdrawal from your Independent Reserve account to an external bank account
+        /// </summary>
+        /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only USD accounts are supported)</param>
+        /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
+        /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
+        /// <returns>A FiatWithdrawalRequest object</returns>
+        public FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal? withdrawalAmount, string withdrawalBankAccountName)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return RequestFiatWithdrawalAsync(secondaryCurrency, withdrawalAmount, withdrawalBankAccountName).Result;
+        }
+
+        /// <summary>
+        /// Creates a withdrawal request for a Fiat currency withdrawal from your Independent Reserve account to an external bank account
+        /// </summary>
+        /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only USD accounts are supported)</param>
+        /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
+        /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
+        /// <returns>A FiatWithdrawalRequest object</returns>
+        public async Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal? withdrawalAmount, string withdrawalBankAccountName)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", new
+                                                                                                    {
+                                                                                                        apiKey = _apiKey,
+                                                                                                        nonce = nonceAndSignature.Item1,
+                                                                                                        signature = nonceAndSignature.Item2,
+                                                                                                        secondaryCurrencyCode = secondaryCurrency.ToString(),
+                                                                                                        withdrawalAmount,
+                                                                                                        withdrawalBankAccountName
+                                                                                                    }).ConfigureAwait(false);
+        }
+
         #endregion //Private API
 
         #region Helpers
