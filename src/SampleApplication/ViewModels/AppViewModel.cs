@@ -32,6 +32,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetOrderDetails,
             MethodMetadata.GetTransactions, 
             MethodMetadata.GetBitcoinDepositAddress, 
+            MethodMetadata.RequestFiatWithdrawal
         };
 
         private MethodMetadata _selectedMethod;
@@ -52,6 +53,8 @@ namespace SampleApplication.ViewModels
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
         private string _accountGuid;
+        private decimal? _withdrawalAmount;
+        private string _withdrawalBankAccountName;
 
         public AppViewModel()
         {
@@ -68,6 +71,8 @@ namespace SampleApplication.ViewModels
             _orderGuid = string.Empty;
             _fromTimestampUtc = new DateTime(2014,8,1);
             _toTimestampUtc = null;
+            _withdrawalAmount = 50;
+            _withdrawalBankAccountName = null;
         }
 
         public MethodMetadata[] Methods
@@ -349,6 +354,34 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _accountGuid) return;
                 _accountGuid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - WithdrawalAmount- used by private API method RequestFiatWithdrawal
+        /// </summary>
+        public decimal? WithdrawalAmount
+        {
+            get { return _withdrawalAmount; }
+            set
+            {
+                if (value == _withdrawalAmount) return;
+                _withdrawalAmount = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - WithdrawalBankAccountName - used by private API method RequestFiatWithdrawal
+        /// </summary>
+        public string WithdrawalBankAccountName
+        {
+            get { return _withdrawalBankAccountName; }
+            set
+            {
+                if (value == _withdrawalBankAccountName) return;
+                _withdrawalBankAccountName = value;
                 OnPropertyChanged();
             }
         }

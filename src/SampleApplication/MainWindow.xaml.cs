@@ -134,6 +134,10 @@ namespace SampleApplication
                     {
                         await client.GetBitcoinDepositAddressAsync();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.RequestFiatWithdrawal)
+                    {
+                        await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName);
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

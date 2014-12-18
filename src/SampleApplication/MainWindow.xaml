@@ -122,7 +122,16 @@
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding PageSize}"></TextBox>
                 </StackPanel>
 
-                
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=withdrawalAmount}">
+                    <TextBlock Style="{StaticResource Label}">Withdrawal Amount:</TextBlock>
+                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding WithdrawalAmount}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=withdrawalBankAccountName}">
+                    <TextBlock Style="{StaticResource Label}">Bank Account Name:</TextBlock>
+                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding WithdrawalBankAccountName}"></TextBox>
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
         

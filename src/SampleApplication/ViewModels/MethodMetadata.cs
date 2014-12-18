@@ -220,6 +220,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //RequestFiatWithdrawal()
+        public static MethodMetadata RequestFiatWithdrawal
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "RequestFiatWithdrawal",
+                    Description = "RequestFiatWithdrawal",
+                    Parameters = new [] { "secondaryCurrency", "withdrawalAmount", "withdrawalBankAccountName" }
+                };
+            }
+        }
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata)obj;
