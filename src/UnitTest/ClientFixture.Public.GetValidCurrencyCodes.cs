@@ -26,8 +26,9 @@ namespace UnitTest
             {
                 IEnumerable<CurrencyCode> currencyCodes = client.GetValidSecondaryCurrencyCodes();
 
-                Assert.AreEqual(currencyCodes.Count(), 1);
+                Assert.AreEqual(currencyCodes.Count(), 2);
                 Assert.AreEqual(currencyCodes.First(), CurrencyCode.Usd);
+                Assert.AreEqual(currencyCodes.Last(), CurrencyCode.Aud);
             }
         }
     }

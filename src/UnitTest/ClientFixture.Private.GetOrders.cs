@@ -39,5 +39,22 @@ namespace UnitTest
                 Assert.IsTrue(page.Data.Count() <= 10);
             }
         }
+
+        [Test]
+        public void GetClosedFilledOrders()
+        {
+            using (var client = CreatePrivateClient())
+            {
+                Page<BankHistoryOrder> page = client.GetClosedFilledOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10);
+
+                Assert.IsNotNull(page);
+
+                Assert.AreEqual(page.PageSize, 10);
+                Assert.IsTrue(page.TotalItems > 0);
+
+                Assert.IsTrue(page.Data.Any());
+                Assert.IsTrue(page.Data.Count() <= 10);
+            }
+        }
     }
 }
