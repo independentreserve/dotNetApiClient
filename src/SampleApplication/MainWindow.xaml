@@ -132,6 +132,11 @@
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding WithdrawalBankAccountName}"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=address}">
+                    <TextBlock Style="{StaticResource Label}">Bitcoin Address:</TextBlock>
+                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding Address}" Width="250"></TextBox>
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
         

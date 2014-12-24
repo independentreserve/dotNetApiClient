@@ -138,6 +138,10 @@ namespace SampleApplication
                     {
                         await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.SynchBitcoinAddressWithBlockchain)
+                    {
+                        await client.SynchBitcoinAddressWithBlockchainAsync(ViewModel.Address);
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }
