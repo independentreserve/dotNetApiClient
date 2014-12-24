@@ -234,6 +234,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //SynchBitcoinAddressWithBlockchain()
+        public static MethodMetadata SynchBitcoinAddressWithBlockchain
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "SynchBitcoinAddressWithBlockchain",
+                    Description = "SynchBitcoinAddressWithBlockchain",
+                    Parameters = new[] { "address" }
+                };
+            }
+        }
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata)obj;

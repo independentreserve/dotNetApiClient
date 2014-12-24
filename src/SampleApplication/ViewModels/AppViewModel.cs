@@ -32,6 +32,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetOrderDetails,
             MethodMetadata.GetTransactions, 
             MethodMetadata.GetBitcoinDepositAddress, 
+            MethodMetadata.SynchBitcoinAddressWithBlockchain,
             MethodMetadata.RequestFiatWithdrawal
         };
 
@@ -55,6 +56,7 @@ namespace SampleApplication.ViewModels
         private string _accountGuid;
         private decimal? _withdrawalAmount;
         private string _withdrawalBankAccountName;
+        private string _address;
 
         public AppViewModel()
         {
@@ -73,6 +75,7 @@ namespace SampleApplication.ViewModels
             _toTimestampUtc = null;
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
+            _address = null;
         }
 
         public MethodMetadata[] Methods
@@ -382,6 +385,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _withdrawalBankAccountName) return;
                 _withdrawalBankAccountName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - Address - used by private API method SynchBitcoinAddressWithBlockchain
+        /// </summary>
+        public string Address
+        {
+            get { return _address; }
+            set
+            {
+                if (value == _address) return;
+                _address = value;
                 OnPropertyChanged();
             }
         }
