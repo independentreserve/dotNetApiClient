@@ -51,6 +51,7 @@
     <Compile Include="ClientFixture.Private.GetTransactions.cs" />
     <Compile Include="ClientFixture.Private.PlaceOrder.cs" />
     <Compile Include="ClientFixture.Private.SynchBitcoinAddressWithBlockchain.cs" />
+    <Compile Include="ClientFixture.Private.WithdrawBitcoin.cs" />
     <Compile Include="ClientFixture.Public.GetMarketSummary.cs" />
     <Compile Include="ClientFixture.Public.GetOrderBook.cs" />
     <Compile Include="ClientFixture.Public.GetValidCurrencyCodes.cs" />
