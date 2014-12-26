@@ -33,6 +33,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetTransactions, 
             MethodMetadata.GetBitcoinDepositAddress, 
             MethodMetadata.SynchBitcoinAddressWithBlockchain,
+            MethodMetadata.WithdrawBitcoin,
             MethodMetadata.RequestFiatWithdrawal
         };
 

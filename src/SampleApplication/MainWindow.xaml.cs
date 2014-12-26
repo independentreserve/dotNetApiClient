@@ -142,6 +142,10 @@ namespace SampleApplication
                     {
                         await client.SynchBitcoinAddressWithBlockchainAsync(ViewModel.Address);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawBitcoin)
+                    {
+                        await client.WithdrawBitcoinAsync(ViewModel.AccountGuid, ViewModel.WithdrawalAmount, ViewModel.Address);
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

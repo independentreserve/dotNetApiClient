@@ -712,12 +712,50 @@ namespace IndependentReserve.DotNetClientApi
             var nonceAndSignature = GetNonceAndSignature();
 
             return await QueryPrivateAsync<BitcoinDepositAddress>("/Private/SynchBitcoinAddressWithBlockchain", new
-            {
-                apiKey = _apiKey,
-                nonce = nonceAndSignature.Item1,
-                signature = nonceAndSignature.Item2,
-                address
-            }).ConfigureAwait(false);
+                                                                                                                {
+                                                                                                                    apiKey = _apiKey,
+                                                                                                                    nonce = nonceAndSignature.Item1,
+                                                                                                                    signature = nonceAndSignature.Item2,
+                                                                                                                    address
+                                                                                                                }).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates bitcoin withdrawal request
+        /// </summary>
+        /// <param name="accountId">Xbt account GUID</param>
+        /// <param name="withdrawalAmount">withdrawal amount</param>
+        /// <param name="address">bitcoin address to withdraw</param>
+        public void WithdrawBitcoin(string accountId, decimal? withdrawalAmount, string address)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            WithdrawBitcoinAsync(accountId, withdrawalAmount, address).Wait();
+        }
+
+        /// <summary>
+        /// Creates bitcoin withdrawal request
+        /// </summary>
+        /// <param name="accountId">Xbt account GUID</param>
+        /// <param name="withdrawalAmount">withdrawal amount</param>
+        /// <param name="address">bitcoin address to withdraw</param>
+        public async Task WithdrawBitcoinAsync(string accountId, decimal? withdrawalAmount, string address)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            await QueryPrivateAsync("/Private/WithdrawBitcoin", new
+                                                                {
+                                                                    apiKey = _apiKey,
+                                                                    nonce = nonceAndSignature.Item1,
+                                                                    signature = nonceAndSignature.Item2,
+                                                                    accountId,
+                                                                    amount = withdrawalAmount,
+                                                                    address
+                                                                }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -808,13 +846,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="request">object to post</param>
         private async Task<T> QueryPrivateAsync<T>(string url, object request)
         {
-            string parameters = JsonConvert.SerializeObject(request);
-
-            LastRequestParameters = parameters;
-            LastRequestUrl = url;
-            LastRequestHttpMethod = "POST";
-
-            HttpContent content = new StringContent(parameters, Encoding.UTF8, "application/json");
+            HttpContent content = CreateRequestContent(url, request);
 
             HttpResponseMessage response = await _client.PostAsync(url, content).ConfigureAwait(false);
 
@@ -828,6 +860,41 @@ namespace IndependentReserve.DotNetClientApi
             }
 
             return JsonConvert.DeserializeObject<T>(result);
+        }
+
+        /// <summary>
+        /// Awaitable helper method to call private api url posting specified request object as json content
+        /// </summary>
+        /// <param name="url">api url (without base url part)</param>
+        /// <param name="request">object to post</param>
+        private async Task QueryPrivateAsync(string url, object request)
+        {
+            HttpContent content = CreateRequestContent(url, request);
+
+            HttpResponseMessage response = await _client.PostAsync(url, content).ConfigureAwait(false);
+
+            string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            LastResponseRaw = result;
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
+                throw new Exception(errorMessage.Message);
+            }
+        }
+
+        /// <summary>
+        /// Prepares post request content.
+        /// </summary>
+        private HttpContent CreateRequestContent(string url, object request)
+        {
+            string parameters = JsonConvert.SerializeObject(request);
+
+            LastRequestParameters = parameters;
+            LastRequestUrl = url;
+            LastRequestHttpMethod = "POST";
+
+            return new StringContent(parameters, Encoding.UTF8, "application/json");
         }
 
         /// <summary>
