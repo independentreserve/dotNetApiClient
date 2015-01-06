@@ -261,6 +261,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //GetTrades(int pageIndex, int pageSize)
+        public static MethodMetadata GetTrades
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetTrades",
+                    Description = "GetTrades",
+                    Parameters = new[] { "pageIndex", "pageSize" }
+                };
+            }
+        }
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;

@@ -60,6 +60,7 @@
     <Compile Include="Data\PageBase.cs" />
     <Compile Include="Data\RecentTrades.cs" />
     <Compile Include="Data\Trade.cs" />
+    <Compile Include="Data\TradeDetails.cs" />
     <Compile Include="Data\TradeHistorySummary.cs" />
     <Compile Include="Data\TradeHistorySummaryItem.cs" />
     <Compile Include="Data\Transaction.cs" />
