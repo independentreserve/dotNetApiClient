@@ -146,6 +146,10 @@ namespace SampleApplication
                     {
                         await client.WithdrawBitcoinAsync(ViewModel.AccountGuid, ViewModel.WithdrawalAmount, ViewModel.Address);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
+                    {
+                        await client.GetTradesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

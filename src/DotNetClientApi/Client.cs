@@ -798,6 +798,43 @@ namespace IndependentReserve.DotNetClientApi
                                                                                                     }).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Retrieves recent trades made by user.
+        /// </summary>
+        /// <param name="pageIndex">1 based page index</param>
+        /// <param name="pageSize">page size must be greater or equal 1 and not exceed 50</param>
+        /// <returns>a page of a specified size containing recent trades mady by user</returns>
+        public Page<TradeDetails> GetTrades(int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetTradesAsync(pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves recent trades made by user.
+        /// </summary>
+        /// <param name="pageIndex">1 based page index</param>
+        /// <param name="pageSize">page size must be greater or equal 1 and not exceed 50</param>
+        /// <returns>a page of a specified size containing recent trades mady by user</returns>
+        public async Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var nonceAndSignature = GetNonceAndSignature();
+
+            return await QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", new
+            {
+                apiKey = _apiKey,
+                nonce = nonceAndSignature.Item1,
+                signature = nonceAndSignature.Item2,
+                pageIndex,
+                pageSize
+            }).ConfigureAwait(false);
+        }
+
         #endregion //Private API
 
         #region Helpers

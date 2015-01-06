@@ -10,7 +10,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 500, 1);
+                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 500.01m, 1);
                 Assert.IsNotNull(bankOrder);
             }
         }
