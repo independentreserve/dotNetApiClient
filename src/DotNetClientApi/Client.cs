@@ -689,22 +689,22 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Marks bitcoin address to sync with blockchain and update balance
         /// </summary>
-        /// <param name="address">Bitcoin address</param>
+        /// <param name="bitcoinAddress">Bitcoin address</param>
         /// <returns>A BitcoinDepositAddress object</returns>
-        public BitcoinDepositAddress SynchBitcoinAddressWithBlockchain(string address)
+        public BitcoinDepositAddress SynchBitcoinAddressWithBlockchain(string bitcoinAddress)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return SynchBitcoinAddressWithBlockchainAsync(address).Result;
+            return SynchBitcoinAddressWithBlockchainAsync(bitcoinAddress).Result;
         }
 
         /// <summary>
         /// Marks bitcoin address to sync with blockchain and update balance
         /// </summary>
-        /// <param name="address">Bitcoin address</param>
+        /// <param name="bitcoinAddress">Bitcoin address</param>
         /// <returns>A BitcoinDepositAddress object</returns>
-        public async Task<BitcoinDepositAddress> SynchBitcoinAddressWithBlockchainAsync(string address)
+        public async Task<BitcoinDepositAddress> SynchBitcoinAddressWithBlockchainAsync(string bitcoinAddress)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -716,7 +716,7 @@ namespace IndependentReserve.DotNetClientApi
                                                                                                                     apiKey = _apiKey,
                                                                                                                     nonce = nonceAndSignature.Item1,
                                                                                                                     signature = nonceAndSignature.Item2,
-                                                                                                                    address
+                                                                                                                    bitcoinAddress
                                                                                                                 }).ConfigureAwait(false);
         }
 
@@ -725,13 +725,13 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="accountId">Xbt account GUID</param>
         /// <param name="withdrawalAmount">withdrawal amount</param>
-        /// <param name="address">bitcoin address to withdraw</param>
-        public void WithdrawBitcoin(string accountId, decimal? withdrawalAmount, string address)
+        /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
+        public void WithdrawBitcoin(string accountId, decimal? withdrawalAmount, string bitcoinAddress)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            WithdrawBitcoinAsync(accountId, withdrawalAmount, address).Wait();
+            WithdrawBitcoinAsync(accountId, withdrawalAmount, bitcoinAddress).Wait();
         }
 
         /// <summary>
@@ -739,8 +739,8 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="accountId">Xbt account GUID</param>
         /// <param name="withdrawalAmount">withdrawal amount</param>
-        /// <param name="address">bitcoin address to withdraw</param>
-        public async Task WithdrawBitcoinAsync(string accountId, decimal? withdrawalAmount, string address)
+        /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
+        public async Task WithdrawBitcoinAsync(string accountId, decimal? withdrawalAmount, string bitcoinAddress)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -754,7 +754,7 @@ namespace IndependentReserve.DotNetClientApi
                                                                     signature = nonceAndSignature.Item2,
                                                                     accountId,
                                                                     amount = withdrawalAmount,
-                                                                    address
+                                                                    bitcoinAddress
                                                                 }).ConfigureAwait(false);
         }
 
