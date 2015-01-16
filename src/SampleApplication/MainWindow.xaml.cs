@@ -144,7 +144,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawBitcoin)
                     {
-                        await client.WithdrawBitcoinAsync(ViewModel.AccountGuid, ViewModel.WithdrawalAmount, ViewModel.Address);
+                        await client.WithdrawBitcoinAsync(ViewModel.WithdrawalAmount, ViewModel.Address);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {

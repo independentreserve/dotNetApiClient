@@ -723,24 +723,22 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Creates bitcoin withdrawal request
         /// </summary>
-        /// <param name="accountId">Xbt account GUID</param>
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
-        public void WithdrawBitcoin(string accountId, decimal? withdrawalAmount, string bitcoinAddress)
+        public void WithdrawBitcoin(decimal? withdrawalAmount, string bitcoinAddress)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            WithdrawBitcoinAsync(accountId, withdrawalAmount, bitcoinAddress).Wait();
+            WithdrawBitcoinAsync(withdrawalAmount, bitcoinAddress).Wait();
         }
 
         /// <summary>
         /// Creates bitcoin withdrawal request
         /// </summary>
-        /// <param name="accountId">Xbt account GUID</param>
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
-        public async Task WithdrawBitcoinAsync(string accountId, decimal? withdrawalAmount, string bitcoinAddress)
+        public async Task WithdrawBitcoinAsync(decimal? withdrawalAmount, string bitcoinAddress)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -752,7 +750,6 @@ namespace IndependentReserve.DotNetClientApi
                                                                     apiKey = _apiKey,
                                                                     nonce = nonceAndSignature.Item1,
                                                                     signature = nonceAndSignature.Item2,
-                                                                    accountId,
                                                                     amount = withdrawalAmount,
                                                                     bitcoinAddress
                                                                 }).ConfigureAwait(false);

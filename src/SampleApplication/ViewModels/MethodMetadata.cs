@@ -256,7 +256,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "WithdrawBitcoin",
                            Description = "WithdrawBitcoin",
-                           Parameters = new[] {"accountGuid", "withdrawalAmount", "address"}
+                           Parameters = new[] {"withdrawalAmount", "address"}
                        };
             }
         }
