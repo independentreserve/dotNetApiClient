@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Runtime.CompilerServices;
+using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
 using SampleApplication.Annotations;
 
@@ -18,6 +21,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetValidSecondaryCurrencyCodes, 
             MethodMetadata.GetValidLimitOrderTypes, 
             MethodMetadata.GetValidMarketOrderTypes, 
+            MethodMetadata.GetValidTransactionTypes, 
             MethodMetadata.GetMarketSummary, 
             MethodMetadata.GetOrderBook, 
             MethodMetadata.GetTradeHistorySummary, 
@@ -78,6 +82,19 @@ namespace SampleApplication.ViewModels
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
             _address = null;
+
+            TransactionTypes = new ObservableCollection<TransactionTypeViewModel>();
+            var apiKey = ConfigurationManager.AppSettings["apiKey"];
+            var apiSecret = ConfigurationManager.AppSettings["apiSecret"];
+            var apiUrl = ConfigurationManager.AppSettings["apiUrl"];
+            using (var client = Client.CreatePrivate(apiKey, apiSecret, apiUrl))
+            {
+                var types = client.GetValidTransactionTypes();
+                foreach (var transactionType in types)
+                {
+                    TransactionTypes.Add(new TransactionTypeViewModel {IsSelected = false, Type = transactionType});
+                }
+            }
         }
 
         public MethodMetadata[] Methods
@@ -103,6 +120,8 @@ namespace SampleApplication.ViewModels
 
         public string ApiKey { get; set; }
         public string ApiUrl { get; set; }
+
+        public ObservableCollection<TransactionTypeViewModel> TransactionTypes { get; set; }
 
         #region client profiler information
         /// <summary>

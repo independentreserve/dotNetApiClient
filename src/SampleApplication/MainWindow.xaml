@@ -112,6 +112,17 @@
                     <DatePicker SelectedDate="{Binding ToTimestampUtc}"></DatePicker>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource Label}">Transaction Types:</TextBlock>
+                    <ListBox ItemsSource="{Binding TransactionTypes}" Width="250" MaxHeight="100"  SelectionMode="Multiple">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="IsSelected" Value="{Binding Mode=TwoWay, Path=IsSelected}"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
+
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=pageIndex}">
                     <TextBlock Style="{StaticResource Label}">Page index:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding PageIndex}"></TextBox>

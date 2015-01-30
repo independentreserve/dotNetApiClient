@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Windows;
 using IndependentReserve.DotNetClientApi;
+using IndependentReserve.DotNetClientApi.Data;
 using Newtonsoft.Json;
 using SampleApplication.ViewModels;
 
@@ -78,6 +81,10 @@ namespace SampleApplication
                     {
                         await client.GetValidMarketOrderTypesAsync();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetValidTransactionTypes)
+                    {
+                        await client.GetValidTransactionTypesAsync();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetMarketSummary)
                     {
                         await client.GetMarketSummaryAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency);
@@ -128,7 +135,8 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactions)
                     {
-                        await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                        var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
+                        await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetBitcoinDepositAddress)
                     {
