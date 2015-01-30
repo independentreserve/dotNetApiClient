@@ -190,6 +190,24 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Returns a list of valid transaction types which are supported by Idependent Reserve exchange platform
+        /// </summary>
+        public IEnumerable<TransactionType> GetValidTransactionTypes()
+        {
+            ThrowIfDisposed();
+            return GetValidTransactionTypesAsync().Result;
+        }
+
+        /// <summary>
+        /// Returns a list of valid transaction types which are supported by Idependent Reserve exchange platform
+        /// </summary>
+        public async Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync()
+        {
+            ThrowIfDisposed();
+            return await QueryPublicAsync<IEnumerable<TransactionType>>("/Public/GetValidTransactionTypes").ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Returns a current snapshot of the Independent Reserve market for a given currency pair
         /// </summary>
         /// <param name="primaryCurrency">primary currency</param>
@@ -593,15 +611,16 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="accountGuid">The Guid of your Independent Reseve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
         /// <param name="fromTimestampUtc">The timestamp in UTC from which you want to retrieve transactions</param>
         /// <param name="toTimestampUtc">The timestamp in UTC until which you want to retrieve transactions</param>
-        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="txTypes">Transaction types array for filtering results. If array is empty or null, than no filter will be applied and all Transaction types will be returned</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public Page<Transaction> GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, int pageIndex, int pageSize)
+        public Page<Transaction>  GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetTransactionsAsync(accountGuid, fromTimestampUtc, toTimestampUtc, pageIndex, pageSize).Result;
+            return GetTransactionsAsync(accountGuid, fromTimestampUtc, toTimestampUtc, txTypes, pageIndex, pageSize).Result;
         }
 
         /// <summary>
@@ -610,11 +629,12 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="accountGuid">The Guid of your Independent Reseve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
         /// <param name="fromTimestampUtc">The timestamp in UTC from which you want to retrieve transactions</param>
         /// <param name="toTimestampUtc">The timestamp in UTC until which you want to retrieve transactions</param>
-        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="txTypes">Transaction types array for filtering results. If array is empty or null, than no filter will be applied and all Transaction types will be returned</param>        
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
         public async Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc,
-            DateTime? toTimestampUtc, int pageIndex, int pageSize)
+            DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();

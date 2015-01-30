@@ -55,6 +55,12 @@ namespace SampleApplication.ViewModels
             get { return new MethodMetadata() {Name = "GetValidMarketOrderTypes", Description = "GetValidMarketOrderTypes", Parameters = new string[] {}}; }
         }
 
+        //GetValidTransactionTypes()
+        public static MethodMetadata GetValidTransactionTypes
+        {
+            get { return new MethodMetadata() { Name = "GetValidTransactionTypes", Description = "GetValidTransactionTypes", Parameters = new string[] { } }; }
+        }
+
         //GetMarketSummary(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
         public static MethodMetadata GetMarketSummary
         {
