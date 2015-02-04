@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -320,19 +321,16 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.orderType = orderType.ToString();
+            data.price = price.ToString(CultureInfo.InvariantCulture);
+            data.volume = volume.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<BankOrder>("/Private/PlaceLimitOrder", new
-                                                                                  {
-                                                                                      apiKey = _apiKey,
-                                                                                      nonce = nonceAndSignature.Item1,
-                                                                                      signature = nonceAndSignature.Item2,
-                                                                                      primaryCurrencyCode = primaryCurrency.ToString(),
-                                                                                      secondaryCurrencyCode = secondaryCurrency.ToString(),
-                                                                                      orderType = orderType.ToString(),
-                                                                                      price = price,
-                                                                                      volume = volume
-                                                                                  }).ConfigureAwait(false);
+            return await QueryPrivateAsync<BankOrder>("/Private/PlaceLimitOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -364,18 +362,15 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.orderType = orderType.ToString();
+            data.volume = volume.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<BankOrder>("/Private/PlaceMarketOrder", new
-                                                                                   {
-                                                                                       apiKey = _apiKey,
-                                                                                       nonce = nonceAndSignature.Item1,
-                                                                                       signature = nonceAndSignature.Item2,
-                                                                                       primaryCurrencyCode = primaryCurrency.ToString(),
-                                                                                       secondaryCurrencyCode = secondaryCurrency.ToString(),
-                                                                                       orderType = orderType.ToString(),
-                                                                                       volume = volume
-                                                                                   }).ConfigureAwait(false);
+            return await QueryPrivateAsync<BankOrder>("/Private/PlaceMarketOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -407,15 +402,12 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.orderGuid = orderGuid.ToString();
 
-            return await QueryPrivateAsync<BankOrder>("/Private/CancelOrder", new
-                                                                              {
-                                                                                  apiKey = _apiKey,
-                                                                                  nonce = nonceAndSignature.Item1,
-                                                                                  signature = nonceAndSignature.Item2,
-                                                                                  orderGuid = orderGuid.ToString()
-                                                                              }).ConfigureAwait(false);
+            return await QueryPrivateAsync<BankOrder>("/Private/CancelOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -447,18 +439,15 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
+            data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetOpenOrders", new
-                                                                                             {
-                                                                                                 apiKey = _apiKey,
-                                                                                                 nonce = nonceAndSignature.Item1,
-                                                                                                 signature = nonceAndSignature.Item2,
-                                                                                                 primaryCurrencyCode = primaryCurrency.ToString(),
-                                                                                                 secondaryCurrencyCode = secondaryCurrency.ToString(),
-                                                                                                 pageIndex = pageIndex,
-                                                                                                 pageSize = pageSize
-                                                                                             }).ConfigureAwait(false);
+            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetOpenOrders", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -490,18 +479,15 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
+            data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedOrders", new
-                                                                                               {
-                                                                                                   apiKey = _apiKey,
-                                                                                                   nonce = nonceAndSignature.Item1,
-                                                                                                   signature = nonceAndSignature.Item2,
-                                                                                                   primaryCurrencyCode = primaryCurrency.ToString(),
-                                                                                                   secondaryCurrencyCode = secondaryCurrency.ToString(),
-                                                                                                   pageIndex = pageIndex,
-                                                                                                   pageSize = pageSize
-                                                                                               }).ConfigureAwait(false);
+            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedOrders", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -533,18 +519,15 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
+            data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedFilledOrders", new
-                                                                                                     {
-                                                                                                         apiKey = _apiKey,
-                                                                                                         nonce = nonceAndSignature.Item1,
-                                                                                                         signature = nonceAndSignature.Item2,
-                                                                                                         primaryCurrencyCode = primaryCurrency.ToString(),
-                                                                                                         secondaryCurrencyCode = secondaryCurrency.ToString(),
-                                                                                                         pageIndex = pageIndex,
-                                                                                                         pageSize = pageSize
-                                                                                                     }).ConfigureAwait(false);
+            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedFilledOrders", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -570,15 +553,12 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.orderGuid = orderGuid.ToString();
 
-            return await QueryPrivateAsync<BankOrder>("/Private/GetOrderDetails", new
-                                                                                  {
-                                                                                      apiKey = _apiKey,
-                                                                                      nonce = nonceAndSignature.Item1,
-                                                                                      signature = nonceAndSignature.Item2,
-                                                                                      orderGuid = orderGuid.ToString()
-                                                                                  }).ConfigureAwait(false);
+            return await QueryPrivateAsync<BankOrder>("/Private/GetOrderDetails", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -600,14 +580,11 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
 
-            return await QueryPrivateAsync<IEnumerable<Account>>("/Private/GetAccounts", new
-                                                                                         {
-                                                                                             apiKey = _apiKey,
-                                                                                             nonce = nonceAndSignature.Item1,
-                                                                                             signature = nonceAndSignature.Item2,
-                                                                                         }).ConfigureAwait(false);
+            return await QueryPrivateAsync<IEnumerable<Account>>("/Private/GetAccounts", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -642,19 +619,16 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.accountGuid = accountGuid.ToString();
+            data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
+            data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
+            data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
+            data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<Transaction>>("/Private/GetTransactions", new
-                                                                                          {
-                                                                                              apiKey = _apiKey,
-                                                                                              nonce = nonceAndSignature.Item1,
-                                                                                              signature = nonceAndSignature.Item2,
-                                                                                              accountGuid = accountGuid.ToString(),
-                                                                                              fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc) : (DateTime?) null,
-                                                                                              toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc) : (DateTime?) null,
-                                                                                              pageIndex,
-                                                                                              pageSize
-                                                                                          }).ConfigureAwait(false);
+            return await QueryPrivateAsync<Page<Transaction>>("/Private/GetTransactions", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -676,14 +650,11 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
 
-            return await QueryPrivateAsync<BitcoinDepositAddress>("/Private/GetBitcoinDepositAddress", new
-                                                                                                       {
-                                                                                                           apiKey = _apiKey,
-                                                                                                           nonce = nonceAndSignature.Item1,
-                                                                                                           signature = nonceAndSignature.Item2,
-                                                                                                       }).ConfigureAwait(false);
+            return await QueryPrivateAsync<BitcoinDepositAddress>("/Private/GetBitcoinDepositAddress", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -709,15 +680,12 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.bitcoinAddress = bitcoinAddress;
 
-            return await QueryPrivateAsync<BitcoinDepositAddress>("/Private/SynchBitcoinAddressWithBlockchain", new
-                                                                                                                {
-                                                                                                                    apiKey = _apiKey,
-                                                                                                                    nonce = nonceAndSignature.Item1,
-                                                                                                                    signature = nonceAndSignature.Item2,
-                                                                                                                    bitcoinAddress
-                                                                                                                }).ConfigureAwait(false);
+            return await QueryPrivateAsync<BitcoinDepositAddress>("/Private/SynchBitcoinAddressWithBlockchain", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -743,16 +711,13 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.amount = withdrawalAmount.HasValue ? withdrawalAmount.Value.ToString(CultureInfo.InvariantCulture) : null;
+            data.bitcoinAddress = bitcoinAddress;
 
-            await QueryPrivateAsync("/Private/WithdrawBitcoin", new
-                                                                {
-                                                                    apiKey = _apiKey,
-                                                                    nonce = nonceAndSignature.Item1,
-                                                                    signature = nonceAndSignature.Item2,
-                                                                    amount = withdrawalAmount,
-                                                                    bitcoinAddress
-                                                                }).ConfigureAwait(false);
+            await QueryPrivateAsync("/Private/WithdrawBitcoin", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -762,7 +727,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal? withdrawalAmount, string withdrawalBankAccountName)
+        public FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -777,22 +742,19 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public async Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal? withdrawalAmount, string withdrawalBankAccountName)
+        public async Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.withdrawalAmount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
+            data.withdrawalBankAccountName = withdrawalBankAccountName;
 
-            return await QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", new
-                                                                                                    {
-                                                                                                        apiKey = _apiKey,
-                                                                                                        nonce = nonceAndSignature.Item1,
-                                                                                                        signature = nonceAndSignature.Item2,
-                                                                                                        secondaryCurrencyCode = secondaryCurrency.ToString(),
-                                                                                                        withdrawalAmount,
-                                                                                                        withdrawalBankAccountName
-                                                                                                    }).ConfigureAwait(false);
+            return await QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -820,16 +782,13 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            var nonceAndSignature = GetNonceAndSignature();
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.pageIndex = pageIndex;
+            data.pageSize = pageSize;
 
-            return await QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", new
-            {
-                apiKey = _apiKey,
-                nonce = nonceAndSignature.Item1,
-                signature = nonceAndSignature.Item2,
-                pageIndex,
-                pageSize
-            }).ConfigureAwait(false);
+            return await QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", data).ConfigureAwait(false);
         }
 
         #endregion //Private API
@@ -847,6 +806,7 @@ namespace IndependentReserve.DotNetClientApi
             LastRequestParameters = string.Empty;
             LastRequestUrl = url;
             LastRequestHttpMethod = "GET";
+
             //if we have get parameters - append them to the url
             if (parameters.Any())
             {
@@ -878,7 +838,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <typeparam name="T">type to which response should be deserialized</typeparam>
         /// <param name="url">api url (without base url part)</param>
         /// <param name="request">object to post</param>
-        private async Task<T> QueryPrivateAsync<T>(string url, object request)
+        private async Task<T> QueryPrivateAsync<T>(string url, dynamic request)
         {
             HttpContent content = CreateRequestContent(url, request);
 
@@ -901,7 +861,7 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="url">api url (without base url part)</param>
         /// <param name="request">object to post</param>
-        private async Task QueryPrivateAsync(string url, object request)
+        private async Task QueryPrivateAsync(string url, dynamic request)
         {
             HttpContent content = CreateRequestContent(url, request);
 
@@ -920,8 +880,11 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Prepares post request content.
         /// </summary>
-        private HttpContent CreateRequestContent(string url, object request)
+        private HttpContent CreateRequestContent(string url, dynamic request)
         {
+            // Calculate signature against all request parameters
+            request.signature = GetSignature(url, request as IDictionary<string, object>);
+
             string parameters = JsonConvert.SerializeObject(request);
 
             LastRequestParameters = parameters;
@@ -954,15 +917,28 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
-        /// Helper method to get signature which can be used to 'sign' private api request
+        /// Helper method to get nonce.
         /// </summary>
         /// <returns></returns>
-        private Tuple<string, string> GetNonceAndSignature()
+        private string GetNonce()
         {
-            string nonce = DateTime.UtcNow.Ticks.ToString(CultureInfo.InvariantCulture);
-            var tuple = new Tuple<string, string>(nonce, HMACSHA256Hash(string.Format("{0}{1}", nonce, _apiKey), _apiSecret));
+            return DateTime.UtcNow.Ticks.ToString(CultureInfo.InvariantCulture);
+        }
 
-            return tuple;
+        /// <summary>
+        /// Helper method to get signature which can be used to 'sign' private api request.
+        /// </summary>
+        private string GetSignature(string url, IDictionary<String, Object> requestParameters)
+        {
+            var input = new StringBuilder(new Uri(_client.BaseAddress, url).ToString());
+
+            foreach (string key in requestParameters.Keys)
+            {
+                input.Append(',');
+                input.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}", key, requestParameters[key]);
+            }
+
+            return HMACSHA256Hash(input.ToString(), _apiSecret);
         }
 
         /// <summary>
