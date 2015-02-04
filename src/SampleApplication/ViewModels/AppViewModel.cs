@@ -56,7 +56,7 @@ namespace SampleApplication.ViewModels
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
         private string _accountGuid;
-        private decimal? _withdrawalAmount;
+        private decimal _withdrawalAmount;
         private string _withdrawalBankAccountName;
         private string _address;
 
@@ -366,7 +366,7 @@ namespace SampleApplication.ViewModels
         /// <summary>
         /// Method parameter - WithdrawalAmount- used by private API method RequestFiatWithdrawal
         /// </summary>
-        public decimal? WithdrawalAmount
+        public decimal WithdrawalAmount
         {
             get { return _withdrawalAmount; }
             set
