@@ -16,7 +16,7 @@ namespace UnitTest
 
                 var account = client.GetAccounts().First(a => a.CurrencyCode == CurrencyCode.Xbt);
 
-                var transactions = client.GetTransactions(account.AccountGuid, date, null, 1, 10);
+                var transactions = client.GetTransactions(account.AccountGuid, date, null, null, 1, 10);
 
                 Assert.AreEqual(0, transactions.Data.Count());
 
@@ -26,7 +26,7 @@ namespace UnitTest
 
                 client.WithdrawBitcoin(0.01m, bitcoinDepositAddress.BitcoinAddress);
 
-                transactions = client.GetTransactions(account.AccountGuid, date, null, 1, 10);
+                transactions = client.GetTransactions(account.AccountGuid, date, null, null, 1, 10);
 
                 var data = transactions.Data.ToList();
 

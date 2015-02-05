@@ -206,7 +206,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "GetTransactions",
                            Description = "GetTransactions",
-                           Parameters = new[] {"accountGuid", "fromTimestampUtc", "toTimestampUtc", "pageIndex", "pageSize"}
+                           Parameters = new[] {"accountGuid", "fromTimestampUtc", "toTimestampUtc", "pageIndex", "pageSize", "txTypes"}
                        };
             }
         }
