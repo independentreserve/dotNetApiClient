@@ -112,7 +112,7 @@
                     <DatePicker SelectedDate="{Binding ToTimestampUtc}"></DatePicker>
                 </StackPanel>
 
-                <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=txTypes}">
                     <TextBlock Style="{StaticResource Label}">Transaction Types:</TextBlock>
                     <ListBox ItemsSource="{Binding TransactionTypes}" Width="250" MaxHeight="100"  SelectionMode="Multiple">
                         <ListBox.ItemContainerStyle>
