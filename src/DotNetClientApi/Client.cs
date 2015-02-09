@@ -645,7 +645,7 @@ namespace IndependentReserve.DotNetClientApi
             data.accountGuid = accountGuid.ToString();
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
             data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
-            //data.txTypes = txTypes; //Receives authentication error
+            data.txTypes = txTypes;
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
@@ -956,7 +956,20 @@ namespace IndependentReserve.DotNetClientApi
             foreach (string key in requestParameters.Keys)
             {
                 input.Append(',');
-                input.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}", key, requestParameters[key]);
+                var value = requestParameters[key];
+                object resultValue;
+
+                if (value != null && value.GetType().IsArray && typeof (string).IsAssignableFrom(value.GetType().GetElementType()))
+                {
+                    var array = value as string[];
+                    resultValue = array == null || !array.Any() ? string.Empty : string.Join(",", array.Select(tt => string.Format("{0}", tt)));
+                }
+                else
+                {
+                    resultValue = value;
+                }
+
+                input.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}", key, resultValue);
             }
 
             return HMACSHA256Hash(input.ToString(), _apiSecret);
