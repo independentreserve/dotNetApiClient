@@ -38,6 +38,11 @@ namespace IndependentReserve.DotNetClientApi.Data
         public decimal? Price { get; set; }
 
         /// <summary>
+        /// The order's overall price (weighted average).
+        /// </summary>
+        public decimal? AvgPrice { get; set; }
+
+        /// <summary>
         /// Order's reserved amount (for limit orders)
         /// </summary>
         public decimal ReservedAmount { get; set; }
