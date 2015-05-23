@@ -7,6 +7,7 @@
     {
         Xbt=1,
         Usd=2,
-        Aud=3
+        Aud=3,
+        Nzd=4
     }
 }
