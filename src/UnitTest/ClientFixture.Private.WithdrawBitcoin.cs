@@ -24,7 +24,7 @@ namespace UnitTest
 
                 Assert.IsNotNull(bitcoinDepositAddress);
 
-                client.WithdrawBitcoin(0.01m, bitcoinDepositAddress.BitcoinAddress);
+                client.WithdrawBitcoin(0.01m, bitcoinDepositAddress.BitcoinAddress, "test");
 
                 transactions = client.GetTransactions(account.AccountGuid, date, null, null, 1, 10);
 

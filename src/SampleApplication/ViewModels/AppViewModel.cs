@@ -21,11 +21,13 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetValidSecondaryCurrencyCodes, 
             MethodMetadata.GetValidLimitOrderTypes, 
             MethodMetadata.GetValidMarketOrderTypes, 
+            MethodMetadata.GetValidOrderTypes,
             MethodMetadata.GetValidTransactionTypes, 
             MethodMetadata.GetMarketSummary, 
             MethodMetadata.GetOrderBook, 
             MethodMetadata.GetTradeHistorySummary, 
             MethodMetadata.GetRecentTrades, 
+            MethodMetadata.GetFxRates,
             MethodMetadata.PlaceLimitOrder, 
             MethodMetadata.PlaceMarketOrder, 
             MethodMetadata.CancelOrder, 
@@ -36,6 +38,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetOrderDetails,
             MethodMetadata.GetTransactions, 
             MethodMetadata.GetBitcoinDepositAddress, 
+            MethodMetadata.GetBitcoinDepositAddresses, 
             MethodMetadata.SynchBitcoinAddressWithBlockchain,
             MethodMetadata.WithdrawBitcoin,
             MethodMetadata.RequestFiatWithdrawal,
@@ -63,6 +66,7 @@ namespace SampleApplication.ViewModels
         private decimal _withdrawalAmount;
         private string _withdrawalBankAccountName;
         private string _address;
+        private string _comment;
 
         public AppViewModel()
         {
@@ -420,6 +424,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _address) return;
                 _address = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - Comment - used by private API withdrawal methods
+        /// </summary>
+        public string Comment
+        {
+            get { return _comment; }
+            set
+            {
+                if (value == _comment) return;
+                _comment = value;
                 OnPropertyChanged();
             }
         }

@@ -51,6 +51,7 @@
     <Compile Include="Data\CurrencyCode.cs" />
     <Compile Include="Data\ErrorMessage.cs" />
     <Compile Include="Data\FiatWithdrawalRequest.cs" />
+    <Compile Include="Data\FxRate.cs" />
     <Compile Include="Data\MarketSummary.cs" />
     <Compile Include="Data\OrderBook.cs" />
     <Compile Include="Data\OrderBookItem.cs" />

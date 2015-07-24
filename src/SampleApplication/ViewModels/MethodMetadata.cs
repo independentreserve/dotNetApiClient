@@ -55,6 +55,12 @@ namespace SampleApplication.ViewModels
             get { return new MethodMetadata() {Name = "GetValidMarketOrderTypes", Description = "GetValidMarketOrderTypes", Parameters = new string[] {}}; }
         }
 
+        //GetValidOrderTypes()
+        public static MethodMetadata GetValidOrderTypes
+        {
+            get { return new MethodMetadata() { Name = "GetValidOrderTypes", Description = "GetValidOrderTypes", Parameters = new string[] { }}; }
+        }
+
         //GetValidTransactionTypes()
         public static MethodMetadata GetValidTransactionTypes
         {
@@ -83,6 +89,12 @@ namespace SampleApplication.ViewModels
         public static MethodMetadata GetRecentTrades
         {
             get { return new MethodMetadata() {Name = "GetRecentTrades", Description = "GetRecentTrades", Parameters = new string[] {"primaryCurrency", "secondaryCurrency", "numberOfRecentTradesToRetrieve"}}; }
+        }
+
+        //GetFxRates()
+        public static MethodMetadata GetFxRates
+        {
+            get { return new MethodMetadata() { Name = "GetFxRates", Description = "GetFxRates", Parameters = new string[] { } }; }
         }
 
         //PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume)
@@ -225,6 +237,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //GetBitcoinDepositAddresses()
+        public static MethodMetadata GetBitcoinDepositAddresses
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetBitcoinDepositAddresses",
+                    Description = "GetBitcoinDepositAddresses",
+                    Parameters = new [] { "pageIndex", "pageSize"}
+                };
+            }
+        }
+
         //RequestFiatWithdrawal()
         public static MethodMetadata RequestFiatWithdrawal
         {
@@ -234,7 +260,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "RequestFiatWithdrawal",
                            Description = "RequestFiatWithdrawal",
-                           Parameters = new[] {"secondaryCurrency", "withdrawalAmount", "withdrawalBankAccountName"}
+                           Parameters = new[] {"secondaryCurrency", "withdrawalAmount", "withdrawalBankAccountName", "comment"}
                        };
             }
         }
@@ -262,7 +288,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "WithdrawBitcoin",
                            Description = "WithdrawBitcoin",
-                           Parameters = new[] {"withdrawalAmount", "address"}
+                           Parameters = new[] {"withdrawalAmount", "address", "comment"}
                        };
             }
         }

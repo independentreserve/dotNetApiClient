@@ -22,8 +22,6 @@
             <Setter Property="MinWidth" Value="170"></Setter>
         </Style>
 
-        
-
         <Style TargetType="TextBox">
             <Setter Property="Padding" Value="5"></Setter>
             <Setter Property="MinWidth" Value="50"></Setter>
@@ -38,6 +36,14 @@
                     <Setter Property="Background" Value="LemonChiffon"></Setter>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextArea" TargetType="TextBox">
+            <Setter Property="Padding" Value="5"></Setter>
+            <Setter Property="MinWidth" Value="50"></Setter>
+            <Setter Property="MinHeight" Value="50"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="AcceptsReturn" Value="True"></Setter>
         </Style>
 
     </Application.Resources>
