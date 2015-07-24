@@ -190,6 +190,24 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Returns a list of valid order types which can be placed onto the Idependent Reserve exchange platform
+        /// </summary>
+        public IEnumerable<OrderType> GetValidOrderTypes()
+        {
+            ThrowIfDisposed();
+            return GetValidOrderTypesAsync().Result;
+        }
+
+        /// <summary>
+        /// Returns a list of valid order types which can be placed onto the Idependent Reserve exchange platform
+        /// </summary>
+        public async Task<IEnumerable<OrderType>> GetValidOrderTypesAsync()
+        {
+            ThrowIfDisposed();
+            return await QueryPublicAsync<IEnumerable<OrderType>>("/Public/GetValidOrderTypes").ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Returns a list of valid transaction types which are supported by Idependent Reserve exchange platform
         /// </summary>
         public IEnumerable<TransactionType> GetValidTransactionTypes()
@@ -303,6 +321,24 @@ namespace IndependentReserve.DotNetClientApi
                 , new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString())
                 , new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())
                 , new Tuple<string, string>("numberOfRecentTradesToRetrieve", numberOfRecentTradesToRetrieve.ToString(CultureInfo.InvariantCulture))).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns a list of existing exchange rates between currencies.
+        /// </summary>
+        public IEnumerable<FxRate> GetFxRates()
+        {
+            ThrowIfDisposed();
+            return GetFxRatesAsync().Result;
+        }
+
+        /// <summary>
+        /// Returns a list of existing exchange rates between currencies.
+        /// </summary>
+        public async Task<IEnumerable<FxRate>> GetFxRatesAsync()
+        {
+            ThrowIfDisposed();
+            return await QueryPublicAsync<IEnumerable<FxRate>>("/Public/GetFxRates").ConfigureAwait(false);
         }
 
         #endregion //Public API
@@ -679,6 +715,35 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves the Bitcoin addresses (paged) which should be used for new Bitcoin deposits
+        /// </summary>
+        public Page<BitcoinDepositAddress> GetBitcoinDepositAddresses(int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetBitcoinDepositAddressesAsync(pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves the Bitcoin addresses (paged) which should be used for new Bitcoin deposits
+        /// </summary>
+        public async Task<Page<BitcoinDepositAddress>> GetBitcoinDepositAddressesAsync(int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.pageIndex = pageIndex;
+            data.pageSize = pageSize;
+
+            return await QueryPrivateAsync<Page<BitcoinDepositAddress>>("/Private/GetBitcoinDepositAddresses", data).ConfigureAwait(false);
+        }
+
+
+        /// <summary>
         /// Marks bitcoin address to sync with blockchain and update balance
         /// </summary>
         /// <param name="bitcoinAddress">Bitcoin address</param>
@@ -714,12 +779,13 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
-        public void WithdrawBitcoin(decimal? withdrawalAmount, string bitcoinAddress)
+        /// <param name="comment">withdrawal comment</param>
+        public void WithdrawBitcoin(decimal? withdrawalAmount, string bitcoinAddress, string comment)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            WithdrawBitcoinAsync(withdrawalAmount, bitcoinAddress).Wait();
+            WithdrawBitcoinAsync(withdrawalAmount, bitcoinAddress, comment).Wait();
         }
 
         /// <summary>
@@ -727,7 +793,8 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
-        public async Task WithdrawBitcoinAsync(decimal? withdrawalAmount, string bitcoinAddress)
+        /// <param name="comment">withdrawal comment</param>
+        public async Task WithdrawBitcoinAsync(decimal? withdrawalAmount, string bitcoinAddress, string comment)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -737,6 +804,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.amount = withdrawalAmount.HasValue ? withdrawalAmount.Value.ToString(CultureInfo.InvariantCulture) : null;
             data.bitcoinAddress = bitcoinAddress;
+            data.comment = comment;
 
             await QueryPrivateAsync("/Private/WithdrawBitcoin", data).ConfigureAwait(false);
         }
@@ -747,13 +815,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only USD accounts are supported)</param>
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
+        /// <param name="comment">withdrawal comment</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName)
+        public FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return RequestFiatWithdrawalAsync(secondaryCurrency, withdrawalAmount, withdrawalBankAccountName).Result;
+            return RequestFiatWithdrawalAsync(secondaryCurrency, withdrawalAmount, withdrawalBankAccountName, comment).Result;
         }
 
         /// <summary>
@@ -762,8 +831,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only USD accounts are supported)</param>
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
+        /// <param name="comment">withdrawal comment</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public async Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName)
+        public async Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -774,6 +844,7 @@ namespace IndependentReserve.DotNetClientApi
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.withdrawalAmount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
             data.withdrawalBankAccountName = withdrawalBankAccountName;
+            data.comment = comment;
 
             return await QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", data).ConfigureAwait(false);
         }
@@ -966,7 +1037,14 @@ namespace IndependentReserve.DotNetClientApi
                 }
                 else
                 {
-                    resultValue = value;
+                    if (value is string)
+                    {
+                        resultValue = ((string)value).Replace("\r", "").Replace("\n", "");
+                    }
+                    else
+                    {
+                        resultValue = value;
+                    }
                 }
 
                 input.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}", key, resultValue);

@@ -81,6 +81,10 @@ namespace SampleApplication
                     {
                         await client.GetValidMarketOrderTypesAsync();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetValidOrderTypes)
+                    {
+                        await client.GetValidOrderTypesAsync();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetValidTransactionTypes)
                     {
                         await client.GetValidTransactionTypesAsync();
@@ -100,6 +104,10 @@ namespace SampleApplication
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetRecentTrades)
                     {
                         await client.GetRecentTradesAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.NumberOfRecentTradesToRetrieve??0);
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetFxRates)
+                    {
+                        await client.GetFxRatesAsync();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.PlaceLimitOrder)
                     {
@@ -142,9 +150,13 @@ namespace SampleApplication
                     {
                         await client.GetBitcoinDepositAddressAsync();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetBitcoinDepositAddresses)
+                    {
+                        await client.GetBitcoinDepositAddressesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.RequestFiatWithdrawal)
                     {
-                        await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName);
+                        await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName, ViewModel.Comment);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.SynchBitcoinAddressWithBlockchain)
                     {
@@ -152,7 +164,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawBitcoin)
                     {
-                        await client.WithdrawBitcoinAsync(ViewModel.WithdrawalAmount, ViewModel.Address);
+                        await client.WithdrawBitcoinAsync(ViewModel.WithdrawalAmount, ViewModel.Address, ViewModel.Comment);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {
