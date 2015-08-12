@@ -16,6 +16,7 @@
         GST = 8,
         Unclaimed = 9,
         Error = 10,
-        DepositFee = 11
+        DepositFee = 11,
+        ReferralCommission = 12,
     }
 }
