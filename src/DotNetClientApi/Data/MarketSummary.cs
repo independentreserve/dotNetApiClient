@@ -28,6 +28,11 @@ namespace IndependentReserve.DotNetClientApi.Data
         public decimal? DayVolumeXbt { get; set; }
 
         /// <summary>
+        /// The 24 hours trade volume where one of the orders was in the secondary currency the user chose.
+        /// </summary>
+        public decimal? DayVolumeXbtInSecondaryCurrrency { get; set; }
+
+        /// <summary>
         /// The lowest traded offer price. Used as restriction to prevent cross-market.
         /// </summary>
         public decimal? CurrentLowestOfferPrice { get; set; }
