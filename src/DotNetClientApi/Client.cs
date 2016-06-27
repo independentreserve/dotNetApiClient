@@ -691,6 +691,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves the Bitcoin address which should be used for new Bitcoin deposits
         /// </summary>
+        [Obsolete("Use GetDigitalCurrencyDepositAddress instead.")]
         public BitcoinDepositAddress GetBitcoinDepositAddress()
         {
             ThrowIfDisposed();
@@ -702,6 +703,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves the Bitcoin address which should be used for new Bitcoin deposits
         /// </summary>
+        [Obsolete("Use GetDigitalCurrencyDepositAddressAsync instead.")]
         public async Task<BitcoinDepositAddress> GetBitcoinDepositAddressAsync()
         {
             ThrowIfDisposed();
@@ -715,8 +717,38 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves the deposit address which should be used for new digital currency deposits
+        /// </summary>
+        /// <param name="primaryCurrency">digital currency code to generate deposit address for</param>
+        public DigitalCurrencyDepositAddress GetDigitalCurrencyDepositAddress(CurrencyCode primaryCurrency)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetDigitalCurrencyDepositAddressAsync(primaryCurrency).Result;
+        }
+
+        /// <summary>
+        /// Retrieves the Bitcoin address which should be used for new Bitcoin deposits
+        /// </summary>
+        /// <param name="primaryCurrency">digital currency code to generate deposit address for</param>
+        public async Task<DigitalCurrencyDepositAddress> GetDigitalCurrencyDepositAddressAsync(CurrencyCode primaryCurrency)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+
+            return await QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/GetDigitalCurrencyDepositAddress", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves the Bitcoin addresses (paged) which should be used for new Bitcoin deposits
         /// </summary>
+        [Obsolete("Use GetDigitalCurrencyDepositAddresses instead.")]
         public Page<BitcoinDepositAddress> GetBitcoinDepositAddresses(int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
@@ -728,6 +760,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves the Bitcoin addresses (paged) which should be used for new Bitcoin deposits
         /// </summary>
+        [Obsolete("Use GetDigitalCurrencyDepositAddressesAsync instead.")]
         public async Task<Page<BitcoinDepositAddress>> GetBitcoinDepositAddressesAsync(int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
@@ -742,12 +775,47 @@ namespace IndependentReserve.DotNetClientApi
             return await QueryPrivateAsync<Page<BitcoinDepositAddress>>("/Private/GetBitcoinDepositAddresses", data).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Retrieves deposit addresses (paged) which should be used for new Bitcoin or Ether deposits
+        /// </summary>
+        /// <param name="primaryCurrency">digital currency code to retrieve deposit addresses for</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        public Page<DigitalCurrencyDepositAddress> GetDigitalCurrencyDepositAddresses(CurrencyCode primaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetDigitalCurrencyDepositAddressesAsync(primaryCurrency, pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves the Bitcoin addresses (paged) which should be used for new Bitcoin deposits
+        /// </summary>
+        /// <param name="primaryCurrency">digital currency code to retrieve deposit addresses for</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        public async Task<Page<DigitalCurrencyDepositAddress>> GetDigitalCurrencyDepositAddressesAsync(CurrencyCode primaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.pageIndex = pageIndex;
+            data.pageSize = pageSize;
+
+            return await QueryPrivateAsync<Page<DigitalCurrencyDepositAddress>>("/Private/GetDigitalCurrencyDepositAddresses", data).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Marks bitcoin address to sync with blockchain and update balance
         /// </summary>
         /// <param name="bitcoinAddress">Bitcoin address</param>
         /// <returns>A BitcoinDepositAddress object</returns>
+        [Obsolete("Use SynchDigitalCurrencyDepositAddressWithBlockchain instead.")]
         public BitcoinDepositAddress SynchBitcoinAddressWithBlockchain(string bitcoinAddress)
         {
             ThrowIfDisposed();
@@ -761,6 +829,7 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="bitcoinAddress">Bitcoin address</param>
         /// <returns>A BitcoinDepositAddress object</returns>
+        [Obsolete("Use SynchDigitalCurrencyDepositAddressWithBlockchainAsync instead.")]
         public async Task<BitcoinDepositAddress> SynchBitcoinAddressWithBlockchainAsync(string bitcoinAddress)
         {
             ThrowIfDisposed();
@@ -775,11 +844,43 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Marks digital currency deposit address to sync with blockchain and update balance
+        /// </summary>
+        /// <param name="depositAddress">Digital currency deposit address to sync</param>
+        /// <returns>A DigitalCurrnecyDepositAddress object</returns>
+        public DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return SynchDigitalCurrencyDepositAddressWithBlockchainAsync(depositAddress).Result;
+        }
+
+        /// <summary>
+        /// Marks digital currency deposit address to sync with blockchain and update balance
+        /// </summary>
+        /// <param name="depositAddress">Digital currency deposit address to sync</param>
+        /// <returns>A DigitalCurrencyDepositAddress object</returns>
+        public async Task<DigitalCurrencyDepositAddress> SynchDigitalCurrencyDepositAddressWithBlockchainAsync(string depositAddress)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.depositAddress = depositAddress;
+
+            return await QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/SynchDigitalCurrnecyDepositAddressWithBlockchain", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Creates bitcoin withdrawal request
         /// </summary>
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
+        [Obsolete("Use WithdrawDigitalCurrency instead.")]
         public void WithdrawBitcoin(decimal? withdrawalAmount, string bitcoinAddress, string comment)
         {
             ThrowIfDisposed();
@@ -794,6 +895,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="bitcoinAddress">bitcoin address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
+        [Obsolete("Use WithdrawDigitalCurrencyAsync instead.")]
         public async Task WithdrawBitcoinAsync(decimal? withdrawalAmount, string bitcoinAddress, string comment)
         {
             ThrowIfDisposed();
@@ -807,6 +909,41 @@ namespace IndependentReserve.DotNetClientApi
             data.comment = comment;
 
             await QueryPrivateAsync("/Private/WithdrawBitcoin", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates digital currency withdrawal request
+        /// </summary>
+        /// <param name="withdrawalAmount">withdrawal amount</param>
+        /// <param name="withdrawalAddress">digital address to withdraw</param>
+        /// <param name="comment">withdrawal comment</param>
+        public void WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            WithdrawDigitalCurrencyAsync(withdrawalAmount, withdrawalAddress, comment).Wait();
+        }
+
+        /// <summary>
+        /// Creates digital currency withdrawal request
+        /// </summary>
+        /// <param name="withdrawalAmount">withdrawal amount</param>
+        /// <param name="withdrawalAddress">digital address to withdraw</param>
+        /// <param name="comment">withdrawal comment</param>
+        public async Task WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.amount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
+            data.withdrawalAddress = withdrawalAddress;
+            data.comment = comment;
+
+            await QueryPrivateAsync("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
         }
 
         /// <summary>

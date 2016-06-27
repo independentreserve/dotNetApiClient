@@ -39,6 +39,7 @@
                     <TextBlock Style="{StaticResource Label}" >Primary currency:</TextBlock>
                     <ComboBox SelectedValue="{Binding PrimaryCurrency}" SelectedValuePath="Tag">
                         <ComboBoxItem Tag="Xbt" IsSelected="True">Xbt</ComboBoxItem>
+                        <ComboBoxItem Tag="Eth">Eth</ComboBoxItem>
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
@@ -48,6 +49,7 @@
                     <TextBlock Style="{StaticResource Label}" >Secondary currency:</TextBlock>
                     <ComboBox SelectedValue="{Binding SecondaryCurrency}" SelectedValuePath="Tag">
                         <ComboBoxItem Tag="Xbt">Xbt</ComboBoxItem>
+                        <ComboBoxItem Tag="Eth">Eth</ComboBoxItem>
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
@@ -146,7 +148,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=address}">
-                    <TextBlock Style="{StaticResource Label}">Bitcoin Address:</TextBlock>
+                    <TextBlock Style="{StaticResource Label}">Digital Currency Address:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding Address}" Width="250"></TextBox>
                 </StackPanel>
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
@@ -150,9 +151,17 @@ namespace SampleApplication
                     {
                         await client.GetBitcoinDepositAddressAsync();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddress)
+                    {
+                        await client.GetDigitalCurrencyDepositAddressAsync(ViewModel.PrimaryCurrency);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetBitcoinDepositAddresses)
                     {
                         await client.GetBitcoinDepositAddressesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddresses)
+                    {
+                        await client.GetDigitalCurrencyDepositAddressesAsync(ViewModel.PrimaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.RequestFiatWithdrawal)
                     {
@@ -162,9 +171,17 @@ namespace SampleApplication
                     {
                         await client.SynchBitcoinAddressWithBlockchainAsync(ViewModel.Address);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain)
+                    {
+                        await client.SynchDigitalCurrencyDepositAddressWithBlockchainAsync(ViewModel.Address);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawBitcoin)
                     {
                         await client.WithdrawBitcoinAsync(ViewModel.WithdrawalAmount, ViewModel.Address, ViewModel.Comment);
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawDigitalCurrency)
+                    {
+                        await client.WithdrawDigitalCurrencyAsync(ViewModel.WithdrawalAmount, ViewModel.Address, ViewModel.Comment);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {

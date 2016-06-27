@@ -237,6 +237,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //GetDigitalCurrencyDepositAddress()
+        public static MethodMetadata GetDigitalCurrencyDepositAddress
+        {
+            get
+            {
+                return new MethodMetadata()
+                       {
+                           Name = "GetDigitalCurrencyDepositAddress",
+                           Description = "GetDigitalCurrencyDepositAddress",
+                           Parameters = new[] {"primaryCurrency"}
+                       };
+            }
+        }
+
         //GetBitcoinDepositAddresses()
         public static MethodMetadata GetBitcoinDepositAddresses
         {
@@ -247,6 +261,20 @@ namespace SampleApplication.ViewModels
                     Name = "GetBitcoinDepositAddresses",
                     Description = "GetBitcoinDepositAddresses",
                     Parameters = new [] { "pageIndex", "pageSize"}
+                };
+            }
+        }
+
+        //GetDigitalCurrencyDepositAddresses()
+        public static MethodMetadata GetDigitalCurrencyDepositAddresses
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDigitalCurrencyDepositAddresses",
+                    Description = "GetDigitalCurrencyDepositAddresses",
+                    Parameters = new [] { "primaryCurrency", "pageIndex", "pageSize"}
                 };
             }
         }
@@ -279,6 +307,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //SynchDigitalCurrencyDepositAddressWithBlockchain()
+        public static MethodMetadata SynchDigitalCurrencyDepositAddressWithBlockchain
+        {
+            get
+            {
+                return new MethodMetadata()
+                       {
+                           Name = "SynchDigitalCurrencyDepositAddressWithBlockchain",
+                           Description = "SynchDigitalCurrencyDepositAddressWithBlockchain",
+                           Parameters = new[] {"address"}
+                       };
+            }
+        }
+
         //WithdrawBitcoin()
         public static MethodMetadata WithdrawBitcoin
         {
@@ -288,6 +330,20 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "WithdrawBitcoin",
                            Description = "WithdrawBitcoin",
+                           Parameters = new[] {"withdrawalAmount", "address", "comment"}
+                       };
+            }
+        }
+
+        //WithdrawDigitalCurrency()
+        public static MethodMetadata WithdrawDigitalCurrency
+        {
+            get
+            {
+                return new MethodMetadata()
+                       {
+                           Name = "WithdrawDigitalCurrnecy",
+                           Description = "WithdrawDigitalCurrency",
                            Parameters = new[] {"withdrawalAmount", "address", "comment"}
                        };
             }
