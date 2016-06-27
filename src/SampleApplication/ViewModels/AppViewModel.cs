@@ -38,9 +38,13 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetOrderDetails,
             MethodMetadata.GetTransactions, 
             MethodMetadata.GetBitcoinDepositAddress, 
+            MethodMetadata.GetDigitalCurrencyDepositAddress, 
             MethodMetadata.GetBitcoinDepositAddresses, 
+            MethodMetadata.GetDigitalCurrencyDepositAddresses, 
             MethodMetadata.SynchBitcoinAddressWithBlockchain,
+            MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
             MethodMetadata.WithdrawBitcoin,
+            MethodMetadata.WithdrawDigitalCurrency,
             MethodMetadata.RequestFiatWithdrawal,
             MethodMetadata.GetTrades
         };

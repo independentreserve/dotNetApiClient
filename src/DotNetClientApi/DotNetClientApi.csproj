@@ -47,6 +47,7 @@
     <Compile Include="Data\AccountStatus.cs" />
     <Compile Include="Data\BankHistoryOrder.cs" />
     <Compile Include="Data\BankOrder.cs" />
+    <Compile Include="Data\DigitalCurrencyDepositAddress.cs" />
     <Compile Include="Data\BitcoinDepositAddress.cs" />
     <Compile Include="Data\CurrencyCode.cs" />
     <Compile Include="Data\ErrorMessage.cs" />
