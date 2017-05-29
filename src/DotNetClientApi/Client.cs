@@ -871,7 +871,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.depositAddress = depositAddress;
 
-            return await QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/SynchDigitalCurrnecyDepositAddressWithBlockchain", data).ConfigureAwait(false);
+            return await QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/SynchDigitalCurrencyDepositAddressWithBlockchain", data).ConfigureAwait(false);
         }
 
         /// <summary>
