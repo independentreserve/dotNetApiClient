@@ -472,7 +472,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your currently Open and Partially Filled orders</returns>
-        public Page<BankHistoryOrder> GetOpenOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        public Page<BankHistoryOrder> GetOpenOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -488,7 +488,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your currently Open and Partially Filled orders</returns>
-        public async Task<Page<BankHistoryOrder>> GetOpenOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        public async Task<Page<BankHistoryOrder>> GetOpenOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -496,8 +496,17 @@ namespace IndependentReserve.DotNetClientApi
             dynamic data = new ExpandoObject();
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
-            data.primaryCurrencyCode = primaryCurrency.ToString();
-            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+
+            if (primaryCurrency.HasValue)
+            {
+                data.primaryCurrencyCode = primaryCurrency.ToString();
+            }
+
+            if (secondaryCurrency.HasValue)
+            {
+                data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            }
+
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
@@ -512,7 +521,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your Closed and Cancelled orders</returns>
-        public Page<BankHistoryOrder> GetClosedOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        public Page<BankHistoryOrder> GetClosedOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -528,7 +537,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your Closed and Cancelled orders</returns>
-        public async Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        public async Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -536,8 +545,17 @@ namespace IndependentReserve.DotNetClientApi
             dynamic data = new ExpandoObject();
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
-            data.primaryCurrencyCode = primaryCurrency.ToString();
-            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+
+            if (primaryCurrency.HasValue)
+            {
+                data.primaryCurrencyCode = primaryCurrency.ToString();
+            }
+
+            if (secondaryCurrency.HasValue)
+            {
+                data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            }
+
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
@@ -552,7 +570,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your Closed filled orders</returns>
-        public Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        public Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -568,7 +586,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your Closed filled orders</returns>
-        public async Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int pageIndex, int pageSize)
+        public async Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -576,8 +594,17 @@ namespace IndependentReserve.DotNetClientApi
             dynamic data = new ExpandoObject();
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
-            data.primaryCurrencyCode = primaryCurrency.ToString();
-            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+
+            if (primaryCurrency.HasValue)
+            {
+                data.primaryCurrencyCode = primaryCurrency.ToString();
+            }
+
+            if (secondaryCurrency.HasValue)
+            {
+                data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            }
+
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
