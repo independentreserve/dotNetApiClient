@@ -9,6 +9,7 @@
         Usd=2,
         Aud=3,
         Nzd=4,
-        Eth=5
+        Eth=5,
+        Bch=6
     }
 }
