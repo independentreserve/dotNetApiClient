@@ -316,7 +316,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "SynchDigitalCurrencyDepositAddressWithBlockchain",
                            Description = "SynchDigitalCurrencyDepositAddressWithBlockchain",
-                           Parameters = new[] {"address"}
+                           Parameters = new[] {"address", "primaryCurrency"}
                        };
             }
         }
@@ -344,7 +344,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "WithdrawDigitalCurrnecy",
                            Description = "WithdrawDigitalCurrency",
-                           Parameters = new[] {"withdrawalAmount", "address", "comment"}
+                           Parameters = new[] {"withdrawalAmount", "address", "comment", "primaryCurrency"}
                        };
             }
         }
