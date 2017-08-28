@@ -874,21 +874,23 @@ namespace IndependentReserve.DotNetClientApi
         /// Marks digital currency deposit address to sync with blockchain and update balance
         /// </summary>
         /// <param name="depositAddress">Digital currency deposit address to sync</param>
+        /// <param name="primaryCurrency">Optional primary currency</param>
         /// <returns>A DigitalCurrnecyDepositAddress object</returns>
-        public DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress)
+        public DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress, CurrencyCode? primaryCurrency = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return SynchDigitalCurrencyDepositAddressWithBlockchainAsync(depositAddress).Result;
+            return SynchDigitalCurrencyDepositAddressWithBlockchainAsync(depositAddress, primaryCurrency).Result;
         }
 
         /// <summary>
         /// Marks digital currency deposit address to sync with blockchain and update balance
         /// </summary>
         /// <param name="depositAddress">Digital currency deposit address to sync</param>
+        /// <param name="primaryCurrency">Optional primary currency</param>
         /// <returns>A DigitalCurrencyDepositAddress object</returns>
-        public async Task<DigitalCurrencyDepositAddress> SynchDigitalCurrencyDepositAddressWithBlockchainAsync(string depositAddress)
+        public async Task<DigitalCurrencyDepositAddress> SynchDigitalCurrencyDepositAddressWithBlockchainAsync(string depositAddress, CurrencyCode? primaryCurrency = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -897,6 +899,10 @@ namespace IndependentReserve.DotNetClientApi
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
             data.depositAddress = depositAddress;
+            if (primaryCurrency.HasValue)
+            {
+                data.primaryCurrencyCode = primaryCurrency.ToString();
+            }
 
             return await QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/SynchDigitalCurrencyDepositAddressWithBlockchain", data).ConfigureAwait(false);
         }
@@ -944,12 +950,13 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="withdrawalAddress">digital address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
-        public void WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment)
+        /// <param name="primaryCurrency">optional primary currency</param>
+        public void WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode? primaryCurrency = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            WithdrawDigitalCurrencyAsync(withdrawalAmount, withdrawalAddress, comment).Wait();
+            WithdrawDigitalCurrencyAsync(withdrawalAmount, withdrawalAddress, comment, primaryCurrency).Wait();
         }
 
         /// <summary>
@@ -958,7 +965,8 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="withdrawalAddress">digital address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
-        public async Task WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment)
+        /// <param name="primaryCurrency">optional primary currency</param>
+        public async Task WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode? primaryCurrency = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -969,6 +977,10 @@ namespace IndependentReserve.DotNetClientApi
             data.amount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
             data.withdrawalAddress = withdrawalAddress;
             data.comment = comment;
+            if (primaryCurrency.HasValue)
+            {
+                data.primaryCurrencyCode = primaryCurrency.ToString();
+            }
 
             await QueryPrivateAsync("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
         }

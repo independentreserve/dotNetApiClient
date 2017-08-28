@@ -173,7 +173,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain)
                     {
-                        await client.SynchDigitalCurrencyDepositAddressWithBlockchainAsync(ViewModel.Address);
+                        await client.SynchDigitalCurrencyDepositAddressWithBlockchainAsync(ViewModel.Address, ViewModel.PrimaryCurrency);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawBitcoin)
                     {
@@ -181,7 +181,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawDigitalCurrency)
                     {
-                        await client.WithdrawDigitalCurrencyAsync(ViewModel.WithdrawalAmount, ViewModel.Address, ViewModel.Comment);
+                        await client.WithdrawDigitalCurrencyAsync(ViewModel.WithdrawalAmount, ViewModel.Address, ViewModel.Comment, ViewModel.PrimaryCurrency);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {
