@@ -669,6 +669,34 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves information about user's brokerage fees
+        /// </summary>
+        /// <returns>a collection of brokerage fees</returns>
+        public IEnumerable<BrokerageFee> GetBrokerageFees()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetBrokerageFeesAsync().Result;
+        }
+
+        /// <summary>
+        /// Retrieves information about user's brokerage fees
+        /// </summary>
+        /// <returns>a collection of brokerage fees</returns>
+        public async Task<IEnumerable<BrokerageFee>> GetBrokerageFeesAsync()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+
+            return await QueryPrivateAsync<IEnumerable<BrokerageFee>>("/Private/GetBrokerageFees", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves a page of a specified size, containing all transactions made on an account
         /// </summary>
         /// <param name="accountGuid">The Guid of your Independent Reseve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
