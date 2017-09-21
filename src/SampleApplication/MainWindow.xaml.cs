@@ -126,6 +126,10 @@ namespace SampleApplication
                     {
                         await client.GetAccountsAsync();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetBrokerageFees)
+                    {
+                        await client.GetBrokerageFeesAsync();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOpenOrders)
                     {
                         await client.GetOpenOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);

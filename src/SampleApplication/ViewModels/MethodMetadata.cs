@@ -209,6 +209,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        // GetBrokerageFees()
+        public static MethodMetadata GetBrokerageFees
+        {
+            get
+            {
+                return new MethodMetadata
+                {
+                    Name = "GetBrokerageFees",
+                    Description = "GetBrokerageFees",
+                    Parameters = new string[] {}
+                };
+            }
+        }
+
         //GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, int pageIndex, int pageSize)
         public static MethodMetadata GetTransactions
         {
