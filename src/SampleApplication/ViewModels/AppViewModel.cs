@@ -32,7 +32,6 @@ namespace SampleApplication.ViewModels
             MethodMetadata.PlaceMarketOrder, 
             MethodMetadata.CancelOrder, 
             MethodMetadata.GetAccounts,
-            MethodMetadata.GetBrokerageFees,
             MethodMetadata.GetOpenOrders, 
             MethodMetadata.GetClosedOrders, 
             MethodMetadata.GetClosedFilledOrders, 
@@ -47,7 +46,8 @@ namespace SampleApplication.ViewModels
             MethodMetadata.WithdrawBitcoin,
             MethodMetadata.WithdrawDigitalCurrency,
             MethodMetadata.RequestFiatWithdrawal,
-            MethodMetadata.GetTrades
+            MethodMetadata.GetTrades,
+            MethodMetadata.GetBrokerageFees
         };
 
         private MethodMetadata _selectedMethod;
