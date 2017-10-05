@@ -672,18 +672,6 @@ namespace IndependentReserve.DotNetClientApi
         /// Retrieves information about user's brokerage fees
         /// </summary>
         /// <returns>a collection of brokerage fees</returns>
-        public IEnumerable<BrokerageFee> GetBrokerageFees()
-        {
-            ThrowIfDisposed();
-            ThrowIfPublicClient();
-
-            return GetBrokerageFeesAsync().Result;
-        }
-
-        /// <summary>
-        /// Retrieves information about user's brokerage fees
-        /// </summary>
-        /// <returns>a collection of brokerage fees</returns>
         public async Task<IEnumerable<BrokerageFee>> GetBrokerageFeesAsync()
         {
             ThrowIfDisposed();
@@ -1085,6 +1073,18 @@ namespace IndependentReserve.DotNetClientApi
             data.pageSize = pageSize;
 
             return await QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information about user's brokerage fees
+        /// </summary>
+        /// <returns>a collection of brokerage fees</returns>
+        public IEnumerable<BrokerageFee> GetBrokerageFees()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetBrokerageFeesAsync().Result;
         }
 
         #endregion //Private API
