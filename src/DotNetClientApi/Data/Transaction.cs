@@ -61,5 +61,10 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// output index of bitcoin transaction linked to this bank transaction
         /// </summary>
         public int? BitcoinTransactionOutputIndex { get; set; }
+
+        /// <summary>
+        /// id of ethereum transaction linked to this bank transaction
+        /// </summary>
+        public string EthereumTransactionId { get; set; }
     }
 }
