@@ -10,6 +10,7 @@
         Aud=3,
         Nzd=4,
         Eth=5,
-        Bch=6
+        Bch=6,
+        Ltc=7
     }
 }
