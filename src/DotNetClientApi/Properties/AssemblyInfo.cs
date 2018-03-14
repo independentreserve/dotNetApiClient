@@ -13,8 +13,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: AssemblyInformationalVersion("dev build")]
 
+[assembly: InternalsVisibleTo("UnitTest")]
 #if DEBUG
-    [assembly: AssemblyConfiguration("Debug")]
+[assembly: AssemblyConfiguration("Debug")]
 #else
     [assembly: AssemblyConfiguration("Release")]
 #endif
