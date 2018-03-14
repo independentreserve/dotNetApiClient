@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageId>IndependentReserve.Client</PackageId>
+    <Authors>Independent Reserve</Authors>
   </PropertyGroup>
 
   <ItemGroup>

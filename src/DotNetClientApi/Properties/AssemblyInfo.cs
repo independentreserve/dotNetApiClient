@@ -3,11 +3,10 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("DotNetClientApi")]
-[assembly: AssemblyDescription("Independent Reserve .NET Client")]
+[assembly: AssemblyTitle("foobar")]
+[assembly: AssemblyDescription(".NET client for interacting with the Independent Reserve API")]
 [assembly: AssemblyCompany("Independent Reserve")]
-[assembly: AssemblyProduct("IrClientApi")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("API Client")]
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
