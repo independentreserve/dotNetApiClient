@@ -1,6 +1,6 @@
 # Independent Reserve .Net API Client
 
-![NuGet](https://img.shields.io/nuget/dt/IndependentReserve.Client.svg)
+![NuGet](https://img.shields.io/nuget/v/independentreserve.client.svg)
 
 Independent Reserve C# API client and sample application.
 
