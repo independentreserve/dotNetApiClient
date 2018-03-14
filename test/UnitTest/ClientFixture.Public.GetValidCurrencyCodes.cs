@@ -12,11 +12,15 @@ namespace UnitTest
         {
             using (var client = CreatePublicClient())
             {
-                IEnumerable<CurrencyCode> currencyCodes = client.GetValidPrimaryCurrencyCodes();
+                var currencyCodes = client.GetValidPrimaryCurrencyCodes().ToList();
 
-                Assert.AreEqual(currencyCodes.Count(),1);
-                Assert.AreEqual(currencyCodes.First(), CurrencyCode.Xbt);
+                Assert.Greater(currencyCodes.Count(), 2);
+                Assert.Contains(CurrencyCode.Xbt, currencyCodes);
             }
+        }
+
+        private void AssertCurrencies(List<CurrencyCode> currencyCodes)
+        {
         }
 
         [Test]
@@ -24,11 +28,10 @@ namespace UnitTest
         {
             using (var client = CreatePublicClient())
             {
-                IEnumerable<CurrencyCode> currencyCodes = client.GetValidSecondaryCurrencyCodes();
+                var currencyCodes = client.GetValidSecondaryCurrencyCodes().ToList();
 
-                Assert.AreEqual(currencyCodes.Count(), 2);
-                Assert.AreEqual(currencyCodes.First(), CurrencyCode.Usd);
-                Assert.AreEqual(currencyCodes.Last(), CurrencyCode.Aud);
+                Assert.Greater(currencyCodes.Count(), 2);
+                Assert.Contains(CurrencyCode.Aud, currencyCodes);
             }
         }
     }
