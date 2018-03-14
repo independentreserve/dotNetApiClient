@@ -1,5 +1,6 @@
 ﻿using IndependentReserve.DotNetClientApi;
 using NUnit.Framework;
+using System;
 
 namespace UnitTest
 {
@@ -24,6 +25,13 @@ namespace UnitTest
             var client = Client.CreatePublic(BaseUrl);
 
             Assert.IsNotNull(client);
+        }
+
+        [Test]
+        public void HMACSHA256Hash()
+        {
+            var output = Client.HMACSHA256Hash("message", "key");
+            Assert.AreEqual("6E9EF29B75FFFC5B7ABAE527D58FDADB2FE42E7219011976917343065F58ED4A", output);
         }
 
         private Client CreatePrivateClient()
