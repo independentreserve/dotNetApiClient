@@ -5,6 +5,9 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageId>IndependentReserve.Client</PackageId>
     <Authors>Independent Reserve</Authors>
+    <PackageIconUrl>https://www.independentreserve.com/img/ir-icon-logo-blue-50.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/independentreserve/dotNetApiClient</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/independentreserve/dotNetApiClient</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
