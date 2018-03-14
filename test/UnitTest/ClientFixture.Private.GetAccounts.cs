@@ -16,7 +16,7 @@ namespace UnitTest
 
                 Assert.IsNotNull(accounts);
 
-                Assert.AreEqual(accounts.Count(),2);
+                Assert.That(accounts.ToList().Count > 2);
 
                 Account usdAccount = accounts.FirstOrDefault(a => a.CurrencyCode == CurrencyCode.Usd);
                 Assert.IsNotNull(usdAccount);
