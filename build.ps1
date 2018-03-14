@@ -54,7 +54,7 @@ function Pack-Nuget{
         $packageVersion = "1.0.0.0"
     }
 
-    nuget pack "$PSScriptRoot\src\DotNetClientApi\DotNetClientApi.csproj" -o $outputFolder -IncludeReferencedProjects -p Configuration=$configuration -Version $packageVersion
+    dotnet pack "$PSScriptRoot\src\DotNetClientApi\DotNetClientApi.csproj" --include-symbols -o $outputFolder -c $configuration /p:PackageVersion=$packageVersion
 }
 
 Find-Nuget
