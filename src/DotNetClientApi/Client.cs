@@ -16,7 +16,7 @@ namespace IndependentReserve.DotNetClientApi
     /// <summary>
     /// IndependentReserve API client, implements IDisposable
     /// </summary>
-    public class Client : IDisposable
+    public class Client : IDisposable, IClient
     {
         private readonly string _apiKey;
         private readonly string _apiSecret;
