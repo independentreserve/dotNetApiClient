@@ -1260,10 +1260,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Calculates HMACSHA256 hash of specified message with specified key
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        private static string HMACSHA256Hash(string message, string key)
+        internal static string HMACSHA256Hash(string message, string key)
         {
             byte[] keyBytes = StringToAscii(key);
             byte[] messageBytes = StringToAscii(message);
