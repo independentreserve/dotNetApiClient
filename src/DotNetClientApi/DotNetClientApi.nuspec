@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>IndependentReserve.Client</id>
+        <version>$version$</version>
+        <title>Independent Reserve Client</title>
+        <authors>Independent Reserve</authors>
+        <projectUrl>https://github.com/independentreserve/dotNetApiClient</projectUrl>
+        <iconUrl>https://www.independentreserve.com/img/ir-icon-logo-blue-50.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Independent Reserve API client</description>
+        <language>en-US</language>
+        <tags></tags>
+    </metadata>
+    <files>
+        <file src="bin\$configuration$\IndependentReserve.DotNetClientApi.pdb" target="lib\portable40-net45+sl5+win8+wp8+wpa81\" />
+    </files>
+</package>
