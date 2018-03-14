@@ -1,25 +1,25 @@
 # Independent Reserve .Net API Client
 
-![NuGet](https://img.shields.io/nuget/dt/IndependentReserve.Client.svg)
+![NuGet](https://img.shields.io/nuget/v/independentreserve.client.svg)
 
-Independent Reserve C# API client and sample application.
+This client encapsulates the private and public methods exposed by the Independent Reserve API. It also handles authentication when configured with a valid API Key and API Secret.
 
-The client wraps up all of the private and public methods exposed by the Independent Reserve API, and handles authentication when it is configured with a valid API Key and API Secret.
 It is designed to be easily plugged in by 3rd party developers into their own applications.
 
-The sample application shows how to use the client in a simple WPF application.
+## Installation
 
-For further detail, see our [API documentation](https://www.independentreserve.com/API)
+The package is [available on nuget](https://www.nuget.org/packages/IndependentReserve.Client/) 
 
-## System Requirements
+## Development Requirements
 
 * Visual Studio 2017
 
-## Configuring Sample Application
+## Sample Application
 
-You need to specify your API Key and API Secret in .NET Sample Application configuration file `SampleApplication.exe.config`, in the appSettings section.
+The sample application shows how to use the client in a simple WPF application.
+
+Specify your API Key and API Secret in the Sample Application configuration file `SampleApplication.exe.config`.
 
 ## Need help?
 
-Contact us at [support@independentreserve.com](mailto:support@independentreserve.com)
-
+For further detail, see our [API documentation](https://www.independentreserve.com/API)
