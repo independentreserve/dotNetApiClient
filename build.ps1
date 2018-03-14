@@ -42,7 +42,23 @@ function Build-Solution()
     msbuild "$PSScriptRoot\IRDotNetClientApi.sln" /p:Configuration=$configuration /verbosity:minimal
 }
 
+
+function Pack-Nuget{
+    Write-Host "Nuget pack"
+
+    $outputFolder = "$PSScriptRoot\_artifacts"
+    
+    New-Item -Force -ItemType directory -Path $outputFolder | Out-Null
+
+    if(-not $packageVersion){
+        $packageVersion = "1.0.0.0"
+    }
+
+    nuget pack "$PSScriptRoot\src\DotNetClientApi\DotNetClientApi.csproj" -o $outputFolder -IncludeReferencedProjects -p Configuration=$configuration -Version $packageVersion
+}
+
 Find-Nuget
 Restore-Packages
 Find-MsBuild
 Build-Solution
+Pack-Nuget
