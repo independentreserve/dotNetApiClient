@@ -7,6 +7,8 @@ function Find-Nuget{
     
         $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/v3.5.0-rc1/NuGet.exe"
         $targetNugetExe = "$PSScriptRoot\packages\nuget.exe"
+        
+        New-Item -ItemType directory -Path "$PSScriptRoot\packages" -Force  | Out-Null
     
         if (!(Test-Path $targetNugetExe )){
             Write-Host "Downloading nuget to $targetNugetExe"
