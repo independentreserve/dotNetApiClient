@@ -16,54 +16,46 @@ namespace IndependentReserve.DotNetClientApi
     /// <summary>
     /// IndependentReserve API client, implements IDisposable
     /// </summary>
-    public class Client : IDisposable, IClient
+    public class Client : IDisposable //, IClient
     {
         private readonly string _apiKey;
-        private readonly string _apiSecret;
 
-        private HttpClient _client;
+        internal IHttpWorker HttpWorker { get; set; }
+
+
+        public string LastRequestUrl => HttpWorker.LastRequestUrl;
+
+        public string LastRequestHttpMethod => HttpWorker.LastRequestHttpMethod;
+        public string LastRequestParameters => HttpWorker.LastRequestParameters;
+        public string LastResponseRaw => HttpWorker.LastResponseRaw;
 
         #region private constructors
 
         /// <summary>
         /// Creates instance of Client class, which can be used then to call public ONLY api methdos
         /// </summary>
-        /// <param name="baseUri"></param>
         private Client(Uri baseUri)
         {
-            _client = new HttpClient();
-            _client.BaseAddress = baseUri;
+            HttpWorker = new HttpWorker(baseUri);
         }
 
         /// <summary>
         /// Creates instance of Client class, which can be used then to call public and private api methdos
         /// </summary>
-        /// <param name="apiKey">api key</param>
-        /// <param name="apiSecret"></param>
-        /// <param name="baseUri"></param>
-        private Client(string apiKey, string apiSecret, Uri baseUri)
+        private Client(string apiKey, string apiSecret, Uri baseUri) : this(baseUri)
         {
             _apiKey = apiKey;
-            _apiSecret = apiSecret;
-
-            _client = new HttpClient();
-            _client.BaseAddress = baseUri;
+            HttpWorker.ApiSecret = apiSecret;
         }
 
         #endregion //private constructors
 
-        public string LastRequestUrl { get; private set; }
-        public string LastRequestHttpMethod { get; private set; }
-        public string LastRequestParameters { get; private set; }
-        public string LastResponseRaw { get; private set; }
 
         #region Factory
 
         /// <summary>
         /// Creates new instance of API client, which can be used to call ONLY public methods. Instance implements IDisposable, so wrap it with using statement
         /// </summary>
-        /// <param name="baseUrl"></param>
-        /// <returns></returns>
         public static Client CreatePublic(string baseUrl)
         {
             if (string.IsNullOrWhiteSpace(baseUrl))
@@ -132,7 +124,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<IEnumerable<CurrencyCode>> GetValidPrimaryCurrencyCodesAsync()
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<IEnumerable<CurrencyCode>>("/Public/GetValidPrimaryCurrencyCodes").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyCode>>("/Public/GetValidPrimaryCurrencyCodes").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -150,7 +142,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<IEnumerable<CurrencyCode>> GetValidSecondaryCurrencyCodesAsync()
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<IEnumerable<CurrencyCode>>("/Public/GetValidSecondaryCurrencyCodes").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyCode>>("/Public/GetValidSecondaryCurrencyCodes").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -168,7 +160,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<IEnumerable<OrderType>> GetValidLimitOrderTypesAsync()
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<IEnumerable<OrderType>>("/Public/GetValidLimitOrderTypes").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<OrderType>>("/Public/GetValidLimitOrderTypes").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -186,7 +178,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<IEnumerable<OrderType>> GetValidMarketOrderTypesAsync()
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<IEnumerable<OrderType>>("/Public/GetValidMarketOrderTypes").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<OrderType>>("/Public/GetValidMarketOrderTypes").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -204,7 +196,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<IEnumerable<OrderType>> GetValidOrderTypesAsync()
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<IEnumerable<OrderType>>("/Public/GetValidOrderTypes").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<OrderType>>("/Public/GetValidOrderTypes").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -222,7 +214,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync()
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<IEnumerable<TransactionType>>("/Public/GetValidTransactionTypes").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<TransactionType>>("/Public/GetValidTransactionTypes").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -244,7 +236,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<MarketSummary> GetMarketSummaryAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<MarketSummary>("/Public/GetMarketSummary", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<MarketSummary>("/Public/GetMarketSummary", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -266,7 +258,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<OrderBook>("/Public/GetOrderBook", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<OrderBook>("/Public/GetOrderBook", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -290,7 +282,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<TradeHistorySummary> GetTradeHistorySummaryAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfHoursInThePastToRetrieve)
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<TradeHistorySummary>("/Public/GetTradeHistorySummary"
+            return await HttpWorker.QueryPublicAsync<TradeHistorySummary>("/Public/GetTradeHistorySummary"
                 , new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString())
                 , new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())
                 , new Tuple<string, string>("numberOfHoursInThePastToRetrieve", numberOfHoursInThePastToRetrieve.ToString(CultureInfo.InvariantCulture))).ConfigureAwait(false);
@@ -317,7 +309,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<RecentTrades> GetRecentTradesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfRecentTradesToRetrieve)
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<RecentTrades>("/Public/GetRecentTrades"
+            return await HttpWorker.QueryPublicAsync<RecentTrades>("/Public/GetRecentTrades"
                 , new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString())
                 , new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())
                 , new Tuple<string, string>("numberOfRecentTradesToRetrieve", numberOfRecentTradesToRetrieve.ToString(CultureInfo.InvariantCulture))).ConfigureAwait(false);
@@ -338,7 +330,7 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<IEnumerable<FxRate>> GetFxRatesAsync()
         {
             ThrowIfDisposed();
-            return await QueryPublicAsync<IEnumerable<FxRate>>("/Public/GetFxRates").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<FxRate>>("/Public/GetFxRates").ConfigureAwait(false);
         }
 
         #endregion //Public API
@@ -384,7 +376,7 @@ namespace IndependentReserve.DotNetClientApi
             data.price = price.ToString(CultureInfo.InvariantCulture);
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<BankOrder>("/Private/PlaceLimitOrder", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/PlaceLimitOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -424,7 +416,7 @@ namespace IndependentReserve.DotNetClientApi
             data.orderType = orderType.ToString();
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<BankOrder>("/Private/PlaceMarketOrder", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/PlaceMarketOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -461,7 +453,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.orderGuid = orderGuid.ToString();
 
-            return await QueryPrivateAsync<BankOrder>("/Private/CancelOrder", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/CancelOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -510,7 +502,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetOpenOrders", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetOpenOrders", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -559,7 +551,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedOrders", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedOrders", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -608,7 +600,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedFilledOrders", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedFilledOrders", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -639,7 +631,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.orderGuid = orderGuid.ToString();
 
-            return await QueryPrivateAsync<BankOrder>("/Private/GetOrderDetails", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/GetOrderDetails", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -665,7 +657,7 @@ namespace IndependentReserve.DotNetClientApi
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
 
-            return await QueryPrivateAsync<IEnumerable<Account>>("/Private/GetAccounts", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<Account>>("/Private/GetAccounts", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -681,7 +673,7 @@ namespace IndependentReserve.DotNetClientApi
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
 
-            return await QueryPrivateAsync<IEnumerable<BrokerageFee>>("/Private/GetBrokerageFees", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<BrokerageFee>>("/Private/GetBrokerageFees", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -728,7 +720,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await QueryPrivateAsync<Page<Transaction>>("/Private/GetTransactions", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<Transaction>>("/Private/GetTransactions", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -756,7 +748,7 @@ namespace IndependentReserve.DotNetClientApi
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
 
-            return await QueryPrivateAsync<BitcoinDepositAddress>("/Private/GetBitcoinDepositAddress", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<BitcoinDepositAddress>("/Private/GetBitcoinDepositAddress", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -785,7 +777,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.primaryCurrencyCode = primaryCurrency.ToString();
 
-            return await QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/GetDigitalCurrencyDepositAddress", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/GetDigitalCurrencyDepositAddress", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -815,7 +807,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex;
             data.pageSize = pageSize;
 
-            return await QueryPrivateAsync<Page<BitcoinDepositAddress>>("/Private/GetBitcoinDepositAddresses", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<BitcoinDepositAddress>>("/Private/GetBitcoinDepositAddresses", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -850,7 +842,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex;
             data.pageSize = pageSize;
 
-            return await QueryPrivateAsync<Page<DigitalCurrencyDepositAddress>>("/Private/GetDigitalCurrencyDepositAddresses", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<DigitalCurrencyDepositAddress>>("/Private/GetDigitalCurrencyDepositAddresses", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -883,7 +875,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.bitcoinAddress = bitcoinAddress;
 
-            return await QueryPrivateAsync<BitcoinDepositAddress>("/Private/SynchBitcoinAddressWithBlockchain", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<BitcoinDepositAddress>("/Private/SynchBitcoinAddressWithBlockchain", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -920,7 +912,7 @@ namespace IndependentReserve.DotNetClientApi
                 data.primaryCurrencyCode = primaryCurrency.ToString();
             }
 
-            return await QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/SynchDigitalCurrencyDepositAddressWithBlockchain", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/SynchDigitalCurrencyDepositAddressWithBlockchain", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -957,7 +949,7 @@ namespace IndependentReserve.DotNetClientApi
             data.bitcoinAddress = bitcoinAddress;
             data.comment = comment;
 
-            await QueryPrivateAsync("/Private/WithdrawBitcoin", data).ConfigureAwait(false);
+            await HttpWorker.QueryPrivateAsync("/Private/WithdrawBitcoin", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -998,7 +990,7 @@ namespace IndependentReserve.DotNetClientApi
                 data.primaryCurrencyCode = primaryCurrency.ToString();
             }
 
-            await QueryPrivateAsync("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
+            await HttpWorker.QueryPrivateAsync("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1038,7 +1030,7 @@ namespace IndependentReserve.DotNetClientApi
             data.withdrawalBankAccountName = withdrawalBankAccountName;
             data.comment = comment;
 
-            return await QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1072,7 +1064,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex;
             data.pageSize = pageSize;
 
-            return await QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1091,104 +1083,6 @@ namespace IndependentReserve.DotNetClientApi
 
         #region Helpers
 
-        /// <summary>
-        /// Awaitable helper method to call public api url with set of specified get parameters
-        /// </summary>
-        /// <typeparam name="T">type to which response should be deserialized</typeparam>
-        /// <param name="url">api url (without base url part)</param>
-        /// <param name="parameters">set of get parameters</param>
-        private async Task<T> QueryPublicAsync<T>(string url, params Tuple<string, string>[] parameters)
-        {
-            LastRequestParameters = string.Empty;
-            LastRequestUrl = url;
-            LastRequestHttpMethod = "GET";
-
-            //if we have get parameters - append them to the url
-            if (parameters.Any())
-            {
-                string queryString = parameters.Aggregate(string.Empty, (current, parameter) => current + string.Format("{0}={1}&", parameter.Item1, parameter.Item2)).TrimEnd('&');
-
-                LastRequestParameters = queryString;
-
-                url = string.Format("{0}?{1}", url, queryString);
-            }
-
-            HttpResponseMessage response = await _client.GetAsync(url).ConfigureAwait(false);
-
-            string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            LastResponseRaw = result;
-
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
-                throw new Exception(errorMessage.Message);
-            }
-
-            return JsonConvert.DeserializeObject<T>(result);
-        }
-
-        /// <summary>
-        /// Awaitable helper method to call private api url posting specified request object as json content
-        /// </summary>
-        /// <typeparam name="T">type to which response should be deserialized</typeparam>
-        /// <param name="url">api url (without base url part)</param>
-        /// <param name="request">object to post</param>
-        private async Task<T> QueryPrivateAsync<T>(string url, dynamic request)
-        {
-            HttpContent content = CreateRequestContent(url, request);
-
-            HttpResponseMessage response = await _client.PostAsync(url, content).ConfigureAwait(false);
-
-            string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            LastResponseRaw = result;
-
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
-                throw new Exception(errorMessage.Message);
-            }
-
-            return JsonConvert.DeserializeObject<T>(result);
-        }
-
-        /// <summary>
-        /// Awaitable helper method to call private api url posting specified request object as json content
-        /// </summary>
-        /// <param name="url">api url (without base url part)</param>
-        /// <param name="request">object to post</param>
-        private async Task QueryPrivateAsync(string url, dynamic request)
-        {
-            HttpContent content = CreateRequestContent(url, request);
-
-            HttpResponseMessage response = await _client.PostAsync(url, content).ConfigureAwait(false);
-
-            string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            LastResponseRaw = result;
-
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
-                throw new Exception(errorMessage.Message);
-            }
-        }
-
-        /// <summary>
-        /// Prepares post request content.
-        /// </summary>
-        private HttpContent CreateRequestContent(string url, dynamic request)
-        {
-            // Calculate signature against all request parameters
-            request.signature = GetSignature(url, request as IDictionary<string, object>);
-
-            string parameters = JsonConvert.SerializeObject(request);
-
-            LastRequestParameters = parameters;
-            LastRequestUrl = url;
-            LastRequestHttpMethod = "POST";
-
-            return new StringContent(parameters, Encoding.UTF8, "application/json");
-        }
 
         /// <summary>
         /// Throws InvalidOperationException if client is disposed
@@ -1206,7 +1100,7 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         private void ThrowIfPublicClient()
         {
-            if (string.IsNullOrWhiteSpace(_apiKey) || string.IsNullOrWhiteSpace(_apiSecret))
+            if (string.IsNullOrWhiteSpace(_apiKey) || string.IsNullOrWhiteSpace(HttpWorker.ApiSecret))
             {
                 throw new InvalidOperationException("This instance of Client can access Public API only. Use CreatePrivate method to create instance of client to call Private API.");
             }
@@ -1215,78 +1109,13 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Helper method to get nonce.
         /// </summary>
-        /// <returns></returns>
         private string GetNonce()
         {
             return DateTime.UtcNow.Ticks.ToString(CultureInfo.InvariantCulture);
         }
 
-        /// <summary>
-        /// Helper method to get signature which can be used to 'sign' private api request.
-        /// </summary>
-        private string GetSignature(string url, IDictionary<String, Object> requestParameters)
-        {
-            var input = new StringBuilder(new Uri(_client.BaseAddress, url).ToString());
 
-            foreach (string key in requestParameters.Keys)
-            {
-                input.Append(',');
-                var value = requestParameters[key];
-                object resultValue;
 
-                if (value != null && value.GetType().IsArray && typeof (string).IsAssignableFrom(value.GetType().GetElementType()))
-                {
-                    var array = value as string[];
-                    resultValue = array == null || !array.Any() ? string.Empty : string.Join(",", array.Select(tt => string.Format("{0}", tt)));
-                }
-                else
-                {
-                    if (value is string)
-                    {
-                        resultValue = ((string)value).Replace("\r", "").Replace("\n", "");
-                    }
-                    else
-                    {
-                        resultValue = value;
-                    }
-                }
-
-                input.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}", key, resultValue);
-            }
-
-            return HMACSHA256Hash(input.ToString(), _apiSecret);
-        }
-
-        /// <summary>
-        /// Calculates HMACSHA256 hash of specified message with specified key
-        /// </summary>
-        internal static string HMACSHA256Hash(string message, string key)
-        {
-            byte[] keyBytes = StringToAscii(key);
-            byte[] messageBytes = StringToAscii(message);
-
-            using (var hmac = new HMACSHA256(keyBytes))
-            {
-                return BitConverter.ToString(hmac.ComputeHash(messageBytes)).Replace("-", "");
-            }
-        }
-
-        /// <summary>
-        /// Helper method to convert string into byte array uasing ASCII encoding
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        private static byte[] StringToAscii(string s)
-        {
-            var retval = new byte[s.Length];
-            for (int ix = 0; ix < s.Length; ++ix)
-            {
-                char ch = s[ix];
-                if (ch <= 0x7f) retval[ix] = (byte) ch;
-                else retval[ix] = (byte) '?';
-            }
-            return retval;
-        }
 
         #endregion //Helpers
 
@@ -1309,10 +1138,10 @@ namespace IndependentReserve.DotNetClientApi
 
             if (disposing)
             {
-                if (_client != null)
+                if (HttpWorker != null)
                 {
-                    _client.Dispose();
-                    _client = null;
+                    HttpWorker.Dispose();
+                    HttpWorker = null;
                 }
             }
 
