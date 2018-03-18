@@ -15,7 +15,7 @@ namespace IndependentReserve.DotNetClientApi.Extensions
                 case 1:
                     config = new ApiConfig(components[0]);
                     break;
-                case 2:
+                case 3:
                     config = new ApiConfig(components[0], components[1], components[2]);
                     break;
                 default:
