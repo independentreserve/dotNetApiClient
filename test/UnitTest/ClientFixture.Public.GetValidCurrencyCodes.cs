@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace UnitTest
 {
-    partial class ClientFixture
+    partial class PublicClientFixture
     {
         [Test]
         public void GetValidPrimaryCurrencyCodes()

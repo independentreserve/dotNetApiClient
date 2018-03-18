@@ -78,6 +78,7 @@
     <Compile Include="ClientFixture.Public.GetValidOrderTypes.cs" />
     <Compile Include="ClientFixture.Public.GetValidTransactionTypes.cs" />
     <Compile Include="FixtureBase.cs" />
+    <Compile Include="HttpWorkerFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
