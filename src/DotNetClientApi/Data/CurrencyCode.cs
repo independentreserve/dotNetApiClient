@@ -5,6 +5,7 @@
     /// </summary>
     public enum CurrencyCode
     {
+        Unknown = 0,
         Xbt=1,
         Usd=2,
         Aud=3,
