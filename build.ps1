@@ -76,7 +76,7 @@ function Run-Tests{
     $nunitConsole = "$PSScriptRoot\packages\NUnit.ConsoleRunner.3.8.0\tools\nunit3-console.exe"
       
     $assembliesToTest = @(
-        "$PSScriptRoot\test\UnitTest\bin\Debug\UnitTest.dll"
+        "$PSScriptRoot\test\UnitTest\bin\$configuration\UnitTest.dll"
     )
 
     $resultArg = "--result=$artifactDir\UnitTest.xml$testResultformat"
