@@ -9,18 +9,9 @@ namespace UnitTest
     {
 
         [Test]
-        public void CreatePrivateClientSucceed()
-        {
-            var client = Client.CreatePrivate(ApiKey, ApiSecret, BaseUrl);
-
-            Assert.IsNotNull(client);
-        }
-
-        [Test]
         public void CreatePublicClientSucceed()
         {
-            var client = Client.CreatePublic(BaseUrl);
-
+            var client = Client.CreatePublic("https://fake.ir.domain");
             Assert.IsNotNull(client);
         }
 
