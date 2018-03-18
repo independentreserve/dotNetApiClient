@@ -4,15 +4,26 @@
 
 This .NET client encapsulates the private and public methods exposed by the Independent Reserve API.
 
+It targets .NET Standard 2.0
+
 ## Installation
 
-Install the package [via nuget](https://www.nuget.org/packages/IndependentReserve.Client/)
+Install the latest package [via nuget](https://www.nuget.org/packages/IndependentReserve.Client/)
 
-## Development Requirements
+## Development
 
-* Visual Studio 2017
+Requires `Visual Studio 2017`
 
-## Sample Application
+### Unit Tests
+
+Tests require a single environment variable set with a CSV of baseUrl, apiKey and secret.
+
+This can be set from an elevated powershell prompt like so:
+
+`[Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_TEST_CONFIG", "<url>,<key>,<secret>", "Machine")`
+
+
+### Sample Application
 
 The sample application shows how to use the client in a simple WPF application.
 
