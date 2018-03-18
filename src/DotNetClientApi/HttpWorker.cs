@@ -162,14 +162,14 @@ namespace IndependentReserve.DotNetClientApi
                 input.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}", key, resultValue);
             }
 
-            return HMACSHA256Hash(input.ToString(), ApiSecret);
+            return GetHmacSha256Hash(input.ToString(), ApiSecret);
         }
 
 
         /// <summary>
         /// Calculates HMACSHA256 hash of specified message with specified key
         /// </summary>
-        internal static string HMACSHA256Hash(string message, string key)
+        internal static string GetHmacSha256Hash(string message, string key)
         {
             byte[] keyBytes = StringToAscii(key);
             byte[] messageBytes = StringToAscii(message);
