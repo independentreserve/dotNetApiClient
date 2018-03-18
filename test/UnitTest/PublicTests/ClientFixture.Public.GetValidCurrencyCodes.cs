@@ -1,12 +1,37 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
+using Moq;
 using NUnit.Framework;
 
 namespace UnitTest
 {
     partial class PublicClientFixture
     {
+        /// <summary>
+        /// https://github.com/independentreserve/dotNetApiClient/issues/5
+        /// </summary>
+        [Test]
+        public void GetValidPrimaryCurrencyCodes_DoesNotBreakOnUnexpectedCoins()
+        {
+            var mockApiOutput = new[] { "Xbt","Eth", "NewCodeFromServer" };
+            var mockHttpWorker = new Mock<IHttpWorker>();
+
+            mockHttpWorker.Setup(w => w.QueryPublicAsync<string[]>(It.IsAny<string>()))
+                        .Returns(Task.FromResult(mockApiOutput));
+
+            using (var client = CreatePublicClient())
+            {
+                client.HttpWorker = mockHttpWorker.Object;
+                var currencyCodes = client.GetValidPrimaryCurrencyCodes().ToList();
+
+                Assert.AreEqual(2, currencyCodes.Count);
+                Assert.Contains(CurrencyCode.Xbt, currencyCodes);
+            }
+        }
+
         [Test]
         public void GetValidPrimaryCurrencyCodes()
         {
@@ -18,11 +43,7 @@ namespace UnitTest
                 Assert.Contains(CurrencyCode.Xbt, currencyCodes);
             }
         }
-
-        private void AssertCurrencies(List<CurrencyCode> currencyCodes)
-        {
-        }
-
+        
         [Test]
         public void GetValidSecondaryCurrencyCodes()
         {

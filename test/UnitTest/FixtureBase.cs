@@ -43,26 +43,4 @@ namespace UnitTest
             return config;
         }
     }
-
-
-    [Category("Private")]
-    public class PrivateFixtureBase : FixtureBase
-    {
-
-        protected Client CreatePrivateClient()
-        {
-            return Client.Create(GetConfig());
-        }
-
-    }
-
-    [Category("Public")]
-    public class PublicFixtureBase : FixtureBase
-    {
-
-        protected Client CreatePublicClient()
-        {
-            return Client.CreatePublic(GetConfig().BaseUrl);
-        }
-    }
 }

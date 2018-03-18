@@ -24,13 +24,14 @@ namespace UnitTest
                 Assert.IsNotNull(bankOrder);
             }
         }
-
+        
+        //[Category("Brittle")]
         [Test]
         public void CancelOrder()
         {
             using (var client = CreatePrivateClient())
             {
-                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 500, 1);
+                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 50000, 1);
                 Assert.IsNotNull(bankOrder);
 
                 Assert.AreEqual(bankOrder.Status, OrderStatus.Open);
