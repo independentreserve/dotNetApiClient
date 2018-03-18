@@ -1,6 +1,8 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Threading;
 using IndependentReserve.DotNetClientApi;
+using IndependentReserve.DotNetClientApi.Extensions;
 using NUnit.Framework;
 
 namespace UnitTest
@@ -11,12 +13,8 @@ namespace UnitTest
     [TestFixture]
     public abstract class FixtureBase
     {
-        protected const string ApiKey = "3de4047d-81e4-421e-8402-9dddb8971b32";
-        protected const string ApiSecret = "6195d2ef6c0e4c6d94bb0c8a982ef825";
-        protected const string BaseUrl = "http://api.ir.localhost";
-
         /// <summary>
-        ///     The test fixture setup method.
+        /// The test fixture setup method.
         /// </summary>
         [SetUp]
         public void SetUp()
@@ -25,7 +23,25 @@ namespace UnitTest
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
         }
+
+
+        /// <summary>
+        /// [Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_TEST_CONFIG", "[url],[key],[secret]", "Machine")
+        /// </summary>
+        /// <returns></returns>
+        protected ApiConfig GetConfig()
+        {
+            var envVarKey = "IR_DOTNETCLIENTAPI_TEST_CONFIG";
+            var envVar = Environment.GetEnvironmentVariable(envVarKey);
+            if (string.IsNullOrEmpty(envVar))
+            {
+                throw new Exception($"Unit tests require environment variable {envVarKey}");
+            }
+            var config = ApiConfigExtensions.FromCsv(envVar);
+            return config;
+        }
     }
+
 
     [Category("Private")]
     public class PrivateFixtureBase : FixtureBase
@@ -33,7 +49,7 @@ namespace UnitTest
 
         protected Client CreatePrivateClient()
         {
-            return Client.CreatePrivate(ApiKey, ApiSecret, BaseUrl);
+            return Client.Create(GetConfig());
         }
 
     }
@@ -44,7 +60,7 @@ namespace UnitTest
 
         protected Client CreatePublicClient()
         {
-            return Client.CreatePublic(BaseUrl);
+            return Client.CreatePublic(GetConfig().BaseUrl);
         }
     }
 }

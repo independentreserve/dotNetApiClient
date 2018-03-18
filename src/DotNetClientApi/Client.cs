@@ -13,10 +13,12 @@ using Newtonsoft.Json;
 
 namespace IndependentReserve.DotNetClientApi
 {
+
+
     /// <summary>
     /// IndependentReserve API client, implements IDisposable
     /// </summary>
-    public class Client : IDisposable //, IClient
+    public class Client : IDisposable , IClient
     {
         private readonly string _apiKey;
 
@@ -71,6 +73,22 @@ namespace IndependentReserve.DotNetClientApi
 
             return new Client(uri);
         }
+
+        /// <summary>
+        /// Create client instance for public or private depending on whether credentials supplied
+        /// </summary>
+        public static Client Create(ApiConfig config)
+        {
+            if (config.HasCredential)
+            {
+                return CreatePrivate(config.Credential.Key, config.Credential.Secret, config.BaseUrl);
+            }
+            else
+            {
+                return CreatePublic(config.BaseUrl);
+            }
+        }
+
 
         /// <summary>
         /// Creates new instance of API client, which can be used to call public and private api methods, implements IDisposable, so wrap it with using statement
