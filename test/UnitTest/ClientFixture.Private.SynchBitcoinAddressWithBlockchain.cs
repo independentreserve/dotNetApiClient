@@ -2,7 +2,7 @@
 
 namespace UnitTest
 {
-    partial class ClientFixture
+    partial class PrivateClientFixture
     {
         [Test]
         public void SynchBitcoinAddressWithBlockchain()

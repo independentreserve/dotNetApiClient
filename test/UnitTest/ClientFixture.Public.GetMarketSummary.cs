@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace UnitTest
 {
-    partial class ClientFixture
+    partial class PublicClientFixture : PublicFixtureBase
     {
         [Test]
         public void GetMarketSummary()
