@@ -57,8 +57,41 @@ function Pack-Nuget{
     dotnet pack "$PSScriptRoot\src\DotNetClientApi\DotNetClientApi.csproj" --include-symbols -o $outputFolder -c $configuration /p:PackageVersion=$packageVersion
 }
 
+
+function Run-Tests{
+
+    if (-not (Test-Path env:IR_DOTNETCLIENTAPI_TEST_CONFIG))
+    {
+        Write-Warning "Tests not executed, missing api config"
+        return
+    }
+
+    Write-Host "Execute Tests"
+
+
+    $testResultformat = ""
+    $nunitConsole = "$PSScriptRoot\packages\NUnit.ConsoleRunner.3.8.0\tools\nunit3-console.exe"
+      
+    $assembliesToTest = @(
+        "$PSScriptRoot\test\UnitTest\bin\Debug\UnitTest.dll"
+    )
+
+    $resultArg = "--result=$PSScriptRoot\_artifacts\UnitTest.xml$testResultformat"
+
+    Write-Host "$resultArg $whereArg" 
+    & $nunitConsole $assembliesToTest $resultArg
+
+    if ($lastExitCode -ne 0)
+    {
+        Write-Host "##teamcity[buildProblem description='unit test failure']"
+        exit $lastExitCode
+    }
+}
+
+
 Find-Nuget
 Restore-Packages
 Find-MsBuild
 Build-Solution
+Run-Tests
 Pack-Nuget
