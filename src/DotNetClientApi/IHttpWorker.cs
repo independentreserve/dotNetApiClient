@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace IndependentReserve.DotNetClientApi
 {
-    interface IHttpWorker
+    public interface IHttpWorker
     {
         string ApiSecret { get; set; }
         string LastRequestHttpMethod { get; }
