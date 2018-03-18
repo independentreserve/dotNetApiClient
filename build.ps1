@@ -47,8 +47,6 @@ function Pack-Nuget{
     Write-Host "Nuget pack"
 
     $outputFolder = "$PSScriptRoot\_artifacts"
-    
-    New-Item -Force -ItemType directory -Path $outputFolder | Out-Null
 
     if(-not $packageVersion){
         $packageVersion = "1.0.0.0"
@@ -59,6 +57,11 @@ function Pack-Nuget{
 
 
 function Run-Tests{
+
+    # ensure folder is clean and exists
+    $artifactDir = "$PSScriptRoot\_artifacts"
+    Get-ChildItem -Path $artifactDir -Recurse | Remove-Item -force -recurse
+    New-Item -Force -ItemType directory -Path $artifactDir | Out-Null
 
     if (-not (Test-Path env:IR_DOTNETCLIENTAPI_TEST_CONFIG))
     {
@@ -76,7 +79,7 @@ function Run-Tests{
         "$PSScriptRoot\test\UnitTest\bin\Debug\UnitTest.dll"
     )
 
-    $resultArg = "--result=$PSScriptRoot\_artifacts\UnitTest.xml$testResultformat"
+    $resultArg = "--result=$artifactDir\UnitTest.xml$testResultformat"
 
     Write-Host "$resultArg $whereArg" 
     & $nunitConsole $assembliesToTest $resultArg

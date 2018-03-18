@@ -28,7 +28,7 @@ namespace UnitTest
         /// <summary>
         /// Requires environment variable:
         /// 
-        /// [Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_TEST_CONFIG", "[url],[key],[secret]", "Machine")
+        /// [Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_TEST_CONFIG", "url,key,secret", "Machine")
         /// </summary>
         /// <returns></returns>
         protected ApiConfig GetConfig()
