@@ -139,10 +139,25 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Returns a list of valid primary currency codes. These are the digital currencies which can be traded on Independent Reserve
         /// </summary>
+        /// <remarks>
+        /// example endpoint: https://api.independentreserve.com/Public/GetValidPrimaryCurrencyCodes
+        /// </remarks>
         public async Task<IEnumerable<CurrencyCode>> GetValidPrimaryCurrencyCodesAsync()
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyCode>>("/Public/GetValidPrimaryCurrencyCodes").ConfigureAwait(false);
+            var currencyCodeStrings = await HttpWorker.QueryPublicAsync<string[]>("/Public/GetValidPrimaryCurrencyCodes").ConfigureAwait(false);
+
+            var currencyCodeList = new List<CurrencyCode>();
+            foreach(var code in currencyCodeStrings)
+            {
+                CurrencyCode enumCode;
+                if (Enum.TryParse(code, out enumCode))
+                {
+                    currencyCodeList.Add(enumCode);
+                }
+            }
+
+            return currencyCodeList;
         }
 
         /// <summary>

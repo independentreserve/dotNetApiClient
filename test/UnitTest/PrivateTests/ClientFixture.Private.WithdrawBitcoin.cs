@@ -7,6 +7,10 @@ namespace UnitTest
 {
     partial class PrivateClientFixture
     {
+        /// <summary>
+        /// Marked brittle since requires withdraw api rights
+        /// </summary>
+        [Category("Brittle")]
         [Test]
         public void WithdrawBitcoin()
         {

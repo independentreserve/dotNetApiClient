@@ -78,11 +78,13 @@ function Run-Tests{
     $assembliesToTest = @(
         "$PSScriptRoot\test\UnitTest\bin\$configuration\UnitTest.dll"
     )
-
+    
+    $excludeToUse = '"cat!=Brittle"'
+    $whereArg ="--where=$excludeToUse"
     $resultArg = "--result=$artifactDir\UnitTest.xml$testResultformat"
 
     Write-Host "$resultArg $whereArg" 
-    & $nunitConsole $assembliesToTest $resultArg
+    & $nunitConsole $assembliesToTest $resultArg $whereArg
 
     if ($lastExitCode -ne 0)
     {
