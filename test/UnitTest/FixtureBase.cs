@@ -29,8 +29,9 @@ namespace UnitTest
         /// Requires environment variable:
         /// 
         /// [Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_TEST_CONFIG", "url,key,secret", "Machine")
+        /// 
+        /// and then restart Visual Studio to pick up the change
         /// </summary>
-        /// <returns></returns>
         protected ApiConfig GetConfig()
         {
             var envVarKey = "IR_DOTNETCLIENTAPI_TEST_CONFIG";
