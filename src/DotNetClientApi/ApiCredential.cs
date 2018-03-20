@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return string.IsNullOrEmpty(Key) ? "<nil>" : Key.Substring(0, 4);
+            return string.IsNullOrWhiteSpace(Key) ? "<nil>" : Key.Length > 4 ? Key.Substring(0, 4) : Key;
         }
     }
 }
