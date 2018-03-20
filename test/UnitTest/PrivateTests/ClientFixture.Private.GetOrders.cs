@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace UnitTest
 {
-    partial class ClientFixture
+    partial class PrivateClientFixture : PrivateFixtureBase
     {
         [Test]
         public void GetOpenOrders()
