@@ -8,6 +8,7 @@
     <PackageIconUrl>https://www.independentreserve.com/img/ir-icon-logo-blue-50.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/independentreserve/dotNetApiClient</PackageProjectUrl>
     <RepositoryUrl>https://github.com/independentreserve/dotNetApiClient</RepositoryUrl>
+    <RootNamespace>IndependentReserve.DotNetClientApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

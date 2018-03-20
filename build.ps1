@@ -49,8 +49,6 @@ function Pack-Nuget{
     Write-Host "Nuget pack"
 
     $outputFolder = "$PSScriptRoot\_artifacts"
-    
-    New-Item -Force -ItemType directory -Path $outputFolder | Out-Null
 
     if(-not $packageVersion){
         $packageVersion = "1.0.0.0"
@@ -59,8 +57,48 @@ function Pack-Nuget{
     dotnet pack "$PSScriptRoot\src\DotNetClientApi\DotNetClientApi.csproj" --include-symbols -o $outputFolder -c $configuration /p:PackageVersion=$packageVersion
 }
 
+
+function Run-Tests{
+
+    # ensure folder is clean and exists
+    $artifactDir = "$PSScriptRoot\_artifacts"
+    Get-ChildItem -Path $artifactDir -Recurse | Remove-Item -force -recurse
+    New-Item -Force -ItemType directory -Path $artifactDir | Out-Null
+
+    if (-not (Test-Path env:IR_DOTNETCLIENTAPI_TEST_CONFIG))
+    {
+        Write-Warning "Tests not executed, missing api config"
+        return
+    }
+
+    Write-Host "Execute Tests"
+
+
+    $testResultformat = ""
+    $nunitConsole = "$PSScriptRoot\packages\NUnit.ConsoleRunner.3.8.0\tools\nunit3-console.exe"
+      
+    $assembliesToTest = @(
+        "$PSScriptRoot\test\UnitTest\bin\$configuration\UnitTest.dll"
+    )
+    
+    $excludeToUse = '"cat!=Brittle"'
+    $whereArg ="--where=$excludeToUse"
+    $resultArg = "--result=$artifactDir\UnitTest.xml$testResultformat"
+
+    Write-Host "$resultArg $whereArg" 
+    & $nunitConsole $assembliesToTest $resultArg $whereArg
+
+    if ($lastExitCode -ne 0)
+    {
+        Write-Host "##teamcity[buildProblem description='unit test failure']"
+        exit $lastExitCode
+    }
+}
+
+
 Find-Nuget
 Restore-Packages
 Find-MsBuild
 Build-Solution
+Run-Tests
 Pack-Nuget
