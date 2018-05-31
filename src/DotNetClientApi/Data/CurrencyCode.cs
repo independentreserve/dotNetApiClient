@@ -12,6 +12,7 @@
         Nzd=4,
         Eth=5,
         Bch=6,
-        Ltc=7
+        Ltc=7,
+        Xrp=8
     }
 }
