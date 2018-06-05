@@ -18,6 +18,6 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// <summary>
         /// Leave empty if currency does not support tags
         /// </summary>
-        public string Tag { get; set; }
+        public string DestinationTag { get; set; }
     }
 }
