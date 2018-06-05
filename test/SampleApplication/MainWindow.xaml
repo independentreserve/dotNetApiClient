@@ -102,20 +102,10 @@
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding AccountGuid}" Width="250"></TextBox>
                 </StackPanel>
 
-                <!--<StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
-                    <TextBlock Style="{StaticResource Label}">From Timestamp (UTC):</TextBlock>
-                    <TextBox Text="{Binding FromTimestampUtc}"></TextBox>
-                </StackPanel>-->
-
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
                     <TextBlock Style="{StaticResource Label}">From Timestamp (UTC):</TextBlock>
                     <DatePicker SelectedDate="{Binding FromTimestampUtc}"></DatePicker>
                 </StackPanel>
-                
-                <!--<StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=toTimestampUtc}">
-                    <TextBlock Style="{StaticResource Label}">To Timestamp (UTC):</TextBlock>
-                    <TextBox Text="{Binding ToTimestampUtc}"></TextBox>
-                </StackPanel>-->
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=toTimestampUtc}">
                     <TextBlock Style="{StaticResource Label}">To Timestamp (UTC):</TextBlock>
