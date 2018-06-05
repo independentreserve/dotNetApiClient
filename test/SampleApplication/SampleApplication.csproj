@@ -60,7 +60,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Config\AppSettingsConfigProvider.cs" />
     <Compile Include="Converters\MethodParameterToVisibilityConverter.cs" />
+    <Compile Include="Config\EnvironmentVariableConfigProvider.cs" />
+    <Compile Include="Config\IConfigProvider.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\MethodMetadata.cs" />
