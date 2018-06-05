@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -11,6 +10,7 @@ using SampleApplication.ViewModels;
 
 namespace SampleApplication
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -20,20 +20,27 @@ namespace SampleApplication
         {
             InitializeComponent();
 
-            if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["apiKey"]) || string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["apiUrl"]) || string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["apiSecret"]))
+            var config = new AppSettingsConfigProvider().Get();
+
+            if (!config.HasCredential)
+            {
+                config = new EnvironmentVariableConfigProvider().Get();
+            }
+
+            if (!config.HasCredential)
             {
                 MessageBoxResult result = MessageBox.Show("Some or all of the following required API key details are empty: ApiKey, ApiUrl, ApiSecret.\n\nPlease set them to the correct values in application configuration file.", "Please specify your API key details", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
                 return;
             }
 
-            this.DataContext = new AppViewModel()
+            this.DataContext = new AppViewModel(config)
             {
-                SelectedMethod = MethodMetadata.Null,
-                ApiKey = ConfigurationManager.AppSettings["apiKey"],
-                ApiUrl = ConfigurationManager.AppSettings["apiUrl"]
+                SelectedMethod = MethodMetadata.Null
             };
         }
+
+
 
         private AppViewModel ViewModel
         {
@@ -52,12 +59,10 @@ namespace SampleApplication
                 return;
             }
 
-            string apiKey = ConfigurationManager.AppSettings["apiKey"];
-            string apiSecret =ConfigurationManager.AppSettings["apiSecret"];
-            string apiUrl = ConfigurationManager.AppSettings["apiUrl"];
+            var viewModel = (AppViewModel) this.DataContext;
 
             //create instane of API client capable to call both private and public api methods
-            using (var client = Client.CreatePrivate(apiKey, apiSecret, apiUrl))
+            using (var client = Client.Create(viewModel.ApiConfig))
             {
                 ViewModel.LastRequestParameters = string.Empty;
                 ViewModel.LastRequestResponse = string.Empty;

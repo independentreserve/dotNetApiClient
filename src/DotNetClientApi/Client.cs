@@ -1037,9 +1037,9 @@ namespace IndependentReserve.DotNetClientApi
             data.comment = withdrawRequest.Comment;
             data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
 
-            if (!string.IsNullOrEmpty(withdrawRequest.Tag))
+            if (!string.IsNullOrEmpty(withdrawRequest.DestinationTag))
             {
-                data.tag = withdrawRequest.Tag;
+                data.destinationTag = withdrawRequest.DestinationTag;
             }
 
             await HttpWorker.QueryPrivateAsync("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
