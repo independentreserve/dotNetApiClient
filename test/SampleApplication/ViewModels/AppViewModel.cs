@@ -73,7 +73,9 @@ namespace SampleApplication.ViewModels
         private string _address;
         private string _comment;
 
-        public AppViewModel()
+
+
+        public AppViewModel(ApiConfig apiConfig)
         {
             _primaryCurrency = CurrencyCode.Xbt;
             _secondaryCurrency = CurrencyCode.Usd;
@@ -91,12 +93,9 @@ namespace SampleApplication.ViewModels
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
             _address = null;
-
+            ApiConfig = apiConfig;
             TransactionTypes = new ObservableCollection<TransactionTypeViewModel>();
-            var apiKey = ConfigurationManager.AppSettings["apiKey"];
-            var apiSecret = ConfigurationManager.AppSettings["apiSecret"];
-            var apiUrl = ConfigurationManager.AppSettings["apiUrl"];
-            using (var client = Client.CreatePrivate(apiKey, apiSecret, apiUrl))
+            using (var client = Client.Create(apiConfig))
             {
                 var types = client.GetValidTransactionTypes();
                 foreach (var transactionType in types)
@@ -127,8 +126,7 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        public string ApiKey { get; set; }
-        public string ApiUrl { get; set; }
+        public ApiConfig ApiConfig { get; private set; }
 
         public ObservableCollection<TransactionTypeViewModel> TransactionTypes { get; set; }
 
