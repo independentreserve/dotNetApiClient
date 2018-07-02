@@ -25,7 +25,7 @@ namespace UnitTest
             }
         }
         
-        //[Category("Brittle")]
+        [Category("Brittle")]
         [Test]
         public void CancelOrder()
         {

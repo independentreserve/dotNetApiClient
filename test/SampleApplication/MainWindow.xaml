@@ -9,11 +9,11 @@
 
             <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
                 <TextBlock Padding="0,5,5,0" FontWeight="Bold">API Key:</TextBlock>
-                <TextBlock Padding="5,5,5,0" Text="{Binding ApiKey}"></TextBlock>
+                <TextBlock Padding="5,5,5,0" Text="{Binding ApiConfig.Credential.Key}"></TextBlock>
             </StackPanel>
             <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
                 <TextBlock Padding="0,5,5,0" FontWeight="Bold">API Url:</TextBlock>
-                <TextBlock Padding="5,5,5,0" Text="{Binding ApiUrl}"></TextBlock>
+                <TextBlock Padding="5,5,5,0" Text="{Binding ApiConfig.BaseUrl}"></TextBlock>
             </StackPanel>
             <Separator/>
         </StackPanel>
@@ -42,6 +42,7 @@
                         <ComboBoxItem Tag="Eth">Eth</ComboBoxItem>
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
+                        <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
@@ -54,6 +55,7 @@
                         <ComboBoxItem Tag="Eth">Eth</ComboBoxItem>
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
+                        <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
@@ -100,20 +102,10 @@
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding AccountGuid}" Width="250"></TextBox>
                 </StackPanel>
 
-                <!--<StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
-                    <TextBlock Style="{StaticResource Label}">From Timestamp (UTC):</TextBlock>
-                    <TextBox Text="{Binding FromTimestampUtc}"></TextBox>
-                </StackPanel>-->
-
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
                     <TextBlock Style="{StaticResource Label}">From Timestamp (UTC):</TextBlock>
                     <DatePicker SelectedDate="{Binding FromTimestampUtc}"></DatePicker>
                 </StackPanel>
-                
-                <!--<StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=toTimestampUtc}">
-                    <TextBlock Style="{StaticResource Label}">To Timestamp (UTC):</TextBlock>
-                    <TextBox Text="{Binding ToTimestampUtc}"></TextBox>
-                </StackPanel>-->
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=toTimestampUtc}">
                     <TextBlock Style="{StaticResource Label}">To Timestamp (UTC):</TextBlock>
