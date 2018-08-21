@@ -43,6 +43,8 @@
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
                         <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
+                        <ComboBoxItem Tag="Omg">Omg</ComboBoxItem>
+                        <ComboBoxItem Tag="Zrx">Zrx</ComboBoxItem>
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
@@ -56,6 +58,8 @@
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
                         <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
+                        <ComboBoxItem Tag="Omg">Omg</ComboBoxItem>
+                        <ComboBoxItem Tag="Zrx">Zrx</ComboBoxItem>
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
