@@ -13,6 +13,8 @@
         Eth=5,
         Bch=6,
         Ltc=7,
-        Xrp=8
+        Xrp=8,
+        Omg=9,
+        Zrx=10,
     }
 }
