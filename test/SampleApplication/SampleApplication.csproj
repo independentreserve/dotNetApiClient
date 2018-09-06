@@ -54,6 +54,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="netstandard" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
