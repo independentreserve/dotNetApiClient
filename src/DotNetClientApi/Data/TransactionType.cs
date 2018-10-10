@@ -18,5 +18,7 @@
         Error = 10,
         DepositFee = 11,
         ReferralCommission = 12,
+        Insurance = 13,
+        StatementFee = 14
     }
 }
