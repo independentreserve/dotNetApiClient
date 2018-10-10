@@ -30,12 +30,6 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// <summary>
         /// The 24 hours trade volume where one of the orders was in the secondary currency the user chose.
         /// </summary>
-        public decimal DayVolumeXbtInSecondaryCurrency { get; set; }
-
-        /// <summary>
-        /// The 24 hours trade volume where one of the orders was in the secondary currency the user chose.
-        /// </summary>
-        [Obsolete("Typo in property name")]
         public decimal DayVolumeXbtInSecondaryCurrrency { get; set; }
 
         /// <summary>
