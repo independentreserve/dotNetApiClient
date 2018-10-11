@@ -6,17 +6,17 @@ namespace IndependentReserve.DotNetClientApi.Data
     /// <summary>
     /// Represents the Order Book
     /// </summary>
-    public class OrderBook
+    public class OrderBookBase<T>
     {
         /// <summary>
         /// List of Buy Orders
         /// </summary>
-        public List<OrderBookItem> BuyOrders { get; set; }
+        public List<T> BuyOrders { get; set; }
 
         /// <summary>
         /// List of Sell Orders
         /// </summary>
-        public List<OrderBookItem> SellOrders { get; set; }
+        public List<T> SellOrders { get; set; }
 
         /// <summary>
         /// Primary Currency this Orderbook is in

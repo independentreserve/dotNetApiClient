@@ -39,6 +39,8 @@ namespace IndependentReserve.DotNetClientApi
         Task<Page<BankHistoryOrder>> GetOpenOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize);
         OrderBook GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency);
         Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency);
+        OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency);
+        Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency);
         BankOrder GetOrderDetails(Guid orderGuid);
         Task<BankOrder> GetOrderDetailsAsync(Guid orderGuid);
         RecentTrades GetRecentTrades(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfRecentTradesToRetrieve);

@@ -3,13 +3,8 @@
     /// <summary>
     /// Represents an order on the OrderBook
     /// </summary>
-    public class OrderBookItem
+    public class OrderBookItemBase
     {
-        /// <summary>
-        /// Buy or Sell order
-        /// </summary>
-        public OrderType OrderType { get; set; }
-
         /// <summary>
         /// Price in Secondary Currency
         /// </summary>

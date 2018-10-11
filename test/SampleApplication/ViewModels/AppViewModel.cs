@@ -24,6 +24,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetValidTransactionTypes, 
             MethodMetadata.GetMarketSummary, 
             MethodMetadata.GetOrderBook, 
+            MethodMetadata.GetAllOrders, 
             MethodMetadata.GetTradeHistorySummary, 
             MethodMetadata.GetRecentTrades, 
             MethodMetadata.GetFxRates,
@@ -71,8 +72,6 @@ namespace SampleApplication.ViewModels
         private string _withdrawalBankAccountName;
         private string _address;
         private string _comment;
-
-
 
         public AppViewModel(ApiConfig apiConfig)
         {
