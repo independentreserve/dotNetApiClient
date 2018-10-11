@@ -103,6 +103,10 @@ namespace SampleApplication
                     {
                         await client.GetOrderBookAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetAllOrders)
+                    {
+                        await client.GetAllOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTradeHistorySummary)
                     {
                         await client.GetTradeHistorySummaryAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.NumberOfHoursInThePastToRetrieve??0);
