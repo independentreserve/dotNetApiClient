@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
-using Newtonsoft.Json;
 
 namespace IndependentReserve.DotNetClientApi
 {
@@ -51,7 +45,6 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         #endregion //private constructors
-
 
         #region Factory
 
@@ -292,6 +285,28 @@ namespace IndependentReserve.DotNetClientApi
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<OrderBook>("/Public/GetOrderBook", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns the Order Book for a given currency pair including orders identifiers
+        /// </summary>
+        /// <param name="primaryCurrency">primary currency</param>
+        /// <param name="secondaryCurrency">secondary currency</param>
+        public OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
+        {
+            ThrowIfDisposed();
+            return GetAllOrdersAsync(primaryCurrency, secondaryCurrency).Result;
+        }
+
+        /// <summary>
+        /// Returns the Order Book for a given currency pair including orders identifiers
+        /// </summary>
+        /// <param name="primaryCurrency">primary currency</param>
+        /// <param name="secondaryCurrency">secondary currency</param>
+        public async Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<OrderBookDetailed>("/Public/GetAllOrders", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
         }
 
         /// <summary>

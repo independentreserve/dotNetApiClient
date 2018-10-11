@@ -79,6 +79,12 @@ namespace SampleApplication.ViewModels
             get { return new MethodMetadata() {Name = "GetOrderBook", Description = "GetOrderBook", Parameters = new string[] {"primaryCurrency", "secondaryCurrency"}}; }
         }
 
+        //GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
+        public static MethodMetadata GetAllOrders
+        {
+            get { return new MethodMetadata() {Name = "GetAllOrders", Description = "GetAllOrders", Parameters = new string[] {"primaryCurrency", "secondaryCurrency"}}; }
+        }
+
         //GetTradeHistorySummary(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfHoursInThePastToRetrieve
         public static MethodMetadata GetTradeHistorySummary
         {
