@@ -2,7 +2,7 @@
 
 ![NuGet](https://img.shields.io/nuget/v/independentreserve.client.svg)
 
-This .NET client encapsulates the private and public methods exposed by the Independent Reserve API.
+This .NET client encapsulates the private and public methods exposed by the [Independent Reserve](https://www.independentreserve.com) API.
 
 It targets .NET Standard 2.0
 
