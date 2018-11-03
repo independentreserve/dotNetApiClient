@@ -18,5 +18,7 @@
         Error = 10,
         DepositFee = 11,
         ReferralCommission = 12,
+        ReservedFutureUse = 13,
+        StatementFee = 14
     }
 }
