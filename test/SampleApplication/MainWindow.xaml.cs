@@ -160,17 +160,9 @@ namespace SampleApplication
                         var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
                         await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetBitcoinDepositAddress)
-                    {
-                        await client.GetBitcoinDepositAddressAsync();
-                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddress)
                     {
                         await client.GetDigitalCurrencyDepositAddressAsync(ViewModel.PrimaryCurrency);
-                    }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetBitcoinDepositAddresses)
-                    {
-                        await client.GetBitcoinDepositAddressesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddresses)
                     {
@@ -180,17 +172,9 @@ namespace SampleApplication
                     {
                         await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName, ViewModel.Comment);
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.SynchBitcoinAddressWithBlockchain)
-                    {
-                        await client.SynchBitcoinAddressWithBlockchainAsync(ViewModel.Address);
-                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain)
                     {
                         await client.SynchDigitalCurrencyDepositAddressWithBlockchainAsync(ViewModel.Address, ViewModel.PrimaryCurrency);
-                    }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawBitcoin)
-                    {
-                        await client.WithdrawBitcoinAsync(ViewModel.WithdrawalAmount, ViewModel.Address, ViewModel.Comment);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawDigitalCurrency)
                     {

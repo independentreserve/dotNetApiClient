@@ -243,20 +243,6 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        //GetBitcoinDepositAddress()
-        public static MethodMetadata GetBitcoinDepositAddress
-        {
-            get
-            {
-                return new MethodMetadata()
-                       {
-                           Name = "GetBitcoinDepositAddress",
-                           Description = "GetBitcoinDepositAddress",
-                           Parameters = new string[] {}
-                       };
-            }
-        }
-
         //GetDigitalCurrencyDepositAddress()
         public static MethodMetadata GetDigitalCurrencyDepositAddress
         {
@@ -268,20 +254,6 @@ namespace SampleApplication.ViewModels
                            Description = "GetDigitalCurrencyDepositAddress",
                            Parameters = new[] {"primaryCurrency"}
                        };
-            }
-        }
-
-        //GetBitcoinDepositAddresses()
-        public static MethodMetadata GetBitcoinDepositAddresses
-        {
-            get
-            {
-                return new MethodMetadata()
-                {
-                    Name = "GetBitcoinDepositAddresses",
-                    Description = "GetBitcoinDepositAddresses",
-                    Parameters = new [] { "pageIndex", "pageSize"}
-                };
             }
         }
 
@@ -313,20 +285,6 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        //SynchBitcoinAddressWithBlockchain()
-        public static MethodMetadata SynchBitcoinAddressWithBlockchain
-        {
-            get
-            {
-                return new MethodMetadata()
-                       {
-                           Name = "SynchBitcoinAddressWithBlockchain",
-                           Description = "SynchBitcoinAddressWithBlockchain",
-                           Parameters = new[] {"address"}
-                       };
-            }
-        }
-
         //SynchDigitalCurrencyDepositAddressWithBlockchain()
         public static MethodMetadata SynchDigitalCurrencyDepositAddressWithBlockchain
         {
@@ -337,20 +295,6 @@ namespace SampleApplication.ViewModels
                            Name = "SynchDigitalCurrencyDepositAddressWithBlockchain",
                            Description = "SynchDigitalCurrencyDepositAddressWithBlockchain",
                            Parameters = new[] {"address", "primaryCurrency"}
-                       };
-            }
-        }
-
-        //WithdrawBitcoin()
-        public static MethodMetadata WithdrawBitcoin
-        {
-            get
-            {
-                return new MethodMetadata()
-                       {
-                           Name = "WithdrawBitcoin",
-                           Description = "WithdrawBitcoin",
-                           Parameters = new[] {"withdrawalAmount", "address", "comment"}
                        };
             }
         }
