@@ -16,10 +16,10 @@ namespace UnitTest
                 Assert.IsNotNull(page);
 
                 Assert.AreEqual(page.PageSize,10);
-                Assert.IsTrue(page.TotalItems>0);
+                Assert.IsTrue(page.TotalItems>0, $"page.TotalItems is {page.TotalItems}");
 
-                Assert.IsTrue(page.Data.Any());
-                Assert.IsTrue(page.Data.Count() <= 10);
+                Assert.IsTrue(page.Data.Any(), "page.Data has no items");
+                Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
             }
         }
 
@@ -33,10 +33,10 @@ namespace UnitTest
                 Assert.IsNotNull(page);
 
                 Assert.AreEqual(page.PageSize, 10);
-                Assert.IsTrue(page.TotalItems > 0);
+                Assert.IsTrue(page.TotalItems > 0, $"page.TotalItems is {page.TotalItems}");
 
-                Assert.IsTrue(page.Data.Any());
-                Assert.IsTrue(page.Data.Count() <= 10);
+                Assert.IsTrue(page.Data.Any(), "page.Data has no items");
+                Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
             }
         }
 
@@ -50,10 +50,10 @@ namespace UnitTest
                 Assert.IsNotNull(page);
 
                 Assert.AreEqual(page.PageSize, 10);
-                Assert.IsTrue(page.TotalItems > 0);
+                Assert.IsTrue(page.TotalItems > 0, $"page.TotalItems is {page.TotalItems}");
 
-                Assert.IsTrue(page.Data.Any());
-                Assert.IsTrue(page.Data.Count() <= 10);
+                Assert.IsTrue(page.Data.Any(), "page.Data has no items");
+                Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
             }
         }
 
@@ -67,10 +67,10 @@ namespace UnitTest
                 Assert.IsNotNull(page);
 
                 Assert.AreEqual(page.PageSize, 10);
-                Assert.IsTrue(page.TotalItems > 0);
+                Assert.IsTrue(page.TotalItems > 0, $"page.TotalItems is {page.TotalItems}");
 
-                Assert.IsTrue(page.Data.Any());
-                Assert.IsTrue(page.Data.Count() <= 10);
+                Assert.IsTrue(page.Data.Any(), "page.Data has no items");
+                Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
             }
         }
 
@@ -84,10 +84,10 @@ namespace UnitTest
                 Assert.IsNotNull(page);
 
                 Assert.AreEqual(page.PageSize, 10);
-                Assert.IsTrue(page.TotalItems > 0);
+                Assert.IsTrue(page.TotalItems > 0, $"page.TotalItems is {page.TotalItems}");
 
-                Assert.IsTrue(page.Data.Any());
-                Assert.IsTrue(page.Data.Count() <= 10);
+                Assert.IsTrue(page.Data.Any(), "page.Data has no items");
+                Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
             }
         }
 
@@ -101,10 +101,10 @@ namespace UnitTest
                 Assert.IsNotNull(page);
 
                 Assert.AreEqual(page.PageSize, 10);
-                Assert.IsTrue(page.TotalItems > 0);
+                Assert.IsTrue(page.TotalItems > 0, $"page.TotalItems is {page.TotalItems}");
 
-                Assert.IsTrue(page.Data.Any());
-                Assert.IsTrue(page.Data.Count() <= 10);
+                Assert.IsTrue(page.Data.Any(), "page.Data has no items");
+                Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
             }
         }
     }
