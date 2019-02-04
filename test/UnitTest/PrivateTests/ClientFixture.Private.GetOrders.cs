@@ -11,15 +11,10 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                Page<BankHistoryOrder> page = client.GetOpenOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10);
+                var page = client.GetOpenOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10);
 
                 Assert.IsNotNull(page);
-
-                Assert.AreEqual(page.PageSize,10);
-                Assert.IsTrue(page.TotalItems>0, $"page.TotalItems is {page.TotalItems}");
-
-                Assert.IsTrue(page.Data.Any(), "page.Data has no items");
-                Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
+                Assert.AreEqual(page.PageSize, 10);
             }
         }
 
