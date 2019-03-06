@@ -16,6 +16,7 @@
         Xrp=8,
         Omg=9,
         Zrx=10,
-        Pla=11
+        Pla=11,
+        Eos=12,
     }
 }
