@@ -43,6 +43,7 @@
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
                         <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
+                        <ComboBoxItem Tag="Eos">Eos</ComboBoxItem>
                         <ComboBoxItem Tag="Pla">Pla</ComboBoxItem>
                         <ComboBoxItem Tag="Omg">Omg</ComboBoxItem>
                         <ComboBoxItem Tag="Zrx">Zrx</ComboBoxItem>
@@ -59,6 +60,7 @@
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
                         <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
+                        <ComboBoxItem Tag="Eos">Eos</ComboBoxItem>
                         <ComboBoxItem Tag="Pla">Pla</ComboBoxItem>
                         <ComboBoxItem Tag="Omg">Omg</ComboBoxItem>
                         <ComboBoxItem Tag="Zrx">Zrx</ComboBoxItem>
