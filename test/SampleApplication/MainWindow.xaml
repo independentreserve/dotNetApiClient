@@ -48,6 +48,9 @@
                         <ComboBoxItem Tag="Pla">Pla</ComboBoxItem>
                         <ComboBoxItem Tag="Omg">Omg</ComboBoxItem>
                         <ComboBoxItem Tag="Zrx">Zrx</ComboBoxItem>
+                        <ComboBoxItem Tag="Bat">Bat</ComboBoxItem>
+                        <ComboBoxItem Tag="Rep">Rep</ComboBoxItem>
+                        <ComboBoxItem Tag="Gnt">Gnt</ComboBoxItem>
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
@@ -66,6 +69,9 @@
                         <ComboBoxItem Tag="Pla">Pla</ComboBoxItem>
                         <ComboBoxItem Tag="Omg">Omg</ComboBoxItem>
                         <ComboBoxItem Tag="Zrx">Zrx</ComboBoxItem>
+                        <ComboBoxItem Tag="Bat">Bat</ComboBoxItem>
+                        <ComboBoxItem Tag="Rep">Rep</ComboBoxItem>
+                        <ComboBoxItem Tag="Gnt">Gnt</ComboBoxItem>
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
