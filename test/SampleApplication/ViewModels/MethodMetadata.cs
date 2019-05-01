@@ -327,6 +327,13 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata Events => new MethodMetadata()
+        {
+            Name = "GetEvents",
+            Description = "GetEvents",
+            Parameters = new string[] { }
+        };
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;
