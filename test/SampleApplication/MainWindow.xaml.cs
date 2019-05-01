@@ -184,6 +184,10 @@ namespace SampleApplication
                     {
                         await client.GetTradesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.Events)
+                    {
+                        await client.Events();
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }
