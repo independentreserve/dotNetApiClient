@@ -184,7 +184,7 @@ namespace SampleApplication
                     {
                         await client.GetTradesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.Events)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetEvents)
                     {
                         await client.GetEvents();
                     }

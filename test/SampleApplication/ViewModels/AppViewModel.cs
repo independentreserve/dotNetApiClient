@@ -44,7 +44,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.RequestFiatWithdrawal,
             MethodMetadata.GetTrades,
             MethodMetadata.GetBrokerageFees,
-            MethodMetadata.Events,
+            MethodMetadata.GetEvents,
         };
 
         private MethodMetadata _selectedMethod;
