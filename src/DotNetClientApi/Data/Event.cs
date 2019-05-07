@@ -8,11 +8,9 @@ namespace IndependentReserve.DotNetClientApi.Data
 
         public string Description { get; set; }
 
-        public string Type { get; set; }
-
         public DateTimeOffset Start { get; set; }
 
-        public int EstimationDurationMinutes { get; set; }
+        public string EstimatedDuration { get; set; }
 
         public bool IsComplete { get; set; }
     }
