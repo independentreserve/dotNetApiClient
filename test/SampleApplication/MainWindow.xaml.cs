@@ -186,7 +186,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.Events)
                     {
-                        await client.Events();
+                        await client.GetEvents();
                     }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
@@ -213,7 +213,7 @@ namespace SampleApplication
         /// <returns></returns>
         private static string FormatJson(string json)
         {
-            var serializerSettings = new JsonSerializerSettings()
+            var serializerSettings = new JsonSerializerSettings
             {
                 DateParseHandling = DateParseHandling.DateTimeOffset
             };
