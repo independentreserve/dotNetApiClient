@@ -327,7 +327,7 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        public static MethodMetadata Events => new MethodMetadata()
+        public static MethodMetadata GetEvents => new MethodMetadata()
         {
             Name = "GetEvents",
             Description = "GetEvents",
