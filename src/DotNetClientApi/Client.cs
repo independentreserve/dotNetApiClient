@@ -381,7 +381,7 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPublicAsync<IEnumerable<FxRate>>("/Public/GetFxRates").ConfigureAwait(false);
         }
 
-        public async Task<List<Event>> Events()
+        public async Task<List<Event>> GetEvents()
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<List<Event>>("/Public/Events");
