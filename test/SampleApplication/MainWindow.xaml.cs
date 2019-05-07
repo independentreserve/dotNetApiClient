@@ -207,13 +207,18 @@ namespace SampleApplication
         }
 
         /// <summary>
-        /// Helper method to format JSON string to the nice ideneted format
+        /// Helper method to format JSON string to the nice indented format
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
         private static string FormatJson(string json)
         {
-            dynamic parsedJson = JsonConvert.DeserializeObject(json);
+            var serializerSettings = new JsonSerializerSettings()
+            {
+                DateParseHandling = DateParseHandling.DateTimeOffset
+            };
+
+            dynamic parsedJson = JsonConvert.DeserializeObject(json, serializerSettings);
 
             return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
         }
