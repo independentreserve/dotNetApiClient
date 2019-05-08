@@ -4,7 +4,12 @@ using System.Xml;
 
 namespace IndependentReserve.DotNetClientApi.Converters
 {
-    // https://stackoverflow.com/questions/12466188/how-do-i-convert-an-iso8601-timespan-to-a-c-sharp-timespan
+    /// <summary>
+    /// Convert between TimeSpan and ISO8601
+    /// </summary>
+    /// <remarks>
+    /// https://stackoverflow.com/questions/12466188/how-do-i-convert-an-iso8601-timespan-to-a-c-sharp-timespan
+    /// </remarks>
     public class TimeSpanToIsoConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
