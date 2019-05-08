@@ -5,10 +5,11 @@ param(
 
 function Find-Nuget{
     
-        $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/v3.5.0-rc1/NuGet.exe"
+        $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/v4.9.4/nuget.exe"
         $targetNugetExe = "$PSScriptRoot\packages\nuget.exe"
-        
-        New-Item -ItemType directory -Path "$PSScriptRoot\packages" -Force  | Out-Null
+        $packageFolder = "$PSScriptRoot\packages"
+                
+        New-Item -ItemType directory -Path $packageFolder -Force  | Out-Null
     
         if (!(Test-Path $targetNugetExe )){
             Write-Host "Downloading nuget to $targetNugetExe"
@@ -16,6 +17,8 @@ function Find-Nuget{
         }
     
         Set-Alias nuget $targetNugetExe -Scope Global
+        
+        return $packageFolder
 }
 
 function Restore-Packages()
@@ -26,17 +29,42 @@ function Restore-Packages()
 
 function Find-MsBuild()
 {
-    $path = &"$PSScriptRoot\packages\vswhere.2.3.2\tools\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+    $package = "vsWhere"
+    $version = "2.6.7"
+    $packageFolder = Find-Nuget $package $version
+    $vsWherePath = "$packageFolder\$package.$version\tools\vswhere.exe"
+   
+    $path = &$vsWherePath -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+    $msbuildFound = $false
+    
     if ($path) {
-      $path = join-path $path 'MSBuild\15.0\Bin\MSBuild.exe'
-      if (test-path $path) {
-        Set-Alias msbuild $path -Scope Global
-        Write-Host "MSBuild found at '$path'"
+      $testPath = join-path $path 'MSBuild\15.0\Bin\msbuild.exe'
+      if (test-path $testPath) {
+        $msbuildFound = $true 
+        $path = $testPath
+        
+        Write-Host "MSBuild: Visual Studio 2017"
       }
-      else{
-        Write-Error "MSBuild not found"
+
+      if (-not $msbuildFound)
+      {
+            $testPath = join-path $path 'MSBuild\current\Bin\msbuild.exe'
+
+            if (test-path $testPath) {
+                Write-Host "MSBuild: Visual Studio 2019"
+                $path = $testPath
+                $msbuildFound = $true 
+            }
       }
     }
+    
+    if (-not $msbuildFound){
+        $path = "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
+        Write-Host "Using legacy MSBuild. This won't work! Fix vswhere." -ForegroundColor "Red"
+        _WriteConfig "MSBuild" "Visual Studio 2015"
+    }
+    
+    Set-Alias msbuild $path -Scope Global
 }
 
 function Build-Solution()
@@ -75,7 +103,7 @@ function Run-Tests{
 
 
     $testResultformat = ""
-    $nunitConsole = "$PSScriptRoot\packages\NUnit.ConsoleRunner.3.8.0\tools\nunit3-console.exe"
+    $nunitConsole = "$PSScriptRoot\packages\NUnit.ConsoleRunner.3.10.0\tools\nunit3-console.exe"
       
     $assembliesToTest = @(
         "$PSScriptRoot\test\UnitTest\bin\$configuration\UnitTest.dll"
