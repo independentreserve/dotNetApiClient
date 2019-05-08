@@ -12,7 +12,7 @@ Install the latest package [via nuget](https://www.nuget.org/packages/Independen
 
 ## Development
 
-Requires `Visual Studio 2017`
+Requires `Visual Studio 2017+`
 
 ### Unit Tests
 
