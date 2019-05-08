@@ -1,4 +1,6 @@
 ﻿using System;
+using IndependentReserve.DotNetClientApi.Converters;
+using Newtonsoft.Json;
 
 namespace IndependentReserve.DotNetClientApi.Data
 {
@@ -10,7 +12,8 @@ namespace IndependentReserve.DotNetClientApi.Data
 
         public DateTimeOffset Start { get; set; }
 
-        public string EstimatedDuration { get; set; }
+        [JsonConverter(typeof(TimeSpanToIsoConverter))]
+        public TimeSpan EstimatedDuration { get; set; }
 
         public bool IsComplete { get; set; }
     }
