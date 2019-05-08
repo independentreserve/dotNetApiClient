@@ -43,7 +43,8 @@ namespace SampleApplication.ViewModels
             MethodMetadata.WithdrawDigitalCurrency,
             MethodMetadata.RequestFiatWithdrawal,
             MethodMetadata.GetTrades,
-            MethodMetadata.GetBrokerageFees
+            MethodMetadata.GetBrokerageFees,
+            MethodMetadata.GetEvents,
         };
 
         private MethodMetadata _selectedMethod;
