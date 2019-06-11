@@ -6,7 +6,7 @@
 
         public ApiCredential Credential { get; set; }
 
-        public bool HasCredential => Credential.IsValid;
+        public bool HasCredential => Credential?.IsValid ?? false;
 
         public ApiConfig()
         {
