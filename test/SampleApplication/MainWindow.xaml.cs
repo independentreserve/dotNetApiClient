@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Windows;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
 using Newtonsoft.Json;
+using NLog;
 using SampleApplication.ViewModels;
 
 namespace SampleApplication
@@ -16,10 +18,21 @@ namespace SampleApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         public MainWindow()
         {
             InitializeComponent();
 
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) =>
+            {
+                Log.Warn($"SSL Certificate error");
+
+                // Change this to return true to to ignore certificate errors
+                return false;
+            };
+
+            Log.Info("Reading credentials");
             var config = new AppSettingsConfigProvider().Get();
 
             if (!config.HasCredential)
@@ -29,17 +42,22 @@ namespace SampleApplication
 
             if (!config.HasCredential)
             {
-                MessageBoxResult result = MessageBox.Show("Some or all of the following required API key details are empty: ApiKey, ApiUrl, ApiSecret.\n\nPlease set them to the correct values in application configuration file.", "Please specify your API key details", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    "Some or all of the following required API key details are empty: ApiKey, ApiUrl, ApiSecret.\n\nPlease set them to the correct values in application configuration file."
+                    , "Please specify your API key details"
+                    , MessageBoxButton.OK
+                    , MessageBoxImage.Error);
+
                 Application.Current.Shutdown();
                 return;
             }
 
-            this.DataContext = new AppViewModel(config)
+            Log.Info("Setting DataContext");
+            DataContext = new AppViewModel(config)
             {
                 SelectedMethod = MethodMetadata.Null
             };
         }
-
 
 
         private AppViewModel ViewModel
