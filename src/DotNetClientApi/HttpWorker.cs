@@ -44,11 +44,11 @@ namespace IndependentReserve.DotNetClientApi
             //if we have get parameters - append them to the url
             if (parameters.Any())
             {
-                string queryString = parameters.Aggregate(string.Empty, (current, parameter) => current + string.Format("{0}={1}&", parameter.Item1, parameter.Item2)).TrimEnd('&');
+                string queryString = parameters.Aggregate(string.Empty, (current, parameter) => current + $"{parameter.Item1}={parameter.Item2}&").TrimEnd('&');
 
                 LastRequestParameters = queryString;
 
-                url = string.Format("{0}?{1}", url, queryString);
+                url = $"{url}?{queryString}";
             }
 
             var response = await _client.GetAsync(url).ConfigureAwait(false);
@@ -59,7 +59,17 @@ namespace IndependentReserve.DotNetClientApi
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
+                ErrorMessage errorMessage;
+                try
+                {
+                    errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
+                }
+                catch(Exception)
+                {
+                    // The response wasn't a JSON formatted result
+                    throw new Exception(result.Substring(0, 100));
+                }
+                
                 throw new Exception(errorMessage.Message);
             }
 

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
+using NLog;
 using SampleApplication.Annotations;
 
 namespace SampleApplication.ViewModels
@@ -13,40 +15,7 @@ namespace SampleApplication.ViewModels
     /// </summary>
     public class AppViewModel:INotifyPropertyChanged
     {
-        private readonly MethodMetadata[] _methods = new[]
-        {
-            MethodMetadata.Null,
-            MethodMetadata.GetValidPrimaryCurrencyCodes, 
-            MethodMetadata.GetValidSecondaryCurrencyCodes, 
-            MethodMetadata.GetValidLimitOrderTypes, 
-            MethodMetadata.GetValidMarketOrderTypes, 
-            MethodMetadata.GetValidOrderTypes,
-            MethodMetadata.GetValidTransactionTypes, 
-            MethodMetadata.GetMarketSummary, 
-            MethodMetadata.GetOrderBook, 
-            MethodMetadata.GetAllOrders, 
-            MethodMetadata.GetTradeHistorySummary, 
-            MethodMetadata.GetRecentTrades, 
-            MethodMetadata.GetFxRates,
-            MethodMetadata.PlaceLimitOrder, 
-            MethodMetadata.PlaceMarketOrder, 
-            MethodMetadata.CancelOrder, 
-            MethodMetadata.GetAccounts,
-            MethodMetadata.GetOpenOrders, 
-            MethodMetadata.GetClosedOrders, 
-            MethodMetadata.GetClosedFilledOrders, 
-            MethodMetadata.GetOrderDetails,
-            MethodMetadata.GetTransactions, 
-            MethodMetadata.GetDigitalCurrencyDepositAddress, 
-            MethodMetadata.GetDigitalCurrencyDepositAddresses, 
-            MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
-            MethodMetadata.WithdrawDigitalCurrency,
-            MethodMetadata.RequestFiatWithdrawal,
-            MethodMetadata.GetTrades,
-            MethodMetadata.GetBrokerageFees,
-            MethodMetadata.GetEvents,
-        };
-
+        private static Logger Log = LogManager.GetCurrentClassLogger();
         private MethodMetadata _selectedMethod;
         private string _lastRequestParameters;
         private string _lastRequestResponse;
@@ -83,27 +52,71 @@ namespace SampleApplication.ViewModels
             _limitOrderPrice = 500;
             _orderVolume = 0.1m;
             _orderGuid = string.Empty;
-            _fromTimestampUtc = new DateTime(2014,8,1);
+            _fromTimestampUtc = new DateTime(2014, 8, 1);
             _toTimestampUtc = null;
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
             _address = null;
             ApiConfig = apiConfig;
+
+            SetTransactionTypes(apiConfig);
+        }
+
+        private void SetTransactionTypes(ApiConfig apiConfig)
+        {
             TransactionTypes = new ObservableCollection<TransactionTypeViewModel>();
+            Log.Info($"Connecting to '{apiConfig.BaseUrl}'");
             using (var client = Client.Create(apiConfig))
             {
-                var types = client.GetValidTransactionTypes();
+                IEnumerable<TransactionType> types = null;
+                try
+                {
+                    types = client.GetValidTransactionTypes();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e, $"GetValidTransactionTypes failed. LastRequestUrl='{client.LastRequestUrl}'");
+                }
                 foreach (var transactionType in types)
                 {
-                    TransactionTypes.Add(new TransactionTypeViewModel {IsSelected = false, Type = transactionType});
+                    TransactionTypes.Add(new TransactionTypeViewModel { IsSelected = false, Type = transactionType });
                 }
             }
         }
 
-        public MethodMetadata[] Methods
+        public MethodMetadata[] Methods { get; } = new[]
         {
-            get { return _methods; }
-        }
+            MethodMetadata.Null,
+            MethodMetadata.GetValidPrimaryCurrencyCodes,
+            MethodMetadata.GetValidSecondaryCurrencyCodes,
+            MethodMetadata.GetValidLimitOrderTypes,
+            MethodMetadata.GetValidMarketOrderTypes,
+            MethodMetadata.GetValidOrderTypes,
+            MethodMetadata.GetValidTransactionTypes,
+            MethodMetadata.GetMarketSummary,
+            MethodMetadata.GetOrderBook,
+            MethodMetadata.GetAllOrders,
+            MethodMetadata.GetTradeHistorySummary,
+            MethodMetadata.GetRecentTrades,
+            MethodMetadata.GetFxRates,
+            MethodMetadata.PlaceLimitOrder,
+            MethodMetadata.PlaceMarketOrder,
+            MethodMetadata.CancelOrder,
+            MethodMetadata.GetAccounts,
+            MethodMetadata.GetOpenOrders,
+            MethodMetadata.GetClosedOrders,
+            MethodMetadata.GetClosedFilledOrders,
+            MethodMetadata.GetOrderDetails,
+            MethodMetadata.GetTransactions,
+            MethodMetadata.GetDigitalCurrencyDepositAddress,
+            MethodMetadata.GetDigitalCurrencyDepositAddresses,
+            MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
+            MethodMetadata.WithdrawDigitalCurrency,
+            MethodMetadata.RequestFiatWithdrawal,
+            MethodMetadata.GetTrades,
+            MethodMetadata.GetBrokerageFees,
+            MethodMetadata.GetEvents,
+        };
 
         /// <summary>
         /// Gets or sets currently selected method which will be called if user press "Call It" button
