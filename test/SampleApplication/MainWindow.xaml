@@ -41,6 +41,7 @@
                         <ComboBoxItem Tag="Xbt" IsSelected="True">Xbt</ComboBoxItem>
                         <ComboBoxItem Tag="Eth">Eth</ComboBoxItem>
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
+                        <ComboBoxItem Tag="Bsv">Bsv</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
                         <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
                         <ComboBoxItem Tag="Eos">Eos</ComboBoxItem>
@@ -52,6 +53,7 @@
                         <ComboBoxItem Tag="Rep">Rep</ComboBoxItem>
                         <ComboBoxItem Tag="Gnt">Gnt</ComboBoxItem>
                         <ComboBoxItem Tag="Etc">Etc</ComboBoxItem>
+                        <ComboBoxItem Tag="Usdt">Usdt</ComboBoxItem>
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
@@ -63,6 +65,7 @@
                         <ComboBoxItem Tag="Xbt">Xbt</ComboBoxItem>
                         <ComboBoxItem Tag="Eth">Eth</ComboBoxItem>
                         <ComboBoxItem Tag="Bch">Bch</ComboBoxItem>
+                        <ComboBoxItem Tag="Bsv">Bsv</ComboBoxItem>
                         <ComboBoxItem Tag="Ltc">Ltc</ComboBoxItem>
                         <ComboBoxItem Tag="Xrp">Xrp</ComboBoxItem>
                         <ComboBoxItem Tag="Eos">Eos</ComboBoxItem>
@@ -74,6 +77,7 @@
                         <ComboBoxItem Tag="Rep">Rep</ComboBoxItem>
                         <ComboBoxItem Tag="Gnt">Gnt</ComboBoxItem>
                         <ComboBoxItem Tag="Etc">Etc</ComboBoxItem>
+                        <ComboBoxItem Tag="Usdt">Usdt</ComboBoxItem>
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
                         <ComboBoxItem Tag="Nzd">Nzd</ComboBoxItem>
