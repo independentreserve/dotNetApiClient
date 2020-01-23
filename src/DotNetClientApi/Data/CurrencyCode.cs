@@ -16,7 +16,7 @@
         Xrp=8,
         Omg=9,
         Zrx=10,
-        Pla=11,
+
         Eos=12,
         Xlm=13,
         Bat=14,
