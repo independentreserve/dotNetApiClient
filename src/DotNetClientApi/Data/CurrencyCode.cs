@@ -22,6 +22,8 @@
         Bat=14,
         Rep=15,
         Gnt=16,
-        Etc=17
+        Etc=17,
+        Bsv=18,
+        Usdt=19
     }
 }
