@@ -116,6 +116,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetTrades,
             MethodMetadata.GetBrokerageFees,
             MethodMetadata.GetEvents,
+            MethodMetadata.GetExchangeStatus,
         };
 
         /// <summary>
