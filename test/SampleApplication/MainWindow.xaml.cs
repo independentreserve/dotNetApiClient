@@ -206,6 +206,10 @@ namespace SampleApplication
                     {
                         await client.GetEvents();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetExchangeStatus)
+                    {
+                        await client.GetExchangeStatus();
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

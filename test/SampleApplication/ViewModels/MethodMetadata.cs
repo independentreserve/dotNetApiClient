@@ -334,6 +334,14 @@ namespace SampleApplication.ViewModels
             Parameters = new string[] { }
         };
 
+        public static MethodMetadata GetExchangeStatus =>
+            new MethodMetadata()
+            {
+                Name = "GetExchangeStatus",
+                Description = "GetExchangeStatus",
+                Parameters = new string[] { }
+            };
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;

@@ -387,6 +387,15 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPublicAsync<List<Event>>("/Public/Events");
         }
 
+        /// <summary>
+        /// Returns exchange status for all currency codes
+        /// </summary>
+        public async Task<ExchangeStatus> GetExchangeStatus()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<ExchangeStatus>("/Public/GetExchangeStatus");
+        }
+
         #endregion //Public API
 
         #region Private API
