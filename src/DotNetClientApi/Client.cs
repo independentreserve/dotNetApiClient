@@ -25,6 +25,9 @@ namespace IndependentReserve.DotNetClientApi
         public string LastRequestParameters => HttpWorker.LastRequestParameters;
         public string LastResponseRaw => HttpWorker.LastResponseRaw;
 
+        /// <summary>
+        /// Support injecting an alternate implementation
+        /// </summary>
         public static Func<string> GetNonceProvider = () => DateTime.UtcNow.Ticks.ToString(CultureInfo.InvariantCulture);
 
         #region private constructors
