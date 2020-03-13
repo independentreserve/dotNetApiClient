@@ -26,10 +26,18 @@ namespace SampleApplication
 
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) =>
             {
-                Log.Warn($"SSL Certificate error");
+                // [Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_IGNORE_SSL_ERROR", "true", "Machine")
+                const string envKeyIgnoreSsl = "IR_DOTNETCLIENTAPI_IGNORE_SSL_ERROR";
+                var ignoreSslText = Environment.GetEnvironmentVariable(envKeyIgnoreSsl);
 
-                // Change this to return true to to ignore certificate errors
-                return false;
+                var parsedOk = bool.TryParse(ignoreSslText, out var ignoreSslValue);
+
+                if (parsedOk && ignoreSslValue)
+                {
+                    return true;
+                }
+
+                throw new Exception($"SSL Certificate error. Ignore using $env:{envKeyIgnoreSsl}");
             };
 
             Log.Info("Reading credentials");

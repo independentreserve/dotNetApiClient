@@ -75,7 +75,10 @@ namespace SampleApplication.ViewModels
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e, $"GetValidTransactionTypes failed. LastRequestUrl='{client.LastRequestUrl}'");
+                    // If this fails it could be a certificate error in dev/test env
+                    var deepest = e.GetBaseException();
+                    Log.Error(deepest, $"GetValidTransactionTypes failed. LastRequestUrl='{client.LastRequestUrl}'");
+                    throw;
                 }
                 foreach (var transactionType in types)
                 {
