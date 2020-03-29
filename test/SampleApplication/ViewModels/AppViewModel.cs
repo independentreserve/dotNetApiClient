@@ -117,6 +117,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.WithdrawDigitalCurrency,
             MethodMetadata.RequestFiatWithdrawal,
             MethodMetadata.GetTrades,
+            MethodMetadata.GetTrades2,
             MethodMetadata.GetBrokerageFees,
             MethodMetadata.GetEvents,
             MethodMetadata.GetExchangeStatus,
