@@ -82,5 +82,8 @@ namespace IndependentReserve.DotNetClientApi
         Task WithdrawDigitalCurrencyAsync(DigitalWithdrawalRequest withdrawalRequest);
         Task<List<Event>> GetEvents();
         Task<ExchangeStatus> GetExchangeStatus();
+        
+        Task<Dictionary<string, decimal>> GetWithdrawalFees();
+        Task<IEnumerable<DepositFee>> GetDepositFees();
     }
 }
