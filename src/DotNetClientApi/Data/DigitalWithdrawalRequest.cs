@@ -1,9 +1,4 @@
-﻿using IndependentReserve.DotNetClientApi.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IndependentReserve.DotNetClientApi.Data
+﻿namespace IndependentReserve.DotNetClientApi.Data
 {
     public class DigitalWithdrawalRequest
     {
@@ -19,5 +14,7 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Leave empty if currency does not support tags
         /// </summary>
         public string DestinationTag { get; set; }
+
+        public string ClientWithdrowalId { get; set; }
     }
 }
