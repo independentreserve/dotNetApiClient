@@ -1155,6 +1155,24 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves trades that related to the specified order
+        /// </summary>
+        /// <param name="orderGuid">order guid</param>
+        /// <returns>a list of specified order's trades</returns>
+        public async Task<IEnumerable<TradeDetails>> GetTrades2Async(Guid orderGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.orderGuid = orderGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<TradeDetails>>("/Private/GetTrades2", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves information about user's brokerage fees
         /// </summary>
         /// <returns>a collection of brokerage fees</returns>

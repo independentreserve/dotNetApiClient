@@ -327,6 +327,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //GetTrades2(string orderGuid)
+        public static MethodMetadata GetTrades2
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetTrades2",
+                    Description = "GetTrades2",
+                    Parameters = new[] { "orderGuid" }
+                };
+            }
+        }
+
         public static MethodMetadata GetEvents => new MethodMetadata()
         {
             Name = "GetEvents",
