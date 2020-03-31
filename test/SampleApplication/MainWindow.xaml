@@ -170,11 +170,20 @@
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding Address}" Width="250"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=tag}">
+                    <TextBlock Style="{StaticResource Label}">Digital Currency Tag:</TextBlock>
+                    <TextBox Text="{Binding Tag}" Width="250"></TextBox>
+                </StackPanel>
+
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=comment}">
                     <TextBlock Style="{StaticResource Label}">Comment:</TextBlock>
                     <TextBox Style="{StaticResource TextArea}" Text="{Binding Comment}" Width="250"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=customId}">
+                    <TextBlock Style="{StaticResource Label}">Custom id:</TextBlock>
+                    <TextBox Text="{Binding CustomId}" Width="250"></TextBox>
+                </StackPanel>
             </StackPanel>
         </GroupBox>
         

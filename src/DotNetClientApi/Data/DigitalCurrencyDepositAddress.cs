@@ -11,6 +11,12 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Deposit address
         /// </summary>
         public string DepositAddress { get; set; }
+
+        /// <summary>
+        /// Destionation tag. 
+        /// </summary>
+        /// <remarks>Field is returned only for currecies that support destination tags (XRP, XLM, EOS, etc.)</remarks>
+        public string Tag { get; set; }
         
         /// <summary>
         /// Timestamp in UTC of when IR last checked this address for new deposits

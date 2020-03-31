@@ -14,7 +14,5 @@
         /// Leave empty if currency does not support tags
         /// </summary>
         public string DestinationTag { get; set; }
-
-        public string ClientWithdrowalId { get; set; }
     }
 }
