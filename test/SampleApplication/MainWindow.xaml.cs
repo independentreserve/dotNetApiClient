@@ -213,6 +213,10 @@ namespace SampleApplication
                             DestinationTag = string.IsNullOrWhiteSpace(ViewModel.Tag) ? null : ViewModel.Tag,
                         });
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawal)
+                    {
+                        await client.GetDigitalCurrencyWithdrawalAsync(ParseGuid(ViewModel.TransactionGuid));
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {
                         await client.GetTradesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
