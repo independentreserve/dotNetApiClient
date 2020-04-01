@@ -204,7 +204,14 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawDigitalCurrency)
                     {
-                        await client.WithdrawDigitalCurrencyAsync(ViewModel.WithdrawalAmount, ViewModel.Address, ViewModel.Comment, ViewModel.PrimaryCurrency);
+                        await client.WithdrawDigitalCurrencyAsync(new DigitalWithdrawalRequest
+                        {
+                            Amount = ViewModel.WithdrawalAmount,
+                            Address = ViewModel.Address,
+                            Comment = ViewModel.Comment,
+                            Currency = ViewModel.PrimaryCurrency,
+                            DestinationTag = string.IsNullOrWhiteSpace(ViewModel.Tag) ? null : ViewModel.Tag,
+                        });
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {

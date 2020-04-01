@@ -1,9 +1,4 @@
-﻿using IndependentReserve.DotNetClientApi.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IndependentReserve.DotNetClientApi.Data
+﻿namespace IndependentReserve.DotNetClientApi.Data
 {
     public class DigitalWithdrawalRequest
     {

@@ -308,7 +308,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "WithdrawDigitalCurrnecy",
                            Description = "WithdrawDigitalCurrency",
-                           Parameters = new[] {"withdrawalAmount", "address", "comment", "primaryCurrency"}
+                           Parameters = new[] {"withdrawalAmount", "address", "tag", "comment", "primaryCurrency" }
                        };
             }
         }

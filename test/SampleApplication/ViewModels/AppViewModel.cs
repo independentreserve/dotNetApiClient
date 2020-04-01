@@ -37,7 +37,9 @@ namespace SampleApplication.ViewModels
         private decimal _withdrawalAmount;
         private string _withdrawalBankAccountName;
         private string _address;
+        private string _tag;
         private string _comment;
+        private string _customId;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -444,6 +446,17 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public string Tag
+        {
+            get { return _tag; }
+            set
+            {
+                if (value == _tag) return;
+                _tag = value;
+                OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// Method parameter - Comment - used by private API withdrawal methods
         /// </summary>
@@ -454,6 +467,17 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _comment) return;
                 _comment = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CustomId
+        {
+            get { return _customId; }
+            set
+            {
+                if (value == _customId) return;
+                _customId = value;
                 OnPropertyChanged();
             }
         }
