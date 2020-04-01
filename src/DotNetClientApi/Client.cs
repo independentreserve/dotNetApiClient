@@ -401,6 +401,24 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPublicAsync<ExchangeStatus>("/Public/GetExchangeStatus");
         }
 
+        /// <summary>
+        /// Returns exchange status for all currency codes
+        /// </summary>
+        public async Task<Dictionary<string, decimal>> GetWithdrawalFees()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<Dictionary<string, decimal>>("/Public/GetWithdrawalFees");
+        }
+
+        /// <summary>
+        /// Returns exchange status for all currency codes
+        /// </summary>
+        public async Task<IEnumerable<DepositFee>> GetDepositFees()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DepositFee>>("/Public/GetDepositFees");
+        }
+
         #endregion //Public API
 
         #region Private API

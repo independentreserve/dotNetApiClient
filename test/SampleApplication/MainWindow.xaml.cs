@@ -229,6 +229,14 @@ namespace SampleApplication
                     {
                         await client.GetExchangeStatus();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetWithdrawalFees)
+                    {
+                        await client.GetWithdrawalFees();
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDepositFees)
+                    {
+                        await client.GetDepositFees();
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

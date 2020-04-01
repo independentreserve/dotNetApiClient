@@ -123,6 +123,8 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetBrokerageFees,
             MethodMetadata.GetEvents,
             MethodMetadata.GetExchangeStatus,
+            MethodMetadata.GetWithdrawalFees,
+            MethodMetadata.GetDepositFees,
         };
 
         /// <summary>
