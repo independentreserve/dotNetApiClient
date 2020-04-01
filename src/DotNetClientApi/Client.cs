@@ -1098,6 +1098,20 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
         }
 
+        public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid transactionGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+
+            data.transactionGuid = transactionGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/GetDigitalCurrencyWithdrawal", data).ConfigureAwait(false);
+        }
+
         /// <summary>
         /// Creates a withdrawal request for a Fiat currency withdrawal from your Independent Reserve account to an external bank account
         /// </summary>

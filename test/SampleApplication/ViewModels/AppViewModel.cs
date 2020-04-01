@@ -40,6 +40,7 @@ namespace SampleApplication.ViewModels
         private string _tag;
         private string _comment;
         private string _customId;
+        private string _transactionGuid;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -59,6 +60,8 @@ namespace SampleApplication.ViewModels
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
             _address = null;
+            _transactionGuid = null;
+
             ApiConfig = apiConfig;
 
             SetTransactionTypes(apiConfig);
@@ -117,6 +120,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetDigitalCurrencyDepositAddresses,
             MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
             MethodMetadata.WithdrawDigitalCurrency,
+            MethodMetadata.GetDigitalCurrencyWithdrawal,
             MethodMetadata.RequestFiatWithdrawal,
             MethodMetadata.GetTrades,
             MethodMetadata.GetTrades2,
@@ -480,6 +484,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _customId) return;
                 _customId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - AccountGuid - used by private API method GetDigitalCurrencyWithdrawal
+        /// </summary>
+        public string TransactionGuid
+        {
+            get { return _transactionGuid; }
+            set
+            {
+                if (value == _transactionGuid) return;
+                _transactionGuid = value;
                 OnPropertyChanged();
             }
         }

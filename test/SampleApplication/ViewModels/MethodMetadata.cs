@@ -313,6 +313,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //WithdrawDigitalCurrency()
+        public static MethodMetadata GetDigitalCurrencyWithdrawal
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDigitalCurrencyWithdrawal",
+                    Description = "GetDigitalCurrencyWithdrawal",
+                    Parameters = new[] { "transactionGuid" }
+                };
+            }
+        }
+
         //GetTrades(int pageIndex, int pageSize)
         public static MethodMetadata GetTrades
         {
