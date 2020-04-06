@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Globalization;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Limits;
 
 namespace IndependentReserve.DotNetClientApi
 {
@@ -1200,6 +1201,27 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfPublicClient();
 
             return GetBrokerageFeesAsync().Result;
+        }
+
+        public async Task<DepositLimits> GetDepositLimits()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+
+            return await HttpWorker.QueryPrivateAsync<DepositLimits>("/Private/GetDepositLimits", data).ConfigureAwait(false);
+        }
+
+        public async Task<Dictionary<string, List<TransactionLimit>>> GetWithdrawalLimits()
+        {
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+
+            return await HttpWorker.QueryPrivateAsync<Dictionary<string, List<TransactionLimit>>>("/Private/GetWithdrawalLimits", data).ConfigureAwait(false);
         }
 
         #endregion //Private API
