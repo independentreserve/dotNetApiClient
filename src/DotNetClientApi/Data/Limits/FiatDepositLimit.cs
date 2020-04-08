@@ -10,8 +10,13 @@ namespace IndependentReserve.DotNetClientApi.Data.Limits
         public string DepositType { get; set; }
 
         /// <summary>
+        /// Maximum possible deposit amount.
+        /// </summary>
+        public decimal MaxTransactionAmount { get; set; }
+        
+        /// <summary>
         /// Automatic approval limits
         /// </summary>
-        public List<TransactionLimit> Limits { get; set; }
+        public List<DepositLimit> Limits { get; set; }
     }
 }

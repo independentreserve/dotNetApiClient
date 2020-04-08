@@ -1229,13 +1229,13 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<DepositLimits>("/Private/GetDepositLimits", data).ConfigureAwait(false);
         }
 
-        public async Task<Dictionary<string, List<TransactionLimit>>> GetWithdrawalLimits()
+        public async Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits()
         {
             dynamic data = new ExpandoObject();
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
 
-            return await HttpWorker.QueryPrivateAsync<Dictionary<string, List<TransactionLimit>>>("/Private/GetWithdrawalLimits", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Dictionary<string, List<WithdrawalLimit>>>("/Private/GetWithdrawalLimits", data).ConfigureAwait(false);
         }
 
         #endregion //Private API

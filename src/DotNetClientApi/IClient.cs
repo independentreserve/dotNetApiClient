@@ -91,6 +91,6 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<DepositFee>> GetDepositFees();
 
         Task<DepositLimits> GetDepositLimits();
-        Task<Dictionary<string, List<TransactionLimit>>> GetWithdrawalLimits();
+        Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
     }
 }
