@@ -982,9 +982,9 @@ namespace IndependentReserve.DotNetClientApi
         /// Marks digital currency deposit address to sync with blockchain and update balance
         /// </summary>
         /// <param name="depositAddress">Digital currency deposit address to sync</param>
-        /// <param name="primaryCurrency">Optional primary currency</param>
+        /// <param name="primaryCurrency">Primary currency code</param>
         /// <returns>A DigitalCurrencyDepositAddress object</returns>
-        public async Task<DigitalCurrencyDepositAddress> SynchDigitalCurrencyDepositAddressWithBlockchainAsync(string depositAddress, CurrencyCode? primaryCurrency = null)
+        public async Task<DigitalCurrencyDepositAddress> SynchDigitalCurrencyDepositAddressWithBlockchainAsync(string depositAddress, CurrencyCode primaryCurrency)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -993,10 +993,7 @@ namespace IndependentReserve.DotNetClientApi
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
             data.depositAddress = depositAddress;
-            if (primaryCurrency.HasValue)
-            {
-                data.primaryCurrencyCode = primaryCurrency.ToString();
-            }
+            data.primaryCurrencyCode = primaryCurrency.ToString();
 
             return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/SynchDigitalCurrencyDepositAddressWithBlockchain", data).ConfigureAwait(false);
         }
