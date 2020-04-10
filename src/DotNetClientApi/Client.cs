@@ -970,7 +970,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="depositAddress">Digital currency deposit address to sync</param>
         /// <param name="primaryCurrency">Optional primary currency</param>
         /// <returns>A DigitalCurrnecyDepositAddress object</returns>
-        public DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress, CurrencyCode? primaryCurrency = null)
+        public DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress, CurrencyCode primaryCurrency)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
