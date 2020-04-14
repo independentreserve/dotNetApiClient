@@ -129,6 +129,8 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetExchangeStatus,
             MethodMetadata.GetWithdrawalFees,
             MethodMetadata.GetDepositFees,
+            MethodMetadata.GetWithdrawalLimits,
+            MethodMetadata.GetDepositLimits,
         };
 
         /// <summary>

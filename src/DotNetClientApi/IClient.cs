@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Limits;
 
 namespace IndependentReserve.DotNetClientApi
 {
@@ -88,5 +89,8 @@ namespace IndependentReserve.DotNetClientApi
         
         Task<Dictionary<string, decimal>> GetWithdrawalFees();
         Task<IEnumerable<DepositFee>> GetDepositFees();
+
+        Task<DepositLimits> GetDepositLimits();
+        Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
     }
 }
