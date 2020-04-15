@@ -66,5 +66,7 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Order fee percent
         /// </summary>
         public decimal FeePercent { get; set; }
+
+        public string VolumeCurrencyType { get; set; }
     }
 }
