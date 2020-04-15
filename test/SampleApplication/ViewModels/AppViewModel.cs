@@ -30,6 +30,7 @@ namespace SampleApplication.ViewModels
         private OrderType _marketOrderType;
         private decimal? _limitOrderPrice;
         private decimal? _orderVolume;
+        private bool _hasFiatVolume;
         private string _orderGuid;
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
@@ -54,6 +55,7 @@ namespace SampleApplication.ViewModels
             _marketOrderType = OrderType.MarketOffer;
             _limitOrderPrice = 500;
             _orderVolume = 0.1m;
+            _hasFiatVolume = false;
             _orderGuid = string.Empty;
             _fromTimestampUtc = new DateTime(2014, 8, 1);
             _toTimestampUtc = null;
@@ -350,6 +352,19 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _orderVolume) return;
                 _orderVolume = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// Method parameter - order volume - used by private API method PlaceMarketOrder
+        /// </summary>
+        public bool HasFiatVolume
+        {
+            get { return _hasFiatVolume; }
+            set
+            {
+                if (value == _hasFiatVolume) return;
+                _hasFiatVolume = value;
                 OnPropertyChanged();
             }
         }
