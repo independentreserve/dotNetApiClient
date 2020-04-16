@@ -66,5 +66,20 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Order fee percent
         /// </summary>
         public decimal FeePercent { get; set; }
+
+        /// <summary>
+        /// <see cref="OriginalVolumeCurrencyType"/> volume of order
+        /// </summary>
+        public decimal OriginalVolume { get; set; }
+
+        /// <summary>
+        /// The order's <see cref="OriginalVolumeCurrencyType"/> volume outstanding in 
+        /// </summary>
+        public decimal? OriginalOutstanding { get; set; }
+
+        /// <summary>
+        /// Volume currency discriminator. Possible values 'Primary', 'Secondary' 
+        /// </summary>
+        public string OriginalVolumeCurrencyType { get; set; }
     }
 }

@@ -67,6 +67,9 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// </summary>
         public decimal FeePercent { get; set; }
 
+        /// <summary>
+        /// Volume currency discriminator. Possible values 'Primary', 'Secondary' 
+        /// </summary>
         public string VolumeCurrencyType { get; set; }
     }
 }
