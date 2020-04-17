@@ -11,12 +11,12 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Timestamp in utc when this order was created
         /// </summary>
         public DateTime CreatedTimestampUtc { get; set; }
-        
+
         /// <summary>
         /// Order type
         /// </summary>
         public OrderType OrderType { get; set; }
-        
+
         /// <summary>
         /// Volume of order
         /// </summary>
@@ -41,22 +41,22 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// The order's total value (sum of executed trades values).
         /// </summary>
         public decimal? Value { get; set; }
-        
+
         /// <summary>
         /// The order's status
         /// </summary>
         public OrderStatus Status { get; set; }
-        
+
         /// <summary>
         /// The order's guid
         /// </summary>
         public Guid OrderGuid { get; set; }
-        
+
         /// <summary>
         /// Order's digital currency
         /// </summary>
         public CurrencyCode PrimaryCurrencyCode { get; set; }
-        
+
         /// <summary>
         /// Order's fiat currency
         /// </summary>
@@ -67,19 +67,6 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// </summary>
         public decimal FeePercent { get; set; }
 
-        /// <summary>
-        /// <see cref="OriginalVolumeCurrencyType"/> volume of order
-        /// </summary>
-        public decimal OriginalVolume { get; set; }
-
-        /// <summary>
-        /// The order's <see cref="OriginalVolumeCurrencyType"/> volume outstanding in 
-        /// </summary>
-        public decimal? OriginalOutstanding { get; set; }
-
-        /// <summary>
-        /// Volume currency discriminator. Possible values 'Primary', 'Secondary' 
-        /// </summary>
-        public string OriginalVolumeCurrencyType { get; set; }
+        public BankOrderVolume Original { get; set; }
     }
 }
