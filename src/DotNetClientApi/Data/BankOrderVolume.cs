@@ -13,8 +13,8 @@
         public decimal? Outstanding { get; set; }
 
         /// <summary>
-        /// Volume currency discriminator. Possible values 'Primary', 'Secondary' 
+        /// Volume currency discriminator. 
         /// </summary>
-        public string VolumeCurrencyType { get; set; }
+        public CurrencyType VolumeCurrencyType { get; set; }
     }
 }

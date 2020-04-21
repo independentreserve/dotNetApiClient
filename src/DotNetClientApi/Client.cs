@@ -472,14 +472,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">The fiat currency of market order</param>
         /// <param name="orderType">The type of market order</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
-        /// <param name="hasFiatVolume">The flag indicating that the order is fiat based. Meaning that a customers want's to buy (sell) as much Bitcoins (or any other crypto) as possible for his given $volume.</param>
+        /// <param name="volumeCurrencyType">Volume currency discriminator</param>
         /// <returns>newly created limit order</returns>
-        public BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, bool? hasFiatVolume = null)
+        public BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return PlaceMarketOrderAsync(primaryCurrency, secondaryCurrency, orderType, volume, hasFiatVolume).Result;
+            return PlaceMarketOrderAsync(primaryCurrency, secondaryCurrency, orderType, volume, volumeCurrencyType).Result;
         }
 
         /// <summary>
@@ -489,9 +489,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">The fiat currency of market order</param>
         /// <param name="orderType">The type of market order</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
-        /// <param name="hasFiatVolume">The flag indicating that the order is fiat based. Meaning that a customers want's to buy (sell) as much Bitcoins (or any other crypto) as possible for his given $volume.</param>
+        /// <param name="volumeCurrencyType">Volume currency discriminator</param>
         /// <returns>newly created limit order</returns>
-        public async Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, bool? hasFiatVolume = null)
+        public async Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -504,9 +504,9 @@ namespace IndependentReserve.DotNetClientApi
             data.orderType = orderType.ToString();
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
 
-            if (hasFiatVolume.HasValue)
+            if (volumeCurrencyType.HasValue)
             {
-                data.hasFiatVolume = hasFiatVolume.Value.ToString();
+                data.volumeCurrencyType = volumeCurrencyType.Value.ToString();
             }
 
             return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/PlaceMarketOrder", data).ConfigureAwait(false);

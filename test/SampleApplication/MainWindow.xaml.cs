@@ -151,7 +151,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.PlaceMarketOrder)
                     {
-                        await client.PlaceMarketOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MarketOrderType, ViewModel.OrderVolume ?? 0, ViewModel.HasFiatVolume);
+                        await client.PlaceMarketOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MarketOrderType, ViewModel.OrderVolume ?? 0, ViewModel.IsFiatBasedOrder ? CurrencyType.Secondary : CurrencyType.Primary);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrder)
                     {

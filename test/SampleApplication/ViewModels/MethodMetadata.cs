@@ -126,7 +126,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "PlaceMarketOrder",
                            Description = "PlaceMarketOrder",
-                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "marketOrderType", "orderVolume", "hasFiatVolume" }
+                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "marketOrderType", "orderVolume", "isFiatBasedOrder" }
                        };
             }
         }
