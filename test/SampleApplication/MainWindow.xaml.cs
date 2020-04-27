@@ -241,6 +241,14 @@ namespace SampleApplication
                     {
                         await client.GetDepositFees();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDepositLimits)
+                    {
+                        await client.GetDepositLimits();
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetWithdrawalLimits)
+                    {
+                        await client.GetWithdrawalLimits();
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

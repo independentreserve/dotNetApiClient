@@ -387,6 +387,23 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata GetDepositLimits =>
+            new MethodMetadata()
+            {
+                Name = "GetDepositLimits",
+                Description = "GetDepositLimits",
+                Parameters = new string[] { }
+            };
+
+
+        public static MethodMetadata GetWithdrawalLimits =>
+            new MethodMetadata()
+            {
+                Name = "GetWithdrawalLimits",
+                Description = "GetWithdrawalLimits",
+                Parameters = new string[] { }
+            };
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;
