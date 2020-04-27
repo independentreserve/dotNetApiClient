@@ -11,12 +11,12 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Timestamp in utc when this order was created
         /// </summary>
         public DateTime CreatedTimestampUtc { get; set; }
-        
+
         /// <summary>
         /// Order type
         /// </summary>
         public OrderType OrderType { get; set; }
-        
+
         /// <summary>
         /// Volume of order
         /// </summary>
@@ -41,22 +41,22 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// The order's total value (sum of executed trades values).
         /// </summary>
         public decimal? Value { get; set; }
-        
+
         /// <summary>
         /// The order's status
         /// </summary>
         public OrderStatus Status { get; set; }
-        
+
         /// <summary>
         /// The order's guid
         /// </summary>
         public Guid OrderGuid { get; set; }
-        
+
         /// <summary>
         /// Order's digital currency
         /// </summary>
         public CurrencyCode PrimaryCurrencyCode { get; set; }
-        
+
         /// <summary>
         /// Order's fiat currency
         /// </summary>
@@ -66,5 +66,7 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Order fee percent
         /// </summary>
         public decimal FeePercent { get; set; }
+
+        public BankOrderVolume Original { get; set; }
     }
 }
