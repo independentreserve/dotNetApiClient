@@ -115,8 +115,11 @@
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding OrderVolume}"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=volumeCurrencyType}">
-                    <TextBlock Style="{StaticResource Label}">Is fiat-based order:</TextBlock>
-                    <CheckBox IsChecked="{Binding VolumeCurrencyType}" VerticalAlignment="Center"></CheckBox>
+                    <TextBlock Style="{StaticResource Label}">Volume currency type:</TextBlock>
+                    <ComboBox SelectedValue="{Binding VolumeCurrencyType}" SelectedValuePath="Tag">
+                        <ComboBoxItem Tag="Primary" IsSelected="True">Primary</ComboBoxItem>
+                        <ComboBoxItem Tag="Secondary">Secondary</ComboBoxItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=orderGuid}">
                     <TextBlock Style="{StaticResource Label}">Order guid:</TextBlock>
