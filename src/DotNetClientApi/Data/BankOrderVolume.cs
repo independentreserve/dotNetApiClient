@@ -8,7 +8,7 @@
         public decimal Volume { get; set; }
 
         /// <summary>
-        /// The order's <see cref="OriginalVolumeCurrencyType"/> volume outstanding in 
+        /// The order's volume outstanding in <see cref="VolumeCurrencyType"/> currency
         /// </summary>
         public decimal? Outstanding { get; set; }
 

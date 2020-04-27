@@ -30,7 +30,7 @@ namespace SampleApplication.ViewModels
         private OrderType _marketOrderType;
         private decimal? _limitOrderPrice;
         private decimal? _orderVolume;
-        private bool _isFiatBasedOrder;
+        private CurrencyType _volumeCurrencyType;
         private string _orderGuid;
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
@@ -55,7 +55,7 @@ namespace SampleApplication.ViewModels
             _marketOrderType = OrderType.MarketOffer;
             _limitOrderPrice = 500;
             _orderVolume = 0.1m;
-            _isFiatBasedOrder = false;
+            _volumeCurrencyType = CurrencyType.Primary;
             _orderGuid = string.Empty;
             _fromTimestampUtc = new DateTime(2014, 8, 1);
             _toTimestampUtc = null;
@@ -358,13 +358,13 @@ namespace SampleApplication.ViewModels
 
         /// Method parameter - order volume - used by private API method PlaceMarketOrder
         /// </summary>
-        public bool IsFiatBasedOrder
+        public CurrencyType VolumeCurrencyType
         {
-            get { return _isFiatBasedOrder; }
+            get { return _volumeCurrencyType; }
             set
             {
-                if (value == _isFiatBasedOrder) return;
-                _isFiatBasedOrder = value;
+                if (value == _volumeCurrencyType) return;
+                _volumeCurrencyType = value;
                 OnPropertyChanged();
             }
         }
