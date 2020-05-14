@@ -976,7 +976,7 @@ namespace IndependentReserve.DotNetClientApi
         /// Marks digital currency deposit address to sync with blockchain and update balance
         /// </summary>
         /// <param name="depositAddress">Digital currency deposit address to sync</param>
-        /// <param name="primaryCurrency">Optional primary currency</param>
+        /// <param name="primaryCurrency">Primary currency</param>
         /// <returns>A DigitalCurrnecyDepositAddress object</returns>
         public DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress, CurrencyCode primaryCurrency)
         {
@@ -1049,7 +1049,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">withdrawal amount</param>
         /// <param name="withdrawalAddress">digital address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
-        /// <param name="primaryCurrency">optional primary currency</param>
+        /// <param name="primaryCurrency">primary currency</param>
         [Obsolete("Use overload that accepts DigitalWithdrawalRequest instead.")]
         public CryptoWithdrawal WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency)
         {
