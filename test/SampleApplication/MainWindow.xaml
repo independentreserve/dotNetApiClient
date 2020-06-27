@@ -54,8 +54,8 @@
                         <ComboBoxItem Tag="Gnt">Gnt</ComboBoxItem>
                         <ComboBoxItem Tag="Etc">Etc</ComboBoxItem>
                         <ComboBoxItem Tag="Usdt">Usdt</ComboBoxItem>
-                        <ComboBoxItem Tag="Usdt">Pmgt</ComboBoxItem>
-                        <ComboBoxItem Tag="Usdt">Link</ComboBoxItem>
+                        <ComboBoxItem Tag="Pmgt">Pmgt</ComboBoxItem>
+                        <ComboBoxItem Tag="Link">Link</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
@@ -81,8 +81,8 @@
                         <ComboBoxItem Tag="Gnt">Gnt</ComboBoxItem>
                         <ComboBoxItem Tag="Etc">Etc</ComboBoxItem>
                         <ComboBoxItem Tag="Usdt">Usdt</ComboBoxItem>
-                        <ComboBoxItem Tag="Usdt">Pmgt</ComboBoxItem>
-                        <ComboBoxItem Tag="Usdt">Link</ComboBoxItem>
+                        <ComboBoxItem Tag="Pmgt">Pmgt</ComboBoxItem>
+                        <ComboBoxItem Tag="Link">Link</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
