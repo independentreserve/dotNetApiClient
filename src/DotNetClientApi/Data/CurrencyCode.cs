@@ -24,6 +24,8 @@
         Gnt=16,
         Etc=17,
         Usdt=18,
-        Bsv=19
+        Bsv=19,
+        Pmgt=20,
+        Link=21
     }
 }
