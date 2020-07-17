@@ -285,6 +285,20 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        //GetFiatWithdrawal()
+        public static MethodMetadata GetFiatWithdrawal
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetFiatWithdrawal",
+                    Description = "GetFiatWithdrawal",
+                    Parameters = new[] { "transactionGuid" }
+                };
+            }
+        }
+
         //SynchDigitalCurrencyDepositAddressWithBlockchain()
         public static MethodMetadata SynchDigitalCurrencyDepositAddressWithBlockchain
         {
@@ -313,7 +327,7 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        //WithdrawDigitalCurrency()
+        //GetDigitalCurrencyWithdrawal()
         public static MethodMetadata GetDigitalCurrencyWithdrawal
         {
             get
