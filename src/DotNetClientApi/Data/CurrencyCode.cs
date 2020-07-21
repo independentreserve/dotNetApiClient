@@ -26,6 +26,9 @@
         Usdt=18,
         Bsv=19,
         Pmgt=20,
-        Link=21
+        Link=21,
+        Usdc=22,
+        Mkr=23,
+        Dai=24
     }
 }
