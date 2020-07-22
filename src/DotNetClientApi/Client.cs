@@ -1158,6 +1158,26 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Get fiat withdrawal details
+        /// </summary>
+        /// <param name="fiatWithdrawalRequestGuid">withdrawal guid</param>
+        /// <returns></returns>
+        public async Task<FiatWithdrawalRequest> GetFiatWithdrawalAsync(Guid fiatWithdrawalRequestGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+
+            data.fiatWithdrawalRequestGuid = fiatWithdrawalRequestGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/GetFiatWithdrawal", data).ConfigureAwait(false);
+        }
+
+
+        /// <summary>
         /// Retrieves recent trades made by user.
         /// </summary>
         /// <param name="pageIndex">1 based page index</param>

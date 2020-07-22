@@ -198,6 +198,10 @@ namespace SampleApplication
                     {
                         await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName, ViewModel.Comment);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatWithdrawal)
+                    {
+                        await client.GetFiatWithdrawalAsync(ParseGuid(ViewModel.TransactionGuid));
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain)
                     {
                         await client.SynchDigitalCurrencyDepositAddressWithBlockchainAsync(ViewModel.Address, ViewModel.PrimaryCurrency);
