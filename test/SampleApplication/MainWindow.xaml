@@ -56,6 +56,9 @@
                         <ComboBoxItem Tag="Usdt">Usdt</ComboBoxItem>
                         <ComboBoxItem Tag="Pmgt">Pmgt</ComboBoxItem>
                         <ComboBoxItem Tag="Link">Link</ComboBoxItem>
+                        <ComboBoxItem Tag="Usdc">Usdc</ComboBoxItem>
+                        <ComboBoxItem Tag="Mkr">Mkr</ComboBoxItem>
+                        <ComboBoxItem Tag="Dai">Dai</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
@@ -83,6 +86,9 @@
                         <ComboBoxItem Tag="Usdt">Usdt</ComboBoxItem>
                         <ComboBoxItem Tag="Pmgt">Pmgt</ComboBoxItem>
                         <ComboBoxItem Tag="Link">Link</ComboBoxItem>
+                        <ComboBoxItem Tag="Usdc">Usdc</ComboBoxItem>
+                        <ComboBoxItem Tag="Mkr">Mkr</ComboBoxItem>
+                        <ComboBoxItem Tag="Dai">Dai</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
