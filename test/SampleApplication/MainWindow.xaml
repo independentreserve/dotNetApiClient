@@ -59,7 +59,7 @@
                         <ComboBoxItem Tag="Usdc">Usdc</ComboBoxItem>
                         <ComboBoxItem Tag="Mkr">Mkr</ComboBoxItem>
                         <ComboBoxItem Tag="Dai">Dai</ComboBoxItem>
-                        <ComboBoxItem Tag="Comp">Compound</ComboBoxItem>
+                        <ComboBoxItem Tag="Comp">Comp</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
@@ -90,7 +90,7 @@
                         <ComboBoxItem Tag="Usdc">Usdc</ComboBoxItem>
                         <ComboBoxItem Tag="Mkr">Mkr</ComboBoxItem>
                         <ComboBoxItem Tag="Dai">Dai</ComboBoxItem>
-                        <ComboBoxItem Tag="Comp">Compound</ComboBoxItem>
+                        <ComboBoxItem Tag="Comp">Comp</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
