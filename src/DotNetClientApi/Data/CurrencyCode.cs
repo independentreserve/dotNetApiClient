@@ -29,6 +29,7 @@
         Link=21,
         Usdc=22,
         Mkr=23,
-        Dai=24
+        Dai=24,
+        Comp=25,
     }
 }
