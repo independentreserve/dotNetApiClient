@@ -14,8 +14,10 @@ namespace IndependentReserve.DotNetClientApi
 {
     class HttpWorker : IDisposable, IHttpWorker
     {
-
         private HttpClient _client;
+        
+        static string _version;
+
         public string ApiSecret { get; set; }
 
         public string LastRequestUrl { get; private set; }
@@ -23,10 +25,18 @@ namespace IndependentReserve.DotNetClientApi
         public string LastRequestParameters { get; private set; }
         public string LastResponseRaw { get; private set; }
 
+        
+
+        static HttpWorker()
+        {
+            _version = typeof(HttpWorker).Assembly.GetName().Version.ToString();
+        }
+
         public HttpWorker(Uri baseUri)
         {
             _client = new HttpClient();
             _client.BaseAddress = baseUri;
+            _client.DefaultRequestHeaders.UserAgent.ParseAdd("irDotNetClient " + _version);
         }
 
         /// <summary>
