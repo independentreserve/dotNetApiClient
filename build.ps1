@@ -88,6 +88,12 @@ function Pack-Nuget{
 
 function Run-Tests{
 
+	if ($env:IR_TESTS_SKIP -eq $true) 
+    {
+      Write-Host "Tests execution disabled via env:IR_TESTS_SKIP flag"
+	  return
+    }
+
     # ensure folder is clean and exists
     $artifactDir = "$PSScriptRoot\_artifacts"
     Get-ChildItem -Path $artifactDir -Recurse | Remove-Item -force -recurse
@@ -124,9 +130,9 @@ function Run-Tests{
 }
 
 
-Find-Nuget
-Restore-Packages
-Find-MsBuild
-Build-Solution
+#Find-Nuget
+#Restore-Packages
+#Find-MsBuild
+#Build-Solution
 Run-Tests
-Pack-Nuget
+#Pack-Nuget
