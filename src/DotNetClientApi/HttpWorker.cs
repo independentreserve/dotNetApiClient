@@ -44,6 +44,7 @@ namespace IndependentReserve.DotNetClientApi
             _client.BaseAddress = baseUri;
             _client.DefaultRequestHeaders.UserAgent.ParseAdd("irDotNetClient " + _version);
             _client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip");
+            _client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("deflate");
         }
 
         /// <summary>
