@@ -37,7 +37,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             HttpClientHandler handler = new HttpClientHandler
             {
-                AutomaticDecompression = DecompressionMethods.GZip
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             };
 
             _client = new HttpClient(handler);
