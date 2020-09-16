@@ -130,9 +130,9 @@ function Run-Tests{
 }
 
 
-#Find-Nuget
-#Restore-Packages
-#Find-MsBuild
-#Build-Solution
+Find-Nuget
+Restore-Packages
+Find-MsBuild
+Build-Solution
 Run-Tests
-#Pack-Nuget
+Pack-Nuget
