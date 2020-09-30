@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
+using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
 {
@@ -69,8 +70,12 @@ namespace IndependentReserve.DotNetClientApi
         Task<BankOrder> PlaceLimitOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume);
         BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null);
         Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null);
+
+        Task<IEnumerable<FiatBankAccount>> GetFiatBankAccountsAsync();
         FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment);
         Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment);
+        Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid bankAccountGuid, string comment);
+        
         BitcoinDepositAddress SynchBitcoinAddressWithBlockchain(string bitcoinAddress);
         Task<BitcoinDepositAddress> SynchBitcoinAddressWithBlockchainAsync(string bitcoinAddress);
         DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress, CurrencyCode primaryCurrency);

@@ -194,9 +194,17 @@ namespace SampleApplication
                     {
                         await client.GetDigitalCurrencyDepositAddressesAsync(ViewModel.PrimaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatBankAccounts)
+                    {
+                        await client.GetFiatBankAccountsAsync();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.RequestFiatWithdrawal)
                     {
                         await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName, ViewModel.Comment);
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawFiatCurrency)
+                    {
+                        await client.WithdrawFiatCurrencyAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ParseGuid(ViewModel.BankAccountGuid), ViewModel.Comment);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatWithdrawal)
                     {

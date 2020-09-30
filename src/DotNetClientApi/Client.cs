@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
+using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
 {
@@ -1118,9 +1119,25 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
-        /// Creates a withdrawal request for a Fiat currency withdrawal from your Independent Reserve account to an external bank account
+        /// Get list of external bank accounts
         /// </summary>
-        /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only USD accounts are supported)</param>
+        /// <returns>list of pre-configured external bank accounts</returns>
+        public async Task<IEnumerable<FiatBankAccount>> GetFiatBankAccountsAsync()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<FiatBankAccount>>("/Private/GetFiatBankAccounts", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates an instant withdrawal from your Independent Reserve account to an external bank account
+        /// </summary>
+        /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from</param>
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
         /// <param name="comment">withdrawal comment</param>
@@ -1136,7 +1153,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Creates a withdrawal request for a Fiat currency withdrawal from your Independent Reserve account to an external bank account
         /// </summary>
-        /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only USD accounts are supported)</param>
+        /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from</param>
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
         /// <param name="comment">withdrawal comment</param>
@@ -1156,6 +1173,31 @@ namespace IndependentReserve.DotNetClientApi
 
             return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", data).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Creates an instant withdrawal request for a Fiat currency withdrawal from your Independent Reserve account to an external bank account
+        /// </summary>
+        /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only AUD accounts are supported)</param>
+        /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
+        /// <param name="bankAccountGuid">bank account guid</param>
+        /// <param name="comment">withdrawal user comment</param>
+        /// <returns>A FiatWithdrawalRequest object</returns>
+        public async Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid fiatBankAccountGuid, string comment)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.withdrawalAmount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
+            data.fiatBankAccountGuid = fiatBankAccountGuid.ToString();
+            data.comment = comment;
+
+            return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/WithdrawFiatCurrency", data).ConfigureAwait(false);
+        }
+
 
         /// <summary>
         /// Get fiat withdrawal details
