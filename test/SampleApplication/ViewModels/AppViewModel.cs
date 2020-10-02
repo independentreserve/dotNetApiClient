@@ -38,6 +38,7 @@ namespace SampleApplication.ViewModels
         private decimal _withdrawalAmount;
         private string _withdrawalBankAccountName;
         private string _bankAccountGuid;
+        private bool _useNpp;
         private string _address;
         private string _tag;
         private string _comment;
@@ -469,6 +470,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _bankAccountGuid) return;
                 _bankAccountGuid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - UseNpp - used by private API method WithdrawFiatCurrency
+        /// </summary>
+        public bool UseNpp
+        {
+            get { return _useNpp; }
+            set
+            {
+                if (value == _useNpp) return;
+                _useNpp = value;
                 OnPropertyChanged();
             }
         }

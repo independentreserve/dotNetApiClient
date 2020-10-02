@@ -1182,7 +1182,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="bankAccountGuid">bank account guid</param>
         /// <param name="comment">withdrawal user comment</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public async Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid fiatBankAccountGuid, string comment)
+        public async Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid fiatBankAccountGuid, bool useNpp, string comment)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1193,6 +1193,7 @@ namespace IndependentReserve.DotNetClientApi
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.withdrawalAmount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
             data.fiatBankAccountGuid = fiatBankAccountGuid.ToString();
+            data.useNpp = useNpp.ToString(CultureInfo.InvariantCulture);
             data.comment = comment;
 
             return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/WithdrawFiatCurrency", data).ConfigureAwait(false);

@@ -204,7 +204,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawFiatCurrency)
                     {
-                        await client.WithdrawFiatCurrencyAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ParseGuid(ViewModel.BankAccountGuid), ViewModel.Comment);
+                        await client.WithdrawFiatCurrencyAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ParseGuid(ViewModel.BankAccountGuid), ViewModel.UseNpp, ViewModel.Comment);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatWithdrawal)
                     {

@@ -307,7 +307,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "WithdrawFiatCurrency",
                     Description = "WithdrawFiatCurrency",
-                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "bankAccountGuid", "comment" }
+                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "bankAccountGuid", "useNpp", "comment" }
                 };
             }
         }
