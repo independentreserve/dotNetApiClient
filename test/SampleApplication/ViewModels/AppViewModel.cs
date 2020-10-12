@@ -37,6 +37,8 @@ namespace SampleApplication.ViewModels
         private string _accountGuid;
         private decimal _withdrawalAmount;
         private string _withdrawalBankAccountName;
+        private string _bankAccountGuid;
+        private bool _useNpp;
         private string _address;
         private string _tag;
         private string _comment;
@@ -123,7 +125,9 @@ namespace SampleApplication.ViewModels
             MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
             MethodMetadata.WithdrawDigitalCurrency,
             MethodMetadata.GetDigitalCurrencyWithdrawal,
+            MethodMetadata.GetFiatBankAccounts,
             MethodMetadata.RequestFiatWithdrawal,
+            MethodMetadata.WithdrawFiatCurrency,
             MethodMetadata.GetFiatWithdrawal,
             MethodMetadata.GetTrades,
             MethodMetadata.GetTrades2,
@@ -452,6 +456,34 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _withdrawalBankAccountName) return;
                 _withdrawalBankAccountName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - BankAccountGuid - used by private API method WithdrawFiatCurrency
+        /// </summary>
+        public string BankAccountGuid
+        {
+            get { return _bankAccountGuid; }
+            set
+            {
+                if (value == _bankAccountGuid) return;
+                _bankAccountGuid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - UseNpp - used by private API method WithdrawFiatCurrency
+        /// </summary>
+        public bool UseNpp
+        {
+            get { return _useNpp; }
+            set
+            {
+                if (value == _useNpp) return;
+                _useNpp = value;
                 OnPropertyChanged();
             }
         }

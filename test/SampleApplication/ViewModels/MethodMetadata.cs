@@ -277,11 +277,38 @@ namespace SampleApplication.ViewModels
             get
             {
                 return new MethodMetadata()
+                {
+                    Name = "RequestFiatWithdrawal",
+                    Description = "RequestFiatWithdrawal",
+                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "withdrawalBankAccountName", "comment" }
+                };
+            }
+        }
+
+        //GetFiatBankAccounts()
+        public static MethodMetadata GetFiatBankAccounts
+        {
+            get
+            {
+                return new MethodMetadata()
                        {
-                           Name = "RequestFiatWithdrawal",
-                           Description = "RequestFiatWithdrawal",
-                           Parameters = new[] {"secondaryCurrency", "withdrawalAmount", "withdrawalBankAccountName", "comment"}
+                           Name = "GetFiatBankAccounts",
+                           Description = "GetFiatBankAccounts",
+                           Parameters = Array.Empty<string>()
                        };
+            }
+        }
+
+        public static MethodMetadata WithdrawFiatCurrency
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "WithdrawFiatCurrency",
+                    Description = "WithdrawFiatCurrency",
+                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "bankAccountGuid", "useNpp", "comment" }
+                };
             }
         }
 

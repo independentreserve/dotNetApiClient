@@ -193,6 +193,16 @@
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding WithdrawalBankAccountName}"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=bankAccountGuid}">
+                    <TextBlock Style="{StaticResource Label}">Bank Account guid:</TextBlock>
+                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding BankAccountGuid}" Width="250"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=useNpp}">
+                    <TextBlock Style="{StaticResource Label}">Send instantly using NPP</TextBlock>
+                    <CheckBox IsChecked="{Binding UseNpp}" VerticalAlignment="Center"></CheckBox>
+                </StackPanel>
+
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=address}">
                     <TextBlock Style="{StaticResource Label}">Digital Currency Address:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding Address}" Width="250"></TextBox>
