@@ -31,6 +31,9 @@
         Mkr=23,
         Dai=24,
         Comp=25,
-        Snx=26
+        Snx=26,
+        Yfi=27,
+        Aave=28,
+        Knc=29
     }
 }

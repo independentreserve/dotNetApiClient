@@ -61,6 +61,9 @@
                         <ComboBoxItem Tag="Dai">Dai</ComboBoxItem>
                         <ComboBoxItem Tag="Comp">Comp</ComboBoxItem>
                         <ComboBoxItem Tag="Snx">Snx</ComboBoxItem>
+                        <ComboBoxItem Tag="Yfi">Yfi</ComboBoxItem>
+                        <ComboBoxItem Tag="Aave">Aave</ComboBoxItem>
+                        <ComboBoxItem Tag="Knc">Knc</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
@@ -93,6 +96,9 @@
                         <ComboBoxItem Tag="Dai">Dai</ComboBoxItem>
                         <ComboBoxItem Tag="Comp">Comp</ComboBoxItem>
                         <ComboBoxItem Tag="Snx">Snx</ComboBoxItem>
+                        <ComboBoxItem Tag="Yfi">Yfi</ComboBoxItem>
+                        <ComboBoxItem Tag="Aave">Aave</ComboBoxItem>
+                        <ComboBoxItem Tag="Knc">Knc</ComboBoxItem>
                         <!--secondaries-->
                         <ComboBoxItem Tag="Usd" IsSelected="True">Usd</ComboBoxItem>
                         <ComboBoxItem Tag="Aud">Aud</ComboBoxItem>
