@@ -138,6 +138,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetDepositFees,
             MethodMetadata.GetWithdrawalLimits,
             MethodMetadata.GetDepositLimits,
+            MethodMetadata.GetOrderMinimumVolumes
         };
 
         /// <summary>

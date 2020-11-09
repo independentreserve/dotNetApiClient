@@ -261,6 +261,10 @@ namespace SampleApplication
                     {
                         await client.GetWithdrawalLimits();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderMinimumVolumes)
+                    {
+                        await client.GetOrderMinimumVolumes();
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }
