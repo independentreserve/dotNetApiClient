@@ -404,7 +404,7 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
-        /// Returns exchange status for all currency codes
+        /// Returns withdrawal fees for all currency codes
         /// </summary>
         public async Task<Dictionary<string, decimal>> GetWithdrawalFees()
         {
@@ -413,12 +413,21 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
-        /// Returns exchange status for all currency codes
+        /// Returns deposit fees for all currency codes
         /// </summary>
         public async Task<IEnumerable<DepositFee>> GetDepositFees()
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<IEnumerable<DepositFee>>("/Public/GetDepositFees");
+        }
+
+        /// <summary>
+        /// Returns minimum volumes for orders all currency codes
+        /// </summary>
+        public async Task<Dictionary<string, decimal>> GetOrderMinimumVolumes()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<Dictionary<string, decimal>>("/Public/GetOrderMinimumVolumes");
         }
 
         #endregion //Public API

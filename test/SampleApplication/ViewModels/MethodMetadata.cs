@@ -445,6 +445,14 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata GetOrderMinimumVolumes =>
+            new MethodMetadata()
+            {
+                Name = "GetOrderMinimumVolumes",
+                Description = "GetOrderMinimumVolumes",
+                Parameters = new string[] { }
+            };
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;
