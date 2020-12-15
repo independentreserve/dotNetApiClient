@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
 using System.Reflection;
 using System.Windows;
 using IndependentReserve.DotNetClientApi;
@@ -37,7 +38,13 @@ namespace SampleApplication
                     return true;
                 }
 
-                throw new Exception($"SSL Certificate error. Ignore using $env:{envKeyIgnoreSsl}");
+                if (sslPolicyErrors != SslPolicyErrors.None)
+                {
+                    Log.Info($"SSL Certificate error ({sslPolicyErrors}). Ignore using $env:{envKeyIgnoreSsl}");
+                    return false;
+                }
+
+                return true;
             };
 
             Log.Info("Reading credentials");
