@@ -34,6 +34,7 @@
         Snx=26,
         Yfi=27,
         Aave=28,
-        Knc=29
+        Knc=29,
+        Grt = 30
     }
 }
