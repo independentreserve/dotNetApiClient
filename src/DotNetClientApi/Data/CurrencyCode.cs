@@ -35,6 +35,7 @@
         Yfi=27,
         Aave=28,
         Knc=29,
-        Grt = 30
+        Grt = 30,
+        Sgd = 31        
     }
 }
