@@ -72,6 +72,7 @@
     <Compile Include="Converters\MethodParameterToVisibilityConverter.cs" />
     <Compile Include="Config\EnvironmentVariableConfigProvider.cs" />
     <Compile Include="Config\IConfigProvider.cs" />
+    <Compile Include="CurrencyComboBox.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\MethodMetadata.cs" />
@@ -88,6 +89,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
