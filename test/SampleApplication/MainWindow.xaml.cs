@@ -272,6 +272,10 @@ namespace SampleApplication
                     {
                         await client.GetOrderMinimumVolumes();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoWithdrawalFees)
+                    {
+                        await client.GetCryptoWithdrawalFees();
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

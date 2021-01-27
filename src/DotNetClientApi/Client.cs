@@ -430,6 +430,12 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPublicAsync<Dictionary<CurrencyCode, decimal>>("/Public/GetOrderMinimumVolumes");
         }
 
+        public async Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<Dictionary<CurrencyCode, decimal>>("/Public/GetCryptoWithdrawalFees");
+        }
+
         #endregion //Public API
 
         #region Private API

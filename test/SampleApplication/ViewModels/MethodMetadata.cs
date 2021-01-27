@@ -453,6 +453,14 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata GetCryptoWithdrawalFees =>
+            new MethodMetadata()
+            {
+                Name = "GetCryptoWithdrawalFees",
+                Description = "GetCryptoWithdrawalFees",
+                Parameters = new string[] { }
+            };
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;
