@@ -36,6 +36,7 @@
         Aave=28,
         Knc=29,
         Grt = 30,
-        Sgd = 31        
+        Sgd = 31,
+        Dot = 32
     }
 }
