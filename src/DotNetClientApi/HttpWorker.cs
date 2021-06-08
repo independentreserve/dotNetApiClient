@@ -229,7 +229,7 @@ namespace IndependentReserve.DotNetClientApi
         private Exception BuildException(HttpStatusCode responseCode, string message)
         {
             var exception = new Exception(message);
-            exception.Data[Client.ExceptionDataHttpStatusCode] = responseCode.ToString();
+            exception.Data[Client.ExceptionDataHttpStatusCode] = responseCode;
             return exception;
         }
 
