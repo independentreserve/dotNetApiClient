@@ -88,7 +88,7 @@ namespace IndependentReserve.DotNetClientApi
                     throw new Exception(result.Substring(0, 100));
                 }
                 
-                throw new Exception(errorMessage.Message);
+                throw BuildException(response.StatusCode, errorMessage.Message);
             }
 
             return JsonConvert.DeserializeObject<T>(result);
@@ -112,7 +112,7 @@ namespace IndependentReserve.DotNetClientApi
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
-                throw new Exception(errorMessage.Message);
+                throw BuildException(response.StatusCode, errorMessage?.Message);
             }
 
             return JsonConvert.DeserializeObject<T>(result);
@@ -135,7 +135,7 @@ namespace IndependentReserve.DotNetClientApi
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
-                throw new Exception(errorMessage.Message);
+                throw BuildException(response.StatusCode, errorMessage.Message);
             }
         }
 
@@ -224,6 +224,13 @@ namespace IndependentReserve.DotNetClientApi
                 else retval[ix] = (byte)'?';
             }
             return retval;
+        }
+
+        private Exception BuildException(HttpStatusCode responseCode, string message)
+        {
+            var exception = new Exception(message);
+            exception.Data[Client.ExceptionDataHttpStatusCode] = responseCode;
+            return exception;
         }
 
         #region IDisposable

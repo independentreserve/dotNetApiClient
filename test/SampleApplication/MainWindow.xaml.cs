@@ -281,7 +281,13 @@ namespace SampleApplication
                 }
                 catch (Exception ex)
                 {
-                    ViewModel.LastRequestResponse = ex.Message;
+                    ViewModel.LastRequestResponse = string.Empty;
+                    if (ex.Data.Contains(Client.ExceptionDataHttpStatusCode))
+                    {
+                        var statusCode = (HttpStatusCode) ex.Data[Client.ExceptionDataHttpStatusCode];
+                        ViewModel.LastRequestResponse = $"HttpStatusCode=({(int)statusCode}) {statusCode}\r\n";
+                    }
+                    ViewModel.LastRequestResponse += ex.Message;
                 }
 
                 ViewModel.LastRequestUrl = string.Format("{0} {1}", client.LastRequestHttpMethod, client.LastRequestUrl);
