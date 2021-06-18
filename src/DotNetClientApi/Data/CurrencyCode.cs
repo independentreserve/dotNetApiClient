@@ -40,6 +40,7 @@
         Dot = 32,
         Uni = 33,
         Ada = 34,
-        Mtc = 35
+        Matic = 35,
+        Doge = 36,
     }
 }
