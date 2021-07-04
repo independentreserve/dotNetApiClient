@@ -1276,6 +1276,14 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="orderGuid">order guid</param>
         /// <returns>a list of specified order's trades</returns>
+        [Obsolete("Use GetTradesByOrder instead.")]
+        public Task<IEnumerable<TradeDetails>> GetTrades2(Guid orderGuid) => GetTradesByOrder(orderGuid);
+
+        /// <summary>
+        /// Retrieves trades that related to the specified order
+        /// </summary>
+        /// <param name="orderGuid">order guid</param>
+        /// <returns>a list of specified order's trades</returns>
         public async Task<IEnumerable<TradeDetails>> GetTradesByOrder(Guid orderGuid)
         {
             ThrowIfDisposed();
