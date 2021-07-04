@@ -1276,7 +1276,7 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="orderGuid">order guid</param>
         /// <returns>a list of specified order's trades</returns>
-        public async Task<IEnumerable<TradeDetails>> GetTrades2Async(Guid orderGuid)
+        public async Task<IEnumerable<TradeDetails>> GetTradesByOrder(Guid orderGuid)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1286,7 +1286,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.orderGuid = orderGuid.ToString();
 
-            return await HttpWorker.QueryPrivateAsync<IEnumerable<TradeDetails>>("/Private/GetTrades2", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<TradeDetails>>("/Private/GetTradesByOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>

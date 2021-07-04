@@ -382,15 +382,15 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        //GetTrades2(string orderGuid)
-        public static MethodMetadata GetTrades2
+        //GetTradesByOrder(string orderGuid)
+        public static MethodMetadata GetTradesByOrder
         {
             get
             {
                 return new MethodMetadata()
                 {
-                    Name = "GetTrades2",
-                    Description = "GetTrades2",
+                    Name = "GetTradesByOrder",
+                    Description = "GetTradesByOrder",
                     Parameters = new[] { "orderGuid" }
                 };
             }

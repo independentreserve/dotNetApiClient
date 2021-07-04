@@ -130,7 +130,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.WithdrawFiatCurrency,
             MethodMetadata.GetFiatWithdrawal,
             MethodMetadata.GetTrades,
-            MethodMetadata.GetTrades2,
+            MethodMetadata.GetTradesByOrder,
             MethodMetadata.GetBrokerageFees,
             MethodMetadata.GetEvents,
             MethodMetadata.GetExchangeStatus,
