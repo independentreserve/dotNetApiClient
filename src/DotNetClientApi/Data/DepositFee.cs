@@ -14,6 +14,6 @@
         /// <summary>
         /// The deposit fee amount which will be substracted deposit amount.
         /// </summary>
-        public decimal Amount { get; set; }
+        public FeeModel Fee { get; set; }
     }
 }
