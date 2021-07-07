@@ -411,11 +411,11 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
-        public static MethodMetadata GetWithdrawalFees =>
+        public static MethodMetadata GetFiatWithdrawalFees =>
             new MethodMetadata()
             {
-                Name = "GetWithdrawalFees",
-                Description = "GetWithdrawalFees",
+                Name = "GetFiatWithdrawalFees",
+                Description = "GetFiatWithdrawalFees",
                 Parameters = new string[] { }
             };
 

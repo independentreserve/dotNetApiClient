@@ -252,9 +252,9 @@ namespace SampleApplication
                     {
                         await client.GetExchangeStatus();
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetWithdrawalFees)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatWithdrawalFees)
                     {
-                        await client.GetWithdrawalFees();
+                        await client.GetFiatWithdrawalFees();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDepositFees)
                     {

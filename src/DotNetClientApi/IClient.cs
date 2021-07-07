@@ -93,7 +93,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<List<Event>> GetEvents();
         Task<ExchangeStatus> GetExchangeStatus();
         
-        Task<Dictionary<CurrencyCode, decimal>> GetWithdrawalFees();
+        Task<IEnumerable<WithdrawalFee>> GetFiatWithdrawalFees();
         Task<IEnumerable<DepositFee>> GetDepositFees();
         Task<Dictionary<CurrencyCode, decimal>> GetOrderMinimumVolumes();
 

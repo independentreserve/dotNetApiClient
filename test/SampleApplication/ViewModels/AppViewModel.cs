@@ -134,7 +134,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetBrokerageFees,
             MethodMetadata.GetEvents,
             MethodMetadata.GetExchangeStatus,
-            MethodMetadata.GetWithdrawalFees,
+            MethodMetadata.GetFiatWithdrawalFees,
             MethodMetadata.GetDepositFees,
             MethodMetadata.GetWithdrawalLimits,
             MethodMetadata.GetDepositLimits,

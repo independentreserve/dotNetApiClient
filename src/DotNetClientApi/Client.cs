@@ -408,10 +408,10 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Returns withdrawal fees for all currency codes
         /// </summary>
-        public async Task<Dictionary<CurrencyCode, decimal>> GetWithdrawalFees()
+        public async Task<IEnumerable<WithdrawalFee>> GetFiatWithdrawalFees()
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<Dictionary<CurrencyCode, decimal>>("/Public/GetWithdrawalFees");
+            return await HttpWorker.QueryPublicAsync<IEnumerable<WithdrawalFee>>("/Public/GetFiatWithdrawalFees");
         }
 
         /// <summary>
