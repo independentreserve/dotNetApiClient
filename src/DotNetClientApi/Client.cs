@@ -408,10 +408,10 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Returns withdrawal fees for all currency codes
         /// </summary>
-        public async Task<Dictionary<CurrencyCode, decimal>> GetWithdrawalFees()
+        public async Task<IEnumerable<WithdrawalFee>> GetFiatWithdrawalFees()
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<Dictionary<CurrencyCode, decimal>>("/Public/GetWithdrawalFees");
+            return await HttpWorker.QueryPublicAsync<IEnumerable<WithdrawalFee>>("/Public/GetFiatWithdrawalFees");
         }
 
         /// <summary>
@@ -1276,7 +1276,15 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="orderGuid">order guid</param>
         /// <returns>a list of specified order's trades</returns>
-        public async Task<IEnumerable<TradeDetails>> GetTrades2Async(Guid orderGuid)
+        [Obsolete("Use GetTradesByOrder instead.")]
+        public Task<IEnumerable<TradeDetails>> GetTrades2(Guid orderGuid) => GetTradesByOrder(orderGuid);
+
+        /// <summary>
+        /// Retrieves trades that related to the specified order
+        /// </summary>
+        /// <param name="orderGuid">order guid</param>
+        /// <returns>a list of specified order's trades</returns>
+        public async Task<IEnumerable<TradeDetails>> GetTradesByOrder(Guid orderGuid)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1286,7 +1294,7 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.orderGuid = orderGuid.ToString();
 
-            return await HttpWorker.QueryPrivateAsync<IEnumerable<TradeDetails>>("/Private/GetTrades2", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<TradeDetails>>("/Private/GetTradesByOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>

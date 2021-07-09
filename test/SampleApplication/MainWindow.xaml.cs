@@ -240,9 +240,9 @@ namespace SampleApplication
                     {
                         await client.GetTradesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades2)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetTradesByOrder)
                     {
-                        await client.GetTrades2Async(ParseGuid(ViewModel.OrderGuid));
+                        await client.GetTradesByOrder(ParseGuid(ViewModel.OrderGuid));
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetEvents)
                     {
@@ -252,9 +252,9 @@ namespace SampleApplication
                     {
                         await client.GetExchangeStatus();
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetWithdrawalFees)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatWithdrawalFees)
                     {
-                        await client.GetWithdrawalFees();
+                        await client.GetFiatWithdrawalFees();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDepositFees)
                     {

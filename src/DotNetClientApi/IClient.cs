@@ -51,7 +51,8 @@ namespace IndependentReserve.DotNetClientApi
         Task<TradeHistorySummary> GetTradeHistorySummaryAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfHoursInThePastToRetrieve);
         Page<TradeDetails> GetTrades(int pageIndex, int pageSize);
         Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize);
-        Task<IEnumerable<TradeDetails>> GetTrades2Async(Guid orderGuid);
+        Task<IEnumerable<TradeDetails>> GetTrades2(Guid orderGuid);
+        Task<IEnumerable<TradeDetails>> GetTradesByOrder(Guid orderGuid);
         Page<Transaction> GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);
         Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);
         IEnumerable<OrderType> GetValidLimitOrderTypes();
@@ -92,7 +93,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<List<Event>> GetEvents();
         Task<ExchangeStatus> GetExchangeStatus();
         
-        Task<Dictionary<CurrencyCode, decimal>> GetWithdrawalFees();
+        Task<IEnumerable<WithdrawalFee>> GetFiatWithdrawalFees();
         Task<IEnumerable<DepositFee>> GetDepositFees();
         Task<Dictionary<CurrencyCode, decimal>> GetOrderMinimumVolumes();
 

@@ -66,5 +66,10 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// id of ethereum transaction linked to this bank transaction
         /// </summary>
         public string EthereumTransactionId { get; set; }
+
+        /// <summary>
+        /// The transactions's guid
+        /// </summary>
+        public Guid TransactionGuid { get; set; }
     }
 }

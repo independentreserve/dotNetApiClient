@@ -382,15 +382,15 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        //GetTrades2(string orderGuid)
-        public static MethodMetadata GetTrades2
+        //GetTradesByOrder(string orderGuid)
+        public static MethodMetadata GetTradesByOrder
         {
             get
             {
                 return new MethodMetadata()
                 {
-                    Name = "GetTrades2",
-                    Description = "GetTrades2",
+                    Name = "GetTradesByOrder",
+                    Description = "GetTradesByOrder",
                     Parameters = new[] { "orderGuid" }
                 };
             }
@@ -411,11 +411,11 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
-        public static MethodMetadata GetWithdrawalFees =>
+        public static MethodMetadata GetFiatWithdrawalFees =>
             new MethodMetadata()
             {
-                Name = "GetWithdrawalFees",
-                Description = "GetWithdrawalFees",
+                Name = "GetFiatWithdrawalFees",
+                Description = "GetFiatWithdrawalFees",
                 Parameters = new string[] { }
             };
 
