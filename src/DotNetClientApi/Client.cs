@@ -1277,14 +1277,16 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="orderGuid">order guid</param>
         /// <returns>a list of specified order's trades</returns>
         [Obsolete("Use GetTradesByOrder instead.")]
-        public Task<IEnumerable<TradeDetails>> GetTrades2(Guid orderGuid) => GetTradesByOrder(orderGuid);
+        public Task<Page<TradeDetails>> GetTrades2(Guid orderGuid) => GetTradesByOrder(orderGuid, 1, 50);
 
         /// <summary>
         /// Retrieves trades that related to the specified order
         /// </summary>
         /// <param name="orderGuid">order guid</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>a list of specified order's trades</returns>
-        public async Task<IEnumerable<TradeDetails>> GetTradesByOrder(Guid orderGuid)
+        public async Task<Page<TradeDetails>> GetTradesByOrder(Guid orderGuid, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1293,8 +1295,10 @@ namespace IndependentReserve.DotNetClientApi
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
             data.orderGuid = orderGuid.ToString();
+            data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
+            data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await HttpWorker.QueryPrivateAsync<IEnumerable<TradeDetails>>("/Private/GetTradesByOrder", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTradesByOrder", data).ConfigureAwait(false);
         }
 
         /// <summary>
