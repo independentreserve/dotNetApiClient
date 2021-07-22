@@ -391,7 +391,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "GetTradesByOrder",
                     Description = "GetTradesByOrder",
-                    Parameters = new[] { "orderGuid" }
+                    Parameters = new[] { "orderGuid", "pageIndex", "pageSize" }
                 };
             }
         }
