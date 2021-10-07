@@ -71,5 +71,10 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// The transactions's guid
         /// </summary>
         public Guid TransactionGuid { get; set; }
+
+        /// <summary>
+        /// Used to correlate against other entities that triggered this transaction
+        /// </summary>
+        public string CorrelationId { get; set; }
     }
 }
