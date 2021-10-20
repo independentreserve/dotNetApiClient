@@ -59,7 +59,7 @@ namespace SampleApplication.ViewModels
             _orderVolume = 0.1m;
             _volumeCurrencyType = CurrencyType.Primary;
             _orderGuid = string.Empty;
-            _fromTimestampUtc = new DateTime(2014, 8, 1);
+            _fromTimestampUtc = DateTime.Now.AddDays(-90);
             _toTimestampUtc = null;
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
