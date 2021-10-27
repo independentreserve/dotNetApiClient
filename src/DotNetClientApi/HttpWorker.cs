@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +32,9 @@ namespace IndependentReserve.DotNetClientApi
             _version = typeof(HttpWorker).Assembly.GetName().Version.ToString();
         }
 
-        public HttpWorker(Uri baseUri)
+        public HttpWorker(Uri baseUri, IDictionary<string, string> headers = null)
         {
+            (string, string)[] f = {};
             HttpClientHandler handler = new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
@@ -45,6 +45,10 @@ namespace IndependentReserve.DotNetClientApi
             _client.DefaultRequestHeaders.UserAgent.ParseAdd("irDotNetClient " + _version);
             _client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip");
             _client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("deflate");
+            foreach(var header in headers ?? Enumerable.Empty<KeyValuePair<string, string>>())
+            {
+                _client.DefaultRequestHeaders.Add(header.Key, header.Value);
+            }
         }
 
         /// <summary>
