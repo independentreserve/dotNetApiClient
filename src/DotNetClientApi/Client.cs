@@ -37,7 +37,7 @@ namespace IndependentReserve.DotNetClientApi
         #region private constructors
 
         /// <summary>
-        /// Creates instance of Client class, which can be used then to call public ONLY api methdos
+        /// Creates instance of Client class, which can be used then to call public ONLY api methods
         /// </summary>
         private Client(Uri baseUri, IDictionary<string, string> headers = null)
         {
@@ -45,7 +45,7 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
-        /// Creates instance of Client class, which can be used then to call public and private api methdos
+        /// Creates instance of Client class, which can be used then to call public and private api methods
         /// </summary>
         private Client(string apiKey, string apiSecret, Uri baseUri, IDictionary<string, string> headers = null) : this(baseUri, headers)
         {

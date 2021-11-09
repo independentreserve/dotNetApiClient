@@ -34,7 +34,6 @@ namespace IndependentReserve.DotNetClientApi
 
         public HttpWorker(Uri baseUri, IDictionary<string, string> headers = null)
         {
-            (string, string)[] f = {};
             HttpClientHandler handler = new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
