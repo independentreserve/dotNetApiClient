@@ -94,8 +94,15 @@ namespace SampleApplication
 
             var viewModel = (AppViewModel) this.DataContext;
 
-            //create instane of API client capable to call both private and public api methods
-            using (var client = Client.Create(viewModel.ApiConfig))
+            // add custom header with client version
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var headers = new Dictionary<string, string>
+            {
+                {"x-ir-test-client-version", version.ToString()}
+            };
+
+            //create instance of API client capable to call both private and public api methods
+            using (var client = Client.Create(viewModel.ApiConfig, headers))
             {
                 ViewModel.LastRequestParameters = string.Empty;
                 ViewModel.LastRequestResponse = string.Empty;

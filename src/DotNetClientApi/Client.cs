@@ -37,17 +37,17 @@ namespace IndependentReserve.DotNetClientApi
         #region private constructors
 
         /// <summary>
-        /// Creates instance of Client class, which can be used then to call public ONLY api methdos
+        /// Creates instance of Client class, which can be used then to call public ONLY api methods
         /// </summary>
-        private Client(Uri baseUri)
+        private Client(Uri baseUri, IDictionary<string, string> headers = null)
         {
-            HttpWorker = new HttpWorker(baseUri);
+            HttpWorker = new HttpWorker(baseUri, headers);
         }
 
         /// <summary>
-        /// Creates instance of Client class, which can be used then to call public and private api methdos
+        /// Creates instance of Client class, which can be used then to call public and private api methods
         /// </summary>
-        private Client(string apiKey, string apiSecret, Uri baseUri) : this(baseUri)
+        private Client(string apiKey, string apiSecret, Uri baseUri, IDictionary<string, string> headers = null) : this(baseUri, headers)
         {
             _apiKey = apiKey;
             HttpWorker.ApiSecret = apiSecret;
@@ -60,7 +60,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Creates new instance of API client, which can be used to call ONLY public methods. Instance implements IDisposable, so wrap it with using statement
         /// </summary>
-        public static Client CreatePublic(string baseUrl)
+        public static Client CreatePublic(string baseUrl, IDictionary<string, string> headers = null)
         {
             if (string.IsNullOrWhiteSpace(baseUrl))
             {
@@ -73,21 +73,21 @@ namespace IndependentReserve.DotNetClientApi
                 throw new ArgumentException("Invalid url format", "baseUrl");
             }
 
-            return new Client(uri);
+            return new Client(uri, headers);
         }
 
         /// <summary>
         /// Create client instance for public or private depending on whether credentials supplied
         /// </summary>
-        public static Client Create(ApiConfig config)
+        public static Client Create(ApiConfig config, IDictionary<string, string> headers = null)
         {
             if (config.HasCredential)
             {
-                return CreatePrivate(config.Credential.Key, config.Credential.Secret, config.BaseUrl);
+                return CreatePrivate(config.Credential.Key, config.Credential.Secret, config.BaseUrl, headers);
             }
             else
             {
-                return CreatePublic(config.BaseUrl);
+                return CreatePublic(config.BaseUrl, headers);
             }
         }
 
@@ -98,8 +98,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="apiKey">your api key</param>
         /// <param name="apiSecret">your api secret</param>
         /// <param name="baseUrl">api base url, please refer to documentation for exact url depending on environment</param>
+        /// <param name="headers">additional HTTP request headers to be included with every request</param>
         /// <returns>instance of Client class which can be used to call public & private API methods</returns>
-        public static Client CreatePrivate(string apiKey, string apiSecret, string baseUrl)
+        public static Client CreatePrivate(string apiKey, string apiSecret, string baseUrl, IDictionary<string, string> headers = null)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -122,7 +123,7 @@ namespace IndependentReserve.DotNetClientApi
                 throw new ArgumentException("Invalid url format", "baseUrl");
             }
 
-            return new Client(apiKey, apiSecret, uri);
+            return new Client(apiKey, apiSecret, uri, headers);
         }
 
         #endregion //Factory
