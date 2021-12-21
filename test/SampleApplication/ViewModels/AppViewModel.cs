@@ -44,6 +44,7 @@ namespace SampleApplication.ViewModels
         private string _comment;
         private string _customId;
         private string _transactionGuid;
+        private string _orderGuids;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -65,6 +66,7 @@ namespace SampleApplication.ViewModels
             _withdrawalBankAccountName = null;
             _address = null;
             _transactionGuid = null;
+            _orderGuids = string.Empty;
 
             ApiConfig = apiConfig;
 
@@ -114,6 +116,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.PlaceLimitOrder,
             MethodMetadata.PlaceMarketOrder,
             MethodMetadata.CancelOrder,
+            MethodMetadata.CancelOrders,
             MethodMetadata.GetAccounts,
             MethodMetadata.GetOpenOrders,
             MethodMetadata.GetClosedOrders,
@@ -388,6 +391,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _orderGuid) return;
                 _orderGuid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - order guids - used by private API method CancelOrders
+        /// </summary>
+        public string OrderGuids
+        {
+            get { return _orderGuids; }
+            set
+            {
+                if (value == _orderGuids) return;
+                _orderGuids = value;
                 OnPropertyChanged();
             }
         }

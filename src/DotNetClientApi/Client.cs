@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
@@ -566,6 +567,27 @@ namespace IndependentReserve.DotNetClientApi
             data.orderGuid = orderGuid.ToString();
 
             return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/CancelOrder", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Cancels a set of orders
+        /// </summary>
+        /// <param name="orderGuids">specific bank order guids to cancel</param>
+        /// <returns>status of canceled orders</returns>
+        /// <remarks>
+        /// The order must be in either 'Open' or 'PartiallyFilled' status to be valid for cancellation. You can retrieve list of Open and Partially Filled orders via the <see cref="GetOpenOrdersAsync"/> or <see cref="GetOpenOrders"/>  methods.
+        /// </remarks>
+        public async Task<BankOrder> CancelOrdersAsync(Guid[] orderGuids)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.orderGuids = orderGuids.Select(o=>o.ToString()).ToArray();
+
+            return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/CancelOrders", data).ConfigureAwait(false);
         }
 
         /// <summary>
