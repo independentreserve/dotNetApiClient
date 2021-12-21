@@ -17,7 +17,7 @@ namespace IndependentReserve.DotNetClientApi
         BankOrder CancelOrder(Guid orderGuid);
         Task<BankOrder> CancelOrderAsync(Guid orderGuid);
 
-        Task<BankOrder> CancelOrdersAsync(Guid[] orderGuids);
+        Task<CancelOrdersResult> CancelOrdersAsync(Guid[] orderGuids);
 
         IEnumerable<Account> GetAccounts();
         Task<IEnumerable<Account>> GetAccountsAsync();
