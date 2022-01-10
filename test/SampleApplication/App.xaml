@@ -42,6 +42,8 @@
             <Setter Property="Padding" Value="5"></Setter>
             <Setter Property="MinWidth" Value="50"></Setter>
             <Setter Property="MinHeight" Value="50"></Setter>
+            <Setter Property="MaxHeight" Value="300"></Setter>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
             <Setter Property="AcceptsReturn" Value="True"></Setter>
         </Style>
