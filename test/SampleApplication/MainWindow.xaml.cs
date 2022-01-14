@@ -283,6 +283,22 @@ namespace SampleApplication
                     {
                         await client.GetCryptoWithdrawalFees();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
+                    {
+                        var orderGuids = ViewModel.OrderGuids.Split(',').Select(o =>
+                        {
+                            var str = o.Trim();
+
+                            if (!Guid.TryParse(str, out var guidVal))
+                            {
+                                throw new Exception($"The value '{str}' - is not a valid Guid");
+                            }
+
+                            return guidVal;
+                        }).ToArray();
+
+                        await client.CancelOrdersAsync(orderGuids);
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

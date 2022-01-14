@@ -461,6 +461,19 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata CancelOrders
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "CancelOrders",
+                    Description = "CancelOrders",
+                    Parameters = new[] { "orderGuids" }
+                };
+            }
+        }
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;
