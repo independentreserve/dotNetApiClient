@@ -42,5 +42,8 @@
         Ada = 34,
         Matic = 35,
         Doge = 36,
+        Sol = 37,
+        Mana = 38,
+        Sand = 39
     }
 }
