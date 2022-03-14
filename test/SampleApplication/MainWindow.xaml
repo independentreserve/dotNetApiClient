@@ -171,6 +171,17 @@
                     <TextBlock Style="{StaticResource Label}">Custom id:</TextBlock>
                     <TextBox Text="{Binding CustomId}" Width="250"></TextBox>
                 </StackPanel>
+
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=maxDepthVolumeOrderBook}">
+                    <TextBlock Style="{StaticResource Label}">Limit by Volume:</TextBlock>
+                    <TextBox Text="{Binding MaxDepthVolumeOrderBook}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=maxDepthValueOrderBook}">
+                    <TextBlock Style="{StaticResource Label}">Limit by Value:</TextBlock>
+                    <TextBox Text="{Binding MaxDepthValueOrderBook}"></TextBox>
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
         

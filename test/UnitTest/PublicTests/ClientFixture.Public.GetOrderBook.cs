@@ -10,7 +10,7 @@ namespace UnitTest
         {
             using (var client = CreatePublicClient())
             {
-                var orderBook = client.GetOrderBook(CurrencyCode.Xbt, CurrencyCode.Usd);
+                var orderBook = client.GetOrderBook(CurrencyCode.Xbt, CurrencyCode.Usd, null, null);
 
                 Assert.IsNotNull(orderBook);
             }
