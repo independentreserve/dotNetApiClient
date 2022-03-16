@@ -464,13 +464,20 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">The fiat currency of limit order</param>
         /// <param name="orderType">The type of limit order</param>
         /// <param name="price">The price in secondary currency to buy/sell</param>
+        /// <param name="clientId">Client side ID</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
         /// <returns>newly created limit order</returns>
-        public BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume)
+        public BankOrder PlaceLimitOrder(
+            CurrencyCode primaryCurrency, 
+            CurrencyCode secondaryCurrency, 
+            OrderType orderType, 
+            decimal price, 
+            decimal volume,
+            string clientId)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
-            return PlaceLimitOrderAsync(primaryCurrency, secondaryCurrency, orderType, price, volume).Result;
+            return PlaceLimitOrderAsync(primaryCurrency, secondaryCurrency, orderType, price, volume, clientId).Result;
         }
 
         /// <summary>
@@ -481,8 +488,15 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="orderType">The type of limit order</param>
         /// <param name="price">The price in secondary currency to buy/sell</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
+        /// <param name="clientId">Client side ID</param>
         /// <returns>newly created limit order</returns>
-        public async Task<BankOrder> PlaceLimitOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume)
+        public async Task<BankOrder> PlaceLimitOrderAsync(
+            CurrencyCode primaryCurrency, 
+            CurrencyCode secondaryCurrency, 
+            OrderType orderType, 
+            decimal price, 
+            decimal volume,
+            string clientId)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -495,6 +509,7 @@ namespace IndependentReserve.DotNetClientApi
             data.orderType = orderType.ToString();
             data.price = price.ToString(CultureInfo.InvariantCulture);
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
+            data.clientSideId = clientId;
 
             return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/PlaceLimitOrder", data).ConfigureAwait(false);
         }
@@ -507,13 +522,20 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="orderType">The type of market order</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
         /// <param name="volumeCurrencyType">Volume currency discriminator</param>
+        /// <param name="clientId">Client side ID</param>
         /// <returns>newly created limit order</returns>
-        public BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null)
+        public BankOrder PlaceMarketOrder(
+            CurrencyCode primaryCurrency, 
+            CurrencyCode secondaryCurrency, 
+            OrderType orderType, 
+            decimal volume, 
+            CurrencyType? volumeCurrencyType = null,
+            string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return PlaceMarketOrderAsync(primaryCurrency, secondaryCurrency, orderType, volume, volumeCurrencyType).Result;
+            return PlaceMarketOrderAsync(primaryCurrency, secondaryCurrency, orderType, volume, volumeCurrencyType, clientId).Result;
         }
 
         /// <summary>
@@ -524,8 +546,15 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="orderType">The type of market order</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
         /// <param name="volumeCurrencyType">Volume currency discriminator</param>
+        /// <param name="clientId">Client side ID</param>
         /// <returns>newly created limit order</returns>
-        public async Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null)
+        public async Task<BankOrder> PlaceMarketOrderAsync(
+            CurrencyCode primaryCurrency, 
+            CurrencyCode secondaryCurrency, 
+            OrderType orderType, 
+            decimal volume, 
+            CurrencyType? volumeCurrencyType = null, 
+            string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -537,6 +566,7 @@ namespace IndependentReserve.DotNetClientApi
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.orderType = orderType.ToString();
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
+            data.clientSideId = clientId;
 
             if (volumeCurrencyType.HasValue)
             {

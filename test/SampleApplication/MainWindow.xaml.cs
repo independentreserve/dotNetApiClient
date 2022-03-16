@@ -161,11 +161,11 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.PlaceLimitOrder)
                     {
-                        await client.PlaceLimitOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.LimitOrderType, ViewModel.LimitOrderPrice ?? 0, ViewModel.OrderVolume ?? 0);
+                        await client.PlaceLimitOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.LimitOrderType, ViewModel.LimitOrderPrice ?? 0, ViewModel.OrderVolume ?? 0, ViewModel.BankOrderClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.PlaceMarketOrder)
                     {
-                        await client.PlaceMarketOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MarketOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType);
+                        await client.PlaceMarketOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MarketOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType, ViewModel.BankOrderClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrder)
                     {

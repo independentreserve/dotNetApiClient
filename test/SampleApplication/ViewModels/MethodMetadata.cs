@@ -112,7 +112,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "PlaceLimitOrder",
                            Description = "PlaceLimitOrder",
-                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "limitOrderType", "limitOrderPrice", "orderVolume"}
+                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "limitOrderType", "limitOrderPrice", "orderVolume", "bankOrderClientId" }
                        };
             }
         }
@@ -126,7 +126,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "PlaceMarketOrder",
                            Description = "PlaceMarketOrder",
-                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "marketOrderType", "orderVolume", "volumeCurrencyType" }
+                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "marketOrderType", "orderVolume", "volumeCurrencyType", "bankOrderClientId" }
                        };
             }
         }
