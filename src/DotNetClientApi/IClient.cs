@@ -41,10 +41,10 @@ namespace IndependentReserve.DotNetClientApi
         Task<MarketSummary> GetMarketSummaryAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency);
         Page<BankHistoryOrder> GetOpenOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize);
         Task<Page<BankHistoryOrder>> GetOpenOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize);
-        OrderBook GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue);
-        Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue);
-        OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue);
-        Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue);
+        OrderBook GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null);
+        Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null);
+        OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null);
+        Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null);
         BankOrder GetOrderDetails(Guid orderGuid);
         Task<BankOrder> GetOrderDetailsAsync(Guid orderGuid);
         RecentTrades GetRecentTrades(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfRecentTradesToRetrieve);
@@ -68,7 +68,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<CurrencyCode>> GetValidSecondaryCurrencyCodesAsync();
         IEnumerable<TransactionType> GetValidTransactionTypes();
         Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync();
-        BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId);
+        BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId = null);
         Task<BankOrder> PlaceLimitOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId);
         BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null);
         Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null);

@@ -283,7 +283,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">secondary currency</param>
         /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
         /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
-        public OrderBook GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
+        public OrderBook GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null)
         {
             ThrowIfDisposed();
             return GetOrderBookAsync(primaryCurrency, secondaryCurrency, maxDepthVolume, maxDepthValue).Result;
@@ -296,7 +296,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">secondary currency</param>
         /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
         /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
-        public async Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
+        public async Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null)
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<OrderBook>("/Public/GetOrderBook", 
@@ -314,7 +314,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">secondary currency</param>
         /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
         /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
-        public OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
+        public OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null)
         {
             ThrowIfDisposed();
             return GetAllOrdersAsync(primaryCurrency, secondaryCurrency, maxDepthVolume, maxDepthValue).Result;
@@ -327,7 +327,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="secondaryCurrency">secondary currency</param>
         /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
         /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
-        public async Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
+        public async Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null)
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<OrderBookDetailed>("/Public/GetAllOrders", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
@@ -473,7 +473,7 @@ namespace IndependentReserve.DotNetClientApi
             OrderType orderType, 
             decimal price, 
             decimal volume,
-            string clientId)
+            string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -496,7 +496,7 @@ namespace IndependentReserve.DotNetClientApi
             OrderType orderType, 
             decimal price, 
             decimal volume,
-            string clientId)
+            string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
