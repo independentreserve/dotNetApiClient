@@ -69,6 +69,8 @@ namespace SampleApplication.ViewModels
             _address = null;
             _transactionGuid = null;
             _orderGuids = string.Empty;
+            _maxDepthVolumeOrderBook = null;
+            _maxDepthValueOrderBook = null;
 
             ApiConfig = apiConfig;
 
