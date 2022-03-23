@@ -281,10 +281,12 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="primaryCurrency">primary currency</param>
         /// <param name="secondaryCurrency">secondary currency</param>
-        public OrderBook GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
+        /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
+        /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
+        public OrderBook GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
         {
             ThrowIfDisposed();
-            return GetOrderBookAsync(primaryCurrency, secondaryCurrency).Result;
+            return GetOrderBookAsync(primaryCurrency, secondaryCurrency, maxDepthVolume, maxDepthValue).Result;
         }
 
         /// <summary>
@@ -292,10 +294,17 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="primaryCurrency">primary currency</param>
         /// <param name="secondaryCurrency">secondary currency</param>
-        public async Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
+        /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
+        /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
+        public async Task<OrderBook> GetOrderBookAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<OrderBook>("/Public/GetOrderBook", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<OrderBook>("/Public/GetOrderBook", 
+                new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), 
+                new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString()),
+                new Tuple<string, string>("maxDepthVolume", maxDepthVolume?.ToString()),
+                new Tuple<string, string>("maxDepthValue", maxDepthValue?.ToString())
+            ).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -303,10 +312,12 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="primaryCurrency">primary currency</param>
         /// <param name="secondaryCurrency">secondary currency</param>
-        public OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
+        /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
+        /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
+        public OrderBookDetailed GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
         {
             ThrowIfDisposed();
-            return GetAllOrdersAsync(primaryCurrency, secondaryCurrency).Result;
+            return GetAllOrdersAsync(primaryCurrency, secondaryCurrency, maxDepthVolume, maxDepthValue).Result;
         }
 
         /// <summary>
@@ -314,10 +325,17 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="primaryCurrency">primary currency</param>
         /// <param name="secondaryCurrency">secondary currency</param>
-        public async Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
+        /// <param name="maxDepthVolume">limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders</param>
+        /// <param name="maxDepthValue"> limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)</param>
+        public async Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume, decimal? maxDepthValue)
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<OrderBookDetailed>("/Public/GetAllOrders", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<OrderBookDetailed>("/Public/GetAllOrders", 
+                new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), 
+                new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString()),
+                new Tuple<string, string>("maxDepthVolume", maxDepthVolume?.ToString()),
+                new Tuple<string, string>("maxDepthValue", maxDepthValue?.ToString())
+            ).ConfigureAwait(false);
         }
 
         /// <summary>

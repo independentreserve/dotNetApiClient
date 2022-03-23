@@ -45,6 +45,8 @@ namespace SampleApplication.ViewModels
         private string _customId;
         private string _transactionGuid;
         private string _orderGuids;
+        private decimal? _maxDepthVolumeOrderBook;
+        private decimal? _maxDepthValueOrderBook;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -67,6 +69,8 @@ namespace SampleApplication.ViewModels
             _address = null;
             _transactionGuid = null;
             _orderGuids = string.Empty;
+            _maxDepthVolumeOrderBook = null;
+            _maxDepthValueOrderBook = null;
 
             ApiConfig = apiConfig;
 
@@ -568,6 +572,42 @@ namespace SampleApplication.ViewModels
                 if (value == _transactionGuid) return;
                 _transactionGuid = value;
                 OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Limit the number of orders returned to the client on both sides of the order book based on the cumulative volume of orders
+        /// </summary>
+        public decimal? MaxDepthVolumeOrderBook
+        {
+            get { return _maxDepthVolumeOrderBook; }
+            set
+            {
+
+                if (_maxDepthVolumeOrderBook != value)
+                {
+                    _maxDepthVolumeOrderBook = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Limit the number of orders returned to the client on both sides of the order book based on the cumulative value (vol*price)
+        /// </summary>
+        public decimal? MaxDepthValueOrderBook
+        {
+            get { return _maxDepthValueOrderBook; }
+            set
+            {
+
+                if (_maxDepthValueOrderBook != value)
+                {
+                    _maxDepthValueOrderBook = value;
+                    OnPropertyChanged();
+                }
+
             }
         }
 

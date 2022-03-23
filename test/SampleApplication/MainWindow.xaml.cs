@@ -141,11 +141,11 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderBook)
                     {
-                        await client.GetOrderBookAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency);
+                        await client.GetOrderBookAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MaxDepthVolumeOrderBook, ViewModel.MaxDepthValueOrderBook);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetAllOrders)
                     {
-                        await client.GetAllOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency);
+                        await client.GetAllOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MaxDepthVolumeOrderBook, ViewModel.MaxDepthValueOrderBook);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTradeHistorySummary)
                     {

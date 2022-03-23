@@ -76,13 +76,13 @@ namespace SampleApplication.ViewModels
         //GetOrderBook(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
         public static MethodMetadata GetOrderBook
         {
-            get { return new MethodMetadata() {Name = "GetOrderBook", Description = "GetOrderBook", Parameters = new string[] {"primaryCurrency", "secondaryCurrency"}}; }
+            get { return new MethodMetadata() {Name = "GetOrderBook", Description = "GetOrderBook", Parameters = new string[] {"primaryCurrency", "secondaryCurrency", "maxDepthVolumeOrderBook", "maxDepthValueOrderBook" } }; }
         }
 
         //GetAllOrders(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency)
         public static MethodMetadata GetAllOrders
         {
-            get { return new MethodMetadata() {Name = "GetAllOrders", Description = "GetAllOrders", Parameters = new string[] {"primaryCurrency", "secondaryCurrency"}}; }
+            get { return new MethodMetadata() {Name = "GetAllOrders", Description = "GetAllOrders", Parameters = new string[] {"primaryCurrency", "secondaryCurrency", "maxDepthVolumeOrderBook", "maxDepthValueOrderBook" } }; }
         }
 
         //GetTradeHistorySummary(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfHoursInThePastToRetrieve
