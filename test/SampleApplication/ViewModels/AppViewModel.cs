@@ -47,6 +47,7 @@ namespace SampleApplication.ViewModels
         private string _orderGuids;
         private decimal? _maxDepthVolumeOrderBook;
         private decimal? _maxDepthValueOrderBook;
+        private string _bankOrderClientId;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -71,6 +72,7 @@ namespace SampleApplication.ViewModels
             _orderGuids = string.Empty;
             _maxDepthVolumeOrderBook = null;
             _maxDepthValueOrderBook = null;
+            _bankOrderClientId = null;
 
             ApiConfig = apiConfig;
 
@@ -605,6 +607,24 @@ namespace SampleApplication.ViewModels
                 if (_maxDepthValueOrderBook != value)
                 {
                     _maxDepthValueOrderBook = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Client order Id
+        /// </summary>
+        public string BankOrderClientId
+        {
+            get { return _bankOrderClientId; }
+            set
+            {
+
+                if (_bankOrderClientId != value)
+                {
+                    _bankOrderClientId = value;
                     OnPropertyChanged();
                 }
 

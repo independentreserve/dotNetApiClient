@@ -10,7 +10,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 500.01m, 1);
+                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 500.01m, 1, null);
                 Assert.IsNotNull(bankOrder);
             }
         }
@@ -31,7 +31,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 50000, 1);
+                BankOrder bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, 50000, 1, null);
                 Assert.IsNotNull(bankOrder);
 
                 Assert.AreEqual(bankOrder.Status, OrderStatus.Open);
