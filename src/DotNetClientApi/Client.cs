@@ -330,7 +330,12 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<OrderBookDetailed> GetAllOrdersAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, decimal? maxDepthVolume = null, decimal? maxDepthValue = null)
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<OrderBookDetailed>("/Public/GetAllOrders", new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString())).ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<OrderBookDetailed>("/Public/GetAllOrders", 
+                new Tuple<string, string>("primaryCurrencyCode", primaryCurrency.ToString()), 
+                new Tuple<string, string>("secondaryCurrencyCode", secondaryCurrency.ToString()),
+                new Tuple<string, string>("maxDepthVolume", maxDepthVolume?.ToString()),
+                new Tuple<string, string>("maxDepthValue", maxDepthValue?.ToString())
+            ).ConfigureAwait(false);
         }
 
         /// <summary>
