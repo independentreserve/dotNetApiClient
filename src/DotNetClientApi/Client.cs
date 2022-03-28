@@ -514,7 +514,7 @@ namespace IndependentReserve.DotNetClientApi
             data.orderType = orderType.ToString();
             data.price = price.ToString(CultureInfo.InvariantCulture);
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
-            data.clientSideId = clientId;
+            data.clientId = clientId;
 
             return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/PlaceLimitOrder", data).ConfigureAwait(false);
         }
@@ -571,7 +571,7 @@ namespace IndependentReserve.DotNetClientApi
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.orderType = orderType.ToString();
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
-            data.clientSideId = clientId;
+            data.clientId = clientId;
 
             if (volumeCurrencyType.HasValue)
             {
