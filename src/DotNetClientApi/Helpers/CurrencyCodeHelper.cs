@@ -18,7 +18,7 @@ namespace IndependentReserve.DotNetClientApi.Helpers
             }
 
             //Transform the ticker to the integer using FNV-1a hash
-            var hash = (int)Fnv1a.GetFnv1aHashCode(ticker);
+            var hash = (int)Fnv1a.ComputeHash(ticker);
             return (CurrencyCode)hash;
         }
     }

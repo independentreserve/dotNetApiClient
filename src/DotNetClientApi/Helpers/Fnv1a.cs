@@ -11,7 +11,7 @@ namespace IndependentReserve.DotNetClientApi.Helpers
         /// Get FNV-1a hash code of the string (32-bit).
         /// https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
         /// </summary>
-        public static uint GetFnv1aHashCode(byte[] data)
+        public static uint ComputeHash(byte[] data)
         {
             uint hash = _fnvOffsetBasis;
             for (int i = 0; i < data.Length; ++i)
@@ -23,10 +23,10 @@ namespace IndependentReserve.DotNetClientApi.Helpers
             return hash;
         }
 
-        public static uint GetFnv1aHashCode(string value)
+        public static uint ComputeHash(string value)
         {
             var bytes = Encoding.UTF8.GetBytes(value);
-            return GetFnv1aHashCode(bytes);
+            return ComputeHash(bytes);
         }
     }
 }

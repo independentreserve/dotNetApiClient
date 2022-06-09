@@ -3,9 +3,8 @@ using IndependentReserve.DotNetClientApi.Helpers;
 using NUnit.Framework;
 using System;
 using System.Linq;
-using System.Text;
 
-namespace UnitTest
+namespace UnitTest.Helpers
 {
     [TestFixture]
     public class CurrencyCodeHelperFixture : FixtureBase
@@ -37,7 +36,7 @@ namespace UnitTest
                 .Select(code => new
                 {
                     Code = code,
-                    Hash = Fnv1a.GetFnv1aHashCode(code.ToString())
+                    Hash = Fnv1a.ComputeHash(code.ToString())
                 })
                 .ToList();
 
