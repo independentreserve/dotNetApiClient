@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="ApiCredentialFixture.cs" />
     <Compile Include="ClientFixture.cs" />
+    <Compile Include="CurrencyCodeHelperFixture.cs" />
     <Compile Include="PrivateTests\PrivateFixtureBase.cs" />
     <Compile Include="PrivateTests\ClientFixture.GetBrokerageFees.cs" />
     <Compile Include="PrivateTests\ClientFixture.GetTrades.cs" />
