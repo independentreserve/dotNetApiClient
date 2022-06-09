@@ -32,3 +32,6 @@ Specify your API Key and API Secret in the Sample Application configuration file
 ## Further Help
 
 See the [API documentation](https://www.independentreserve.com/API) for more information.
+
+## Backward compatibility
+After the listing of a new currency that doesn't exist in the `CurrencyCode` enum, a `FNV-1a` hash (32-bit) of a listed currency ticker will be returned as a `CurrencyCode`. It is done for better compatibility with 3-rd party clients that, for instance, use `ToDictionary` by `CurrencyCode`.
