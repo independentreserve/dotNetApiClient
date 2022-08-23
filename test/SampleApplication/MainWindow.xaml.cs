@@ -204,6 +204,10 @@ namespace SampleApplication
                     {
                         await client.GetDigitalCurrencyDepositAddressAsync(ViewModel.PrimaryCurrency);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.NewDepositAddress)
+                    {
+                        await client.NewDepositAddressAsync(ViewModel.PrimaryCurrency);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddresses)
                     {
                         await client.GetDigitalCurrencyDepositAddressesAsync(ViewModel.PrimaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
