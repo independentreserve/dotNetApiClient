@@ -31,5 +31,7 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// Gets total current balance of this bank account
         /// </summary>
         public decimal TotalBalance { get; set; }
+
+        public override string ToString() => $"{CurrencyCode}, Available={AvailableBalance}, Total={TotalBalance}";
     }
 }
