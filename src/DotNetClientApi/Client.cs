@@ -1035,6 +1035,23 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Generate a new deposit address which should be used for new deposits of a digital currency
+        /// </summary>
+        /// <param name="primaryCurrency">digital currency code to generate deposit address for</param>
+        public async Task<DigitalCurrencyDepositAddress> NewDepositAddressAsync(CurrencyCode primaryCurrency)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/NewDepositAddress", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Marks bitcoin address to sync with blockchain and update balance
         /// </summary>
         /// <param name="bitcoinAddress">Bitcoin address</param>
