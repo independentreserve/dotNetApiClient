@@ -1,4 +1,5 @@
-﻿using IndependentReserve.DotNetClientApi.Data;
+﻿using IndependentReserve.DotNetClientApi.Converters;
+using IndependentReserve.DotNetClientApi.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -83,7 +84,7 @@ namespace IndependentReserve.DotNetClientApi
                 ErrorMessage errorMessage;
                 try
                 {
-                    errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
+                    errorMessage = Deserialize<ErrorMessage>(result);
                 }
                 catch(Exception)
                 {
@@ -94,7 +95,7 @@ namespace IndependentReserve.DotNetClientApi
                 throw BuildException(response.StatusCode, errorMessage.Message);
             }
 
-            return JsonConvert.DeserializeObject<T>(result);
+            return Deserialize<T>(result);
         }
 
         /// <summary>
@@ -114,11 +115,11 @@ namespace IndependentReserve.DotNetClientApi
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
+                var errorMessage = Deserialize<ErrorMessage>(result);
                 throw BuildException(response.StatusCode, errorMessage?.Message);
             }
 
-            return JsonConvert.DeserializeObject<T>(result);
+            return Deserialize<T>(result);
         }
 
         /// <summary>
@@ -137,7 +138,7 @@ namespace IndependentReserve.DotNetClientApi
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                var errorMessage = JsonConvert.DeserializeObject<ErrorMessage>(result);
+                var errorMessage = Deserialize<ErrorMessage>(result);
                 throw BuildException(response.StatusCode, errorMessage.Message);
             }
         }
@@ -234,6 +235,11 @@ namespace IndependentReserve.DotNetClientApi
             var exception = new Exception(message);
             exception.Data[Client.ExceptionDataHttpStatusCode] = responseCode;
             return exception;
+        }
+
+        private T Deserialize<T>(string json)
+        {
+            return JsonConvert.DeserializeObject<T>(json, new CurrencyCodeConverter());
         }
 
         #region IDisposable

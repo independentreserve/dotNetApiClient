@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
+using IndependentReserve.DotNetClientApi.Helpers;
 using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
@@ -449,14 +450,19 @@ namespace IndependentReserve.DotNetClientApi
         public async Task<Dictionary<CurrencyCode, decimal>> GetOrderMinimumVolumes()
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<Dictionary<CurrencyCode, decimal>>("/Public/GetOrderMinimumVolumes");
+            var result = await HttpWorker.QueryPublicAsync<Dictionary<string, decimal>>("/Public/GetOrderMinimumVolumes");
+            return ConvertToCurrencyDictionary(result);
         }
 
         public async Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees()
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<Dictionary<CurrencyCode, decimal>>("/Public/GetCryptoWithdrawalFees");
+            var result = await HttpWorker.QueryPublicAsync<Dictionary<string, decimal>>("/Public/GetCryptoWithdrawalFees");
+            return ConvertToCurrencyDictionary(result);
         }
+
+        private Dictionary<CurrencyCode, TValue> ConvertToCurrencyDictionary<TValue>(Dictionary<string, TValue> data) 
+            => data.ToDictionary(kv => CurrencyCodeHelper.Parse(kv.Key), kv => kv.Value);
 
         #endregion //Public API
 
