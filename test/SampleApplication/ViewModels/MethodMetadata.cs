@@ -243,6 +243,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata GetCryptoDeposits
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetCryptoDeposits",
+                    Description = "GetCryptoDeposits",
+                    Parameters = new[] { "primaryCurrency", "fromTimestampUtc", "toTimestampUtc", "pageIndex", "pageSize" }
+                };
+            }
+        }
+
         //GetDigitalCurrencyDepositAddress()
         public static MethodMetadata GetDigitalCurrencyDepositAddress
         {

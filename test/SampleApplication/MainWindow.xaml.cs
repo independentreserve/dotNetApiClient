@@ -200,6 +200,11 @@ namespace SampleApplication
                         var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
                         await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoDeposits)
+                    {
+                        var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
+                        await client.GetCryptoDepositsAsync(ViewModel.PrimaryCurrency, ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddress)
                     {
                         await client.GetDigitalCurrencyDepositAddressAsync(ViewModel.PrimaryCurrency);

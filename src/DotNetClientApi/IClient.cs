@@ -56,6 +56,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<Page<TradeDetails>> GetTradesByOrder(Guid orderGuid, int pageIndex, int pageSize);
         Page<Transaction> GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);
         Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);
+        Task<Page<DepositTransaction>> GetCryptoDepositsAsync(CurrencyCode primaryCurrency, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, int pageIndex, int pageSize);
         IEnumerable<OrderType> GetValidLimitOrderTypes();
         Task<IEnumerable<OrderType>> GetValidLimitOrderTypesAsync();
         IEnumerable<OrderType> GetValidMarketOrderTypes();
