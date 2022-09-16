@@ -129,6 +129,7 @@ namespace SampleApplication.ViewModels
             MethodMetadata.GetClosedFilledOrders,
             MethodMetadata.GetOrderDetails,
             MethodMetadata.GetTransactions,
+            MethodMetadata.GetCryptoDeposits,
             MethodMetadata.GetDigitalCurrencyDepositAddress,
             MethodMetadata.GetDigitalCurrencyDepositAddresses,
             MethodMetadata.NewDepositAddress,

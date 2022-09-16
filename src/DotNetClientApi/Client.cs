@@ -913,6 +913,32 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Get crypto deposit transactions (paged) for specified currency and specified timeframe
+        /// </summary>
+        /// <param name="primaryCurrency">digital currency code</param>
+        /// <param name="fromTimestampUtc">The timestamp in UTC from which you want to retrieve transactions</param>
+        /// <param name="toTimestampUtc">The timestamp in UTC until which you want to retrieve transactions</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, containing all transactions made on an account</returns>
+        public async Task<Page<DepositTransaction>> GetCryptoDepositsAsync(CurrencyCode primaryCurrency, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
+            data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
+            data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
+            data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
+
+            return await HttpWorker.QueryPrivateAsync<Page<DepositTransaction>>("/Private/GetCryptoDeposits", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves the Bitcoin address which should be used for new Bitcoin deposits
         /// </summary>
         [Obsolete("Use GetDigitalCurrencyDepositAddress instead.")]
