@@ -83,8 +83,6 @@ namespace SampleApplication
         /// <summary>
         /// Handles CallIt button click; calls seleted API method with specified parameters, shows what API URL was requested, using what HTTP method, and what was parameters and response
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void CallIt_OnClick(object sender, RoutedEventArgs e)
         {
             if (ViewModel.SelectedMethod == MethodMetadata.Null)
