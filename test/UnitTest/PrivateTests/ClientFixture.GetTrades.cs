@@ -10,7 +10,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                var trades = client.GetTrades(1, 50);
+                var trades = client.GetTrades(1, 50, null, null);
                 Assert.IsNotNull(trades);
                 Assert.Greater(trades.Data.Count(), 0);
             }
