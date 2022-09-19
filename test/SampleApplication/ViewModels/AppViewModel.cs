@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
@@ -13,7 +14,7 @@ namespace SampleApplication.ViewModels
     /// <summary>
     /// ViewModel for Main application window; contains collection of methods which can be called, and notifyable properties to store all specified method parameters
     /// </summary>
-    public class AppViewModel:INotifyPropertyChanged
+    public class AppViewModel : INotifyPropertyChanged
     {
         private static Logger Log = LogManager.GetCurrentClassLogger();
         private MethodMetadata _selectedMethod;
@@ -104,54 +105,61 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        public MethodMetadata[] Methods { get; } = new[]
+        public MethodMetadata[] Methods
         {
-            MethodMetadata.Null,
-            MethodMetadata.GetValidPrimaryCurrencyCodes,
-            MethodMetadata.GetValidSecondaryCurrencyCodes,
-            MethodMetadata.GetValidLimitOrderTypes,
-            MethodMetadata.GetValidMarketOrderTypes,
-            MethodMetadata.GetValidOrderTypes,
-            MethodMetadata.GetValidTransactionTypes,
-            MethodMetadata.GetMarketSummary,
-            MethodMetadata.GetOrderBook,
-            MethodMetadata.GetAllOrders,
-            MethodMetadata.GetTradeHistorySummary,
-            MethodMetadata.GetRecentTrades,
-            MethodMetadata.GetFxRates,
-            MethodMetadata.PlaceLimitOrder,
-            MethodMetadata.PlaceMarketOrder,
-            MethodMetadata.CancelOrder,
-            MethodMetadata.CancelOrders,
-            MethodMetadata.GetAccounts,
-            MethodMetadata.GetOpenOrders,
-            MethodMetadata.GetClosedOrders,
-            MethodMetadata.GetClosedFilledOrders,
-            MethodMetadata.GetOrderDetails,
-            MethodMetadata.GetTransactions,
-            MethodMetadata.GetCryptoDeposits,
-            MethodMetadata.GetDigitalCurrencyDepositAddress,
-            MethodMetadata.GetDigitalCurrencyDepositAddresses,
-            MethodMetadata.NewDepositAddress,
-            MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
-            MethodMetadata.WithdrawDigitalCurrency,
-            MethodMetadata.GetDigitalCurrencyWithdrawal,
-            MethodMetadata.GetFiatBankAccounts,
-            MethodMetadata.RequestFiatWithdrawal,
-            MethodMetadata.WithdrawFiatCurrency,
-            MethodMetadata.GetFiatWithdrawal,
-            MethodMetadata.GetTrades,
-            MethodMetadata.GetTradesByOrder,
-            MethodMetadata.GetBrokerageFees,
-            MethodMetadata.GetEvents,
-            MethodMetadata.GetExchangeStatus,
-            MethodMetadata.GetFiatWithdrawalFees,
-            MethodMetadata.GetDepositFees,
-            MethodMetadata.GetWithdrawalLimits,
-            MethodMetadata.GetDepositLimits,
-            MethodMetadata.GetOrderMinimumVolumes,
-            MethodMetadata.GetCryptoWithdrawalFees
-        };
+            get
+            {
+                var methods = new[] {
+                    MethodMetadata.Null,
+                    MethodMetadata.GetValidPrimaryCurrencyCodes,
+                    MethodMetadata.GetValidSecondaryCurrencyCodes,
+                    MethodMetadata.GetValidLimitOrderTypes,
+                    MethodMetadata.GetValidMarketOrderTypes,
+                    MethodMetadata.GetValidOrderTypes,
+                    MethodMetadata.GetValidTransactionTypes,
+                    MethodMetadata.GetMarketSummary,
+                    MethodMetadata.GetOrderBook,
+                    MethodMetadata.GetAllOrders,
+                    MethodMetadata.GetTradeHistorySummary,
+                    MethodMetadata.GetRecentTrades,
+                    MethodMetadata.GetFxRates,
+                    MethodMetadata.PlaceLimitOrder,
+                    MethodMetadata.PlaceMarketOrder,
+                    MethodMetadata.CancelOrder,
+                    MethodMetadata.CancelOrders,
+                    MethodMetadata.GetAccounts,
+                    MethodMetadata.GetOpenOrders,
+                    MethodMetadata.GetClosedOrders,
+                    MethodMetadata.GetClosedFilledOrders,
+                    MethodMetadata.GetOrderDetails,
+                    MethodMetadata.GetTransactions,
+                    MethodMetadata.GetCryptoDeposits,
+                    MethodMetadata.GetDigitalCurrencyDepositAddress,
+                    MethodMetadata.GetDigitalCurrencyDepositAddresses,
+                    MethodMetadata.NewDepositAddress,
+                    MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
+                    MethodMetadata.WithdrawDigitalCurrency,
+                    MethodMetadata.GetDigitalCurrencyWithdrawal,
+                    MethodMetadata.GetFiatBankAccounts,
+                    MethodMetadata.RequestFiatWithdrawal,
+                    MethodMetadata.WithdrawFiatCurrency,
+                    MethodMetadata.GetFiatWithdrawal,
+                    MethodMetadata.GetTrades,
+                    MethodMetadata.GetTradesByOrder,
+                    MethodMetadata.GetBrokerageFees,
+                    MethodMetadata.GetEvents,
+                    MethodMetadata.GetExchangeStatus,
+                    MethodMetadata.GetFiatWithdrawalFees,
+                    MethodMetadata.GetDepositFees,
+                    MethodMetadata.GetWithdrawalLimits,
+                    MethodMetadata.GetDepositLimits,
+                    MethodMetadata.GetOrderMinimumVolumes,
+                    MethodMetadata.GetCryptoWithdrawalFees
+                }.ToList();
+                methods.Sort((x, y) => x.Name.CompareTo(y.Name));
+                return methods.ToArray();
+            }
+        }
 
         /// <summary>
         /// Gets or sets currently selected method which will be called if user press "Call It" button
@@ -333,7 +341,7 @@ namespace SampleApplication.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         /// <summary>
         /// Method parameter - market order type - used by private API method PlaceMarketOrder
         /// </summary>
