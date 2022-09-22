@@ -1362,13 +1362,15 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="pageIndex">1 based page index</param>
         /// <param name="pageSize">page size must be greater or equal 1 and not exceed 50</param>
-        /// <returns>a page of a specified size containing recent trades mady by user</returns>
-        public Page<TradeDetails> GetTrades(int pageIndex, int pageSize)
+        /// <param name="fromTimestampUtc">the optional timestamp in UTC from which you want to retrieve trades</param>
+        /// <param name="toTimestampUtc">the optional timestamp in UTC to which you want to retrieve trades</param>
+        /// <returns>a page of a specified size containing recent trades made by user</returns>
+        public Page<TradeDetails> GetTrades(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetTradesAsync(pageIndex, pageSize).Result;
+            return GetTradesAsync(pageIndex, pageSize, fromTimestampUtc, toTimestampUtc).Result;
         }
 
         /// <summary>
@@ -1376,8 +1378,10 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="pageIndex">1 based page index</param>
         /// <param name="pageSize">page size must be greater or equal 1 and not exceed 50</param>
-        /// <returns>a page of a specified size containing recent trades mady by user</returns>
-        public async Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize)
+        /// <param name="fromTimestampUtc">the optional timestamp in UTC from which you want to retrieve trades</param>
+        /// <param name="toTimestampUtc">the optional timestamp in UTC to which you want to retrieve trades</param>
+        /// <returns>a page of a specified size containing recent trades made by user</returns>
+        public async Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1387,6 +1391,8 @@ namespace IndependentReserve.DotNetClientApi
             data.nonce = GetNonce();
             data.pageIndex = pageIndex;
             data.pageSize = pageSize;
+            data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
+            data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
 
             return await HttpWorker.QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", data).ConfigureAwait(false);
         }

@@ -252,7 +252,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {
-                        await client.GetTradesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                        await client.GetTradesAsync(ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTradesByOrder)
                     {

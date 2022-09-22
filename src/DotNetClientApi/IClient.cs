@@ -52,8 +52,8 @@ namespace IndependentReserve.DotNetClientApi
         Task<RecentTrades> GetRecentTradesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfRecentTradesToRetrieve);
         TradeHistorySummary GetTradeHistorySummary(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfHoursInThePastToRetrieve);
         Task<TradeHistorySummary> GetTradeHistorySummaryAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, int numberOfHoursInThePastToRetrieve);
-        Page<TradeDetails> GetTrades(int pageIndex, int pageSize);
-        Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize);
+        Page<TradeDetails> GetTrades(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc);
+        Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc);
         Task<Page<TradeDetails>> GetTradesByOrder(Guid orderGuid, int pageIndex, int pageSize);
         Page<Transaction> GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);
         Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);

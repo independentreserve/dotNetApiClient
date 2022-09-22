@@ -429,7 +429,7 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
-        /// Method parameter - FromTimestampUtc - used by private API method GetTransactions
+        /// Method parameter - FromTimestampUtc - used by private API methods: GetTransactions, GetTrades
         /// </summary>
         public DateTime? FromTimestampUtc
         {
@@ -443,7 +443,7 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
-        /// Method parameter - ToTimestampUtc - used by private API method GetTransactions
+        /// Method parameter - ToTimestampUtc - used by private API methods: GetTransactions, GetTrades
         /// </summary>
         public DateTime? ToTimestampUtc
         {
