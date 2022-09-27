@@ -49,6 +49,7 @@ namespace SampleApplication.ViewModels
         private decimal? _maxDepthVolumeOrderBook;
         private decimal? _maxDepthValueOrderBook;
         private string _bankOrderClientId;
+        private decimal? _allowedSlippagePercent;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -74,6 +75,7 @@ namespace SampleApplication.ViewModels
             _maxDepthVolumeOrderBook = null;
             _maxDepthValueOrderBook = null;
             _bankOrderClientId = null;
+            _allowedSlippagePercent = null;
 
             ApiConfig = apiConfig;
 
@@ -638,6 +640,25 @@ namespace SampleApplication.ViewModels
                 if (_bankOrderClientId != value)
                 {
                     _bankOrderClientId = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+
+        /// <summary>
+        /// Slippage protection, in which the order will be rejected after the market has moved by the specified%.
+        /// </summary>
+        public decimal? AllowedSlippagePercent
+        {
+            get { return _allowedSlippagePercent; }
+            set
+            {
+
+                if (_allowedSlippagePercent != value)
+                {
+                    _allowedSlippagePercent = value;
                     OnPropertyChanged();
                 }
 

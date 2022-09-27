@@ -72,8 +72,8 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync();
         BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId = null);
         Task<BankOrder> PlaceLimitOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId);
-        BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null);
-        Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null);
+        BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null, decimal? allowedSlippagePercent = null);
+        Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null, decimal? allowedSlippagePercent = null);
 
         Task<IEnumerable<FiatBankAccount>> GetFiatBankAccountsAsync();
         FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment);

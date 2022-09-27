@@ -188,6 +188,11 @@
                     <TextBox Text="{Binding BankOrderClientId}" Width="250"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=allowedSlippagePercent}">
+                    <TextBlock Style="{StaticResource Label}">Allowed Slippage Percent:</TextBlock>
+                    <TextBox Text="{Binding AllowedSlippagePercent}"></TextBox>
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
         
