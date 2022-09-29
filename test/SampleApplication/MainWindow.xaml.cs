@@ -163,7 +163,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.PlaceMarketOrder)
                     {
-                        await client.PlaceMarketOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MarketOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType, ViewModel.BankOrderClientId);
+                        await client.PlaceMarketOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.MarketOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType, ViewModel.BankOrderClientId, ViewModel.AllowedSlippagePercent);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrder)
                     {

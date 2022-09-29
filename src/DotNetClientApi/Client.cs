@@ -534,6 +534,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="volume">The volume to buy/sell in primary currency</param>
         /// <param name="volumeCurrencyType">Volume currency discriminator</param>
         /// <param name="clientId">Client side ID</param>
+        /// <param name="allowedSlippagePercent">Slippage protection, in which the order will be rejected after the market has moved by the specified%.</param>
         /// <returns>newly created limit order</returns>
         public BankOrder PlaceMarketOrder(
             CurrencyCode primaryCurrency, 
@@ -541,12 +542,13 @@ namespace IndependentReserve.DotNetClientApi
             OrderType orderType, 
             decimal volume, 
             CurrencyType? volumeCurrencyType = null,
-            string clientId = null)
+            string clientId = null,
+            decimal? allowedSlippagePercent = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return PlaceMarketOrderAsync(primaryCurrency, secondaryCurrency, orderType, volume, volumeCurrencyType, clientId).Result;
+            return PlaceMarketOrderAsync(primaryCurrency, secondaryCurrency, orderType, volume, volumeCurrencyType, clientId, allowedSlippagePercent).Result;
         }
 
         /// <summary>
@@ -558,6 +560,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="volume">The volume to buy/sell in primary currency</param>
         /// <param name="volumeCurrencyType">Volume currency discriminator</param>
         /// <param name="clientId">Client side ID</param>
+        /// <param name="allowedSlippagePercent">Slippage protection, in which the order will be rejected after the market has moved by the specified%.</param>
         /// <returns>newly created limit order</returns>
         public async Task<BankOrder> PlaceMarketOrderAsync(
             CurrencyCode primaryCurrency, 
@@ -565,7 +568,8 @@ namespace IndependentReserve.DotNetClientApi
             OrderType orderType, 
             decimal volume, 
             CurrencyType? volumeCurrencyType = null, 
-            string clientId = null)
+            string clientId = null,
+            decimal? allowedSlippagePercent = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -578,6 +582,7 @@ namespace IndependentReserve.DotNetClientApi
             data.orderType = orderType.ToString();
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
             data.clientId = clientId;
+            data.allowedSlippagePercent = allowedSlippagePercent;
 
             if (volumeCurrencyType.HasValue)
             {
