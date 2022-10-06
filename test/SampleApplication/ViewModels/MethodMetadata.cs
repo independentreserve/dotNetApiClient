@@ -196,7 +196,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "GetOrderDetails",
                            Description = "GetOrderDetails",
-                           Parameters = new[] {"orderGuid"}
+                           Parameters = new[] {"orderGuid", "bankOrderClientId" }
                        };
             }
         }
