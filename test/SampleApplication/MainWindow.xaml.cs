@@ -191,7 +191,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderDetails)
                     {
-                        await client.GetOrderDetailsAsync(ParseGuid(ViewModel.OrderGuid));
+                        await client.GetOrderDetailsAsync(ParseNullableGuid(ViewModel.OrderGuid), ViewModel.BankOrderClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactions)
                     {
@@ -356,6 +356,16 @@ namespace SampleApplication
             }
 
             return Guid.Empty;
+        }
+
+        private static Guid? ParseNullableGuid(string guidString)
+        {
+            if (string.IsNullOrEmpty(guidString))
+            {
+                return null;
+            }
+
+            return ParseGuid(guidString);
         }
     }
 }

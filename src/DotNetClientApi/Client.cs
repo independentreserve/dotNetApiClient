@@ -801,21 +801,23 @@ namespace IndependentReserve.DotNetClientApi
         /// Retrieves order details by order Id.
         /// </summary>
         /// <param name="orderGuid">The guid of order</param>
+        /// <param name="clientId">Client side ID</param>
         /// <returns>order object</returns>
-        public BankOrder GetOrderDetails(Guid orderGuid)
+        public BankOrder GetOrderDetails(Guid? orderGuid, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetOrderDetailsAsync(orderGuid).Result;
+            return GetOrderDetailsAsync(orderGuid, clientId).Result;
         }
 
         /// <summary>
         /// Retrieves order details by order Id.
         /// </summary>
         /// <param name="orderGuid">The guid of order</param>
+        /// <param name="clientId">Client side ID</param>
         /// <returns>order object</returns>
-        public async Task<BankOrder> GetOrderDetailsAsync(Guid orderGuid)
+        public async Task<BankOrder> GetOrderDetailsAsync(Guid? orderGuid, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -824,6 +826,7 @@ namespace IndependentReserve.DotNetClientApi
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
             data.orderGuid = orderGuid.ToString();
+            data.clientId = clientId;
 
             return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/GetOrderDetails", data).ConfigureAwait(false);
         }
