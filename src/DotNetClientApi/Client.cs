@@ -582,7 +582,11 @@ namespace IndependentReserve.DotNetClientApi
             data.orderType = orderType.ToString();
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
             data.clientId = clientId;
-            data.allowedSlippagePercent = allowedSlippagePercent;
+
+            if (allowedSlippagePercent.HasValue)
+            { 
+                data.allowedSlippagePercent = allowedSlippagePercent.Value.ToString(CultureInfo.InvariantCulture);
+            }
 
             if (volumeCurrencyType.HasValue)
             {
