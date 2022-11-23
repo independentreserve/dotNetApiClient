@@ -23,6 +23,7 @@ namespace IndependentReserve.DotNetClientApi
         internal IHttpWorker HttpWorker { get; set; }
 
         public const string ExceptionDataHttpStatusCode = "HttpStatusCode";
+        public const string ExceptionDataErrorCode = "ErrorCode";
 
 
         public string LastRequestUrl => HttpWorker.LastRequestUrl;

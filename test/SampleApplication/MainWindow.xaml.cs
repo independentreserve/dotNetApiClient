@@ -317,6 +317,11 @@ namespace SampleApplication
                         var statusCode = (HttpStatusCode) ex.Data[Client.ExceptionDataHttpStatusCode];
                         ViewModel.LastRequestResponse = $"HttpStatusCode=({(int)statusCode}) {statusCode}\r\n";
                     }
+                    if (ex.Data.Contains(Client.ExceptionDataErrorCode))
+                    {
+                        var errorCode = ex.Data[Client.ExceptionDataErrorCode];
+                        ViewModel.LastRequestResponse += $"ErrorCode={errorCode}\r\n";
+                    }
                     ViewModel.LastRequestResponse += ex.Message;
                 }
 
