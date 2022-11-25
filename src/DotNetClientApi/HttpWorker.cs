@@ -92,7 +92,7 @@ namespace IndependentReserve.DotNetClientApi
                     throw new Exception(result.Substring(0, 100));
                 }
                 
-                throw BuildException(response.StatusCode, errorMessage.Message);
+                throw BuildException(response.StatusCode, errorMessage.Message, errorMessage.ErrorCode);
             }
 
             return Deserialize<T>(result);
@@ -116,7 +116,7 @@ namespace IndependentReserve.DotNetClientApi
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 var errorMessage = Deserialize<ErrorMessage>(result);
-                throw BuildException(response.StatusCode, errorMessage?.Message);
+                throw BuildException(response.StatusCode, errorMessage?.Message, errorMessage?.ErrorCode);
             }
 
             return Deserialize<T>(result);
@@ -139,7 +139,7 @@ namespace IndependentReserve.DotNetClientApi
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 var errorMessage = Deserialize<ErrorMessage>(result);
-                throw BuildException(response.StatusCode, errorMessage.Message);
+                throw BuildException(response.StatusCode, errorMessage.Message, errorMessage.ErrorCode);
             }
         }
 
@@ -230,10 +230,15 @@ namespace IndependentReserve.DotNetClientApi
             return retval;
         }
 
-        private Exception BuildException(HttpStatusCode responseCode, string message)
+        private Exception BuildException(HttpStatusCode responseCode, string message, string errorCode = null)
         {
             var exception = new Exception(message);
             exception.Data[Client.ExceptionDataHttpStatusCode] = responseCode;
+            if (errorCode != null)
+            {
+                exception.Data[Client.ExceptionDataErrorCode] = errorCode;
+            }
+
             return exception;
         }
 

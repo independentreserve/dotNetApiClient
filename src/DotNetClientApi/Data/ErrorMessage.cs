@@ -7,5 +7,6 @@ namespace IndependentReserve.DotNetClientApi.Data
     internal class ErrorMessage
     {
         public string Message { get; set; }
+        public string ErrorCode { get; set; }
     }
 }
