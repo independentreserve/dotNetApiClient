@@ -256,7 +256,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTradesByOrder)
                     {
-                        await client.GetTradesByOrder(ParseGuid(ViewModel.OrderGuid), ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                        await client.GetTradesByOrder(ParseNullableGuid(ViewModel.OrderGuid), ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.BankOrderClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetEvents)
                     {

@@ -1416,8 +1416,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="orderGuid">order guid</param>
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <param name="clientId">Client side ID of the order</param>
         /// <returns>a list of specified order's trades</returns>
-        public async Task<Page<TradeDetails>> GetTradesByOrder(Guid orderGuid, int pageIndex, int pageSize)
+        public async Task<Page<TradeDetails>> GetTradesByOrder(Guid? orderGuid, int pageIndex, int pageSize, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1425,9 +1426,10 @@ namespace IndependentReserve.DotNetClientApi
             dynamic data = new ExpandoObject();
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
-            data.orderGuid = orderGuid.ToString();
+            data.orderGuid = orderGuid?.ToString();
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
+            data.clientId = clientId;
 
             return await HttpWorker.QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTradesByOrder", data).ConfigureAwait(false);
         }
