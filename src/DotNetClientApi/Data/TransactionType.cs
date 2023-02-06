@@ -19,6 +19,7 @@
         DepositFee = 11,
         ReferralCommission = 12,
         AccountFee = 13,
-        StatementFee = 14
+        StatementFee = 14,
+        ReferralBonus = 15,
     }
 }
