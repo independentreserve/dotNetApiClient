@@ -418,7 +418,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "GetTradesByOrder",
                     Description = "GetTradesByOrder",
-                    Parameters = new[] { "orderGuid", "pageIndex", "pageSize" }
+                    Parameters = new[] { "orderGuid", "pageIndex", "pageSize", "bankOrderClientId" }
                 };
             }
         }
