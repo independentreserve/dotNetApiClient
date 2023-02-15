@@ -1,6 +1,6 @@
 ﻿namespace IndependentReserve.DotNetClientApi.Data
 {
-    public enum MakerOrTaker
+    public enum TradeSide
     {
         Unknown,
         Taker,

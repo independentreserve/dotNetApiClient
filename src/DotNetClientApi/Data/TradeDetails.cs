@@ -55,8 +55,8 @@ namespace IndependentReserve.DotNetClientApi.Data
         public string SecondaryCurrencyCode { get; set; }
 
         /// <summary>
-        /// Order side that initiated the trade
+        /// Order side that initiated the trade (Maker or Taker)
         /// </summary>
-        public MakerOrTaker MakerOrTaker { get; set; }
+        public TradeSide TradeSide { get; set; }
     }
 }
