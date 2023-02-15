@@ -53,5 +53,10 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// The secondary currency code.
         /// </summary>
         public string SecondaryCurrencyCode { get; set; }
+
+        /// <summary>
+        /// Order side that initiated the trade (Maker or Taker)
+        /// </summary>
+        public TradeSide TradeSide { get; set; }
     }
 }
