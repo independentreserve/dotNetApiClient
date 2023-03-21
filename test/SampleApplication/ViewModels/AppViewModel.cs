@@ -65,7 +65,6 @@ namespace SampleApplication.ViewModels
             _orderVolume = 0.1m;
             _volumeCurrencyType = CurrencyType.Primary;
             _orderGuid = string.Empty;
-            _fromTimestampUtc = DateTime.Now.AddDays(-90);
             _toTimestampUtc = null;
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
@@ -80,6 +79,10 @@ namespace SampleApplication.ViewModels
             ApiConfig = apiConfig;
 
             SetTransactionTypes(apiConfig);
+
+            SetFromTimestampUtc();
+
+            PropertyChanged += OnPropertyChanged;
         }
 
         private void SetTransactionTypes(ApiConfig apiConfig)
@@ -103,6 +106,31 @@ namespace SampleApplication.ViewModels
                 foreach (var transactionType in types)
                 {
                     TransactionTypes.Add(new TransactionTypeViewModel { IsSelected = false, Type = transactionType });
+                }
+            }
+        }
+
+        private void SetFromTimestampUtc()
+        {
+            FromTimestampUtc = DateTime.Now.AddDays(-90);
+        }
+
+        private void ResetFromTimestampUtc()
+        {
+            FromTimestampUtc = null;
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SelectedMethod))
+            {
+                if (SelectedMethod == MethodMetadata.GetClosedFilledOrders)
+                {
+                    ResetFromTimestampUtc();
+                }
+                else
+                {
+                    SetFromTimestampUtc();
                 }
             }
         }
