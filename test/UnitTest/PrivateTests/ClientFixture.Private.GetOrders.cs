@@ -86,6 +86,10 @@ namespace UnitTest
             }
         }
 
+        /// <summary>
+        /// Marked as Brittle since it sometimes breaks unit test due to timeout in Bank when executing dbo.BankOrderGetPaged without currency params
+        /// </summary>
+        [Category("Brittle")]
         [Test]
         public void GetClosedFilledOrdersNoCurrencies()
         {
