@@ -115,7 +115,7 @@ function Run-Tests{
         "$PSScriptRoot\test\UnitTest\bin\$configuration\UnitTest.dll"
     )
     
-    $excludeToUse = '"cat!=Brittle"'
+    $excludeToUse = '"cat!=Brittle and cat!=Integration"'
     $whereArg ="--where=$excludeToUse"
     $resultArg = "--result=$artifactDir\UnitTest.xml$testResultformat"
 

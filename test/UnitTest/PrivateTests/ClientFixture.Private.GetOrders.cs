@@ -86,6 +86,10 @@ namespace UnitTest
             }
         }
 
+        /// <summary>
+        /// Marked as Integration since it sometimes breaks unit test due to timeout in Bank when executing dbo.BankOrderGetPaged without currency params
+        /// </summary>
+        [Category("Integration")]
         [Test]
         public void GetClosedFilledOrdersNoCurrencies()
         {
