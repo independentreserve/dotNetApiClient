@@ -70,8 +70,8 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<CurrencyCode>> GetValidSecondaryCurrencyCodesAsync();
         IEnumerable<TransactionType> GetValidTransactionTypes();
         Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync();
-        BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId = null);
-        Task<BankOrder> PlaceLimitOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId);
+        BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId = null, TimeInForce? timeInForce = null);
+        Task<BankOrder> PlaceLimitOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId, TimeInForce? timeInForce = null);
         BankOrder PlaceMarketOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null, decimal? allowedSlippagePercent = null);
         Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null, decimal? allowedSlippagePercent = null);
 

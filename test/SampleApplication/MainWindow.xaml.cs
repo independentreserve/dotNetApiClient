@@ -159,7 +159,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.PlaceLimitOrder)
                     {
-                        await client.PlaceLimitOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.LimitOrderType, ViewModel.LimitOrderPrice ?? 0, ViewModel.OrderVolume ?? 0, ViewModel.BankOrderClientId);
+                        await client.PlaceLimitOrderAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.LimitOrderType, ViewModel.LimitOrderPrice ?? 0, ViewModel.OrderVolume ?? 0, ViewModel.BankOrderClientId, ViewModel.TimeInForce);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.PlaceMarketOrder)
                     {
