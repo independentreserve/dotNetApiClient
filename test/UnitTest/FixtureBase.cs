@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Net;
 using System.Threading;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Extensions;
@@ -36,11 +37,18 @@ namespace UnitTest
         {
             var envVarKey = "IR_DOTNETCLIENTAPI_TEST_CONFIG";
             var envVar = Environment.GetEnvironmentVariable(envVarKey);
+            
             if (string.IsNullOrEmpty(envVar))
             {
                 throw new Exception($"Unit tests require environment variable {envVarKey}");
             }
+
             var config = ApiConfigExtensions.FromCsv(envVar);
+            
+            if (config.BaseUrl.StartsWith("https"))
+            {
+                ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
+            }
             return config;
         }
     }
