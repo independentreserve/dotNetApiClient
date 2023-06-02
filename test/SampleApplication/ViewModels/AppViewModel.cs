@@ -36,6 +36,7 @@ namespace SampleApplication.ViewModels
         private CurrencyType _volumeCurrencyType;
         private string _orderGuid;
         private string _quoteGuid;
+        private string _dealGuid;
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
         private string _accountGuid;
@@ -81,6 +82,7 @@ namespace SampleApplication.ViewModels
             _bankOrderClientId = null;
             _allowedSlippagePercent = null;
             _quoteGuid = Guid.NewGuid().ToString();
+            _dealGuid = Guid.NewGuid().ToString();
 
             ApiConfig = apiConfig;
 
@@ -166,6 +168,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.RequestQuote,
                         MethodMetadata.ExecuteQuote,
                         MethodMetadata.GetExecutedDeals,
+                        MethodMetadata.GetDealDetails,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -462,6 +465,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _quoteGuid) return;
                 _quoteGuid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - deal guid - used by private API method GetDealDetails
+        /// </summary>
+        public string DealGuid
+        {
+            get { return _dealGuid; }
+            set
+            {
+                if (value == _dealGuid) return;
+                _dealGuid = value;
                 OnPropertyChanged();
             }
         }

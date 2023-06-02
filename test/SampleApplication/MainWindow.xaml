@@ -103,6 +103,12 @@
                     <TextBlock Style="{StaticResource Label}">Quote guid:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding QuoteGuid}" Width="250"></TextBox>
                 </StackPanel>
+                
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=dealGuid}">
+                    <TextBlock Style="{StaticResource Label}">Deal guid:</TextBlock>
+                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding DealGuid}" Width="250"></TextBox>
+                </StackPanel>
+                
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=accountGuid}">
                     <TextBlock Style="{StaticResource Label}">Account guid:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding AccountGuid}" Width="250"></TextBox>

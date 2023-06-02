@@ -528,6 +528,15 @@ namespace SampleApplication.ViewModels
                 Parameters = new[] {"primaryCurrency", "secondaryCurrency", "pageIndex", "pageSize"}
             };
 
+        //GetDealDetails(Guid dealGuid)
+        public static MethodMetadata GetDealDetails =>
+            new MethodMetadata()
+            {
+                Name = "GetDealDetails",
+                Description = "GetDealDetails",
+                Parameters = new[] {"dealGuid" }
+            };
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;

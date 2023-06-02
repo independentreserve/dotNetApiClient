@@ -318,6 +318,10 @@ namespace SampleApplication
                     {
                         await client.GetExecutedDealsAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDealDetails)
+                    {
+                        await client.GetDealDetailsAsync(ParseGuid(ViewModel.DealGuid));
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

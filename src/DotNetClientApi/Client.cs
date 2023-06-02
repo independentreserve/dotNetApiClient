@@ -1573,6 +1573,37 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetExecutedDeals", data).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Retrieves deal details by deal guid.
+        /// </summary>
+        /// <param name="dealGuid">The guid of deal</param>
+        /// <returns>deal object</returns>
+        public object GetDealDetails(Guid dealGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetDealDetailsAsync(dealGuid).Result;
+        }
+
+        /// <summary>
+        /// Retrieves deal details by deal guid.
+        /// </summary>
+        /// <param name="dealGuid">The guid of deal</param>
+        /// <returns>deal object</returns>
+        public async Task<object> GetDealDetailsAsync(Guid dealGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.dealGuid = dealGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<object>("/Private/GetDealDetails", data).ConfigureAwait(false);
+        }
+
         #endregion //Private API
 
         #region Helpers
