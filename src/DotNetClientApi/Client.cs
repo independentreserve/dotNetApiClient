@@ -1570,7 +1570,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetExecutedDeals", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<object>>("/Private/GetExecutedDeals", data).ConfigureAwait(false);
         }
 
         /// <summary>
