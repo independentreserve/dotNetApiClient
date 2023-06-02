@@ -510,7 +510,7 @@ namespace SampleApplication.ViewModels
                 Parameters = new[] {"primaryCurrency", "secondaryCurrency", "shopOrderType", "orderVolume", "volumeCurrencyType"}
             };
 
-        //RequestQuote(string quoteGuid)
+        //ExecuteQuote(string quoteGuid)
         public static MethodMetadata ExecuteQuote =>
             new MethodMetadata()
             {
