@@ -306,6 +306,10 @@ namespace SampleApplication
 
                         await client.CancelOrdersAsync(orderGuids);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.RequestQuote)
+                    {
+                        await client.RequestQuoteAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ShopOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType);
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

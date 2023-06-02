@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
+using IndependentReserve.DotNetClientApi.Data.Shop;
 using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
@@ -103,5 +104,21 @@ namespace IndependentReserve.DotNetClientApi
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
+
+        object RequestQuote(
+            CurrencyCode primaryCurrency, 
+            CurrencyCode secondaryCurrency, 
+            TradeAction orderType,
+            decimal volume, 
+            CurrencyType volumeCurrencyType
+            );
+
+        Task<object> RequestQuoteAsync(
+            CurrencyCode primaryCurrency, 
+            CurrencyCode secondaryCurrency, 
+            TradeAction orderType,
+            decimal volume, 
+            CurrencyType volumeCurrencyType
+            );
     }
 }

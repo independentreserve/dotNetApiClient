@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Shop;
 using NLog;
 using SampleApplication.Annotations;
 
@@ -29,6 +30,7 @@ namespace SampleApplication.ViewModels
         private int? _pageSize;
         private OrderType _limitOrderType;
         private OrderType _marketOrderType;
+        private TradeAction _shopOrderType;
         private decimal? _limitOrderPrice;
         private decimal? _orderVolume;
         private CurrencyType _volumeCurrencyType;
@@ -61,6 +63,7 @@ namespace SampleApplication.ViewModels
             _pageSize = 10;
             _limitOrderType = OrderType.LimitBid;
             _marketOrderType = OrderType.MarketOffer;
+            _shopOrderType = TradeAction.Buy;
             _limitOrderPrice = 500;
             _orderVolume = 0.1m;
             _volumeCurrencyType = CurrencyType.Primary;
@@ -157,7 +160,8 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetWithdrawalLimits,
                         MethodMetadata.GetDepositLimits,
                         MethodMetadata.GetOrderMinimumVolumes,
-                        MethodMetadata.GetCryptoWithdrawalFees
+                        MethodMetadata.GetCryptoWithdrawalFees,
+                        MethodMetadata.RequestQuote,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -357,6 +361,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _marketOrderType) return;
                 _marketOrderType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - shop order type - used by private API method RequestQuote
+        /// </summary>
+        public TradeAction ShopOrderType
+        {
+            get { return _shopOrderType; }
+            set
+            {
+                if (value == _shopOrderType) return;
+                _shopOrderType = value;
                 OnPropertyChanged();
             }
         }

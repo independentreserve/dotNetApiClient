@@ -68,6 +68,13 @@
                         <ComboBoxItem Tag="MarketOffer">Market Offer</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=shopOrderType}">
+                    <TextBlock Style="{StaticResource Label}">Market order type:</TextBlock>
+                    <ComboBox SelectedValue="{Binding ShopOrderType}" SelectedValuePath="Tag">
+                        <ComboBoxItem Tag="Buy" IsSelected="True">Buy</ComboBoxItem>
+                        <ComboBoxItem Tag="Sell">Sell</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=limitOrderPrice}">
                     <TextBlock Style="{StaticResource Label}">Price:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding LimitOrderPrice}"></TextBox>
