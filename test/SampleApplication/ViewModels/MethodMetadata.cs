@@ -519,6 +519,15 @@ namespace SampleApplication.ViewModels
                 Parameters = new[] {"quoteGuid"}
             };
 
+        //GetExecutedDeals(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
+        public static MethodMetadata GetExecutedDeals =>
+            new MethodMetadata()
+            {
+                Name = "GetExecutedDeals",
+                Description = "GetExecutedDeals",
+                Parameters = new[] {"primaryCurrency", "secondaryCurrency", "pageIndex", "pageSize"}
+            };
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;

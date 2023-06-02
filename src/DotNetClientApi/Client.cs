@@ -1504,18 +1504,14 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<object>("/Private/RequestQuote", data).ConfigureAwait(false);
         }
 
-        public object ExecuteQuote(
-            Guid quoteGuid
-            )
+        public object ExecuteQuote(Guid quoteGuid)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
             return ExecuteQuoteAsync(quoteGuid).Result;
         }
 
-        public async Task<object> ExecuteQuoteAsync(
-            Guid quoteGuid
-            )
+        public async Task<object> ExecuteQuoteAsync(Guid quoteGuid)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1526,6 +1522,55 @@ namespace IndependentReserve.DotNetClientApi
             data.quoteGuid = quoteGuid.ToString();
 
             return await HttpWorker.QueryPrivateAsync<object>("/Private/ExecuteQuote", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, with your already executed deals
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of deals</param>
+        /// <param name="secondaryCurrency">The secondary currency of deals</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your already executed deals</returns>
+        public Page<object> GetExecutedDeals(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            return GetExecutedDealsAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize).Result;
+        }
+
+        /// <summary>
+        /// Retrieves a page of a specified size, with your already executed deals
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency of deals</param>
+        /// <param name="secondaryCurrency">The secondary currency of deals</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <returns>page of a specified size, with your already executed deals</returns>
+        public async Task<Page<object>> GetExecutedDealsAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+
+            if (primaryCurrency.HasValue)
+            {
+                data.primaryCurrencyCode = primaryCurrency.ToString();
+            }
+
+            if (secondaryCurrency.HasValue)
+            {
+                data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            }
+
+            data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
+            data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
+
+            return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetExecutedDeals", data).ConfigureAwait(false);
         }
 
         #endregion //Private API

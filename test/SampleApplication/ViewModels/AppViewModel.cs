@@ -165,6 +165,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetCryptoWithdrawalFees,
                         MethodMetadata.RequestQuote,
                         MethodMetadata.ExecuteQuote,
+                        MethodMetadata.GetExecutedDeals,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();

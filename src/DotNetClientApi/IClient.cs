@@ -120,5 +120,13 @@ namespace IndependentReserve.DotNetClientApi
             decimal volume, 
             CurrencyType volumeCurrencyType
             );
+
+        object ExecuteQuote(Guid quoteGuid);
+
+        Task<object> ExecuteQuoteAsync(Guid quoteGuid);
+
+        Page<object> GetExecutedDeals(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize);
+
+        Task<Page<object>> GetExecutedDealsAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize);
     }
 }

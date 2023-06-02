@@ -314,6 +314,10 @@ namespace SampleApplication
                     {
                         await client.ExecuteQuoteAsync(ParseGuid(ViewModel.QuoteGuid));
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetExecutedDeals)
+                    {
+                        await client.GetExecutedDealsAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }
