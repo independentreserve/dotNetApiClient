@@ -35,6 +35,7 @@ namespace SampleApplication.ViewModels
         private decimal? _orderVolume;
         private CurrencyType _volumeCurrencyType;
         private string _orderGuid;
+        private string _quoteGuid;
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
         private string _accountGuid;
@@ -79,6 +80,7 @@ namespace SampleApplication.ViewModels
             _maxDepthValueOrderBook = null;
             _bankOrderClientId = null;
             _allowedSlippagePercent = null;
+            _quoteGuid = Guid.NewGuid().ToString();
 
             ApiConfig = apiConfig;
 
@@ -162,6 +164,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetOrderMinimumVolumes,
                         MethodMetadata.GetCryptoWithdrawalFees,
                         MethodMetadata.RequestQuote,
+                        MethodMetadata.ExecuteQuote,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -444,6 +447,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _orderGuids) return;
                 _orderGuids = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - quote guid - used by private API method ExecuteQuote
+        /// </summary>
+        public string QuoteGuid
+        {
+            get { return _quoteGuid; }
+            set
+            {
+                if (value == _quoteGuid) return;
+                _quoteGuid = value;
                 OnPropertyChanged();
             }
         }

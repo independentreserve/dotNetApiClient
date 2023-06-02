@@ -502,19 +502,22 @@ namespace SampleApplication.ViewModels
         }
 
         //RequestQuote(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, TradeAction orderType, decimal volume, CurrencyType volumeCurrencyType)
-        public static MethodMetadata RequestQuote
-        {
-            get
+        public static MethodMetadata RequestQuote =>
+            new MethodMetadata()
             {
-                return new MethodMetadata()
-                       {
-                           Name = "RequestQuote",
-                           Description = "RequestQuote",
-                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "shopOrderType", "orderVolume", "volumeCurrencyType"}
-                       };
-            }
-        }
-        
+                Name = "RequestQuote",
+                Description = "RequestQuote",
+                Parameters = new[] {"primaryCurrency", "secondaryCurrency", "shopOrderType", "orderVolume", "volumeCurrencyType"}
+            };
+
+        //RequestQuote(string quoteGuid)
+        public static MethodMetadata ExecuteQuote =>
+            new MethodMetadata()
+            {
+                Name = "ExecuteQuote",
+                Description = "ExecuteQuote",
+                Parameters = new[] {"quoteGuid"}
+            };
 
         public override bool Equals(Object obj)
         {

@@ -310,6 +310,10 @@ namespace SampleApplication
                     {
                         await client.RequestQuoteAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ShopOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.ExecuteQuote)
+                    {
+                        await client.ExecuteQuoteAsync(ParseGuid(ViewModel.QuoteGuid));
+                    }
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

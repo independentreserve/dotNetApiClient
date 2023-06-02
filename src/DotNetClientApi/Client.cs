@@ -4,7 +4,6 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Transactions;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
 using IndependentReserve.DotNetClientApi.Data.Shop;
@@ -890,7 +889,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public Page<IndependentReserve.DotNetClientApi.Data.Transaction>  GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize)
+        public Page<Transaction>  GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -908,7 +907,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public async Task<Page<IndependentReserve.DotNetClientApi.Data.Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc,
+        public async Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc,
             DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize)
         {
             ThrowIfDisposed();
@@ -924,7 +923,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
 
-            return await HttpWorker.QueryPrivateAsync<Page<IndependentReserve.DotNetClientApi.Data.Transaction>>("/Private/GetTransactions", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Page<Transaction>>("/Private/GetTransactions", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1503,6 +1502,30 @@ namespace IndependentReserve.DotNetClientApi
             data.volumeCurrencyType = volumeCurrencyType.ToString();
 
             return await HttpWorker.QueryPrivateAsync<object>("/Private/RequestQuote", data).ConfigureAwait(false);
+        }
+
+        public object ExecuteQuote(
+            Guid quoteGuid
+            )
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return ExecuteQuoteAsync(quoteGuid).Result;
+        }
+
+        public async Task<object> ExecuteQuoteAsync(
+            Guid quoteGuid
+            )
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            dynamic data = new ExpandoObject();
+            data.apiKey = _apiKey;
+            data.nonce = GetNonce();
+            data.quoteGuid = quoteGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<object>("/Private/ExecuteQuote", data).ConfigureAwait(false);
         }
 
         #endregion //Private API
