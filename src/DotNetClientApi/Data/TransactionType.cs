@@ -21,5 +21,7 @@
         AccountFee = 13,
         StatementFee = 14,
         ReferralBonus = 15,
+        Buy = 16,
+        Sell = 17,
     }
 }
