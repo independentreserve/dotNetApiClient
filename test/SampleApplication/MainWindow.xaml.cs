@@ -292,7 +292,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
                     {
-                        var orderGuids = ViewModel.OrderGuids.Split(',').Select(o =>
+                        var orderGuids = ViewModel.OrderGuids.Split(new []{',' }, StringSplitOptions.RemoveEmptyEntries).Select(o =>
                         {
                             var str = o.Trim();
 
