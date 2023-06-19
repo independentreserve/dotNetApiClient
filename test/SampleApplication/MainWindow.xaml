@@ -68,6 +68,13 @@
                         <ComboBoxItem Tag="MarketOffer">Market Offer</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=shopOrderType}">
+                    <TextBlock Style="{StaticResource Label}">Market order type:</TextBlock>
+                    <ComboBox SelectedValue="{Binding ShopOrderType}" SelectedValuePath="Tag">
+                        <ComboBoxItem Tag="Buy" IsSelected="True">Buy</ComboBoxItem>
+                        <ComboBoxItem Tag="Sell">Sell</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=limitOrderPrice}">
                     <TextBlock Style="{StaticResource Label}">Price:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding LimitOrderPrice}"></TextBox>
@@ -92,6 +99,16 @@
                     <TextBox Style="{StaticResource TextArea}" Text="{Binding OrderGuids}" Width="250"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=quoteGuid}">
+                    <TextBlock Style="{StaticResource Label}">Quote guid:</TextBlock>
+                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding QuoteGuid}" Width="250"></TextBox>
+                </StackPanel>
+                
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=dealGuid}">
+                    <TextBlock Style="{StaticResource Label}">Deal guid:</TextBlock>
+                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding DealGuid}" Width="250"></TextBox>
+                </StackPanel>
+                
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=accountGuid}">
                     <TextBlock Style="{StaticResource Label}">Account guid:</TextBlock>
                     <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding AccountGuid}" Width="250"></TextBox>

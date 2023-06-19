@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Shop;
 using NLog;
 using SampleApplication.Annotations;
 
@@ -29,10 +30,13 @@ namespace SampleApplication.ViewModels
         private int? _pageSize;
         private OrderType _limitOrderType;
         private OrderType _marketOrderType;
+        private TradeAction _shopOrderType;
         private decimal? _limitOrderPrice;
         private decimal? _orderVolume;
         private CurrencyType _volumeCurrencyType;
         private string _orderGuid;
+        private string _quoteGuid;
+        private string _dealGuid;
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
         private string _accountGuid;
@@ -61,6 +65,7 @@ namespace SampleApplication.ViewModels
             _pageSize = 10;
             _limitOrderType = OrderType.LimitBid;
             _marketOrderType = OrderType.MarketOffer;
+            _shopOrderType = TradeAction.Buy;
             _limitOrderPrice = 500;
             _orderVolume = 0.1m;
             _volumeCurrencyType = CurrencyType.Primary;
@@ -76,6 +81,8 @@ namespace SampleApplication.ViewModels
             _maxDepthValueOrderBook = null;
             _bankOrderClientId = null;
             _allowedSlippagePercent = null;
+            _quoteGuid = Guid.NewGuid().ToString();
+            _dealGuid = Guid.NewGuid().ToString();
 
             ApiConfig = apiConfig;
 
@@ -157,7 +164,11 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetWithdrawalLimits,
                         MethodMetadata.GetDepositLimits,
                         MethodMetadata.GetOrderMinimumVolumes,
-                        MethodMetadata.GetCryptoWithdrawalFees
+                        MethodMetadata.GetCryptoWithdrawalFees,
+                        MethodMetadata.RequestQuote,
+                        MethodMetadata.ExecuteQuote,
+                        MethodMetadata.GetExecutedDeals,
+                        MethodMetadata.GetDealDetails,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -362,6 +373,20 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
+        /// Method parameter - shop order type - used by private API method RequestQuote
+        /// </summary>
+        public TradeAction ShopOrderType
+        {
+            get { return _shopOrderType; }
+            set
+            {
+                if (value == _shopOrderType) return;
+                _shopOrderType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Method parameter - limit order price - used by private API method PlaceLimitOrder
         /// </summary>
         public decimal? LimitOrderPrice
@@ -426,6 +451,34 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _orderGuids) return;
                 _orderGuids = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - quote guid - used by private API method ExecuteQuote
+        /// </summary>
+        public string QuoteGuid
+        {
+            get { return _quoteGuid; }
+            set
+            {
+                if (value == _quoteGuid) return;
+                _quoteGuid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - deal guid - used by private API method GetDealDetails
+        /// </summary>
+        public string DealGuid
+        {
+            get { return _dealGuid; }
+            set
+            {
+                if (value == _dealGuid) return;
+                _dealGuid = value;
                 OnPropertyChanged();
             }
         }
