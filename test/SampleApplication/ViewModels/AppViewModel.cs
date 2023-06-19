@@ -54,6 +54,7 @@ namespace SampleApplication.ViewModels
         private decimal? _maxDepthValueOrderBook;
         private string _bankOrderClientId;
         private decimal? _allowedSlippagePercent;
+        private bool _calculateTotalItems;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -83,6 +84,7 @@ namespace SampleApplication.ViewModels
             _allowedSlippagePercent = null;
             _quoteGuid = Guid.NewGuid().ToString();
             _dealGuid = Guid.NewGuid().ToString();
+            _calculateTotalItems = true;
 
             ApiConfig = apiConfig;
 
@@ -715,6 +717,20 @@ namespace SampleApplication.ViewModels
                     OnPropertyChanged();
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - allows you to disable the calculation of TotalItems used in pagination (this allows you to execute the request faster)
+        /// </summary>
+        public bool CalculateTotalItems
+        {
+            get { return _calculateTotalItems; }
+            set
+            {
+                if (value == _calculateTotalItems) return;
+                _calculateTotalItems = value;
+                OnPropertyChanged();
             }
         }
 

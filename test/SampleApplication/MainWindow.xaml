@@ -210,6 +210,11 @@
                     <TextBox Text="{Binding AllowedSlippagePercent}"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=calculateTotalItems}">
+                    <TextBlock Style="{StaticResource Label}">Calculate total items</TextBlock>
+                    <CheckBox IsChecked="{Binding CalculateTotalItems}" VerticalAlignment="Center"></CheckBox>
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
         
