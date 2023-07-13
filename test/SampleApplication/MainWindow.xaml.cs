@@ -306,6 +306,10 @@ namespace SampleApplication
 
                         await client.CancelOrdersAsync(orderGuids);
                     }
+                    /*
+
+                    // IR-6563 RFQ is disabled
+                    
                     else if (ViewModel.SelectedMethod == MethodMetadata.RequestQuote)
                     {
                         await client.RequestQuoteAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ShopOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType);
@@ -322,6 +326,8 @@ namespace SampleApplication
                     {
                         await client.GetDealDetailsAsync(ParseGuid(ViewModel.DealGuid));
                     }
+
+                    */
 
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

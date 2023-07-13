@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
-using IndependentReserve.DotNetClientApi.Data.Shop;
 using IndependentReserve.DotNetClientApi.Helpers;
 using IndependentReserve.DotNetClientApi.Withdrawal;
 
@@ -1471,6 +1470,10 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<Dictionary<string, List<WithdrawalLimit>>>("/Private/GetWithdrawalLimits", data).ConfigureAwait(false);
         }
 
+        /*
+
+        // IR-6563 RFQ is disabled
+
         public object RequestQuote(
             CurrencyCode primaryCurrency, 
             CurrencyCode secondaryCurrency, 
@@ -1605,7 +1608,7 @@ namespace IndependentReserve.DotNetClientApi
             data.dealGuid = dealGuid.ToString();
 
             return await HttpWorker.QueryPrivateAsync<object>("/Private/GetDealDetails", data).ConfigureAwait(false);
-        }
+        }*/
 
         #endregion //Private API
 

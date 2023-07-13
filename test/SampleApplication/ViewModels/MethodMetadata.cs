@@ -501,6 +501,10 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        /*
+
+        // IR-6563 RFQ is disabled
+
         //RequestQuote(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, TradeAction orderType, decimal volume, CurrencyType volumeCurrencyType)
         public static MethodMetadata RequestQuote =>
             new MethodMetadata()
@@ -536,6 +540,7 @@ namespace SampleApplication.ViewModels
                 Description = "GetDealDetails",
                 Parameters = new[] {"dealGuid" }
             };
+        */
 
         public override bool Equals(Object obj)
         {

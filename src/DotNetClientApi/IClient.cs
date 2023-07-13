@@ -104,8 +104,11 @@ namespace IndependentReserve.DotNetClientApi
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
+        /*
 
-        // todo: replace objects with real shop related classes 
+        // IR-6563 RFQ is disabled
+
+        // todo: replace objects with real RFQ related classes 
 
         object RequestQuote(
             CurrencyCode primaryCurrency, 
@@ -134,5 +137,6 @@ namespace IndependentReserve.DotNetClientApi
         object GetDealDetails(Guid dealGuid);
 
         Task<object> GetDealDetailsAsync(Guid dealGuid);
+        */
     }
 }
