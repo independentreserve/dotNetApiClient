@@ -167,15 +167,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetDepositLimits,
                         MethodMetadata.GetOrderMinimumVolumes,
                         MethodMetadata.GetCryptoWithdrawalFees,
-                        /*
-
-                        // IR-6563 RFQ is disabled
-
-                        MethodMetadata.RequestQuote,
-                        MethodMetadata.ExecuteQuote,
-                        MethodMetadata.GetExecutedDeals,
-                        MethodMetadata.GetDealDetails,
-                        */
+                        
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();

@@ -104,39 +104,6 @@ namespace IndependentReserve.DotNetClientApi
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
-        /*
-
-        // IR-6563 RFQ is disabled
-
-        // todo: replace objects with real RFQ related classes 
-
-        object RequestQuote(
-            CurrencyCode primaryCurrency, 
-            CurrencyCode secondaryCurrency, 
-            TradeAction orderType,
-            decimal volume, 
-            CurrencyType volumeCurrencyType
-            );
-
-        Task<object> RequestQuoteAsync(
-            CurrencyCode primaryCurrency, 
-            CurrencyCode secondaryCurrency, 
-            TradeAction orderType,
-            decimal volume, 
-            CurrencyType volumeCurrencyType
-            );
-
-        object ExecuteQuote(Guid quoteGuid);
-
-        Task<object> ExecuteQuoteAsync(Guid quoteGuid);
-
-        Page<object> GetExecutedDeals(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize);
-
-        Task<Page<object>> GetExecutedDealsAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize);
-
-        object GetDealDetails(Guid dealGuid);
-
-        Task<object> GetDealDetailsAsync(Guid dealGuid);
-        */
+        
     }
 }
