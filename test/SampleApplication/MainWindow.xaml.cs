@@ -306,23 +306,7 @@ namespace SampleApplication
 
                         await client.CancelOrdersAsync(orderGuids);
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.RequestQuote)
-                    {
-                        await client.RequestQuoteAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ShopOrderType, ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType);
-                    }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.ExecuteQuote)
-                    {
-                        await client.ExecuteQuoteAsync(ParseGuid(ViewModel.QuoteGuid));
-                    }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetExecutedDeals)
-                    {
-                        await client.GetExecutedDealsAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
-                    }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDealDetails)
-                    {
-                        await client.GetDealDetailsAsync(ParseGuid(ViewModel.DealGuid));
-                    }
-
+                    
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }
                 catch (Exception ex)
