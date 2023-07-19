@@ -890,13 +890,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="txTypes">Transaction types array for filtering results. If array is empty or null, than no filter will be applied and all Transaction types will be returned</param>
         /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <param name="calculateTotalItems">allows you to disable the calculation of TotalItems</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public Page<Transaction>  GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize)
+        public Page<Transaction>  GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool calculateTotalItems)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetTransactionsAsync(accountGuid, fromTimestampUtc, toTimestampUtc, txTypes, pageIndex, pageSize).Result;
+            return GetTransactionsAsync(accountGuid, fromTimestampUtc, toTimestampUtc, txTypes, pageIndex, pageSize, calculateTotalItems).Result;
         }
 
         /// <summary>
@@ -908,9 +909,10 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="txTypes">Transaction types array for filtering results. If array is empty or null, than no filter will be applied and all Transaction types will be returned</param>        
         /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        /// <param name="calculateTotalItems">allows you to disable the calculation of TotalItems</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
         public async Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc,
-            DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize)
+            DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool calculateTotalItems)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -924,6 +926,7 @@ namespace IndependentReserve.DotNetClientApi
             data.txTypes = txTypes;
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
+            data.calculateTotalItems = calculateTotalItems.ToString(CultureInfo.InvariantCulture);
 
             return await HttpWorker.QueryPrivateAsync<Page<Transaction>>("/Private/GetTransactions", data).ConfigureAwait(false);
         }

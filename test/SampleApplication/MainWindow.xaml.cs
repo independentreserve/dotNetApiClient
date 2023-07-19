@@ -196,7 +196,7 @@ namespace SampleApplication
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactions)
                     {
                         var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
-                        await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                        await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.CalculateTotalItems);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoDeposits)
                     {
@@ -292,7 +292,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
                     {
-                        var orderGuids = ViewModel.OrderGuids.Split(',').Select(o =>
+                        var orderGuids = ViewModel.OrderGuids.Split(new []{',' }, StringSplitOptions.RemoveEmptyEntries).Select(o =>
                         {
                             var str = o.Trim();
 
@@ -306,7 +306,7 @@ namespace SampleApplication
 
                         await client.CancelOrdersAsync(orderGuids);
                     }
-
+                    
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }
                 catch (Exception ex)

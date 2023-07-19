@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Limits;
+using IndependentReserve.DotNetClientApi.Data.Shop;
 using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
@@ -55,8 +56,8 @@ namespace IndependentReserve.DotNetClientApi
         Page<TradeDetails> GetTrades(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc);
         Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc);
         Task<Page<TradeDetails>> GetTradesByOrder(Guid? orderGuid, int pageIndex, int pageSize, string clientId = null);
-        Page<Transaction> GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);
-        Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize);
+        Page<Transaction> GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool calculateTotalItems);
+        Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool calculateTotalItems);
         Task<Page<DepositTransaction>> GetCryptoDepositsAsync(CurrencyCode primaryCurrency, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, int pageIndex, int pageSize);
         IEnumerable<OrderType> GetValidLimitOrderTypes();
         Task<IEnumerable<OrderType>> GetValidLimitOrderTypesAsync();
@@ -103,5 +104,6 @@ namespace IndependentReserve.DotNetClientApi
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
+        
     }
 }
