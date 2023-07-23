@@ -210,9 +210,9 @@
                     <TextBox Text="{Binding AllowedSlippagePercent}"></TextBox>
                 </StackPanel>
 
-                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=calculateTotalItems}">
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=includeTotals}">
                     <TextBlock Style="{StaticResource Label}">Calculate total items</TextBlock>
-                    <CheckBox IsChecked="{Binding CalculateTotalItems}" VerticalAlignment="Center"></CheckBox>
+                    <CheckBox IsChecked="{Binding IncludeTotals}" VerticalAlignment="Center"></CheckBox>
                 </StackPanel>
 
             </StackPanel>
