@@ -27,7 +27,7 @@ namespace SampleApplication
 
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) =>
             {
-                // [Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_IGNORE_SSL_ERROR", "true", "Machine")
+                // [Environment]::SetEnvironmentVariable("IR_DOTNETCLIENTAPI_IGNORE_SSL_ERROR", "true", "Process")
                 const string envKeyIgnoreSsl = "IR_DOTNETCLIENTAPI_IGNORE_SSL_ERROR";
                 var ignoreSslText = Environment.GetEnvironmentVariable(envKeyIgnoreSsl);
 
@@ -187,7 +187,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetClosedFilledOrders)
                     {
-                        await client.GetClosedFilledOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                        await client.GetClosedFilledOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.FromTimestampUtc);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderDetails)
                     {
@@ -196,7 +196,7 @@ namespace SampleApplication
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactions)
                     {
                         var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
-                        await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                        await client.GetTransactionsAsync(ParseGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoDeposits)
                     {
@@ -306,7 +306,7 @@ namespace SampleApplication
 
                         await client.CancelOrdersAsync(orderGuids);
                     }
-
+                    
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }
                 catch (Exception ex)
