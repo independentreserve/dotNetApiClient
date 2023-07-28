@@ -210,6 +210,11 @@
                     <TextBox Text="{Binding AllowedSlippagePercent}"></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=timeInForce}">
+                    <TextBlock Style="{StaticResource Label}" >Time in force:</TextBlock>
+                    <SampleApplication:TimeInForceComboBox SelectedValue="{Binding TimeInForce}" Width="150"></SampleApplication:TimeInForceComboBox>
+                </StackPanel>
+
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=includeTotals}">
                     <TextBlock Style="{StaticResource Label}">Calculate total items</TextBlock>
                     <CheckBox IsChecked="{Binding IncludeTotals}" VerticalAlignment="Center"></CheckBox>

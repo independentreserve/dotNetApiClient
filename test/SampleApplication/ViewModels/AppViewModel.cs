@@ -54,6 +54,7 @@ namespace SampleApplication.ViewModels
         private decimal? _maxDepthValueOrderBook;
         private string _bankOrderClientId;
         private decimal? _allowedSlippagePercent;
+        private TimeInForce? _timeInForce;
         private bool _includeTotals;
 
         public AppViewModel(ApiConfig apiConfig)
@@ -81,6 +82,7 @@ namespace SampleApplication.ViewModels
             _maxDepthValueOrderBook = null;
             _bankOrderClientId = null;
             _allowedSlippagePercent = null;
+            _timeInForce = null;
             _quoteGuid = Guid.NewGuid().ToString();
             _dealGuid = Guid.NewGuid().ToString();
             _includeTotals = true;
@@ -742,6 +744,19 @@ namespace SampleApplication.ViewModels
                     OnPropertyChanged();
                 }
 
+            }
+        }
+
+        public TimeInForce? TimeInForce
+        {
+            get { return _timeInForce; }
+            set
+            {
+                if (_timeInForce != value)
+                {
+                    _timeInForce = value;
+                    OnPropertyChanged();
+                }
             }
         }
 

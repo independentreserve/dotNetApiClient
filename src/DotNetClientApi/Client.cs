@@ -478,6 +478,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="price">The price in secondary currency to buy/sell</param>
         /// <param name="clientId">Client side ID</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
+        /// <param name="timeInForce">The optional limit order behavior definition</param>
         /// <returns>newly created limit order</returns>
         public BankOrder PlaceLimitOrder(
             CurrencyCode primaryCurrency, 
@@ -485,7 +486,8 @@ namespace IndependentReserve.DotNetClientApi
             OrderType orderType, 
             decimal price, 
             decimal volume,
-            string clientId = null)
+            string clientId = null,
+            TimeInForce? timeInForce = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -501,6 +503,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="price">The price in secondary currency to buy/sell</param>
         /// <param name="volume">The volume to buy/sell in primary currency</param>
         /// <param name="clientId">Client side ID</param>
+        /// <param name="timeInForce">The optional limit order behavior definition</param>
         /// <returns>newly created limit order</returns>
         public async Task<BankOrder> PlaceLimitOrderAsync(
             CurrencyCode primaryCurrency, 
@@ -508,7 +511,8 @@ namespace IndependentReserve.DotNetClientApi
             OrderType orderType, 
             decimal price, 
             decimal volume,
-            string clientId = null)
+            string clientId = null,
+            TimeInForce? timeInForce = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -522,6 +526,7 @@ namespace IndependentReserve.DotNetClientApi
             data.price = price.ToString(CultureInfo.InvariantCulture);
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
             data.clientId = clientId;
+            data.timeInForce = timeInForce?.ToString();
 
             return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/PlaceLimitOrder", data).ConfigureAwait(false);
         }
