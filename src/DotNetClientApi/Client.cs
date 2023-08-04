@@ -766,13 +766,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="fromTimestampUtc">an optional from date to filter OrderDate field</param>
+        /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
         /// <returns>page of a specified size, with your Closed filled orders</returns>
-        public Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, DateTime? fromTimestampUtc = null)
+        public Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetClosedFilledOrdersAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize, fromTimestampUtc).Result;
+            return GetClosedFilledOrdersAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize, includeTotals, fromTimestampUtc).Result;
         }
 
         /// <summary>
@@ -783,8 +784,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="fromTimestampUtc">an optional from date to filter OrderDate field</param>
+        /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
         /// <returns>page of a specified size, with your Closed filled orders</returns>
-        public async Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, DateTime? fromTimestampUtc = null)
+        public async Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -806,6 +808,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
+            data.includeTotals = includeTotals.ToString();
 
             return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedFilledOrders", data).ConfigureAwait(false);
         }
