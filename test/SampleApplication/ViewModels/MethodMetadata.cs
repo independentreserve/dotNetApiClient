@@ -168,7 +168,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "GetClosedOrders",
                            Description = "GetClosedOrders",
-                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "pageIndex", "pageSize"}
+                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "pageIndex", "pageSize", "includeTotals" }
                        };
             }
         }

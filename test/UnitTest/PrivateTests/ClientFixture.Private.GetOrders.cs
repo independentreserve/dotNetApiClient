@@ -40,7 +40,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                Page<BankHistoryOrder> page = client.GetClosedOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10);
+                Page<BankHistoryOrder> page = client.GetClosedOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10, true);
 
                 Assert.IsNotNull(page);
 
@@ -61,7 +61,7 @@ namespace UnitTest
         {
             using (var client = CreatePrivateClient())
             {
-                Page<BankHistoryOrder> page = client.GetClosedOrders(null, null, 1, 10);
+                Page<BankHistoryOrder> page = client.GetClosedOrders(null, null, 1, 10, true);
 
                 Assert.IsNotNull(page);
 
