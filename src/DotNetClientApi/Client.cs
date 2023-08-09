@@ -717,12 +717,12 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your Closed and Cancelled orders</returns>
-        public Page<BankHistoryOrder> GetClosedOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
+        public Page<BankHistoryOrder> GetClosedOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, DateTime? fromTimestampUtc = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetClosedOrdersAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize).Result;
+            return GetClosedOrdersAsync(primaryCurrency, secondaryCurrency, pageIndex, pageSize, fromTimestampUtc).Result;
         }
 
         /// <summary>
@@ -733,7 +733,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <returns>page of a specified size, with your Closed and Cancelled orders</returns>
-        public async Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize)
+        public async Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, DateTime? fromTimestampUtc = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -754,6 +754,7 @@ namespace IndependentReserve.DotNetClientApi
 
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
+            data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
 
             return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedOrders", data).ConfigureAwait(false);
         }
