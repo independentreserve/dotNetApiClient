@@ -183,11 +183,11 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetClosedOrders)
                     {
-                        await client.GetClosedOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.FromTimestampUtc);
+                        await client.GetClosedOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals, ViewModel.FromTimestampUtc);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetClosedFilledOrders)
                     {
-                        await client.GetClosedFilledOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.FromTimestampUtc);
+                        await client.GetClosedFilledOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals, ViewModel.FromTimestampUtc);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderDetails)
                     {
