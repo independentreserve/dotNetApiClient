@@ -104,6 +104,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
-        
+
+        Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig();
     }
 }

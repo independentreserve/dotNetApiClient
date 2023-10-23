@@ -488,6 +488,14 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata GetPrimaryCurrencyConfig =>
+            new MethodMetadata()
+            {
+                Name = "GetPrimaryCurrencyConfig",
+                Description = "GetPrimaryCurrencyConfig",
+                Parameters = new string[] { }
+            };
+
         public static MethodMetadata CancelOrders
         {
             get

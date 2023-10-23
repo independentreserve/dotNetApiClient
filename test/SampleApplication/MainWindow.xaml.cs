@@ -286,9 +286,9 @@ namespace SampleApplication
                     {
                         await client.GetOrderMinimumVolumes();
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoWithdrawalFees)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencyConfig)
                     {
-                        await client.GetCryptoWithdrawalFees();
+                        await client.GetPrimaryCurrencyConfig();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
                     {
