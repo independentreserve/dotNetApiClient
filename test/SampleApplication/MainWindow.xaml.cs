@@ -290,6 +290,10 @@ namespace SampleApplication
                     {
                         await client.GetCryptoWithdrawalFees();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencyConfig)
+                    {
+                        await client.GetPrimaryCurrencyConfig();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
                     {
                         var orderGuids = ViewModel.OrderGuids.Split(new []{',' }, StringSplitOptions.RemoveEmptyEntries).Select(o =>

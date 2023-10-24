@@ -455,11 +455,23 @@ namespace IndependentReserve.DotNetClientApi
             return ConvertToCurrencyDictionary(result);
         }
 
+        /// <summary>
+        /// Returns the fee schedule for crypto withdrawals
+        /// </summary>
         public async Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees()
         {
             ThrowIfDisposed();
             var result = await HttpWorker.QueryPublicAsync<Dictionary<string, decimal>>("/Public/GetCryptoWithdrawalFees");
             return ConvertToCurrencyDictionary(result);
+        }
+
+        /// <summary>
+        /// Returns the configuration of all primary currencies
+        /// </summary>
+        public async Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyConfiguration>>("/Public/GetPrimaryCurrencyConfig");
         }
 
         private Dictionary<CurrencyCode, TValue> ConvertToCurrencyDictionary<TValue>(Dictionary<string, TValue> data) 

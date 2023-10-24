@@ -197,7 +197,8 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetDepositLimits,
                         MethodMetadata.GetOrderMinimumVolumes,
                         MethodMetadata.GetCryptoWithdrawalFees,
-                        
+                        MethodMetadata.GetPrimaryCurrencyConfig,
+
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
