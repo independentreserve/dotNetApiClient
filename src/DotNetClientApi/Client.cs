@@ -503,7 +503,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
-            return PlaceLimitOrderAsync(primaryCurrency, secondaryCurrency, orderType, price, volume, clientId).Result;
+            return PlaceLimitOrderAsync(primaryCurrency, secondaryCurrency, orderType, price, volume, clientId, timeInForce).Result;
         }
 
         /// <summary>
