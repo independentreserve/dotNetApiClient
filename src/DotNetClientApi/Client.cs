@@ -31,6 +31,7 @@ namespace IndependentReserve.DotNetClientApi
         public string LastRequestHttpMethod => HttpWorker.LastRequestHttpMethod;
         public string LastRequestParameters => HttpWorker.LastRequestParameters;
         public string LastResponseRaw => HttpWorker.LastResponseRaw;
+        public TimeSpan LastRequestDuration => HttpWorker.LastRequestDuration;
 
         /// <summary>
         /// Support injecting an alternate implementation

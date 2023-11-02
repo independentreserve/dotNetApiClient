@@ -11,6 +11,7 @@ namespace IndependentReserve.DotNetClientApi
         string LastRequestParameters { get; }
         string LastRequestUrl { get; }
         string LastResponseRaw { get; }
+        TimeSpan LastRequestDuration { get; }
 
         HttpContent CreateRequestContent(string url, dynamic request);
         void Dispose();

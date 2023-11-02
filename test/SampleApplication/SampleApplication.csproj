@@ -73,6 +73,7 @@
     <Compile Include="Config\EnvironmentVariableConfigProvider.cs" />
     <Compile Include="Config\IConfigProvider.cs" />
     <Compile Include="CurrencyComboBox.cs" />
+    <Compile Include="Extensions\TimespanExtensions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="TimeInForceComboBox.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
@@ -131,6 +132,7 @@
       <Name>DotNetClientApi</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

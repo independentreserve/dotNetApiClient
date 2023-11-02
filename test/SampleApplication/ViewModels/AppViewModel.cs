@@ -22,6 +22,7 @@ namespace SampleApplication.ViewModels
         private string _lastRequestParameters;
         private string _lastRequestResponse;
         private string _lastRequestUrl;
+        private string _lastRequestDuration;
         private CurrencyCode _primaryCurrency;
         private CurrencyCode _secondaryCurrency;
         private int? _numberOfRecentTradesToRetrieve;
@@ -271,6 +272,20 @@ namespace SampleApplication.ViewModels
                 if (_lastRequestUrl != value)
                 {
                     _lastRequestUrl = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+        public string LastRequestDuration
+        {
+            get => _lastRequestDuration;
+            set
+            {
+                if (_lastRequestDuration != value)
+                {
+                    _lastRequestDuration = value;
                     OnPropertyChanged();
                 }
 

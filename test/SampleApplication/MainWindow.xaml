@@ -235,7 +235,9 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5,0,5">
                 <TextBlock FontWeight="Bold">Url:</TextBlock>
-                <TextBlock Margin="5,0,0,0"  Text="{Binding Path=LastRequestUrl}"></TextBlock>
+                <TextBlock Margin="5,0,5,0"  Text="{Binding Path=LastRequestUrl}"></TextBlock>
+                <TextBlock FontWeight="Bold">Duration:</TextBlock>
+                <TextBlock Margin="5,0,0,0"  Text="{Binding Path=LastRequestDuration}"></TextBlock>
             </StackPanel>
 
             <TextBlock Grid.Row="1" Margin="0,5,0,5" FontWeight="Bold">Parameters:</TextBlock>

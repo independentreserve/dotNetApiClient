@@ -9,6 +9,7 @@ using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
 using Newtonsoft.Json;
 using NLog;
+using SampleApplication.Extensions;
 using SampleApplication.ViewModels;
 
 namespace SampleApplication
@@ -330,6 +331,8 @@ namespace SampleApplication
                 }
 
                 ViewModel.LastRequestUrl = string.Format("{0} {1}", client.LastRequestHttpMethod, client.LastRequestUrl);
+                ViewModel.LastRequestDuration = client.LastRequestDuration.ToHumanReadable();
+
                 ViewModel.LastRequestParameters = client.LastRequestHttpMethod == "GET" ? (
                     
                     string.IsNullOrWhiteSpace(client.LastRequestParameters)?"no parameters": client.LastRequestParameters ) : 

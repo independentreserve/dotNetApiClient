@@ -3,6 +3,7 @@ using IndependentReserve.DotNetClientApi.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -25,9 +26,8 @@ namespace IndependentReserve.DotNetClientApi
         public string LastRequestHttpMethod { get; private set; }
         public string LastRequestParameters { get; private set; }
         public string LastResponseRaw { get; private set; }
-
+        public TimeSpan LastRequestDuration { get; private set; }
         
-
         static HttpWorker()
         {
             _version = typeof(HttpWorker).Assembly.GetName().Version.ToString();
@@ -45,6 +45,7 @@ namespace IndependentReserve.DotNetClientApi
             _client.DefaultRequestHeaders.UserAgent.ParseAdd("irDotNetClient " + _version);
             _client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip");
             _client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("deflate");
+            
             foreach(var header in headers ?? Enumerable.Empty<KeyValuePair<string, string>>())
             {
                 _client.DefaultRequestHeaders.Add(header.Key, header.Value);
@@ -73,7 +74,11 @@ namespace IndependentReserve.DotNetClientApi
                 url = $"{url}?{queryString}";
             }
 
+            // MeasureRequest method hangs here for some reason
+            var stopwatch = Stopwatch.StartNew();
             var response = await _client.GetAsync(url).ConfigureAwait(false);
+            LastRequestDuration = stopwatch.Elapsed;
+            stopwatch.Stop();
 
             string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -108,7 +113,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             HttpContent content = CreateRequestContent(url, request);
 
-            HttpResponseMessage response = await _client.PostAsync(url, content).ConfigureAwait(false);
+            var response = await MeasureRequest(async () => await _client.PostAsync(url, content)).ConfigureAwait(false);
 
             string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             LastResponseRaw = result;
@@ -131,7 +136,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             HttpContent content = CreateRequestContent(url, request);
 
-            HttpResponseMessage response = await _client.PostAsync(url, content).ConfigureAwait(false);
+            var response = await MeasureRequest(async () => await _client.PostAsync(url, content)).ConfigureAwait(false);
 
             string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             LastResponseRaw = result;
@@ -245,6 +250,18 @@ namespace IndependentReserve.DotNetClientApi
         private T Deserialize<T>(string json)
         {
             return JsonConvert.DeserializeObject<T>(json, new CurrencyCodeConverter());
+        }
+
+        private async Task<HttpResponseMessage> MeasureRequest(Func<Task<HttpResponseMessage>> requestFunc)
+        {
+            var stopwatch = Stopwatch.StartNew();
+
+            var response = await requestFunc();
+
+            LastRequestDuration = stopwatch.Elapsed;
+            stopwatch.Stop();
+
+            return response;
         }
 
         #region IDisposable
