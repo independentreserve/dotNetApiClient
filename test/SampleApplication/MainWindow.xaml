@@ -228,6 +228,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
@@ -236,17 +237,20 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5,0,5">
                 <TextBlock FontWeight="Bold">Url:</TextBlock>
                 <TextBlock Margin="5,0,5,0"  Text="{Binding Path=LastRequestUrl}"></TextBlock>
-                <TextBlock FontWeight="Bold">Duration:</TextBlock>
-                <TextBlock Margin="5,0,0,0"  Text="{Binding Path=LastRequestDuration}"></TextBlock>
             </StackPanel>
 
-            <TextBlock Grid.Row="1" Margin="0,5,0,5" FontWeight="Bold">Parameters:</TextBlock>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock FontWeight="Bold">Duration:</TextBlock>
+                <TextBlock Margin="5,0,5,0"  Text="{Binding Path=LastRequestDuration}"></TextBlock>
+            </StackPanel>
 
-            <TextBox Grid.Row="2" Text="{Binding LastRequestParameters}" Padding="5" TextWrapping="Wrap"
+            <TextBlock Grid.Row="2" Margin="0,5,0,5" FontWeight="Bold">Parameters:</TextBlock>
+
+            <TextBox Grid.Row="3" Text="{Binding LastRequestParameters}" Padding="5" TextWrapping="Wrap"
                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            <TextBlock Grid.Row="3" Margin="0,5,0,5" FontWeight="Bold">Response:</TextBlock>
-            <TextBox Grid.Row="4" 
+            <TextBlock Grid.Row="4" Margin="0,5,0,5" FontWeight="Bold">Response:</TextBlock>
+            <TextBox Grid.Row="5" 
                      Text="{Binding LastRequestResponse}" 
                      Padding="5" 
                      TextWrapping="Wrap" 

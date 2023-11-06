@@ -74,12 +74,7 @@ namespace IndependentReserve.DotNetClientApi
                 url = $"{url}?{queryString}";
             }
 
-            // MeasureRequest method hangs here for some reason
-            var stopwatch = Stopwatch.StartNew();
-            var response = await _client.GetAsync(url).ConfigureAwait(false);
-            LastRequestDuration = stopwatch.Elapsed;
-            stopwatch.Stop();
-
+            var response = await MeasureRequest(async () => await _client.GetAsync(url).ConfigureAwait(false)).ConfigureAwait(false);
             string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             LastResponseRaw = result;
@@ -113,7 +108,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             HttpContent content = CreateRequestContent(url, request);
 
-            var response = await MeasureRequest(async () => await _client.PostAsync(url, content)).ConfigureAwait(false);
+            var response = await MeasureRequest(async () => await _client.PostAsync(url, content).ConfigureAwait(false)).ConfigureAwait(false);
 
             string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             LastResponseRaw = result;
@@ -136,7 +131,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             HttpContent content = CreateRequestContent(url, request);
 
-            var response = await MeasureRequest(async () => await _client.PostAsync(url, content)).ConfigureAwait(false);
+            var response = await MeasureRequest(async () => await _client.PostAsync(url, content).ConfigureAwait(false)).ConfigureAwait(false);
 
             string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             LastResponseRaw = result;
@@ -256,7 +251,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             var stopwatch = Stopwatch.StartNew();
 
-            var response = await requestFunc();
+            var response = await requestFunc().ConfigureAwait(false);
 
             LastRequestDuration = stopwatch.Elapsed;
             stopwatch.Stop();
