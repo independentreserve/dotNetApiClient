@@ -32,6 +32,13 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// The order is canceled if it's not executed fully immediately at the time of placement. 
         /// </summary>
         [Description("Fill or kill")] 
-        Fok = 3
+        Fok = 3,
+
+        /// <summary>
+        /// Maker or cancel.
+        /// The order will be placed on the orderbook fully or cancelled, the order will not execute immediately.
+        /// </summary>
+        [Description("Maker or cancel")]
+        Moc = 4
     }
 }
