@@ -11,20 +11,20 @@ using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
 {
-
-
     /// <summary>
     /// IndependentReserve API client, implements IDisposable
     /// </summary>
     public class Client : IDisposable , IClient
     {
+        private const int DefaultExpiry = 30;
+        
         private readonly string _apiKey;
+        private readonly NonceExpiryMode _nonceExpiryMode = NonceExpiryMode.Nonce;
 
         internal IHttpWorker HttpWorker { get; set; }
 
         public const string ExceptionDataHttpStatusCode = "HttpStatusCode";
         public const string ExceptionDataErrorCode = "ErrorCode";
-
 
         public string LastRequestUrl => HttpWorker.LastRequestUrl;
 
@@ -37,6 +37,7 @@ namespace IndependentReserve.DotNetClientApi
         /// Support injecting an alternate implementation
         /// </summary>
         public static Func<string> GetNonceProvider = () => DateTime.UtcNow.Ticks.ToString(CultureInfo.InvariantCulture);
+        public static Func<string> GetExpiryProvider = () => (DateTimeOffset.UtcNow.ToUnixTimeSeconds() + DefaultExpiry).ToString(CultureInfo.InvariantCulture);
 
         #region private constructors
 
@@ -51,9 +52,11 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Creates instance of Client class, which can be used then to call public and private api methods
         /// </summary>
-        private Client(string apiKey, string apiSecret, Uri baseUri, IDictionary<string, string> headers = null) : this(baseUri, headers)
+        private Client(string apiKey, string apiSecret, Uri baseUri, NonceExpiryMode nonceExpiryMode, IDictionary<string, string> headers = null) : this(baseUri, headers)
         {
             _apiKey = apiKey;
+            _nonceExpiryMode = nonceExpiryMode;
+
             HttpWorker.ApiSecret = apiSecret;
         }
 
@@ -87,14 +90,13 @@ namespace IndependentReserve.DotNetClientApi
         {
             if (config.HasCredential)
             {
-                return CreatePrivate(config.Credential.Key, config.Credential.Secret, config.BaseUrl, headers);
+                return CreatePrivate(config.Credential.Key, config.Credential.Secret, config.BaseUrl, config.NonceExpiryMode, headers);
             }
             else
             {
                 return CreatePublic(config.BaseUrl, headers);
             }
         }
-
 
         /// <summary>
         /// Creates new instance of API client, which can be used to call public and private api methods, implements IDisposable, so wrap it with using statement
@@ -105,6 +107,20 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="headers">additional HTTP request headers to be included with every request</param>
         /// <returns>instance of Client class which can be used to call public & private API methods</returns>
         public static Client CreatePrivate(string apiKey, string apiSecret, string baseUrl, IDictionary<string, string> headers = null)
+        {
+            return CreatePrivate(apiKey, apiSecret, baseUrl, NonceExpiryMode.Nonce, headers);
+        }
+
+        /// <summary>
+        /// Creates new instance of API client, which can be used to call public and private api methods, implements IDisposable, so wrap it with using statement
+        /// </summary>
+        /// <param name="apiKey">your api key</param>
+        /// <param name="apiSecret">your api secret</param>
+        /// <param name="baseUrl">api base url, please refer to documentation for exact url depending on environment</param>
+        /// <param name="nonceExpiryMode">nonce or expiry mode</param>
+        /// <param name="headers">additional HTTP request headers to be included with every request</param>
+        /// <returns>instance of Client class which can be used to call public & private API methods</returns>
+        public static Client CreatePrivate(string apiKey, string apiSecret, string baseUrl, NonceExpiryMode nonceExpiryMode, IDictionary<string, string> headers = null)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -127,7 +143,7 @@ namespace IndependentReserve.DotNetClientApi
                 throw new ArgumentException("Invalid url format", "baseUrl");
             }
 
-            return new Client(apiKey, apiSecret, uri, headers);
+            return new Client(apiKey, apiSecret, uri, nonceExpiryMode, headers);
         }
 
         #endregion //Factory
@@ -530,9 +546,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.primaryCurrencyCode = primaryCurrency.ToString();
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.orderType = orderType.ToString();
@@ -593,9 +607,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.primaryCurrencyCode = primaryCurrency.ToString();
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.orderType = orderType.ToString();
@@ -644,9 +656,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.orderGuid = orderGuid.ToString();
 
             return await HttpWorker.QueryPrivateAsync<BankOrder>("/Private/CancelOrder", data).ConfigureAwait(false);
@@ -665,9 +675,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.orderGuids = orderGuids.Select(o=>o.ToString()).ToArray();
 
             return await HttpWorker.QueryPrivateAsync<CancelOrdersResult>("/Private/CancelOrders", data).ConfigureAwait(false);
@@ -702,9 +710,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             if (primaryCurrency.HasValue)
             {
@@ -753,9 +759,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             if (primaryCurrency.HasValue)
             {
@@ -808,9 +812,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             if (primaryCurrency.HasValue)
             {
@@ -855,9 +857,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.orderGuid = orderGuid.ToString();
             data.clientId = clientId;
 
@@ -883,9 +883,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<IEnumerable<Account>>("/Private/GetAccounts", data).ConfigureAwait(false);
         }
@@ -899,9 +897,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<IEnumerable<BrokerageFee>>("/Private/GetBrokerageFees", data).ConfigureAwait(false);
         }
@@ -942,9 +938,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.accountGuid = accountGuid.ToString();
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
             data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
@@ -970,9 +964,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.primaryCurrencyCode = primaryCurrency.ToString();
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
             data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
@@ -1003,9 +995,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<BitcoinDepositAddress>("/Private/GetBitcoinDepositAddress", data).ConfigureAwait(false);
         }
@@ -1031,9 +1021,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.primaryCurrencyCode = primaryCurrency.ToString();
 
             return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/GetDigitalCurrencyDepositAddress", data).ConfigureAwait(false);
@@ -1060,9 +1048,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.pageIndex = pageIndex;
             data.pageSize = pageSize;
 
@@ -1094,9 +1080,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.primaryCurrencyCode = primaryCurrency.ToString();
             data.pageIndex = pageIndex;
             data.pageSize = pageSize;
@@ -1113,9 +1097,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.primaryCurrencyCode = primaryCurrency.ToString();
 
             return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/NewDepositAddress", data).ConfigureAwait(false);
@@ -1146,9 +1128,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.bitcoinAddress = bitcoinAddress;
 
             return await HttpWorker.QueryPrivateAsync<BitcoinDepositAddress>("/Private/SynchBitcoinAddressWithBlockchain", data).ConfigureAwait(false);
@@ -1179,9 +1159,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.depositAddress = depositAddress;
             data.primaryCurrencyCode = primaryCurrency.ToString();
 
@@ -1215,9 +1193,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.amount = withdrawalAmount.HasValue ? withdrawalAmount.Value.ToString(CultureInfo.InvariantCulture) : null;
             data.bitcoinAddress = bitcoinAddress;
             data.comment = comment;
@@ -1268,10 +1244,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
-
+            var data = CreatePrivateRequest();
             data.amount = withdrawRequest.Amount.ToString(CultureInfo.InvariantCulture);
             data.withdrawalAddress = withdrawRequest.Address;
             data.comment = withdrawRequest.Comment;
@@ -1290,9 +1263,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             data.transactionGuid = transactionGuid.ToString();
 
@@ -1308,9 +1279,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<IEnumerable<FiatBankAccount>>("/Private/GetFiatBankAccounts", data).ConfigureAwait(false);
         }
@@ -1344,9 +1313,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.withdrawalAmount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
             data.withdrawalBankAccountName = withdrawalBankAccountName;
@@ -1368,9 +1335,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.secondaryCurrencyCode = secondaryCurrency.ToString();
             data.withdrawalAmount = withdrawalAmount.ToString(CultureInfo.InvariantCulture);
             data.fiatBankAccountGuid = fiatBankAccountGuid.ToString();
@@ -1391,10 +1356,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
-
+            var data = CreatePrivateRequest();
             data.fiatWithdrawalRequestGuid = fiatWithdrawalRequestGuid.ToString();
 
             return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/GetFiatWithdrawal", data).ConfigureAwait(false);
@@ -1430,7 +1392,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
+            var data = CreatePrivateRequest();
             data.apiKey = _apiKey;
             data.nonce = GetNonce();
             data.pageIndex = pageIndex;
@@ -1454,9 +1416,7 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
             data.orderGuid = orderGuid?.ToString();
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
@@ -1482,18 +1442,14 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<DepositLimits>("/Private/GetDepositLimits", data).ConfigureAwait(false);
         }
 
         public async Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits()
         {
-            dynamic data = new ExpandoObject();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
+            var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<Dictionary<string, List<WithdrawalLimit>>>("/Private/GetWithdrawalLimits", data).ConfigureAwait(false);
         }
@@ -1502,6 +1458,23 @@ namespace IndependentReserve.DotNetClientApi
 
         #region Helpers
 
+        private dynamic CreatePrivateRequest()
+        {
+            dynamic data = new ExpandoObject();
+
+            data.apiKey = _apiKey;
+            
+            if (_nonceExpiryMode == NonceExpiryMode.Nonce)
+            {
+                data.nonce = GetNonce();
+            }
+            else
+            {
+                data.expiry = GetExpiry();
+            }
+
+            return data;
+        }
 
         /// <summary>
         /// Throws InvalidOperationException if client is disposed
@@ -1529,6 +1502,11 @@ namespace IndependentReserve.DotNetClientApi
         /// Helper method to get nonce.
         /// </summary>
         private string GetNonce() => GetNonceProvider();
+
+        /// <summary>
+        /// Helper method to get expiry.
+        /// </summary>
+        private string GetExpiry() => GetExpiryProvider();
         
         #endregion //Helpers
 

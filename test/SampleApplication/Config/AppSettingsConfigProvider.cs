@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using IndependentReserve.DotNetClientApi;
 
 namespace SampleApplication
@@ -17,6 +18,7 @@ namespace SampleApplication
             {
                 BaseUrl = ConfigurationManager.AppSettings["apiUrl"]
                 ,Credential = creds
+                ,NonceExpiryMode = (NonceExpiryMode) Enum.Parse(typeof(NonceExpiryMode), ConfigurationManager.AppSettings["nonceExpiryMode"])
             };
 
             return config;
