@@ -1393,8 +1393,6 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfPublicClient();
 
             var data = CreatePrivateRequest();
-            data.apiKey = _apiKey;
-            data.nonce = GetNonce();
             data.pageIndex = pageIndex;
             data.pageSize = pageSize;
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
@@ -1458,6 +1456,9 @@ namespace IndependentReserve.DotNetClientApi
 
         #region Helpers
 
+        /// <summary>
+        /// Creates base request object for private api calls with predefined apiKey and nonce or expiry 
+        /// </summary>
         private dynamic CreatePrivateRequest()
         {
             dynamic data = new ExpandoObject();
