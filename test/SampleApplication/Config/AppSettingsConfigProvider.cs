@@ -18,7 +18,7 @@ namespace SampleApplication
             {
                 BaseUrl = ConfigurationManager.AppSettings["apiUrl"]
                 ,Credential = creds
-                ,NonceExpiryMode = (NonceExpiryMode) Enum.Parse(typeof(NonceExpiryMode), ConfigurationManager.AppSettings["nonceExpiryMode"])
+                ,ExpiryMode = (ExpiryMode) Enum.Parse(typeof(ExpiryMode), ConfigurationManager.AppSettings["expiryMode"])
             };
 
             return config;

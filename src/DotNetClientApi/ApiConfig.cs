@@ -6,20 +6,20 @@
 
         public ApiCredential Credential { get; set; }
 
-        public NonceExpiryMode NonceExpiryMode { get; set; }
+        public ExpiryMode ExpiryMode { get; set; }
 
         public bool HasCredential => Credential?.IsValid ?? false;
 
         public ApiConfig()
         {
-            NonceExpiryMode = NonceExpiryMode.Nonce;
+            ExpiryMode = ExpiryMode.Nonce;
         }
 
-        public ApiConfig(string baseUrl, string key = null, string secret = null, NonceExpiryMode nonceExpiryMode = NonceExpiryMode.Nonce)
+        public ApiConfig(string baseUrl, string key = null, string secret = null, ExpiryMode expiryMode = ExpiryMode.Nonce)
         {
             BaseUrl = baseUrl;
             Credential = new ApiCredential(key, secret);
-            NonceExpiryMode = nonceExpiryMode;
+            ExpiryMode = expiryMode;
         }
 
         public override string ToString()

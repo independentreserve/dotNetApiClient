@@ -1,8 +1,8 @@
 ﻿namespace IndependentReserve.DotNetClientApi
 {
-    public enum NonceExpiryMode
+    public enum ExpiryMode
     {
         Nonce,
-        Expiry
+        Timestamp
     }
 }

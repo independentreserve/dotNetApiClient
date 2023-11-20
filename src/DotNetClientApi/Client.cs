@@ -19,7 +19,7 @@ namespace IndependentReserve.DotNetClientApi
         private const int DefaultExpiry = 30;
         
         private readonly string _apiKey;
-        private readonly NonceExpiryMode _nonceExpiryMode = NonceExpiryMode.Nonce;
+        private readonly ExpiryMode _expiryMode = ExpiryMode.Nonce;
 
         internal IHttpWorker HttpWorker { get; set; }
 
@@ -52,10 +52,10 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Creates instance of Client class, which can be used then to call public and private api methods
         /// </summary>
-        private Client(string apiKey, string apiSecret, Uri baseUri, NonceExpiryMode nonceExpiryMode, IDictionary<string, string> headers = null) : this(baseUri, headers)
+        private Client(string apiKey, string apiSecret, Uri baseUri, ExpiryMode expiryMode, IDictionary<string, string> headers = null) : this(baseUri, headers)
         {
             _apiKey = apiKey;
-            _nonceExpiryMode = nonceExpiryMode;
+            _expiryMode = expiryMode;
 
             HttpWorker.ApiSecret = apiSecret;
         }
@@ -90,7 +90,7 @@ namespace IndependentReserve.DotNetClientApi
         {
             if (config.HasCredential)
             {
-                return CreatePrivate(config.Credential.Key, config.Credential.Secret, config.BaseUrl, config.NonceExpiryMode, headers);
+                return CreatePrivate(config.Credential.Key, config.Credential.Secret, config.BaseUrl, config.ExpiryMode, headers);
             }
             else
             {
@@ -108,7 +108,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <returns>instance of Client class which can be used to call public & private API methods</returns>
         public static Client CreatePrivate(string apiKey, string apiSecret, string baseUrl, IDictionary<string, string> headers = null)
         {
-            return CreatePrivate(apiKey, apiSecret, baseUrl, NonceExpiryMode.Nonce, headers);
+            return CreatePrivate(apiKey, apiSecret, baseUrl, ExpiryMode.Nonce, headers);
         }
 
         /// <summary>
@@ -117,10 +117,10 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="apiKey">your api key</param>
         /// <param name="apiSecret">your api secret</param>
         /// <param name="baseUrl">api base url, please refer to documentation for exact url depending on environment</param>
-        /// <param name="nonceExpiryMode">nonce or expiry mode</param>
+        /// <param name="expiryMode">nonce or timestamp mode</param>
         /// <param name="headers">additional HTTP request headers to be included with every request</param>
         /// <returns>instance of Client class which can be used to call public & private API methods</returns>
-        public static Client CreatePrivate(string apiKey, string apiSecret, string baseUrl, NonceExpiryMode nonceExpiryMode, IDictionary<string, string> headers = null)
+        public static Client CreatePrivate(string apiKey, string apiSecret, string baseUrl, ExpiryMode expiryMode, IDictionary<string, string> headers = null)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -143,7 +143,7 @@ namespace IndependentReserve.DotNetClientApi
                 throw new ArgumentException("Invalid url format", "baseUrl");
             }
 
-            return new Client(apiKey, apiSecret, uri, nonceExpiryMode, headers);
+            return new Client(apiKey, apiSecret, uri, expiryMode, headers);
         }
 
         #endregion //Factory
@@ -1465,13 +1465,16 @@ namespace IndependentReserve.DotNetClientApi
 
             data.apiKey = _apiKey;
             
-            if (_nonceExpiryMode == NonceExpiryMode.Nonce)
+            switch (_expiryMode)
             {
-                data.nonce = GetNonce();
-            }
-            else
-            {
-                data.expiry = GetExpiry();
+                case ExpiryMode.Nonce:
+                    data.nonce = GetNonce();
+                    break;
+                case ExpiryMode.Timestamp:
+                    data.expiry = GetExpiry();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             return data;
