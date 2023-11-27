@@ -27,6 +27,7 @@ This can be set from an elevated powershell prompt like so:
 This simple WPF application demonstrates usage and responses
 
 Specify your API Key and API Secret in the configuration file `SampleApplication.exe.config`.
+You can switch between expiry modes by changing `expiryMode` to `Nonce` or `Timestamp` in the configuration file.  
 
 ## Further Help
 
