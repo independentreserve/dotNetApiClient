@@ -23,5 +23,10 @@
         ReferralBonus = 15,
         Buy = 16,
         Sell = 17,
+        PositionOpeningFee = 18,
+        PositionClosingFee = 19,
+        PositionLiquidationFee = 20,
+        Interest = 21,
+        Loan = 22,
     }
 }
