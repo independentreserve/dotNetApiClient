@@ -44,6 +44,7 @@
         Doge = 36,
         Sol = 37,
         Mana = 38,
-        Sand = 39
+        Sand = 39,
+        Shib = 40,
     }
 }
