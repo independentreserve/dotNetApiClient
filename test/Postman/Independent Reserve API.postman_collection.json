@@ -1,0 +1,1146 @@
+{
+	"info": {
+		"_postman_id": "bac84d09-aea5-4c28-bd8d-93f98489a681",
+		"name": "Independent Reserve API",
+		"description": "# Intro\n\nThis Postman collection is designed to simplify integration and testing process for third party developers. This accelerates development, fosters a better understanding of the API, and encourages more developers to adopt and integrate the API into their projects.\n\nPlease refer [https://www.independentreserve.com/au/features/api](https://www.independentreserve.com/au/features/api) for more detailed description.\n\n# Authentication and private methods\n\nIn order to access private endpoints set collection variables.\n\nGo though the Pre-request Script for Private folder to see how the private requests are signed before being sent to the server. You can adopt it to use in your own project or migrate it to any other programming language.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "436652"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "GetValidPrimaryCurrencyCodes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetValidPrimaryCurrencyCodes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetValidPrimaryCurrencyCodes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetValidSecondaryCurrencyCodes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetValidSecondaryCurrencyCodes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetValidSecondaryCurrencyCodes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetValidLimitOrderTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetValidLimitOrderTypes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetValidLimitOrderTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetValidMarketOrderTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetValidMarketOrderTypes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetValidMarketOrderTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetValidOrderTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetValidOrderTypes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetValidOrderTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetValidTransactionTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetValidTransactionTypes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetValidTransactionTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPrimaryCurrencyConfig",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetPrimaryCurrencyConfig",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetPrimaryCurrencyConfig"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMarketSummary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetMarketSummary?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetMarketSummary"
+							],
+							"query": [
+								{
+									"key": "primaryCurrencyCode",
+									"value": "Xbt"
+								},
+								{
+									"key": "secondaryCurrencyCode",
+									"value": "Aud"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOrderBook",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetOrderBook?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&maxDepthVolume=&maxDepthValue",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetOrderBook"
+							],
+							"query": [
+								{
+									"key": "primaryCurrencyCode",
+									"value": "Xbt"
+								},
+								{
+									"key": "secondaryCurrencyCode",
+									"value": "Aud"
+								},
+								{
+									"key": "maxDepthVolume",
+									"value": ""
+								},
+								{
+									"key": "maxDepthValue",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetAllOrders?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&maxDepthVolume=&maxDepthValue",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetAllOrders"
+							],
+							"query": [
+								{
+									"key": "primaryCurrencyCode",
+									"value": "Xbt"
+								},
+								{
+									"key": "secondaryCurrencyCode",
+									"value": "Aud"
+								},
+								{
+									"key": "maxDepthVolume",
+									"value": ""
+								},
+								{
+									"key": "maxDepthValue",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTradeHistorySummary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetTradeHistorySummary?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&numberOfHoursInThePastToRetrieve=24",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetTradeHistorySummary"
+							],
+							"query": [
+								{
+									"key": "primaryCurrencyCode",
+									"value": "Xbt"
+								},
+								{
+									"key": "secondaryCurrencyCode",
+									"value": "Aud"
+								},
+								{
+									"key": "numberOfHoursInThePastToRetrieve",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRecentTrades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetRecentTrades?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&numberOfRecentTradesToRetrieve=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetRecentTrades"
+							],
+							"query": [
+								{
+									"key": "primaryCurrencyCode",
+									"value": "Xbt"
+								},
+								{
+									"key": "secondaryCurrencyCode",
+									"value": "Aud"
+								},
+								{
+									"key": "numberOfRecentTradesToRetrieve",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFxRates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetFxRates",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetFxRates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOrderMinimumVolumes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetOrderMinimumVolumes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetOrderMinimumVolumes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDepositFees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetDepositFees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetDepositFees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFiatWithdrawalFees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetFiatWithdrawalFees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetFiatWithdrawalFees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCryptoWithdrawalFees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Public/GetCryptoWithdrawalFees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Public",
+								"GetCryptoWithdrawalFees"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Public methods are accessed via HTTP GET and do not require an authentication token to be passed."
+		},
+		{
+			"name": "Private",
+			"item": [
+				{
+					"name": "GetOpenOrders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"primaryCurrencyCode\": \"Xbt\",\r\n    \"secondaryCurrencyCode\": \"Aud\",\r\n    \"pageIndex\": 1,\r\n    \"pageSize\": 25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetOpenOrders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetOpenOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClosedOrders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"primaryCurrencyCode\": \"Xbt\",\r\n  \"secondaryCurrencyCode\": \"Aud\",\r\n  \"pageIndex\": 1,\r\n  \"pageSize\": 25,\r\n  \"fromTimestampUtc\": \"2022-08-01T08:00:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetClosedOrders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetClosedOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClosedFilledOrders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"primaryCurrencyCode\": \"Xbt\",\r\n  \"secondaryCurrencyCode\": \"Aud\",\r\n  \"pageIndex\": 1,\r\n  \"pageSize\": 25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetClosedFilledOrders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetClosedFilledOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOrderDetails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderGuid\": \"803f121f-dec0-4841-b14b-a122e64dae03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetOrderDetails",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetOrderDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccounts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetAccounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetAccounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTransactions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountGuid\": \"7cfa8f00-3c1d-44bb-a71f-2fe9fe4cb6dd\",\r\n    \"fromTimestampUtc\": \"2022-08-01T09:00:00Z\",\r\n    \"toTimestampUtc\": null,\r\n    \"txTypes\": [\r\n        \"Brokerage\",\r\n        \"Trade\"\r\n    ],\r\n    \"pageIndex\": 1,\r\n    \"pageSize\": 10,\r\n    \"includeTotals\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetTransactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetTransactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFiatBankAccounts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetFiatBankAccounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetFiatBankAccounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDigitalCurrencyDepositAddress",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"primaryCurrencyCode\": \"Xbt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetDigitalCurrencyDepositAddress",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetDigitalCurrencyDepositAddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDigitalCurrencyDepositAddresses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"primaryCurrencyCode\": \"Xbt\",\r\n    \"pageIndex\": 1,\r\n    \"pageSize\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetDigitalCurrencyDepositAddresses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetDigitalCurrencyDepositAddresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTrades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pageIndex\": 1,\r\n    \"pageSize\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetTrades",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetTrades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTradesByOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderGuid\": \"cc1e7074-b783-48ac-be0a-fdadf01c19c3\",\r\n    \"clientId\": \"a96ff431-7f47-4ab5-9974-4a2c6b6eb8d8\",\r\n    \"pageIndex\": 1,\r\n    \"pageSize\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetTradesByOrder",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetTradesByOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBrokerageFees",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetBrokerageFees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetBrokerageFees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDigitalCurrencyWithdrawal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionGuid\": \"2a93732f-3f40-4685-b3bc-ff3ec326090d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetDigitalCurrencyWithdrawal",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetDigitalCurrencyWithdrawal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFiatWithdrawal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fiatWithdrawalRequestGuid\": \"2e9ad56c-1954-4b0f-b3d8-2ade7fad93ff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetFiatWithdrawal",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetFiatWithdrawal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDepositLimits",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetDepositLimits",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetDepositLimits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWithdrawalLimits",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetWithdrawalLimits",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetWithdrawalLimits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PlaceLimitOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": \"{client-id}\",\r\n    \"primaryCurrencyCode\": \"Xbt\",\r\n    \"secondaryCurrencyCode\": \"Aud\",\r\n    \"orderType\": \"LimitBid\",\r\n    \"price\": 485.76,\r\n    \"volume\": 0.358,\r\n    \"timeInForce\": \"Gtc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/PlaceLimitOrder",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"PlaceLimitOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PlaceMarketOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": \"{client-id}\",\r\n    \"primaryCurrencyCode\": \"Xbt\",\r\n    \"secondaryCurrencyCode\": \"Aud\",\r\n    \"orderType\": \"MarketOffer\",\r\n    \"volume\": 0.001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/PlaceMarketOrder",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"PlaceMarketOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderGuid\": \"719c495c-a39e-4884-93ac-280b37245037\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/CancelOrder",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"CancelOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelOrders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderGuids\": [\r\n        \"5053e267-6060-44a8-9ab6-77f36fed86df\",\r\n        \"309d8b71-868c-4408-9346-c5aca4c3efdb\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/CancelOrders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"CancelOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SynchDigitalCurrencyDepositAddressWithBlockchain",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"depositAddress\": \"12a7FbBzSGvJd36wNesAxAksLXMWm4oLUJ\",\r\n    \"primaryCurrencyCode\": \"Bch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/SynchDigitalCurrencyDepositAddressWithBlockchain",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"SynchDigitalCurrencyDepositAddressWithBlockchain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WithdrawFiatCurrency",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"secondaryCurrencyCode\": \"{secondaryCurrencyCode}\",\r\n    \"withdrawalAmount\": \"{withdrawalAmount}\",\r\n    \"fiatBankAccountGuid\": \"{fiatBankAccountGuid}\",\r\n    \"useNpp\": \"true\",\r\n    \"comment\": \"{comment}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/WithdrawFiatCurrency",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"WithdrawFiatCurrency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WithdrawDigitalCurrency",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 0.123,\r\n    \"withdrawalAddress\": \"{destinationAddress}\",\r\n    \"comment\": \"\",\r\n    \"primaryCurrencyCode\": \"Bch\",\r\n    \"destinationTag\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/WithdrawDigitalCurrency",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"WithdrawDigitalCurrency"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Private methods are accessed via HTTP POST and require a valid authentication token to be passed. Parameters for all private methods, including the three parameters to authenticate the call, must be posted as a JSON object.\n\nSee Pre-request Script to better understand how the authentication works.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"const getVariable = (name) => {",
+							"    const value = pm.collectionVariables.get(name);",
+							"",
+							"    if (!value) {",
+							"        throw new Error(`Set ${name} collection variable`)",
+							"    }",
+							"",
+							"    return value;",
+							"}",
+							"",
+							"const getConfig = () => {",
+							"",
+							"    const baseUrl = getVariable('baseUrl');",
+							"    const apiKey = getVariable('apiKey');",
+							"    const apiSecret = getVariable('apiSecret');",
+							"",
+							"    return { baseUrl, apiKey, apiSecret };",
+							"}",
+							"",
+							"const getInitialPayload = () => {",
+							"    let requestBody = pm.request.body;",
+							"    if (requestBody.mode !== 'raw') {",
+							"        throw new Error('raw request type expected')",
+							"    }",
+							"",
+							"    return JSON.parse(requestBody.raw);",
+							"}",
+							"",
+							"const getNonce = () => Date.now();",
+							"",
+							"const getSignatureInput = (payload, endpointUrl) => {",
+							"",
+							"    const parameters = [endpointUrl];",
+							"",
+							"    for (const key in payload) {",
+							"        const valueByKey = payload[key];",
+							"        parameters.push(valueByKey === null ? `${key}=` : Array.isArray(valueByKey) ? `${key}=${valueByKey.join(',')}` : `${key}=${valueByKey}`);",
+							"    }",
+							"",
+							"    const message = parameters.join(',');",
+							"",
+							"    return message;",
+							"}",
+							"",
+							"const getSignature = (signatureInput, apiSecret) => {",
+							"    const signer = CryptoJS.HmacSHA256(signatureInput, apiSecret);",
+							"    return signer.toString(CryptoJS.enc.Hex).toUpperCase();",
+							"}",
+							"",
+							"const { baseUrl, apiKey, apiSecret } = getConfig();",
+							"",
+							"const payload = getInitialPayload();",
+							"payload.apiKey = apiKey;",
+							"payload.nonce = getNonce();",
+							"",
+							"const endpointUrl = baseUrl + pm.variables.replaceIn(pm.request.url.getPathWithQuery());",
+							"",
+							"const signatureInput = getSignatureInput(payload, endpointUrl);",
+							"",
+							"payload.signature = getSignature(signatureInput, apiSecret);",
+							"",
+							"pm.request.headers.add({key: \"Content-Type\", value: \"application/json\"});",
+							"pm.request.body.update(JSON.stringify(payload), 'application/json');",
+							"",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.independentreserve.com",
+			"type": "string"
+		},
+		{
+			"key": "apiKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "apiSecret",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
