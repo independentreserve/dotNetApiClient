@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "8f186ffe-56fb-4e10-a803-30e738a861e1",
 		"name": "Independent Reserve API",
-		"description": "# Intro\n\nThis Postman collection is designed to simplify integration and testing process for third party developers. This accelerates development, fosters a better understanding of the API, and encourages more developers to adopt and integrate the API into their projects.\n\nPlease refer [https://www.independentreserve.com/au/features/api](https://www.independentreserve.com/au/features/api) for more detailed description.\n\n# Authentication and Private Methods\n\nIn order to access private endpoints, set the `apiKey` and `apiSecret` collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
+		"description": "# Authentication and Private Methods\n\nIn order to access private endpoints, set the `apiKey` and `apiSecret` collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "436652"
 	},
