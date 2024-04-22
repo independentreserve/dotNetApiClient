@@ -1,6 +1,6 @@
 # Independent Reserve Postman Collection
 
-[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/34428362-8c7029b9-e12b-40f5-8a07-418436993b83?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D34428362-8c7029b9-e12b-40f5-8a07-418436993b83%26entityType%3Dcollection%26workspaceId%3D445c76f6-7a4a-40a9-804a-5a4e33f1558c)
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/34428362-33ca0304-2041-4e4d-8203-628380fea9c3?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D34428362-33ca0304-2041-4e4d-8203-628380fea9c3%26entityType%3Dcollection%26workspaceId%3D879e8d08-0326-4b67-b54b-cdcb27a32123)
 
 ## Authentication and Private Methods
 
