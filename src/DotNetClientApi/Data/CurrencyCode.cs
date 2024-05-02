@@ -46,5 +46,6 @@
         Mana = 38,
         Sand = 39,
         Shib = 40,
+        Trx = 41,
     }
 }
