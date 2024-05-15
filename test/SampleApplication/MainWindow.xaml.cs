@@ -245,11 +245,12 @@ namespace SampleApplication
                             Comment = ViewModel.Comment,
                             Currency = ViewModel.PrimaryCurrency,
                             DestinationTag = string.IsNullOrWhiteSpace(ViewModel.Tag) ? null : ViewModel.Tag,
+                            ClientId = ViewModel.WithdrawalClientId
                         });
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawal)
                     {
-                        await client.GetDigitalCurrencyWithdrawalAsync(ParseGuid(ViewModel.TransactionGuid));
+                        await client.GetDigitalCurrencyWithdrawalAsync(ParseGuid(ViewModel.TransactionGuid), ViewModel.WithdrawalClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {

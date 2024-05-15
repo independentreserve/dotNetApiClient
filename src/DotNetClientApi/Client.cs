@@ -1208,8 +1208,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAddress">digital address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
         /// <param name="primaryCurrency">primary currency</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         [Obsolete("Use overload that accepts DigitalWithdrawalRequest instead.")]
-        public CryptoWithdrawal WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency)
+        public CryptoWithdrawal WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency, string clientId = null)
         {
             return WithdrawDigitalCurrencyAsync(withdrawalAmount, withdrawalAddress, comment, primaryCurrency).Result;
         }
@@ -1221,8 +1222,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAddress">digital address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
         /// <param name="primaryCurrency">primary currency</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         [Obsolete("Use overload that accepts DigitalWithdrawalRequest instead.")]
-        public async Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency)
+        public async Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency, string clientId = null)
         {
             var request = new DigitalWithdrawalRequest
             {
@@ -1230,6 +1232,7 @@ namespace IndependentReserve.DotNetClientApi
                 ,Address = withdrawalAddress
                 ,Comment = comment
                 ,Currency = primaryCurrency
+                ,ClientId = clientId
             };
             return await WithdrawDigitalCurrencyAsync(request);
         }
@@ -1249,6 +1252,7 @@ namespace IndependentReserve.DotNetClientApi
             data.withdrawalAddress = withdrawRequest.Address;
             data.comment = withdrawRequest.Comment;
             data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
+            data.clientId = withdrawRequest.ClientId;
 
             if (!string.IsNullOrEmpty(withdrawRequest.DestinationTag))
             {
@@ -1258,14 +1262,15 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
         }
 
-        public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid transactionGuid)
+        public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
             var data = CreatePrivateRequest();
 
-            data.transactionGuid = transactionGuid.ToString();
+            data.transactionGuid = transactionGuid?.ToString();
+            data.clientId = clientId;
 
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/GetDigitalCurrencyWithdrawal", data).ConfigureAwait(false);
         }

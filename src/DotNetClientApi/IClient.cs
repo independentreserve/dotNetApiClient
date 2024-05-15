@@ -87,12 +87,12 @@ namespace IndependentReserve.DotNetClientApi
         Task<DigitalCurrencyDepositAddress> SynchDigitalCurrencyDepositAddressWithBlockchainAsync(string depositAddress, CurrencyCode primaryCurrency);
         void WithdrawBitcoin(decimal? withdrawalAmount, string bitcoinAddress, string comment);
         Task WithdrawBitcoinAsync(decimal? withdrawalAmount, string bitcoinAddress, string comment);
-        CryptoWithdrawal WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency);
-        Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency);
+        CryptoWithdrawal WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency, string clientId = null);
+        Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency, string clientId = null);
 
         CryptoWithdrawal WithdrawDigitalCurrency(DigitalWithdrawalRequest withdrawalRequest);
         Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(DigitalWithdrawalRequest withdrawalRequest);
-        Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid transactionGuid);
+        Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null);
 
         Task<List<Event>> GetEvents();
         Task<ExchangeStatus> GetExchangeStatus();
