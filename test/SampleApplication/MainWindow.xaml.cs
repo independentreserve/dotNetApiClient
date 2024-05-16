@@ -250,7 +250,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawal)
                     {
-                        await client.GetDigitalCurrencyWithdrawalAsync(ParseGuid(ViewModel.TransactionGuid), ViewModel.WithdrawalClientId);
+                        await client.GetDigitalCurrencyWithdrawalAsync(ParseNullableGuid(ViewModel.TransactionGuid), ViewModel.WithdrawalClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {

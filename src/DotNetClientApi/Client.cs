@@ -1252,7 +1252,11 @@ namespace IndependentReserve.DotNetClientApi
             data.withdrawalAddress = withdrawRequest.Address;
             data.comment = withdrawRequest.Comment;
             data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
-            data.clientId = withdrawRequest.ClientId;
+
+            if (!string.IsNullOrEmpty(withdrawRequest.ClientId))
+            {
+                data.clientId = withdrawRequest.ClientId;
+            }
 
             if (!string.IsNullOrEmpty(withdrawRequest.DestinationTag))
             {
@@ -1269,8 +1273,12 @@ namespace IndependentReserve.DotNetClientApi
 
             var data = CreatePrivateRequest();
 
-            data.transactionGuid = transactionGuid?.ToString();
-            data.clientId = clientId;
+            data.transactionGuid = transactionGuid.ToString();
+
+            if (!string.IsNullOrEmpty(clientId))
+            {
+                data.clientId = clientId;
+            }
 
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/GetDigitalCurrencyWithdrawal", data).ConfigureAwait(false);
         }
