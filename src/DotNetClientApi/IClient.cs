@@ -77,10 +77,11 @@ namespace IndependentReserve.DotNetClientApi
         Task<BankOrder> PlaceMarketOrderAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal volume, CurrencyType? volumeCurrencyType = null, string clientId = null, decimal? allowedSlippagePercent = null);
 
         Task<IEnumerable<FiatBankAccount>> GetFiatBankAccountsAsync();
-        FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment);
-        Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment);
-        Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid bankAccountGuid, bool useNpp, string comment);
-        
+        FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment, string clientId = null);
+        Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment, string clientId = null);
+        Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid bankAccountGuid, bool useNpp, string comment, string clientId = null);
+        Task<FiatWithdrawalRequest> GetFiatWithdrawalAsync(Guid? fiatWithdrawalRequestGuid, string clientId = null);
+
         BitcoinDepositAddress SynchBitcoinAddressWithBlockchain(string bitcoinAddress);
         Task<BitcoinDepositAddress> SynchBitcoinAddressWithBlockchainAsync(string bitcoinAddress);
         DigitalCurrencyDepositAddress SynchDigitalCurrencyDepositAddressWithBlockchain(string depositAddress, CurrencyCode primaryCurrency);
