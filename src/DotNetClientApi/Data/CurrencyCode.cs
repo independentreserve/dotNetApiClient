@@ -47,5 +47,6 @@
         Sand = 39,
         Shib = 40,
         Trx = 41,
+        Rndr = 42,
     }
 }
