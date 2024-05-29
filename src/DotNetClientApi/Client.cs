@@ -1208,8 +1208,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAddress">digital address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
         /// <param name="primaryCurrency">primary currency</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         [Obsolete("Use overload that accepts DigitalWithdrawalRequest instead.")]
-        public CryptoWithdrawal WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency)
+        public CryptoWithdrawal WithdrawDigitalCurrency(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency, string clientId = null)
         {
             return WithdrawDigitalCurrencyAsync(withdrawalAmount, withdrawalAddress, comment, primaryCurrency).Result;
         }
@@ -1221,8 +1222,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAddress">digital address to withdraw</param>
         /// <param name="comment">withdrawal comment</param>
         /// <param name="primaryCurrency">primary currency</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         [Obsolete("Use overload that accepts DigitalWithdrawalRequest instead.")]
-        public async Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency)
+        public async Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(decimal withdrawalAmount, string withdrawalAddress, string comment, CurrencyCode primaryCurrency, string clientId = null)
         {
             var request = new DigitalWithdrawalRequest
             {
@@ -1230,6 +1232,7 @@ namespace IndependentReserve.DotNetClientApi
                 ,Address = withdrawalAddress
                 ,Comment = comment
                 ,Currency = primaryCurrency
+                ,ClientId = clientId
             };
             return await WithdrawDigitalCurrencyAsync(request);
         }
@@ -1250,6 +1253,11 @@ namespace IndependentReserve.DotNetClientApi
             data.comment = withdrawRequest.Comment;
             data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
 
+            if (!string.IsNullOrEmpty(withdrawRequest.ClientId))
+            {
+                data.clientId = withdrawRequest.ClientId;
+            }
+
             if (!string.IsNullOrEmpty(withdrawRequest.DestinationTag))
             {
                 data.destinationTag = withdrawRequest.DestinationTag;
@@ -1258,7 +1266,7 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
         }
 
-        public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid transactionGuid)
+        public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1266,6 +1274,11 @@ namespace IndependentReserve.DotNetClientApi
             var data = CreatePrivateRequest();
 
             data.transactionGuid = transactionGuid.ToString();
+
+            if (!string.IsNullOrEmpty(clientId))
+            {
+                data.clientId = clientId;
+            }
 
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/GetDigitalCurrencyWithdrawal", data).ConfigureAwait(false);
         }
@@ -1291,13 +1304,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
         /// <param name="comment">withdrawal comment</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment)
+        public FiatWithdrawalRequest RequestFiatWithdrawal(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return RequestFiatWithdrawalAsync(secondaryCurrency, withdrawalAmount, withdrawalBankAccountName, comment).Result;
+            return RequestFiatWithdrawalAsync(secondaryCurrency, withdrawalAmount, withdrawalBankAccountName, comment, clientId).Result;
         }
 
         /// <summary>
@@ -1307,8 +1321,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
         /// <param name="withdrawalBankAccountName">A pre-configured bank account you've already linked to your Independent Reserve account</param>
         /// <param name="comment">withdrawal comment</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public async Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment)
+        public async Task<FiatWithdrawalRequest> RequestFiatWithdrawalAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, string withdrawalBankAccountName, string comment, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1319,6 +1334,11 @@ namespace IndependentReserve.DotNetClientApi
             data.withdrawalBankAccountName = withdrawalBankAccountName;
             data.comment = comment;
 
+            if (!string.IsNullOrEmpty(clientId))
+            {
+                data.clientId = clientId;
+            }
+
             return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/RequestFiatWithdrawal", data).ConfigureAwait(false);
         }
 
@@ -1327,10 +1347,11 @@ namespace IndependentReserve.DotNetClientApi
         /// </summary>
         /// <param name="secondaryCurrency">The Independent Reserve fiat currency account to withdraw from (currently only AUD accounts are supported)</param>
         /// <param name="withdrawalAmount">Amount of fiat currency to withdraw</param>
-        /// <param name="bankAccountGuid">bank account guid</param>
+        /// <param name="fiatBankAccountGuid">bank account guid</param>
         /// <param name="comment">withdrawal user comment</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         /// <returns>A FiatWithdrawalRequest object</returns>
-        public async Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid fiatBankAccountGuid, bool useNpp, string comment)
+        public async Task<FiatWithdrawalRequest> WithdrawFiatCurrencyAsync(CurrencyCode secondaryCurrency, decimal withdrawalAmount, Guid fiatBankAccountGuid, bool useNpp, string comment, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1342,6 +1363,11 @@ namespace IndependentReserve.DotNetClientApi
             data.useNpp = useNpp.ToString(CultureInfo.InvariantCulture);
             data.comment = comment;
 
+            if (!string.IsNullOrEmpty(clientId))
+            {
+                data.clientId = clientId;
+            }
+
             return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/WithdrawFiatCurrency", data).ConfigureAwait(false);
         }
 
@@ -1350,14 +1376,19 @@ namespace IndependentReserve.DotNetClientApi
         /// Get fiat withdrawal details
         /// </summary>
         /// <param name="fiatWithdrawalRequestGuid">withdrawal guid</param>
+        /// <param name="clientId">optional client-side withdrawal Id</param>
         /// <returns></returns>
-        public async Task<FiatWithdrawalRequest> GetFiatWithdrawalAsync(Guid fiatWithdrawalRequestGuid)
+        public async Task<FiatWithdrawalRequest> GetFiatWithdrawalAsync(Guid? fiatWithdrawalRequestGuid, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
             var data = CreatePrivateRequest();
             data.fiatWithdrawalRequestGuid = fiatWithdrawalRequestGuid.ToString();
+            if (!string.IsNullOrEmpty(clientId))
+            {
+                data.clientId = clientId;
+            }
 
             return await HttpWorker.QueryPrivateAsync<FiatWithdrawalRequest>("/Private/GetFiatWithdrawal", data).ConfigureAwait(false);
         }

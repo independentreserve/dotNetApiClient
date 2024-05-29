@@ -222,15 +222,15 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.RequestFiatWithdrawal)
                     {
-                        await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName, ViewModel.Comment);
+                        await client.RequestFiatWithdrawalAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ViewModel.WithdrawalBankAccountName, ViewModel.Comment, ViewModel.WithdrawalClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawFiatCurrency)
                     {
-                        await client.WithdrawFiatCurrencyAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ParseGuid(ViewModel.BankAccountGuid), ViewModel.UseNpp, ViewModel.Comment);
+                        await client.WithdrawFiatCurrencyAsync(ViewModel.SecondaryCurrency, ViewModel.WithdrawalAmount, ParseGuid(ViewModel.BankAccountGuid), ViewModel.UseNpp, ViewModel.Comment, ViewModel.WithdrawalClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatWithdrawal)
                     {
-                        await client.GetFiatWithdrawalAsync(ParseGuid(ViewModel.TransactionGuid));
+                        await client.GetFiatWithdrawalAsync(ParseNullableGuid(ViewModel.TransactionGuid), ViewModel.WithdrawalClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain)
                     {
@@ -245,11 +245,12 @@ namespace SampleApplication
                             Comment = ViewModel.Comment,
                             Currency = ViewModel.PrimaryCurrency,
                             DestinationTag = string.IsNullOrWhiteSpace(ViewModel.Tag) ? null : ViewModel.Tag,
+                            ClientId = ViewModel.WithdrawalClientId
                         });
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawal)
                     {
-                        await client.GetDigitalCurrencyWithdrawalAsync(ParseGuid(ViewModel.TransactionGuid));
+                        await client.GetDigitalCurrencyWithdrawalAsync(ParseNullableGuid(ViewModel.TransactionGuid), ViewModel.WithdrawalClientId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTrades)
                     {

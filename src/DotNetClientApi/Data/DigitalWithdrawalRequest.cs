@@ -10,6 +10,8 @@
 
         public string Comment { get; set; }
 
+        public string ClientId { get; set; }
+
         /// <summary>
         /// Leave empty if currency does not support tags
         /// </summary>

@@ -116,7 +116,7 @@
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=transactionGuid}">
                     <TextBlock Style="{StaticResource Label}">Transaction guid:</TextBlock>
-                    <TextBox Style="{StaticResource RequiredTextBox}" Text="{Binding TransactionGuid}" Width="250"></TextBox>
+                    <TextBox Text="{Binding TransactionGuid}" Width="250"></TextBox>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=fromTimestampUtc}">
@@ -183,6 +183,11 @@
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=comment}">
                     <TextBlock Style="{StaticResource Label}">Comment:</TextBlock>
                     <TextBox Style="{StaticResource TextArea}" Text="{Binding Comment}" Width="250"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=withdrawalClientId}">
+                    <TextBlock Style="{StaticResource Label}">Client ID:</TextBlock>
+                    <TextBox Text="{Binding WithdrawalClientId}" Width="250"></TextBox>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=customId}">

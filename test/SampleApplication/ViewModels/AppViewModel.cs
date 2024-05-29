@@ -57,6 +57,7 @@ namespace SampleApplication.ViewModels
         private decimal? _allowedSlippagePercent;
         private TimeInForce? _timeInForce;
         private bool _includeTotals;
+        private string _withdrawalClientId;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -677,11 +678,11 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
-        /// Method parameter - AccountGuid - used by private API method GetDigitalCurrencyWithdrawal
+        /// Method parameter - TransactionGuid - used by private API method GetDigitalCurrencyWithdrawal
         /// </summary>
         public string TransactionGuid
         {
-            get { return _transactionGuid; }
+            get => _transactionGuid;
             set
             {
                 if (value == _transactionGuid) return;
@@ -787,6 +788,24 @@ namespace SampleApplication.ViewModels
                 if (value == _includeTotals) return;
                 _includeTotals = value;
                 OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Client withdrawal Id
+        /// </summary>
+        public string WithdrawalClientId
+        {
+            get => _withdrawalClientId;
+            set
+            {
+
+                if (_withdrawalClientId != value)
+                {
+                    _withdrawalClientId = value;
+                    OnPropertyChanged();
+                }
+
             }
         }
 

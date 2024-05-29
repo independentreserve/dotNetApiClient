@@ -307,7 +307,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "RequestFiatWithdrawal",
                     Description = "RequestFiatWithdrawal",
-                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "withdrawalBankAccountName", "comment" }
+                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "withdrawalBankAccountName", "comment", "withdrawalClientId" }
                 };
             }
         }
@@ -334,7 +334,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "WithdrawFiatCurrency",
                     Description = "WithdrawFiatCurrency",
-                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "bankAccountGuid", "useNpp", "comment" }
+                    Parameters = new[] { "secondaryCurrency", "withdrawalAmount", "bankAccountGuid", "useNpp", "comment", "withdrawalClientId" }
                 };
             }
         }
@@ -348,7 +348,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "GetFiatWithdrawal",
                     Description = "GetFiatWithdrawal",
-                    Parameters = new[] { "transactionGuid" }
+                    Parameters = new[] { "transactionGuid", "withdrawalClientId" }
                 };
             }
         }
@@ -376,7 +376,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "WithdrawDigitalCurrnecy",
                            Description = "WithdrawDigitalCurrency",
-                           Parameters = new[] {"withdrawalAmount", "address", "tag", "comment", "primaryCurrency" }
+                           Parameters = new[] {"withdrawalAmount", "address", "tag", "comment", "primaryCurrency", "withdrawalClientId" }
                        };
             }
         }
@@ -390,7 +390,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "GetDigitalCurrencyWithdrawal",
                     Description = "GetDigitalCurrencyWithdrawal",
-                    Parameters = new[] { "transactionGuid" }
+                    Parameters = new[] { "transactionGuid", "withdrawalClientId" }
                 };
             }
         }
