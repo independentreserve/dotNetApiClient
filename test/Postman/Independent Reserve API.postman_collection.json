@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8f186ffe-56fb-4e10-a803-30e738a861e1",
+		"_postman_id": "e6692864-c201-481a-bd22-da416183e832",
 		"name": "Independent Reserve API",
 		"description": "# Authentication and Private Methods\n\nIn order to access private endpoints, set the `apiKey` and `apiSecret` collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -727,7 +727,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"transactionGuid\": \"2a93732f-3f40-4685-b3bc-ff3ec326090d\"\r\n}",
+							"raw": "{\r\n    \"transactionGuid\": \"2a93732f-3f40-4685-b3bc-ff3ec326090d\",\r\n    \"clientId\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -754,7 +754,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fiatWithdrawalRequestGuid\": \"2e9ad56c-1954-4b0f-b3d8-2ade7fad93ff\"\r\n}",
+							"raw": "{\r\n    \"fiatWithdrawalRequestGuid\": \"2e9ad56c-1954-4b0f-b3d8-2ade7fad93ff\",\r\n    \"clientId\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -970,7 +970,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"secondaryCurrencyCode\": \"{secondaryCurrencyCode}\",\r\n    \"withdrawalAmount\": \"{withdrawalAmount}\",\r\n    \"fiatBankAccountGuid\": \"{fiatBankAccountGuid}\",\r\n    \"useNpp\": \"true\",\r\n    \"comment\": \"{comment}\"\r\n}",
+							"raw": "{\r\n    \"secondaryCurrencyCode\": \"{secondaryCurrencyCode}\",\r\n    \"withdrawalAmount\": \"{withdrawalAmount}\",\r\n    \"fiatBankAccountGuid\": \"{fiatBankAccountGuid}\",\r\n    \"useNpp\": \"true\",\r\n    \"comment\": \"{comment}\",\r\n    \"clientId\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -997,7 +997,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"amount\": 0.123,\r\n    \"withdrawalAddress\": \"{destinationAddress}\",\r\n    \"comment\": \"\",\r\n    \"primaryCurrencyCode\": \"Bch\",\r\n    \"destinationTag\": null\r\n}",
+							"raw": "{\r\n    \"amount\": 0.123,\r\n    \"withdrawalAddress\": \"{destinationAddress}\",\r\n    \"comment\": \"\",\r\n    \"primaryCurrencyCode\": \"Bch\",\r\n    \"destinationTag\": null,\r\n    \"clientId\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
