@@ -913,7 +913,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public Page<Transaction>  GetTransactions(Guid accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals)
+        public Page<Transaction>  GetTransactions(Guid? accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -932,14 +932,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public async Task<Page<Transaction>> GetTransactionsAsync(Guid accountGuid, DateTime? fromTimestampUtc,
+        public async Task<Page<Transaction>> GetTransactionsAsync(Guid? accountGuid, DateTime? fromTimestampUtc,
             DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
             var data = CreatePrivateRequest();
-            data.accountGuid = accountGuid.ToString();
+            data.accountGuid = accountGuid?.ToString();
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
             data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
             data.txTypes = txTypes;
