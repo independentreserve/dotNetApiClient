@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
 using NUnit.Framework;
 
@@ -9,21 +11,21 @@ namespace UnitTest
         [Test]
         public void GetOpenOrders()
         {
-            using (var client = CreatePrivateClient())
+            WrapWithNewOrderPlace(client =>
             {
                 var page = client.GetOpenOrders(CurrencyCode.Xbt, CurrencyCode.Usd, 1, 10);
 
                 Assert.IsNotNull(page);
                 Assert.AreEqual(page.PageSize, 10);
-            }
+            });
         }
 
         [Test]
         public void GetOpenOrdersNoCurrencies()
         {
-            using (var client = CreatePrivateClient())
+            WrapWithNewOrderPlace(client =>
             {
-                Page<BankHistoryOrder> page = client.GetOpenOrders(null, null, 1, 10);
+                var page = client.GetOpenOrders(null, null, 1, 10);
 
                 Assert.IsNotNull(page);
 
@@ -32,7 +34,7 @@ namespace UnitTest
 
                 Assert.IsTrue(page.Data.Any(), "page.Data has no items");
                 Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
-            }
+            });
         }
 
         [Test]
@@ -108,6 +110,31 @@ namespace UnitTest
 
                 Assert.IsTrue(page.Data.Any(), "page.Data has no items");
                 Assert.IsTrue(page.Data.Count() <= 10, $"page.Data.Count() is {page.Data.Count()}");
+            }
+        }
+
+        private void WrapWithNewOrderPlace(Action<Client> action)
+        {
+            using (var client = CreatePrivateClient())
+            {
+                BankOrder bankOrder = null;
+
+                try
+                {
+                    // place order with unrealistic high price to ensure order is not filled
+                    const decimal price = 9999999999;
+                    bankOrder = client.PlaceLimitOrder(CurrencyCode.Xbt, CurrencyCode.Usd, OrderType.LimitOffer, price, 1, null);
+                    Assert.IsNotNull(bankOrder);
+
+                    action(client);
+                }
+                finally
+                {
+                    if (bankOrder != null)
+                    {
+                        client.CancelOrder(bankOrder.OrderGuid);
+                    }
+                }
             }
         }
     }
