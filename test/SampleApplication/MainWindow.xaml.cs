@@ -317,18 +317,21 @@ namespace SampleApplication
                 }
                 catch (Exception ex)
                 {
-                    ViewModel.LastRequestResponse = string.Empty;
+                    Func<string, string> MakeHeader = title => $"---------- {title} -------------\r\n";
+
+                    ViewModel.LastRequestResponse = MakeHeader("Error Response");
                     if (ex.Data.Contains(Client.ExceptionDataHttpStatusCode))
                     {
                         var statusCode = (HttpStatusCode) ex.Data[Client.ExceptionDataHttpStatusCode];
-                        ViewModel.LastRequestResponse = $"HttpStatusCode=({(int)statusCode}) {statusCode}\r\n";
+                        ViewModel.LastRequestResponse += $"HttpStatusCode=({(int)statusCode}) {statusCode}\r\n";
                     }
                     if (ex.Data.Contains(Client.ExceptionDataErrorCode))
                     {
                         var errorCode = ex.Data[Client.ExceptionDataErrorCode];
                         ViewModel.LastRequestResponse += $"ErrorCode={errorCode}\r\n";
                     }
-                    ViewModel.LastRequestResponse += ex.Message;
+                    ViewModel.LastRequestResponse += $"Message='{ex.Message}'";
+                    ViewModel.LastRequestResponse += $"\r\n\r\n{MakeHeader("Raw Response")}" + TryFormatJson(client.LastResponseRaw);
                 }
 
                 ViewModel.LastRequestUrl = string.Format("{0} {1}", client.LastRequestHttpMethod, client.LastRequestUrl);
@@ -343,11 +346,22 @@ namespace SampleApplication
             }
         }
 
+        private static string TryFormatJson(string json)
+        {
+            try
+            {
+                return FormatJson(json);
+            }
+            catch
+            {
+                return json;
+            }
+        }
+
+
         /// <summary>
         /// Helper method to format JSON string to the nice indented format
         /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
         private static string FormatJson(string json)
         {
             var serializerSettings = new JsonSerializerSettings
