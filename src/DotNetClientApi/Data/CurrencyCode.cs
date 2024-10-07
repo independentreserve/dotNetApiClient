@@ -49,5 +49,6 @@
         Trx = 41,
         Rndr = 42,
         Wif = 43,
+        Rlusd = 44,
     }
 }
