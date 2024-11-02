@@ -101,14 +101,17 @@ namespace IndependentReserve.DotNetClientApi
 
         Task<List<Event>> GetEvents();
         Task<ExchangeStatus> GetExchangeStatus();
-        
+
         Task<IEnumerable<WithdrawalFee>> GetFiatWithdrawalFees();
         Task<IEnumerable<DepositFee>> GetDepositFees();
         Task<Dictionary<CurrencyCode, decimal>> GetOrderMinimumVolumes();
 
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
+        Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits();
+
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
+        Task<IEnumerable<DigitalWithdrawalFee>> GetCryptoWithdrawalFees2();
 
         Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig();
         Task<IEnumerable<DigitalCurrencyConfiguration>> GetPrimaryCurrencyConfig2();

@@ -503,6 +503,15 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Returns the fee schedule for crypto withdrawals
+        /// </summary>
+        public async Task<IEnumerable<DigitalWithdrawalFee>> GetCryptoWithdrawalFees2()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalWithdrawalFee>>("/Public/GetCryptoWithdrawalFees2");
+        }
+
+        /// <summary>
         /// Returns the configuration of all primary currencies
         /// </summary>
         public async Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig()
@@ -1510,6 +1519,19 @@ namespace IndependentReserve.DotNetClientApi
             var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<Dictionary<string, List<WithdrawalLimit>>>("/Private/GetWithdrawalLimits", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves crypto withdrawal limits
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits()
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<DigitalCurrencyWithdrawalLimit>>("/Private/GetDigitalCurrencyWithdrawalLimits", data).ConfigureAwait(false);
         }
 
         #endregion //Private API

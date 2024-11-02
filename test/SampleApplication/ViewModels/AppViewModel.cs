@@ -198,9 +198,11 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetFiatWithdrawalFees,
                         MethodMetadata.GetDepositFees,
                         MethodMetadata.GetWithdrawalLimits,
+                        MethodMetadata.GetDigitalCurrencyWithdrawalLimits,
                         MethodMetadata.GetDepositLimits,
                         MethodMetadata.GetOrderMinimumVolumes,
                         MethodMetadata.GetCryptoWithdrawalFees,
+                        MethodMetadata.GetCryptoWithdrawalFees2,
                         MethodMetadata.GetPrimaryCurrencyConfig,
                         MethodMetadata.GetPrimaryCurrencyConfig2,
                     }

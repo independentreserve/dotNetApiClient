@@ -292,6 +292,10 @@ namespace SampleApplication
                     {
                         await client.GetWithdrawalLimits();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawalLimits)
+                    {
+                        await client.GetDigitalCurrencyWithdrawalLimits();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderMinimumVolumes)
                     {
                         await client.GetOrderMinimumVolumes();
@@ -299,6 +303,10 @@ namespace SampleApplication
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoWithdrawalFees)
                     {
                         await client.GetCryptoWithdrawalFees();
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoWithdrawalFees2)
+                    {
+                        await client.GetCryptoWithdrawalFees2();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencyConfig)
                     {

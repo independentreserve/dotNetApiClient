@@ -484,6 +484,14 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata GetDigitalCurrencyWithdrawalLimits =>
+            new MethodMetadata()
+            {
+                Name = "GetDigitalCurrencyWithdrawalLimits",
+                Description = "GetDigitalCurrencyWithdrawalLimits",
+                Parameters = new string[] { }
+            };
+
         public static MethodMetadata GetOrderMinimumVolumes =>
             new MethodMetadata()
             {
@@ -497,6 +505,14 @@ namespace SampleApplication.ViewModels
             {
                 Name = "GetCryptoWithdrawalFees",
                 Description = "GetCryptoWithdrawalFees",
+                Parameters = new string[] { }
+            };
+
+        public static MethodMetadata GetCryptoWithdrawalFees2 =>
+            new MethodMetadata()
+            {
+                Name = "GetCryptoWithdrawalFees2",
+                Description = "GetCryptoWithdrawalFees2",
                 Parameters = new string[] { }
             };
 
