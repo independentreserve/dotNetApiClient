@@ -74,6 +74,7 @@
     <Compile Include="Config\IConfigProvider.cs" />
     <Compile Include="CurrencyComboBox.cs" />
     <Compile Include="Extensions\TimespanExtensions.cs" />
+    <Compile Include="NetworkComboBox.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="TimeInForceComboBox.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />

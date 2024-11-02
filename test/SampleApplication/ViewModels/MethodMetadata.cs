@@ -393,6 +393,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata WithdrawCrypto
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "WithdrawCrypto",
+                    Description = "WithdrawCrypto",
+                    Parameters = new[] { "withdrawalAmount", "address", "tag", "comment", "network", "primaryCurrency", "withdrawalClientId" }
+                };
+            }
+        }
+
         //GetDigitalCurrencyWithdrawal()
         public static MethodMetadata GetDigitalCurrencyWithdrawal
         {

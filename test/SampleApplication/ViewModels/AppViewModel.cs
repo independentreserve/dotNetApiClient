@@ -25,6 +25,7 @@ namespace SampleApplication.ViewModels
         private string _lastRequestDuration;
         private CurrencyCode _primaryCurrency;
         private CurrencyCode _secondaryCurrency;
+        private string _network;
         private int? _numberOfRecentTradesToRetrieve;
         private int? _numberOfHoursInThePastToRetrieve;
         private int? _pageIndex;
@@ -185,6 +186,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.NewDepositAddress,
                         MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
                         MethodMetadata.WithdrawDigitalCurrency,
+                        MethodMetadata.WithdrawCrypto,
                         MethodMetadata.GetDigitalCurrencyWithdrawal,
                         MethodMetadata.GetFiatBankAccounts,
                         MethodMetadata.RequestFiatWithdrawal,
@@ -327,6 +329,22 @@ namespace SampleApplication.ViewModels
                 if (_secondaryCurrency != value)
                 {
                     _secondaryCurrency = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - secondary currency
+        /// </summary>
+        public string Network
+        {
+            get { return _network; }
+            set
+            {
+                if (_network != value)
+                {
+                    _network = value;
                     OnPropertyChanged();
                 }
             }
