@@ -37,10 +37,22 @@ namespace SampleApplication.ViewModels
             get { return new MethodMetadata() {Name = "GetValidPrimaryCurrencyCodes", Description = "GetValidPrimaryCurrencyCodes", Parameters = new string[] {}}; }
         }
 
+        //GetValidPrimaryCurrencyCodes2()
+        public static MethodMetadata GetValidPrimaryCurrencyCodes2
+        {
+            get { return new MethodMetadata() { Name = "GetValidPrimaryCurrencyCodes2", Description = "GetValidPrimaryCurrencyCodes2", Parameters = new string[] { } }; }
+        }
+
         //GetValidSecondaryCurrencyCodes()
         public static MethodMetadata GetValidSecondaryCurrencyCodes
         {
             get { return new MethodMetadata() {Name = "GetValidSecondaryCurrencyCodes", Description = "GetValidSecondaryCurrencyCodes", Parameters = new string[] {}}; }
+        }
+
+        //GetValidBlockchainNetworks()
+        public static MethodMetadata GetValidBlockchainNetworks
+        {
+            get { return new MethodMetadata() { Name = "GetValidBlockchainNetworks", Description = "GetValidBlockchainNetworks", Parameters = new string[] { } }; }
         }
 
         //GetValidLimitOrderTypes()
@@ -493,6 +505,14 @@ namespace SampleApplication.ViewModels
             {
                 Name = "GetPrimaryCurrencyConfig",
                 Description = "GetPrimaryCurrencyConfig",
+                Parameters = new string[] { }
+            };
+
+        public static MethodMetadata GetPrimaryCurrencyConfig2 =>
+            new MethodMetadata()
+            {
+                Name = "GetPrimaryCurrencyConfig2",
+                Description = "GetPrimaryCurrencyConfig2",
                 Parameters = new string[] { }
             };
 

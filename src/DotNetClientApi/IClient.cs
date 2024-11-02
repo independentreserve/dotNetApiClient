@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Common;
+using IndependentReserve.DotNetClientApi.Data.Configuration;
 using IndependentReserve.DotNetClientApi.Data.Limits;
 using IndependentReserve.DotNetClientApi.Data.Shop;
 using IndependentReserve.DotNetClientApi.Withdrawal;
@@ -67,8 +69,10 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<OrderType>> GetValidOrderTypesAsync();
         IEnumerable<CurrencyCode> GetValidPrimaryCurrencyCodes();
         Task<IEnumerable<CurrencyCode>> GetValidPrimaryCurrencyCodesAsync();
+        Task<IEnumerable<DigitalCurrency>> GetValidPrimaryCurrencyCodes2Async();
         IEnumerable<CurrencyCode> GetValidSecondaryCurrencyCodes();
         Task<IEnumerable<CurrencyCode>> GetValidSecondaryCurrencyCodesAsync();
+        Task<IEnumerable<string>> GetValidBlockchainNetworksAsync();
         IEnumerable<TransactionType> GetValidTransactionTypes();
         Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync();
         BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId = null, TimeInForce? timeInForce = null);
@@ -107,5 +111,6 @@ namespace IndependentReserve.DotNetClientApi
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
 
         Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig();
+        Task<IEnumerable<DigitalCurrencyConfiguration>> GetPrimaryCurrencyConfig2();
     }
 }

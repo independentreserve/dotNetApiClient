@@ -156,7 +156,9 @@ namespace SampleApplication.ViewModels
                     {
                         MethodMetadata.Null,
                         MethodMetadata.GetValidPrimaryCurrencyCodes,
+                        MethodMetadata.GetValidPrimaryCurrencyCodes2,
                         MethodMetadata.GetValidSecondaryCurrencyCodes,
+                        MethodMetadata.GetValidBlockchainNetworks,
                         MethodMetadata.GetValidLimitOrderTypes,
                         MethodMetadata.GetValidMarketOrderTypes,
                         MethodMetadata.GetValidOrderTypes,
@@ -200,7 +202,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetOrderMinimumVolumes,
                         MethodMetadata.GetCryptoWithdrawalFees,
                         MethodMetadata.GetPrimaryCurrencyConfig,
-
+                        MethodMetadata.GetPrimaryCurrencyConfig2,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();

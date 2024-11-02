@@ -114,9 +114,17 @@ namespace SampleApplication
                     {
                         await client.GetValidPrimaryCurrencyCodesAsync();
                     }
+                    if (ViewModel.SelectedMethod == MethodMetadata.GetValidPrimaryCurrencyCodes2)
+                    {
+                        await client.GetValidPrimaryCurrencyCodes2Async();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetValidSecondaryCurrencyCodes)
                     {
                         await client.GetValidSecondaryCurrencyCodesAsync();
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetValidBlockchainNetworks)
+                    {
+                        await client.GetValidBlockchainNetworksAsync();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetValidLimitOrderTypes)
                     {
@@ -295,6 +303,10 @@ namespace SampleApplication
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencyConfig)
                     {
                         await client.GetPrimaryCurrencyConfig();
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencyConfig2)
+                    {
+                        await client.GetPrimaryCurrencyConfig2();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
                     {

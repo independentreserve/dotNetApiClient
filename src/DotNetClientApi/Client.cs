@@ -5,6 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Common;
+using IndependentReserve.DotNetClientApi.Data.Configuration;
 using IndependentReserve.DotNetClientApi.Data.Limits;
 using IndependentReserve.DotNetClientApi.Helpers;
 using IndependentReserve.DotNetClientApi.Withdrawal;
@@ -184,6 +186,15 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Returns a list of valid digital currencies.
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrency>> GetValidPrimaryCurrencyCodes2Async()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalCurrency>>("/Public/GetValidPrimaryCurrencyCodes2").ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Returns a list of valid secondary currency codes. These are the fiat currencies which are supported by Independent Reserve for trading purposes.
         /// </summary>
         public IEnumerable<CurrencyCode> GetValidSecondaryCurrencyCodes()
@@ -199,6 +210,15 @@ namespace IndependentReserve.DotNetClientApi
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyCode>>("/Public/GetValidSecondaryCurrencyCodes").ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns a list of valid blockchain networks.
+        /// </summary>
+        public async Task<IEnumerable<string>> GetValidBlockchainNetworksAsync()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<string>>("/Public/GetValidBlockchainNetworks").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -489,6 +509,15 @@ namespace IndependentReserve.DotNetClientApi
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyConfiguration>>("/Public/GetPrimaryCurrencyConfig");
+        }
+
+        /// <summary>
+        /// Returns the configuration of all primary currencies
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrencyConfiguration>> GetPrimaryCurrencyConfig2()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalCurrencyConfiguration>>("/Public/GetPrimaryCurrencyConfig2");
         }
 
         private Dictionary<CurrencyCode, TValue> ConvertToCurrencyDictionary<TValue>(Dictionary<string, TValue> data) 
