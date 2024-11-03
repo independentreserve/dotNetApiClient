@@ -282,6 +282,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata GetDigitalCurrencyDepositAddress2
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDigitalCurrencyDepositAddress2",
+                    Description = "GetDigitalCurrencyDepositAddress2",
+                    Parameters = new[] { "primaryCurrency" }
+                };
+            }
+        }
+
         //NewDepositAddress()
         public static MethodMetadata NewDepositAddress
         {

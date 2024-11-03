@@ -1066,6 +1066,20 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves currency deposit addresses for all networks
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddress2Async(CurrencyCode primaryCurrency)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<DigitalCurrencyAddress>>("/Private/GetDigitalCurrencyDepositAddress2", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves the Bitcoin addresses (paged) which should be used for new Bitcoin deposits
         /// </summary>
         [Obsolete("Use GetDigitalCurrencyDepositAddresses instead.")]

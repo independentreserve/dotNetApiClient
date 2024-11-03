@@ -216,6 +216,10 @@ namespace SampleApplication
                     {
                         await client.GetDigitalCurrencyDepositAddressAsync(ViewModel.PrimaryCurrency);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddress2)
+                    {
+                        await client.GetDigitalCurrencyDepositAddress2Async(ViewModel.PrimaryCurrency);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.NewDepositAddress)
                     {
                         await client.NewDepositAddressAsync(ViewModel.PrimaryCurrency);

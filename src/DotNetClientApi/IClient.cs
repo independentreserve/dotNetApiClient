@@ -36,6 +36,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null);
         DigitalCurrencyDepositAddress GetDigitalCurrencyDepositAddress(CurrencyCode primaryCurrency);
         Task<DigitalCurrencyDepositAddress> GetDigitalCurrencyDepositAddressAsync(CurrencyCode primaryCurrency);
+        Task<IEnumerable<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddress2Async(CurrencyCode primaryCurrency);
         Page<DigitalCurrencyDepositAddress> GetDigitalCurrencyDepositAddresses(CurrencyCode primaryCurrency, int pageIndex, int pageSize);
         Task<Page<DigitalCurrencyDepositAddress>> GetDigitalCurrencyDepositAddressesAsync(CurrencyCode primaryCurrency, int pageIndex, int pageSize);
         Task<DigitalCurrencyDepositAddress> NewDepositAddressAsync(CurrencyCode primaryCurrency);
