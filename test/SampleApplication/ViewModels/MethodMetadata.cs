@@ -323,6 +323,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata GetDigitalCurrencyDepositAddresses2
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDigitalCurrencyDepositAddresses2",
+                    Description = "GetDigitalCurrencyDepositAddresses2",
+                    Parameters = new[] { "network", "pageIndex", "pageSize" }
+                };
+            }
+        }
+
         //RequestFiatWithdrawal()
         public static MethodMetadata RequestFiatWithdrawal
         {

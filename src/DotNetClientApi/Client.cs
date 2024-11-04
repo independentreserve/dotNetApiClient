@@ -1141,6 +1141,26 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves the digital currency addresses (paged) which should be used for deposits
+        /// </summary>
+        /// <param name="network">blockchain network (see <see cref="BlockchainNetwork">)</param>
+        /// <param name="primaryCurrency">digital currency code to retrieve deposit addresses for</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        public async Task<Page<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddresses2Async(string network, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.network = network;
+            data.pageIndex = pageIndex;
+            data.pageSize = pageSize;
+
+            return await HttpWorker.QueryPrivateAsync<Page<DigitalCurrencyAddress>>("/Private/GetDigitalCurrencyDepositAddresses2", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Generate a new deposit address which should be used for new deposits of a digital currency
         /// </summary>
         /// <param name="primaryCurrency">digital currency code to generate deposit address for</param>

@@ -228,6 +228,10 @@ namespace SampleApplication
                     {
                         await client.GetDigitalCurrencyDepositAddressesAsync(ViewModel.PrimaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddresses2)
+                    {
+                        await client.GetDigitalCurrencyDepositAddresses2Async(ViewModel.Network, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatBankAccounts)
                     {
                         await client.GetFiatBankAccountsAsync();

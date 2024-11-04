@@ -39,6 +39,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddress2Async(CurrencyCode primaryCurrency);
         Page<DigitalCurrencyDepositAddress> GetDigitalCurrencyDepositAddresses(CurrencyCode primaryCurrency, int pageIndex, int pageSize);
         Task<Page<DigitalCurrencyDepositAddress>> GetDigitalCurrencyDepositAddressesAsync(CurrencyCode primaryCurrency, int pageIndex, int pageSize);
+        Task<Page<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddresses2Async(string network, int pageIndex, int pageSize);
         Task<DigitalCurrencyDepositAddress> NewDepositAddressAsync(CurrencyCode primaryCurrency);
         IEnumerable<FxRate> GetFxRates();
         Task<IEnumerable<FxRate>> GetFxRatesAsync();
