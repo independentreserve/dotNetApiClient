@@ -74,7 +74,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<DigitalCurrency>> GetValidPrimaryCurrencyCodes2Async();
         IEnumerable<CurrencyCode> GetValidSecondaryCurrencyCodes();
         Task<IEnumerable<CurrencyCode>> GetValidSecondaryCurrencyCodesAsync();
-        Task<IEnumerable<string>> GetValidBlockchainNetworksAsync();
+        Task<IEnumerable<string>> GetBlockchainNetworks();
         IEnumerable<TransactionType> GetValidTransactionTypes();
         Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync();
         BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId = null, TimeInForce? timeInForce = null);

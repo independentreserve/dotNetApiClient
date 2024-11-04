@@ -50,7 +50,7 @@ namespace SampleApplication.ViewModels
         }
 
         //GetValidBlockchainNetworks()
-        public static MethodMetadata GetValidBlockchainNetworks
+        public static MethodMetadata GetBlockchainNetworks
         {
             get { return new MethodMetadata() { Name = "GetValidBlockchainNetworks", Description = "GetValidBlockchainNetworks", Parameters = new string[] { } }; }
         }

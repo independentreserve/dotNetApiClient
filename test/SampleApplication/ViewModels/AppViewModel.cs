@@ -159,7 +159,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetValidPrimaryCurrencyCodes,
                         MethodMetadata.GetValidPrimaryCurrencyCodes2,
                         MethodMetadata.GetValidSecondaryCurrencyCodes,
-                        MethodMetadata.GetValidBlockchainNetworks,
+                        MethodMetadata.GetBlockchainNetworks,
                         MethodMetadata.GetValidLimitOrderTypes,
                         MethodMetadata.GetValidMarketOrderTypes,
                         MethodMetadata.GetValidOrderTypes,

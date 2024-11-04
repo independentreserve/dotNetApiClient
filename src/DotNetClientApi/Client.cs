@@ -215,10 +215,10 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Returns a list of valid blockchain networks.
         /// </summary>
-        public async Task<IEnumerable<string>> GetValidBlockchainNetworksAsync()
+        public async Task<IEnumerable<string>> GetBlockchainNetworks()
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<IEnumerable<string>>("/Public/GetValidBlockchainNetworks").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<string>>("/Public/GetBlockchainNetworks").ConfigureAwait(false);
         }
 
         /// <summary>
