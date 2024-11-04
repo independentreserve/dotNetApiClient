@@ -262,7 +262,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawCrypto)
                     {
-                        await client.WithdrawDigitalCurrencyAsync(new WithdrawCryptoRequest
+                        await client.WithdrawCryptoAsync(new WithdrawCryptoRequest
                         {
                             Amount = ViewModel.WithdrawalAmount,
                             Address = ViewModel.Address,
