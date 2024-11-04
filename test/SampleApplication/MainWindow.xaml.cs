@@ -260,6 +260,19 @@ namespace SampleApplication
                             ClientId = ViewModel.WithdrawalClientId
                         });
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawCrypto)
+                    {
+                        await client.WithdrawDigitalCurrencyAsync(new WithdrawCryptoRequest
+                        {
+                            Amount = ViewModel.WithdrawalAmount,
+                            Address = ViewModel.Address,
+                            Comment = ViewModel.Comment,
+                            Currency = ViewModel.PrimaryCurrency,
+                            DestinationTag = string.IsNullOrWhiteSpace(ViewModel.Tag) ? null : ViewModel.Tag,
+                            ClientId = ViewModel.WithdrawalClientId,
+                            Network = ViewModel.Network,
+                        });
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawal)
                     {
                         await client.GetDigitalCurrencyWithdrawalAsync(ParseNullableGuid(ViewModel.TransactionGuid), ViewModel.WithdrawalClientId);

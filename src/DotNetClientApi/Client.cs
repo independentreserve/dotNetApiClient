@@ -1318,6 +1318,31 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
         }
 
+        public async Task<CryptoWithdrawal> WithdrawCryptoAsync(WithdrawCryptoRequest withdrawRequest)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.amount = withdrawRequest.Amount.ToString(CultureInfo.InvariantCulture);
+            data.withdrawalAddress = withdrawRequest.Address;
+            data.comment = withdrawRequest.Comment;
+            data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
+            data.network = withdrawRequest.Network;
+
+            if (!string.IsNullOrEmpty(withdrawRequest.ClientId))
+            {
+                data.clientId = withdrawRequest.ClientId;
+            }
+
+            if (!string.IsNullOrEmpty(withdrawRequest.DestinationTag))
+            {
+                data.destinationTag = withdrawRequest.DestinationTag;
+            }
+
+            return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawCrypto", data).ConfigureAwait(false);
+        }
+
         public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null)
         {
             ThrowIfDisposed();
