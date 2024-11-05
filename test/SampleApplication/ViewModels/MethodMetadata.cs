@@ -309,6 +309,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata NewDepositAddress2
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "NewDepositAddress2",
+                    Description = "NewDepositAddress2",
+                    Parameters = new[] { "network" }
+                };
+            }
+        }
+
         //GetDigitalCurrencyDepositAddresses()
         public static MethodMetadata GetDigitalCurrencyDepositAddresses
         {
@@ -528,7 +541,7 @@ namespace SampleApplication.ViewModels
             {
                 Name = "GetDigitalCurrencyWithdrawalLimits",
                 Description = "GetDigitalCurrencyWithdrawalLimits",
-                Parameters = new string[] { }
+                Parameters = new string[] { "network", "primaryCurrency" }
             };
 
         public static MethodMetadata GetOrderMinimumVolumes =>

@@ -224,6 +224,10 @@ namespace SampleApplication
                     {
                         await client.NewDepositAddressAsync(ViewModel.PrimaryCurrency);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.NewDepositAddress2)
+                    {
+                        await client.NewDepositAddress2Async(ViewModel.Network);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddresses)
                     {
                         await client.GetDigitalCurrencyDepositAddressesAsync(ViewModel.PrimaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
@@ -315,7 +319,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawalLimits)
                     {
-                        await client.GetDigitalCurrencyWithdrawalLimits();
+                        await client.GetDigitalCurrencyWithdrawalLimits(ViewModel.Network, ViewModel.PrimaryCurrency);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderMinimumVolumes)
                     {

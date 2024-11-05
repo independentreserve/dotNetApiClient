@@ -1175,6 +1175,17 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/NewDepositAddress", data).ConfigureAwait(false);
         }
 
+        public async Task<DigitalCurrencyAddress> NewDepositAddress2Async(string network)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.network = network;
+
+            return await HttpWorker.QueryPrivateAsync<DigitalCurrencyAddress>("/Private/NewDepositAddress2", data).ConfigureAwait(false);
+        }
+
         /// <summary>
         /// Marks bitcoin address to sync with blockchain and update balance
         /// </summary>
@@ -1583,12 +1594,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves crypto withdrawal limits
         /// </summary>
-        public async Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits()
+        public async Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(string network, CurrencyCode currency)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
             var data = CreatePrivateRequest();
+            data.network = network;
+            data.currency = currency.ToString();
 
             return await HttpWorker.QueryPrivateAsync<IEnumerable<DigitalCurrencyWithdrawalLimit>>("/Private/GetDigitalCurrencyWithdrawalLimits", data).ConfigureAwait(false);
         }

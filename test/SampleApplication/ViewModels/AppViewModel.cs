@@ -186,6 +186,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetDigitalCurrencyDepositAddresses,
                         MethodMetadata.GetDigitalCurrencyDepositAddresses2,
                         MethodMetadata.NewDepositAddress,
+                        MethodMetadata.NewDepositAddress2,
                         MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
                         MethodMetadata.WithdrawDigitalCurrency,
                         MethodMetadata.WithdrawCrypto,

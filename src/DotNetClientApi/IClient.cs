@@ -5,7 +5,6 @@ using IndependentReserve.DotNetClientApi.Data;
 using IndependentReserve.DotNetClientApi.Data.Common;
 using IndependentReserve.DotNetClientApi.Data.Configuration;
 using IndependentReserve.DotNetClientApi.Data.Limits;
-using IndependentReserve.DotNetClientApi.Data.Shop;
 using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
@@ -41,6 +40,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<Page<DigitalCurrencyDepositAddress>> GetDigitalCurrencyDepositAddressesAsync(CurrencyCode primaryCurrency, int pageIndex, int pageSize);
         Task<Page<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddresses2Async(string network, int pageIndex, int pageSize);
         Task<DigitalCurrencyDepositAddress> NewDepositAddressAsync(CurrencyCode primaryCurrency);
+        Task<DigitalCurrencyAddress> NewDepositAddress2Async(string network);
         IEnumerable<FxRate> GetFxRates();
         Task<IEnumerable<FxRate>> GetFxRatesAsync();
         MarketSummary GetMarketSummary(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency);
@@ -111,7 +111,7 @@ namespace IndependentReserve.DotNetClientApi
 
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
-        Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits();
+        Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(string network, CurrencyCode currency);
 
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
         Task<IEnumerable<DigitalWithdrawalFee>> GetCryptoWithdrawalFees2();
