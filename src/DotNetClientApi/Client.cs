@@ -1355,20 +1355,21 @@ namespace IndependentReserve.DotNetClientApi
             ThrowIfPublicClient();
 
             var data = CreatePrivateRequest();
-            data.amount = withdrawRequest.Amount.ToString(CultureInfo.InvariantCulture);
-            data.withdrawalAddress = withdrawRequest.Address;
-            data.comment = withdrawRequest.Comment;
-            data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
             data.network = withdrawRequest.Network;
-
-            if (!string.IsNullOrEmpty(withdrawRequest.ClientId))
-            {
-                data.clientId = withdrawRequest.ClientId;
-            }
+            data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
+            data.withdrawalAddress = withdrawRequest.Address;
 
             if (!string.IsNullOrEmpty(withdrawRequest.DestinationTag))
             {
                 data.destinationTag = withdrawRequest.DestinationTag;
+            }
+
+            data.amount = withdrawRequest.Amount.ToString(CultureInfo.InvariantCulture);
+            data.comment = withdrawRequest.Comment;
+
+            if (!string.IsNullOrEmpty(withdrawRequest.ClientId))
+            {
+                data.clientId = withdrawRequest.ClientId;
             }
 
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawCrypto", data).ConfigureAwait(false);
