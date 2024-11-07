@@ -114,9 +114,9 @@ namespace SampleApplication
                     {
                         await client.GetValidPrimaryCurrencyCodesAsync();
                     }
-                    if (ViewModel.SelectedMethod == MethodMetadata.GetValidPrimaryCurrencyCodes2)
+                    if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencies)
                     {
-                        await client.GetValidPrimaryCurrencyCodes2Async();
+                        await client.GetPrimaryCurrenciesAsync();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetValidSecondaryCurrencyCodes)
                     {

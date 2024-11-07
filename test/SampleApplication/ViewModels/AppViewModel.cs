@@ -157,7 +157,7 @@ namespace SampleApplication.ViewModels
                     {
                         MethodMetadata.Null,
                         MethodMetadata.GetValidPrimaryCurrencyCodes,
-                        MethodMetadata.GetValidPrimaryCurrencyCodes2,
+                        MethodMetadata.GetPrimaryCurrencies,
                         MethodMetadata.GetValidSecondaryCurrencyCodes,
                         MethodMetadata.GetBlockchainNetworks,
                         MethodMetadata.GetValidLimitOrderTypes,

@@ -188,10 +188,10 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Returns a list of valid digital currencies.
         /// </summary>
-        public async Task<IEnumerable<DigitalCurrency>> GetValidPrimaryCurrencyCodes2Async()
+        public async Task<IEnumerable<DigitalCurrency>> GetPrimaryCurrenciesAsync()
         {
             ThrowIfDisposed();
-            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalCurrency>>("/Public/GetValidPrimaryCurrencyCodes2").ConfigureAwait(false);
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalCurrency>>("/Public/GetPrimaryCurrencies").ConfigureAwait(false);
         }
 
         /// <summary>

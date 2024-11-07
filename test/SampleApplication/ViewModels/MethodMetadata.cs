@@ -37,10 +37,10 @@ namespace SampleApplication.ViewModels
             get { return new MethodMetadata() {Name = "GetValidPrimaryCurrencyCodes", Description = "GetValidPrimaryCurrencyCodes", Parameters = new string[] {}}; }
         }
 
-        //GetValidPrimaryCurrencyCodes2()
-        public static MethodMetadata GetValidPrimaryCurrencyCodes2
+        //GetPrimaryCurrencies()
+        public static MethodMetadata GetPrimaryCurrencies
         {
-            get { return new MethodMetadata() { Name = "GetValidPrimaryCurrencyCodes2", Description = "GetValidPrimaryCurrencyCodes2", Parameters = new string[] { } }; }
+            get { return new MethodMetadata() { Name = "GetPrimaryCurrencies", Description = "GetPrimaryCurrencies", Parameters = new string[] { } }; }
         }
 
         //GetValidSecondaryCurrencyCodes()

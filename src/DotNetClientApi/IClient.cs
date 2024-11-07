@@ -71,7 +71,7 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<OrderType>> GetValidOrderTypesAsync();
         IEnumerable<CurrencyCode> GetValidPrimaryCurrencyCodes();
         Task<IEnumerable<CurrencyCode>> GetValidPrimaryCurrencyCodesAsync();
-        Task<IEnumerable<DigitalCurrency>> GetValidPrimaryCurrencyCodes2Async();
+        Task<IEnumerable<DigitalCurrency>> GetPrimaryCurrenciesAsync();
         IEnumerable<CurrencyCode> GetValidSecondaryCurrencyCodes();
         Task<IEnumerable<CurrencyCode>> GetValidSecondaryCurrencyCodesAsync();
         Task<IEnumerable<string>> GetBlockchainNetworks();
