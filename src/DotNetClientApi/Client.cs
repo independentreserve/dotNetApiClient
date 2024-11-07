@@ -1595,14 +1595,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves crypto withdrawal limits
         /// </summary>
-        public async Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(string network, CurrencyCode currency)
+        public async Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(DigitalCurrency digitalCurrency)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
             var data = CreatePrivateRequest();
-            data.network = network;
-            data.currency = currency.ToString();
+            data.network = digitalCurrency.Network;
+            data.primaryCurrencyCode = digitalCurrency.Currency.ToString();
 
             return await HttpWorker.QueryPrivateAsync<IEnumerable<DigitalCurrencyWithdrawalLimit>>("/Private/GetDigitalCurrencyWithdrawalLimits", data).ConfigureAwait(false);
         }

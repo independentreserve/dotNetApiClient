@@ -111,7 +111,7 @@ namespace IndependentReserve.DotNetClientApi
 
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
-        Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(string network, CurrencyCode currency);
+        Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(DigitalCurrency digitalCurrency);
 
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
         Task<IEnumerable<DigitalWithdrawalFee>> GetCryptoWithdrawalFees2();

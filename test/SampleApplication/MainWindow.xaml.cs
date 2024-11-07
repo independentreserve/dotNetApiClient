@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Common;
 using Newtonsoft.Json;
 using NLog;
 using SampleApplication.Extensions;
@@ -319,7 +320,11 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawalLimits)
                     {
-                        await client.GetDigitalCurrencyWithdrawalLimits(ViewModel.Network, ViewModel.PrimaryCurrency);
+                        await client.GetDigitalCurrencyWithdrawalLimits(new DigitalCurrency()
+                        {
+                            Network = ViewModel.Network,
+                            Currency = ViewModel.PrimaryCurrency
+                        });
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderMinimumVolumes)
                     {
