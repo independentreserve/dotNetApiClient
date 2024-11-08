@@ -10,6 +10,6 @@
 
         public CurrencyDecimalPlaces DecimalPlaces { get; set; }
 
-        public NetworkConfiguration[] Networks { get; set; }
+        public NetworkSpecificCurrencyConfiguration[] Networks { get; set; }
     }
 }

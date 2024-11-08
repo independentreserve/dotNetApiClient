@@ -1,6 +1,6 @@
 ﻿namespace IndependentReserve.DotNetClientApi.Data.Configuration
 {
-    public class NetworkConfiguration
+    public class NetworkSpecificCurrencyConfiguration
     {
         public string Network { get; set; }
 
