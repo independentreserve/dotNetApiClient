@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Common;
+using IndependentReserve.DotNetClientApi.Data.Configuration;
 using IndependentReserve.DotNetClientApi.Data.Limits;
-using IndependentReserve.DotNetClientApi.Data.Shop;
 using IndependentReserve.DotNetClientApi.Withdrawal;
 
 namespace IndependentReserve.DotNetClientApi
@@ -34,9 +35,12 @@ namespace IndependentReserve.DotNetClientApi
         Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null);
         DigitalCurrencyDepositAddress GetDigitalCurrencyDepositAddress(CurrencyCode primaryCurrency);
         Task<DigitalCurrencyDepositAddress> GetDigitalCurrencyDepositAddressAsync(CurrencyCode primaryCurrency);
+        Task<IEnumerable<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddress2Async(CurrencyCode primaryCurrency);
         Page<DigitalCurrencyDepositAddress> GetDigitalCurrencyDepositAddresses(CurrencyCode primaryCurrency, int pageIndex, int pageSize);
         Task<Page<DigitalCurrencyDepositAddress>> GetDigitalCurrencyDepositAddressesAsync(CurrencyCode primaryCurrency, int pageIndex, int pageSize);
+        Task<Page<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddresses2Async(string network, int pageIndex, int pageSize);
         Task<DigitalCurrencyDepositAddress> NewDepositAddressAsync(CurrencyCode primaryCurrency);
+        Task<DigitalCurrencyAddress> NewDepositAddress2Async(string network);
         IEnumerable<FxRate> GetFxRates();
         Task<IEnumerable<FxRate>> GetFxRatesAsync();
         MarketSummary GetMarketSummary(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency);
@@ -67,8 +71,10 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<OrderType>> GetValidOrderTypesAsync();
         IEnumerable<CurrencyCode> GetValidPrimaryCurrencyCodes();
         Task<IEnumerable<CurrencyCode>> GetValidPrimaryCurrencyCodesAsync();
+        Task<IEnumerable<DigitalCurrency>> GetPrimaryCurrenciesAsync();
         IEnumerable<CurrencyCode> GetValidSecondaryCurrencyCodes();
         Task<IEnumerable<CurrencyCode>> GetValidSecondaryCurrencyCodesAsync();
+        Task<IEnumerable<string>> GetBlockchainNetworks();
         IEnumerable<TransactionType> GetValidTransactionTypes();
         Task<IEnumerable<TransactionType>> GetValidTransactionTypesAsync();
         BankOrder PlaceLimitOrder(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, OrderType orderType, decimal price, decimal volume, string clientId = null, TimeInForce? timeInForce = null);
@@ -93,19 +99,24 @@ namespace IndependentReserve.DotNetClientApi
 
         CryptoWithdrawal WithdrawDigitalCurrency(DigitalWithdrawalRequest withdrawalRequest);
         Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(DigitalWithdrawalRequest withdrawalRequest);
+        Task<CryptoWithdrawal> WithdrawCryptoAsync(WithdrawCryptoRequest withdrawalRequest);
         Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null);
 
         Task<List<Event>> GetEvents();
         Task<ExchangeStatus> GetExchangeStatus();
-        
+
         Task<IEnumerable<WithdrawalFee>> GetFiatWithdrawalFees();
         Task<IEnumerable<DepositFee>> GetDepositFees();
         Task<Dictionary<CurrencyCode, decimal>> GetOrderMinimumVolumes();
 
         Task<DepositLimits> GetDepositLimits();
         Task<Dictionary<string, List<WithdrawalLimit>>> GetWithdrawalLimits();
+        Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(DigitalCurrency digitalCurrency);
+
         Task<Dictionary<CurrencyCode, decimal>> GetCryptoWithdrawalFees();
+        Task<IEnumerable<DigitalWithdrawalFee>> GetCryptoWithdrawalFees2();
 
         Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig();
+        Task<IEnumerable<DigitalCurrencyConfiguration>> GetPrimaryCurrencyConfig2();
     }
 }

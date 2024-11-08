@@ -37,10 +37,22 @@ namespace SampleApplication.ViewModels
             get { return new MethodMetadata() {Name = "GetValidPrimaryCurrencyCodes", Description = "GetValidPrimaryCurrencyCodes", Parameters = new string[] {}}; }
         }
 
+        //GetPrimaryCurrencies()
+        public static MethodMetadata GetPrimaryCurrencies
+        {
+            get { return new MethodMetadata() { Name = "GetPrimaryCurrencies", Description = "GetPrimaryCurrencies", Parameters = new string[] { } }; }
+        }
+
         //GetValidSecondaryCurrencyCodes()
         public static MethodMetadata GetValidSecondaryCurrencyCodes
         {
             get { return new MethodMetadata() {Name = "GetValidSecondaryCurrencyCodes", Description = "GetValidSecondaryCurrencyCodes", Parameters = new string[] {}}; }
+        }
+
+        //GetValidBlockchainNetworks()
+        public static MethodMetadata GetBlockchainNetworks
+        {
+            get { return new MethodMetadata() { Name = "GetBlockchainNetworks", Description = "GetBlockchainNetworks", Parameters = new string[] { } }; }
         }
 
         //GetValidLimitOrderTypes()
@@ -270,6 +282,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata GetDigitalCurrencyDepositAddress2
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDigitalCurrencyDepositAddress2",
+                    Description = "GetDigitalCurrencyDepositAddress2",
+                    Parameters = new[] { "primaryCurrency" }
+                };
+            }
+        }
+
         //NewDepositAddress()
         public static MethodMetadata NewDepositAddress
         {
@@ -284,6 +309,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata NewDepositAddress2
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "NewDepositAddress2",
+                    Description = "NewDepositAddress2",
+                    Parameters = new[] { "network" }
+                };
+            }
+        }
+
         //GetDigitalCurrencyDepositAddresses()
         public static MethodMetadata GetDigitalCurrencyDepositAddresses
         {
@@ -294,6 +332,19 @@ namespace SampleApplication.ViewModels
                     Name = "GetDigitalCurrencyDepositAddresses",
                     Description = "GetDigitalCurrencyDepositAddresses",
                     Parameters = new [] { "primaryCurrency", "pageIndex", "pageSize"}
+                };
+            }
+        }
+
+        public static MethodMetadata GetDigitalCurrencyDepositAddresses2
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDigitalCurrencyDepositAddresses2",
+                    Description = "GetDigitalCurrencyDepositAddresses2",
+                    Parameters = new[] { "network", "pageIndex", "pageSize" }
                 };
             }
         }
@@ -378,6 +429,19 @@ namespace SampleApplication.ViewModels
                            Description = "WithdrawDigitalCurrency",
                            Parameters = new[] {"withdrawalAmount", "address", "tag", "comment", "primaryCurrency", "withdrawalClientId" }
                        };
+            }
+        }
+
+        public static MethodMetadata WithdrawCrypto
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "WithdrawCrypto",
+                    Description = "WithdrawCrypto",
+                    Parameters = new[] { "withdrawalAmount", "address", "tag", "comment", "network", "primaryCurrency", "withdrawalClientId" }
+                };
             }
         }
 
@@ -472,6 +536,14 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata GetDigitalCurrencyWithdrawalLimits =>
+            new MethodMetadata()
+            {
+                Name = "GetDigitalCurrencyWithdrawalLimits",
+                Description = "GetDigitalCurrencyWithdrawalLimits",
+                Parameters = new string[] { "network", "primaryCurrency" }
+            };
+
         public static MethodMetadata GetOrderMinimumVolumes =>
             new MethodMetadata()
             {
@@ -488,11 +560,27 @@ namespace SampleApplication.ViewModels
                 Parameters = new string[] { }
             };
 
+        public static MethodMetadata GetCryptoWithdrawalFees2 =>
+            new MethodMetadata()
+            {
+                Name = "GetCryptoWithdrawalFees2",
+                Description = "GetCryptoWithdrawalFees2",
+                Parameters = new string[] { }
+            };
+
         public static MethodMetadata GetPrimaryCurrencyConfig =>
             new MethodMetadata()
             {
                 Name = "GetPrimaryCurrencyConfig",
                 Description = "GetPrimaryCurrencyConfig",
+                Parameters = new string[] { }
+            };
+
+        public static MethodMetadata GetPrimaryCurrencyConfig2 =>
+            new MethodMetadata()
+            {
+                Name = "GetPrimaryCurrencyConfig2",
+                Description = "GetPrimaryCurrencyConfig2",
                 Parameters = new string[] { }
             };
 

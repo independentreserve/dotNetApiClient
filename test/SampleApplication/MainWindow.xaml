@@ -37,6 +37,10 @@
             </GroupBox.Header>
 
             <StackPanel>
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=network}">
+                    <TextBlock Style="{StaticResource Label}" >Network:</TextBlock>
+                    <SampleApplication:NetworkComboBox SelectedValue="{Binding Network}"></SampleApplication:NetworkComboBox>
+                </StackPanel>
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=primaryCurrency}">
                     <TextBlock Style="{StaticResource Label}" >Primary Currency:</TextBlock>
                     <SampleApplication:CurrencyComboBox SelectedValue="{Binding PrimaryCurrency}"></SampleApplication:CurrencyComboBox>

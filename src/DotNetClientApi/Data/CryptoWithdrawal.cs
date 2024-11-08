@@ -19,6 +19,12 @@ namespace IndependentReserve.DotNetClientApi.Data
         public string PrimaryCurrencyCode { get; set; }
 
         /// <summary>
+        /// Blockchain network where withdrawal is made.
+        /// </summary>
+        [DataMember]
+        public string Network { get; set; }
+
+        /// <summary>
         /// When the pending withdrawal was created.
         /// </summary>
         [DataMember]

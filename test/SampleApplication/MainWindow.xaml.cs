@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows;
 using IndependentReserve.DotNetClientApi;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Common;
 using Newtonsoft.Json;
 using NLog;
 using SampleApplication.Extensions;
@@ -114,9 +115,17 @@ namespace SampleApplication
                     {
                         await client.GetValidPrimaryCurrencyCodesAsync();
                     }
+                    if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencies)
+                    {
+                        await client.GetPrimaryCurrenciesAsync();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetValidSecondaryCurrencyCodes)
                     {
                         await client.GetValidSecondaryCurrencyCodesAsync();
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetBlockchainNetworks)
+                    {
+                        await client.GetBlockchainNetworks();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetValidLimitOrderTypes)
                     {
@@ -208,13 +217,25 @@ namespace SampleApplication
                     {
                         await client.GetDigitalCurrencyDepositAddressAsync(ViewModel.PrimaryCurrency);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddress2)
+                    {
+                        await client.GetDigitalCurrencyDepositAddress2Async(ViewModel.PrimaryCurrency);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.NewDepositAddress)
                     {
                         await client.NewDepositAddressAsync(ViewModel.PrimaryCurrency);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.NewDepositAddress2)
+                    {
+                        await client.NewDepositAddress2Async(ViewModel.Network);
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddresses)
                     {
                         await client.GetDigitalCurrencyDepositAddressesAsync(ViewModel.PrimaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyDepositAddresses2)
+                    {
+                        await client.GetDigitalCurrencyDepositAddresses2Async(ViewModel.Network, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetFiatBankAccounts)
                     {
@@ -246,6 +267,19 @@ namespace SampleApplication
                             Currency = ViewModel.PrimaryCurrency,
                             DestinationTag = string.IsNullOrWhiteSpace(ViewModel.Tag) ? null : ViewModel.Tag,
                             ClientId = ViewModel.WithdrawalClientId
+                        });
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.WithdrawCrypto)
+                    {
+                        await client.WithdrawCryptoAsync(new WithdrawCryptoRequest
+                        {
+                            Amount = ViewModel.WithdrawalAmount,
+                            Address = ViewModel.Address,
+                            Comment = ViewModel.Comment,
+                            Currency = ViewModel.PrimaryCurrency,
+                            DestinationTag = string.IsNullOrWhiteSpace(ViewModel.Tag) ? null : ViewModel.Tag,
+                            ClientId = ViewModel.WithdrawalClientId,
+                            Network = ViewModel.Network,
                         });
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawal)
@@ -284,6 +318,14 @@ namespace SampleApplication
                     {
                         await client.GetWithdrawalLimits();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDigitalCurrencyWithdrawalLimits)
+                    {
+                        await client.GetDigitalCurrencyWithdrawalLimits(new DigitalCurrency()
+                        {
+                            Network = ViewModel.Network,
+                            Currency = ViewModel.PrimaryCurrency
+                        });
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderMinimumVolumes)
                     {
                         await client.GetOrderMinimumVolumes();
@@ -292,9 +334,17 @@ namespace SampleApplication
                     {
                         await client.GetCryptoWithdrawalFees();
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoWithdrawalFees2)
+                    {
+                        await client.GetCryptoWithdrawalFees2();
+                    }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencyConfig)
                     {
                         await client.GetPrimaryCurrencyConfig();
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetPrimaryCurrencyConfig2)
+                    {
+                        await client.GetPrimaryCurrencyConfig2();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
                     {

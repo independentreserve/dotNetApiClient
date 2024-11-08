@@ -5,6 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using IndependentReserve.DotNetClientApi.Data;
+using IndependentReserve.DotNetClientApi.Data.Common;
+using IndependentReserve.DotNetClientApi.Data.Configuration;
 using IndependentReserve.DotNetClientApi.Data.Limits;
 using IndependentReserve.DotNetClientApi.Helpers;
 using IndependentReserve.DotNetClientApi.Withdrawal;
@@ -184,6 +186,15 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Returns a list of valid digital currencies.
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrency>> GetPrimaryCurrenciesAsync()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalCurrency>>("/Public/GetPrimaryCurrencies").ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Returns a list of valid secondary currency codes. These are the fiat currencies which are supported by Independent Reserve for trading purposes.
         /// </summary>
         public IEnumerable<CurrencyCode> GetValidSecondaryCurrencyCodes()
@@ -199,6 +210,15 @@ namespace IndependentReserve.DotNetClientApi
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyCode>>("/Public/GetValidSecondaryCurrencyCodes").ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns a list of valid blockchain networks.
+        /// </summary>
+        public async Task<IEnumerable<string>> GetBlockchainNetworks()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<string>>("/Public/GetBlockchainNetworks").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -483,12 +503,30 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Returns the fee schedule for crypto withdrawals
+        /// </summary>
+        public async Task<IEnumerable<DigitalWithdrawalFee>> GetCryptoWithdrawalFees2()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalWithdrawalFee>>("/Public/GetCryptoWithdrawalFees2");
+        }
+
+        /// <summary>
         /// Returns the configuration of all primary currencies
         /// </summary>
         public async Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig()
         {
             ThrowIfDisposed();
             return await HttpWorker.QueryPublicAsync<IEnumerable<CurrencyConfiguration>>("/Public/GetPrimaryCurrencyConfig");
+        }
+
+        /// <summary>
+        /// Returns the configuration of all primary currencies
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrencyConfiguration>> GetPrimaryCurrencyConfig2()
+        {
+            ThrowIfDisposed();
+            return await HttpWorker.QueryPublicAsync<IEnumerable<DigitalCurrencyConfiguration>>("/Public/GetPrimaryCurrencyConfig2");
         }
 
         private Dictionary<CurrencyCode, TValue> ConvertToCurrencyDictionary<TValue>(Dictionary<string, TValue> data) 
@@ -1028,6 +1066,20 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves currency deposit addresses for all networks
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddress2Async(CurrencyCode primaryCurrency)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<DigitalCurrencyAddress>>("/Private/GetDigitalCurrencyDepositAddress2", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves the Bitcoin addresses (paged) which should be used for new Bitcoin deposits
         /// </summary>
         [Obsolete("Use GetDigitalCurrencyDepositAddresses instead.")]
@@ -1089,6 +1141,26 @@ namespace IndependentReserve.DotNetClientApi
         }
 
         /// <summary>
+        /// Retrieves the digital currency addresses (paged) which should be used for deposits
+        /// </summary>
+        /// <param name="network">blockchain network (see <see cref="BlockchainNetwork">)</param>
+        /// <param name="primaryCurrency">digital currency code to retrieve deposit addresses for</param>
+        /// <param name="pageIndex">The page index. Must be greater or equal to 1</param>
+        /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
+        public async Task<Page<DigitalCurrencyAddress>> GetDigitalCurrencyDepositAddresses2Async(string network, int pageIndex, int pageSize)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.network = network;
+            data.pageIndex = pageIndex;
+            data.pageSize = pageSize;
+
+            return await HttpWorker.QueryPrivateAsync<Page<DigitalCurrencyAddress>>("/Private/GetDigitalCurrencyDepositAddresses2", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Generate a new deposit address which should be used for new deposits of a digital currency
         /// </summary>
         /// <param name="primaryCurrency">digital currency code to generate deposit address for</param>
@@ -1101,6 +1173,17 @@ namespace IndependentReserve.DotNetClientApi
             data.primaryCurrencyCode = primaryCurrency.ToString();
 
             return await HttpWorker.QueryPrivateAsync<DigitalCurrencyDepositAddress>("/Private/NewDepositAddress", data).ConfigureAwait(false);
+        }
+
+        public async Task<DigitalCurrencyAddress> NewDepositAddress2Async(string network)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.network = network;
+
+            return await HttpWorker.QueryPrivateAsync<DigitalCurrencyAddress>("/Private/NewDepositAddress2", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1264,6 +1347,32 @@ namespace IndependentReserve.DotNetClientApi
             }
 
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawDigitalCurrency", data).ConfigureAwait(false);
+        }
+
+        public async Task<CryptoWithdrawal> WithdrawCryptoAsync(WithdrawCryptoRequest withdrawRequest)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.network = withdrawRequest.Network;
+            data.primaryCurrencyCode = withdrawRequest.Currency.ToString();
+            data.withdrawalAddress = withdrawRequest.Address;
+
+            if (!string.IsNullOrEmpty(withdrawRequest.DestinationTag))
+            {
+                data.destinationTag = withdrawRequest.DestinationTag;
+            }
+
+            data.amount = withdrawRequest.Amount.ToString(CultureInfo.InvariantCulture);
+            data.comment = withdrawRequest.Comment;
+
+            if (!string.IsNullOrEmpty(withdrawRequest.ClientId))
+            {
+                data.clientId = withdrawRequest.ClientId;
+            }
+
+            return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawCrypto", data).ConfigureAwait(false);
         }
 
         public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null)
@@ -1481,6 +1590,21 @@ namespace IndependentReserve.DotNetClientApi
             var data = CreatePrivateRequest();
 
             return await HttpWorker.QueryPrivateAsync<Dictionary<string, List<WithdrawalLimit>>>("/Private/GetWithdrawalLimits", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves crypto withdrawal limits
+        /// </summary>
+        public async Task<IEnumerable<DigitalCurrencyWithdrawalLimit>> GetDigitalCurrencyWithdrawalLimits(DigitalCurrency digitalCurrency)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.network = digitalCurrency.Network;
+            data.primaryCurrencyCode = digitalCurrency.Currency.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<DigitalCurrencyWithdrawalLimit>>("/Private/GetDigitalCurrencyWithdrawalLimits", data).ConfigureAwait(false);
         }
 
         #endregion //Private API

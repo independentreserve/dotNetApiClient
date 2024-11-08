@@ -25,6 +25,7 @@ namespace SampleApplication.ViewModels
         private string _lastRequestDuration;
         private CurrencyCode _primaryCurrency;
         private CurrencyCode _secondaryCurrency;
+        private string _network;
         private int? _numberOfRecentTradesToRetrieve;
         private int? _numberOfHoursInThePastToRetrieve;
         private int? _pageIndex;
@@ -156,7 +157,9 @@ namespace SampleApplication.ViewModels
                     {
                         MethodMetadata.Null,
                         MethodMetadata.GetValidPrimaryCurrencyCodes,
+                        MethodMetadata.GetPrimaryCurrencies,
                         MethodMetadata.GetValidSecondaryCurrencyCodes,
+                        MethodMetadata.GetBlockchainNetworks,
                         MethodMetadata.GetValidLimitOrderTypes,
                         MethodMetadata.GetValidMarketOrderTypes,
                         MethodMetadata.GetValidOrderTypes,
@@ -179,10 +182,14 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetTransactions,
                         MethodMetadata.GetCryptoDeposits,
                         MethodMetadata.GetDigitalCurrencyDepositAddress,
+                        MethodMetadata.GetDigitalCurrencyDepositAddress2,
                         MethodMetadata.GetDigitalCurrencyDepositAddresses,
+                        MethodMetadata.GetDigitalCurrencyDepositAddresses2,
                         MethodMetadata.NewDepositAddress,
+                        MethodMetadata.NewDepositAddress2,
                         MethodMetadata.SynchDigitalCurrencyDepositAddressWithBlockchain,
                         MethodMetadata.WithdrawDigitalCurrency,
+                        MethodMetadata.WithdrawCrypto,
                         MethodMetadata.GetDigitalCurrencyWithdrawal,
                         MethodMetadata.GetFiatBankAccounts,
                         MethodMetadata.RequestFiatWithdrawal,
@@ -196,11 +203,13 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetFiatWithdrawalFees,
                         MethodMetadata.GetDepositFees,
                         MethodMetadata.GetWithdrawalLimits,
+                        MethodMetadata.GetDigitalCurrencyWithdrawalLimits,
                         MethodMetadata.GetDepositLimits,
                         MethodMetadata.GetOrderMinimumVolumes,
                         MethodMetadata.GetCryptoWithdrawalFees,
+                        MethodMetadata.GetCryptoWithdrawalFees2,
                         MethodMetadata.GetPrimaryCurrencyConfig,
-
+                        MethodMetadata.GetPrimaryCurrencyConfig2,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -323,6 +332,22 @@ namespace SampleApplication.ViewModels
                 if (_secondaryCurrency != value)
                 {
                     _secondaryCurrency = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - secondary currency
+        /// </summary>
+        public string Network
+        {
+            get { return _network; }
+            set
+            {
+                if (_network != value)
+                {
+                    _network = value;
                     OnPropertyChanged();
                 }
             }
