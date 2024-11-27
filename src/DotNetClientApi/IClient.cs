@@ -100,7 +100,7 @@ namespace IndependentReserve.DotNetClientApi
         CryptoWithdrawal WithdrawDigitalCurrency(DigitalWithdrawalRequest withdrawalRequest);
         Task<CryptoWithdrawal> WithdrawDigitalCurrencyAsync(DigitalWithdrawalRequest withdrawalRequest);
         Task<CryptoWithdrawal> WithdrawCryptoAsync(WithdrawCryptoRequest withdrawalRequest);
-        Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null);
+        Task<CryptoWithdrawalExtended> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null);
 
         Task<List<Event>> GetEvents();
         Task<ExchangeStatus> GetExchangeStatus();

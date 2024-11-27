@@ -1375,7 +1375,7 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<CryptoWithdrawal>("/Private/WithdrawCrypto", data).ConfigureAwait(false);
         }
 
-        public async Task<CryptoWithdrawal> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null)
+        public async Task<CryptoWithdrawalExtended> GetDigitalCurrencyWithdrawalAsync(Guid? transactionGuid, string clientId = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
