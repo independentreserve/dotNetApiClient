@@ -47,11 +47,5 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// </summary>
         [DataMember]
         public string Status { get; set; }
-
-        /// <summary>
-        /// Contains hash reference to withdrawal transaction itself.
-        /// </summary>
-        [DataMember]
-        public BlockchainTransaction Transaction { get; set; }
     }
 }
