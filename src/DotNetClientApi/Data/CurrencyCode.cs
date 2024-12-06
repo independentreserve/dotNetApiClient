@@ -50,5 +50,6 @@
         Render = 42,
         Wif = 43,
         Rlusd = 44,
+        Pepe = 45,
     }
 }
