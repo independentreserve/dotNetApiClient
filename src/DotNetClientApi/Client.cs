@@ -1607,6 +1607,21 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<IEnumerable<DigitalCurrencyWithdrawalLimit>>("/Private/GetDigitalCurrencyWithdrawalLimits", data).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Get transactions by blockchain transaction identifier
+        /// </summary>
+        public async Task<IEnumerable<Transaction>> GetTransactionByBlockchainNetworkId(string network, string transactionId)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.network = network;
+            data.transactionId = transactionId;
+
+            return await HttpWorker.QueryPublicAsync<IEnumerable<Transaction>>("/Private/GetTransactionByBlockchainNetworkId");
+        }
+
         #endregion //Private API
 
         #region Helpers

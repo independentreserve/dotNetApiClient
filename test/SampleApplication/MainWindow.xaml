@@ -229,6 +229,11 @@
                     <CheckBox IsChecked="{Binding IncludeTotals}" VerticalAlignment="Center"></CheckBox>
                 </StackPanel>
 
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=blockchainTransactionId}">
+                    <TextBlock Style="{StaticResource Label}">Blockchain Transaction Id:</TextBlock>
+                    <TextBox Text="{Binding BlockchainTransactionId}" Width="250"></TextBox>
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
         
