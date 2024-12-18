@@ -1619,7 +1619,7 @@ namespace IndependentReserve.DotNetClientApi
             data.network = network;
             data.transactionId = transactionId;
 
-            return await HttpWorker.QueryPublicAsync<IEnumerable<Transaction>>("/Private/GetTransactionByBlockchainNetworkId");
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<Transaction>>("/Private/GetTransactionByBlockchainNetworkId", data).ConfigureAwait(false);
         }
 
         #endregion //Private API
