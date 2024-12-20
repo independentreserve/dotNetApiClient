@@ -255,6 +255,14 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata GetTransactionByBlockchainNetworkId =>
+            new MethodMetadata()
+            {
+                Name = "GetTransactionByBlockchainNetworkId",
+                Description = "GetTransactionByBlockchainNetworkId",
+                Parameters = new[] { "network", "blockchainTransactionId" },
+            };
+
         public static MethodMetadata GetCryptoDeposits
         {
             get

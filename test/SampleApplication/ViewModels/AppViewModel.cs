@@ -59,6 +59,7 @@ namespace SampleApplication.ViewModels
         private TimeInForce? _timeInForce;
         private bool _includeTotals;
         private string _withdrawalClientId;
+        private string _blockchainTransactionId;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -180,6 +181,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetClosedFilledOrders,
                         MethodMetadata.GetOrderDetails,
                         MethodMetadata.GetTransactions,
+                        MethodMetadata.GetTransactionByBlockchainNetworkId,
                         MethodMetadata.GetCryptoDeposits,
                         MethodMetadata.GetDigitalCurrencyDepositAddress,
                         MethodMetadata.GetDigitalCurrencyDepositAddress2,
@@ -828,6 +830,24 @@ namespace SampleApplication.ViewModels
                 if (_withdrawalClientId != value)
                 {
                     _withdrawalClientId = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Blockchain transaction identifier
+        /// </summary>
+        public string BlockchainTransactionId
+        {
+            get => _blockchainTransactionId;
+            set
+            {
+
+                if (_blockchainTransactionId != value)
+                {
+                    _blockchainTransactionId = value;
                     OnPropertyChanged();
                 }
 
