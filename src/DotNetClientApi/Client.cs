@@ -1610,7 +1610,7 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Get transactions by blockchain transaction identifier
         /// </summary>
-        public async Task<IEnumerable<Transaction>> GetTransactionByBlockchainNetworkId(string network, string transactionId)
+        public async Task<IEnumerable<Transaction>> GetTransactionsByHash(string network, string transactionId)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1619,7 +1619,7 @@ namespace IndependentReserve.DotNetClientApi
             data.network = network;
             data.transactionId = transactionId;
 
-            return await HttpWorker.QueryPrivateAsync<IEnumerable<Transaction>>("/Private/GetTransactionByBlockchainNetworkId", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<Transaction>>("/Private/GetTransactionsByHash", data).ConfigureAwait(false);
         }
 
         #endregion //Private API

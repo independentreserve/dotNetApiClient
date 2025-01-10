@@ -119,6 +119,6 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<CurrencyConfiguration>> GetPrimaryCurrencyConfig();
         Task<IEnumerable<DigitalCurrencyConfiguration>> GetPrimaryCurrencyConfig2();
 
-        Task<IEnumerable<Transaction>> GetTransactionByBlockchainNetworkId(string network, string transactionId);
+        Task<IEnumerable<Transaction>> GetTransactionsByHash(string network, string transactionId);
     }
 }

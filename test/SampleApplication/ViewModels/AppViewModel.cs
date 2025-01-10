@@ -181,7 +181,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetClosedFilledOrders,
                         MethodMetadata.GetOrderDetails,
                         MethodMetadata.GetTransactions,
-                        MethodMetadata.GetTransactionByBlockchainNetworkId,
+                        MethodMetadata.GetTransactionsByHash,
                         MethodMetadata.GetCryptoDeposits,
                         MethodMetadata.GetDigitalCurrencyDepositAddress,
                         MethodMetadata.GetDigitalCurrencyDepositAddress2,

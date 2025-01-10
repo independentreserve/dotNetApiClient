@@ -208,9 +208,9 @@ namespace SampleApplication
                         var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
                         await client.GetTransactionsAsync(ParseNullableGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals);
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactionByBlockchainNetworkId)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactionsByHash)
                     {
-                        await client.GetTransactionByBlockchainNetworkId(ViewModel.Network, ViewModel.BlockchainTransactionId);
+                        await client.GetTransactionsByHash(ViewModel.Network, ViewModel.BlockchainTransactionId);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetCryptoDeposits)
                     {
