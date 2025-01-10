@@ -15,7 +15,7 @@
         /// <summary>
         /// blockchain network of the crypto transaction
         /// </summary>
-        public string BlockchainNetwork { get; set; }
+        public string Network { get; set; }
 
         /// <summary>
         /// funds has been credited via the address

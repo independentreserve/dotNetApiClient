@@ -49,10 +49,10 @@ namespace SampleApplication.ViewModels
             get { return new MethodMetadata() {Name = "GetValidSecondaryCurrencyCodes", Description = "GetValidSecondaryCurrencyCodes", Parameters = new string[] {}}; }
         }
 
-        //GetValidBlockchainNetworks()
-        public static MethodMetadata GetBlockchainNetworks
+        //GetNetworks()
+        public static MethodMetadata GetNetworks
         {
-            get { return new MethodMetadata() { Name = "GetBlockchainNetworks", Description = "GetBlockchainNetworks", Parameters = new string[] { } }; }
+            get { return new MethodMetadata() { Name = "GetNetworks", Description = "GetNetworks", Parameters = new string[] { } }; }
         }
 
         //GetValidLimitOrderTypes()
@@ -255,11 +255,11 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        public static MethodMetadata GetTransactionByBlockchainNetworkId =>
+        public static MethodMetadata GetTransactionsByHash =>
             new MethodMetadata()
             {
-                Name = "GetTransactionByBlockchainNetworkId",
-                Description = "GetTransactionByBlockchainNetworkId",
+                Name = "GetTransactionsByHash",
+                Description = "GetTransactionsByHash",
                 Parameters = new[] { "network", "blockchainTransactionId" },
             };
 
