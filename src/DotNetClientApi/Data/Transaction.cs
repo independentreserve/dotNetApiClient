@@ -23,7 +23,7 @@
         /// <summary>
         /// blockchain network of the crypto transaction
         /// </summary>
-        public string BlockchainNetwork { get; set; }
+        public string Network { get; set; }
 
         /// <summary>
         /// Used to correlate against other entities that triggered this transaction

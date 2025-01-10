@@ -123,9 +123,9 @@ namespace SampleApplication
                     {
                         await client.GetValidSecondaryCurrencyCodesAsync();
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetBlockchainNetworks)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetNetworks)
                     {
-                        await client.GetBlockchainNetworks();
+                        await client.GetNetworks();
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetValidLimitOrderTypes)
                     {
