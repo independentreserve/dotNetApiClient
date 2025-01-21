@@ -51,5 +51,6 @@
         Wif = 43,
         Rlusd = 44,
         Pepe = 45,
+        Trump = 46,
     }
 }
