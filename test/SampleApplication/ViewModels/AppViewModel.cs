@@ -58,6 +58,7 @@ namespace SampleApplication.ViewModels
         private decimal? _allowedSlippagePercent;
         private TimeInForce? _timeInForce;
         private bool _includeTotals;
+        private bool _includePosition;
         private string _withdrawalClientId;
         private string _blockchainTransactionId;
 
@@ -90,6 +91,7 @@ namespace SampleApplication.ViewModels
             _quoteGuid = Guid.NewGuid().ToString();
             _dealGuid = Guid.NewGuid().ToString();
             _includeTotals = true;
+            _includePosition = false;
 
             ApiConfig = apiConfig;
 
@@ -814,6 +816,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _includeTotals) return;
                 _includeTotals = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - allows to enable retrieval of PositionGuid for transactions and orders
+        /// </summary>
+        public bool IncludePosition
+        {
+            get => _includePosition;
+            set
+            {
+                if (value == _includePosition) return;
+                _includePosition = value;
                 OnPropertyChanged();
             }
         }

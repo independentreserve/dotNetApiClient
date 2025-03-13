@@ -197,7 +197,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetClosedFilledOrders)
                     {
-                        await client.GetClosedFilledOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals, ViewModel.FromTimestampUtc);
+                        await client.GetClosedFilledOrdersAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals, ViewModel.FromTimestampUtc, ViewModel.IncludePosition);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetOrderDetails)
                     {
@@ -206,7 +206,7 @@ namespace SampleApplication
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactions)
                     {
                         var transactionTypes = (from transactionTypeViewModel in ViewModel.TransactionTypes where transactionTypeViewModel.IsSelected select transactionTypeViewModel.Type.ToString()).ToArray();
-                        await client.GetTransactionsAsync(ParseNullableGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals);
+                        await client.GetTransactionsAsync(ParseNullableGuid(ViewModel.AccountGuid), ViewModel.FromTimestampUtc, ViewModel.ToTimestampUtc, transactionTypes, ViewModel.PageIndex ?? 0, ViewModel.PageSize ?? 0, ViewModel.IncludeTotals, ViewModel.IncludePosition);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetTransactionsByHash)
                     {
