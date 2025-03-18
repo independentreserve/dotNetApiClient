@@ -29,8 +29,8 @@ namespace IndependentReserve.DotNetClientApi
         Task<Page<BitcoinDepositAddress>> GetBitcoinDepositAddressesAsync(int pageIndex, int pageSize);
         IEnumerable<BrokerageFee> GetBrokerageFees();
         Task<IEnumerable<BrokerageFee>> GetBrokerageFeesAsync();
-        Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null);
-        Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null);
+        Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null, bool includePosition = false);
+        Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null, bool includePosition = false);
         Page<BankHistoryOrder> GetClosedOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null);
         Task<Page<BankHistoryOrder>> GetClosedOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null);
         DigitalCurrencyDepositAddress GetDigitalCurrencyDepositAddress(CurrencyCode primaryCurrency);
@@ -60,8 +60,8 @@ namespace IndependentReserve.DotNetClientApi
         Page<TradeDetails> GetTrades(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc);
         Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc);
         Task<Page<TradeDetails>> GetTradesByOrder(Guid? orderGuid, int pageIndex, int pageSize, string clientId = null);
-        Page<Transaction> GetTransactions(Guid? accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals);
-        Task<Page<Transaction>> GetTransactionsAsync(Guid? accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals);
+        Page<Transaction> GetTransactions(Guid? accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals, bool includePosition);
+        Task<Page<Transaction>> GetTransactionsAsync(Guid? accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals, bool includePosition);
         Task<Page<DepositTransaction>> GetCryptoDepositsAsync(CurrencyCode primaryCurrency, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, int pageIndex, int pageSize);
         IEnumerable<OrderType> GetValidLimitOrderTypes();
         Task<IEnumerable<OrderType>> GetValidLimitOrderTypesAsync();

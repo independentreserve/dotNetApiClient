@@ -826,8 +826,16 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="fromTimestampUtc">an optional from date to filter OrderDate field</param>
         /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
+        /// <param name="includePosition">allows to enable PositionGuid retrieval for orders</param>
         /// <returns>page of a specified size, with your Closed filled orders</returns>
-        public Page<BankHistoryOrder> GetClosedFilledOrders(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null)
+        public Page<BankHistoryOrder> GetClosedFilledOrders(
+            CurrencyCode? primaryCurrency, 
+            CurrencyCode? secondaryCurrency, 
+            int pageIndex, 
+            int pageSize, 
+            bool includeTotals, 
+            DateTime? fromTimestampUtc = null, 
+            bool includePosition = false)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -844,8 +852,16 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageSize">The page size. Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="fromTimestampUtc">an optional from date to filter OrderDate field</param>
         /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
+        /// <param name="includePosition">allows to enable PositionGuid retrieval for orders</param>
         /// <returns>page of a specified size, with your Closed filled orders</returns>
-        public async Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(CurrencyCode? primaryCurrency, CurrencyCode? secondaryCurrency, int pageIndex, int pageSize, bool includeTotals, DateTime? fromTimestampUtc = null)
+        public async Task<Page<BankHistoryOrder>> GetClosedFilledOrdersAsync(
+            CurrencyCode? primaryCurrency, 
+            CurrencyCode? secondaryCurrency, 
+            int pageIndex, 
+            int pageSize, 
+            bool includeTotals, 
+            DateTime? fromTimestampUtc = null, 
+            bool includePosition = false)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -866,6 +882,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
             data.includeTotals = includeTotals.ToString(CultureInfo.InvariantCulture);
+            data.includePosition = includePosition.ToString(CultureInfo.InvariantCulture);
 
             return await HttpWorker.QueryPrivateAsync<Page<BankHistoryOrder>>("/Private/GetClosedFilledOrders", data).ConfigureAwait(false);
         }
@@ -943,35 +960,52 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves a page of a specified size, containing all transactions made on an account
         /// </summary>
-        /// <param name="accountGuid">The Guid of your Independent Reseve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
+        /// <param name="accountGuid">The Guid of your Independent Reserve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
         /// <param name="fromTimestampUtc">The timestamp in UTC from which you want to retrieve transactions</param>
         /// <param name="toTimestampUtc">The timestamp in UTC until which you want to retrieve transactions</param>
         /// <param name="txTypes">Transaction types array for filtering results. If array is empty or null, than no filter will be applied and all Transaction types will be returned</param>
         /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
+        /// <param name="includePosition">allows to enable PositionGuid retrieval for transactions</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public Page<Transaction>  GetTransactions(Guid? accountGuid, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals)
+        public Page<Transaction>  GetTransactions(
+            Guid? accountGuid, 
+            DateTime? fromTimestampUtc, 
+            DateTime? toTimestampUtc, 
+            string[] txTypes, 
+            int pageIndex, 
+            int pageSize, 
+            bool includeTotals,
+            bool includePosition)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetTransactionsAsync(accountGuid, fromTimestampUtc, toTimestampUtc, txTypes, pageIndex, pageSize, includeTotals).Result;
+            return GetTransactionsAsync(accountGuid, fromTimestampUtc, toTimestampUtc, txTypes, pageIndex, pageSize, includeTotals, includePosition).Result;
         }
 
         /// <summary>
         /// Retrieves a page of a specified size, containing all transactions made on an account
         /// </summary>
-        /// <param name="accountGuid">The Guid of your Independent Reseve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
+        /// <param name="accountGuid">The Guid of your Independent Reserve account. You can retrieve information about your accounts via the <see cref="GetAccounts"/> or <see cref="GetAccountsAsync"/> method</param>
         /// <param name="fromTimestampUtc">The timestamp in UTC from which you want to retrieve transactions</param>
         /// <param name="toTimestampUtc">The timestamp in UTC until which you want to retrieve transactions</param>
         /// <param name="txTypes">Transaction types array for filtering results. If array is empty or null, than no filter will be applied and all Transaction types will be returned</param>        
         /// <param name="pageIndex">The page index. Must be greater or equal to 0</param>
         /// <param name="pageSize">Must be greater or equal to 1 and less than or equal to 50. If a number greater than 50 is specified, then 50 will be used</param>
         /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
+        /// <param name="includePosition">allows to enable PositionGuid retrieval for transactions</param>
         /// <returns>page of a specified size, containing all transactions made on an account</returns>
-        public async Task<Page<Transaction>> GetTransactionsAsync(Guid? accountGuid, DateTime? fromTimestampUtc,
-            DateTime? toTimestampUtc, string[] txTypes, int pageIndex, int pageSize, bool includeTotals)
+        public async Task<Page<Transaction>> GetTransactionsAsync(
+            Guid? accountGuid, 
+            DateTime? fromTimestampUtc,
+            DateTime? toTimestampUtc, 
+            string[] txTypes, 
+            int pageIndex, 
+            int pageSize, 
+            bool includeTotals,
+            bool includePosition)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -984,6 +1018,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageIndex = pageIndex.ToString(CultureInfo.InvariantCulture);
             data.pageSize = pageSize.ToString(CultureInfo.InvariantCulture);
             data.includeTotals = includeTotals.ToString(CultureInfo.InvariantCulture);
+            data.includePosition = includePosition.ToString(CultureInfo.InvariantCulture);
 
             return await HttpWorker.QueryPrivateAsync<Page<Transaction>>("/Private/GetTransactions", data).ConfigureAwait(false);
         }

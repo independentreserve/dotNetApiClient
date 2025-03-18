@@ -194,7 +194,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "GetClosedFilledOrders",
                            Description = "GetClosedFilledOrders",
-                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "pageIndex", "pageSize", "fromTimestampUtc", "includeTotals" }
+                           Parameters = new[] {"primaryCurrency", "secondaryCurrency", "pageIndex", "pageSize", "fromTimestampUtc", "includeTotals", "includePosition" }
                        };
             }
         }
@@ -250,7 +250,7 @@ namespace SampleApplication.ViewModels
                        {
                            Name = "GetTransactions",
                            Description = "GetTransactions",
-                           Parameters = new[] {"accountGuid", "fromTimestampUtc", "toTimestampUtc", "pageIndex", "pageSize", "txTypes", "includeTotals" }
+                           Parameters = new[] {"accountGuid", "fromTimestampUtc", "toTimestampUtc", "pageIndex", "pageSize", "txTypes", "includeTotals", "includePosition" }
                        };
             }
         }
