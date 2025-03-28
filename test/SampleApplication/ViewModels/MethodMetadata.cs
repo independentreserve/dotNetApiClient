@@ -476,7 +476,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "GetTrades",
                     Description = "GetTrades",
-                    Parameters = new[] { "pageIndex", "pageSize", "fromTimestampUtc", "toTimestampUtc" }
+                    Parameters = new[] { "pageIndex", "pageSize", "fromTimestampUtc", "toTimestampUtc", "includeTotals" }
                 };
             }
         }

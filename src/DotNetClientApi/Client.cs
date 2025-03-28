@@ -1545,13 +1545,14 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageSize">page size must be greater or equal 1 and not exceed 50</param>
         /// <param name="fromTimestampUtc">the optional timestamp in UTC from which you want to retrieve trades</param>
         /// <param name="toTimestampUtc">the optional timestamp in UTC to which you want to retrieve trades</param>
+        /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
         /// <returns>a page of a specified size containing recent trades made by user</returns>
-        public Page<TradeDetails> GetTrades(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc)
+        public Page<TradeDetails> GetTrades(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, bool includeTotals)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
 
-            return GetTradesAsync(pageIndex, pageSize, fromTimestampUtc, toTimestampUtc).Result;
+            return GetTradesAsync(pageIndex, pageSize, fromTimestampUtc, toTimestampUtc, includeTotals).Result;
         }
 
         /// <summary>
@@ -1561,8 +1562,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="pageSize">page size must be greater or equal 1 and not exceed 50</param>
         /// <param name="fromTimestampUtc">the optional timestamp in UTC from which you want to retrieve trades</param>
         /// <param name="toTimestampUtc">the optional timestamp in UTC to which you want to retrieve trades</param>
+        /// <param name="includeTotals">allows you to disable the calculation of TotalItems</param>
         /// <returns>a page of a specified size containing recent trades made by user</returns>
-        public async Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc)
+        public async Task<Page<TradeDetails>> GetTradesAsync(int pageIndex, int pageSize, DateTime? fromTimestampUtc, DateTime? toTimestampUtc, bool includeTotals)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1572,6 +1574,7 @@ namespace IndependentReserve.DotNetClientApi
             data.pageSize = pageSize;
             data.fromTimestampUtc = fromTimestampUtc.HasValue ? DateTime.SpecifyKind(fromTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
             data.toTimestampUtc = toTimestampUtc.HasValue ? DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture) : null;
+            data.includeTotals = includeTotals.ToString(CultureInfo.InvariantCulture);
 
             return await HttpWorker.QueryPrivateAsync<Page<TradeDetails>>("/Private/GetTrades", data).ConfigureAwait(false);
         }
