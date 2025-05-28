@@ -835,7 +835,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"FromTimestampUtc\": \"2022-08-01T09:00:00Z\",\r\n  \"ToTimestampUtc\": \"2025-08-01T09:00:00Z\"\r\n}",
+							"raw": "{\r\n  \"fromTimestampUtc\": \"2022-08-01T09:00:00Z\",\r\n  \"toTimestampUtc\": \"2025-08-01T09:00:00Z\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
