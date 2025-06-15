@@ -52,5 +52,6 @@
         Rlusd = 44,
         Pepe = 45,
         Trump = 46,
+        Avax = 47,
     }
 }

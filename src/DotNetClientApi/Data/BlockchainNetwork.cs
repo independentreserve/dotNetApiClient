@@ -16,5 +16,6 @@
         public const string Cardano = "Cardano";
         public const string Solana = "Solana";
         public const string Tron = "Tron";
+        public const string AvalancheC = "AvalancheC";
     }
 }
