@@ -53,5 +53,6 @@
         Pepe = 45,
         Trump = 46,
         Avax = 47,
+        Hype = 48,
     }
 }
