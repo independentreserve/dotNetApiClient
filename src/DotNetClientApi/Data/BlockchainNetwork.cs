@@ -18,5 +18,6 @@
         public const string Tron = "Tron";
         public const string AvalancheC = "AvalancheC";
         public const string HyperEvm = "HyperEvm";
+        public const string Base = "Base";
     }
 }
