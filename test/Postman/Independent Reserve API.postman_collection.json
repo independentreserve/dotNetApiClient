@@ -856,6 +856,33 @@
 					"response": []
 				},
 				{
+					"name": "GetPositionEvents",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"positionGuid\": \"7c0af935-b5e9-49fb-b2d8-815938911cad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetPositionEvents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetPositionEvents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "PlaceLimitOrder",
 					"request": {
 						"method": "POST",
