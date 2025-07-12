@@ -19,5 +19,6 @@
         public const string AvalancheC = "AvalancheC";
         public const string HyperEvm = "HyperEvm";
         public const string Base = "Base";
+        public const string ArbitrumOne = "ArbitrumOne";
     }
 }
