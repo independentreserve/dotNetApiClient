@@ -1070,6 +1070,114 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "RequestQuote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"orderType\": \"Buy\",\n    \"volume\": \"0.1\",\n    \"volumeCurrencyType\": \"Primary\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/RequestQuote",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"RequestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ExecuteQuote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quoteGuid\": \"e2e8bb12-a899-4d33-8824-4417e85fe236\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/ExecuteQuote",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"ExecuteQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetExecutedDeals",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"pageIndex\": 1,\n    \"pageSize\": 25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetExecutedDeals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetExecutedDeals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDealDetails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dealGuid\": \"e2e8bb12-a899-4d33-8824-4417e85fe236\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Private/GetDealDetails",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Private",
+								"GetDealDetails"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "Private methods are accessed via HTTP POST and require a valid authentication token to be passed. Parameters for all private methods, including the three parameters to authenticate the call, must be posted as a JSON object.\n\nSee Pre-request Script to better understand how the authentication works.",
