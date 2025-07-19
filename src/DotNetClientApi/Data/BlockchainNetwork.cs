@@ -20,5 +20,6 @@
         public const string HyperEvm = "HyperEvm";
         public const string Base = "Base";
         public const string ArbitrumOne = "ArbitrumOne";
+        public const string Polygon = "Polygon";
     }
 }
