@@ -1105,7 +1105,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"quoteGuid\": \"e2e8bb12-a899-4d33-8824-4417e85fe236\"\n}",
+							"raw": "{\n    \"quoteGuid\": \"ea52df75-47bf-4bd5-955d-28f1e739d34e\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1132,7 +1132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"pageIndex\": 1,\n    \"pageSize\": 25\n}",
+							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"toTimestampUtc\": \"2022-08-01T09:00:00Z\",\n    \"maxResultsCount\": 50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
