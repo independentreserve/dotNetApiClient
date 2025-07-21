@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "2af6b4a6-e041-4c5f-a205-85d8f63513d5",
-		"name": "Independent Reserve API",
-		"description": "# Authentication and Private Methods\n\nIn order to access private endpoints, set the `apiKey` and `apiSecret` collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
+		"_postman_id": "7006e776-bd9d-4f04-b1a3-9b7143924681",
+		"name": "Independent Reserve API - temp IR-9026",
+		"description": "# Authentication and Private Methods\n\nIn order to access private endpoints, set the `ir-api-key` and `ir-api-secret` collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "178873"
+		"_exporter_id": "436652"
 	},
 	"item": [
 		{
@@ -16,9 +16,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetValidPrimaryCurrencyCodes",
+							"raw": "{{ir-api-url}}/Public/GetValidPrimaryCurrencyCodes",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -34,9 +34,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetValidSecondaryCurrencyCodes",
+							"raw": "{{ir-api-url}}/Public/GetValidSecondaryCurrencyCodes",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -52,9 +52,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetValidLimitOrderTypes",
+							"raw": "{{ir-api-url}}/Public/GetValidLimitOrderTypes",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -70,9 +70,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetValidMarketOrderTypes",
+							"raw": "{{ir-api-url}}/Public/GetValidMarketOrderTypes",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -88,9 +88,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetValidOrderTypes",
+							"raw": "{{ir-api-url}}/Public/GetValidOrderTypes",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -106,9 +106,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetValidTransactionTypes",
+							"raw": "{{ir-api-url}}/Public/GetValidTransactionTypes",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -124,9 +124,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetPrimaryCurrencyConfig",
+							"raw": "{{ir-api-url}}/Public/GetPrimaryCurrencyConfig",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -142,9 +142,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetMarketSummary?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud",
+							"raw": "{{ir-api-url}}/Public/GetMarketSummary?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -170,9 +170,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetOrderBook?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&maxDepthVolume=&maxDepthValue",
+							"raw": "{{ir-api-url}}/Public/GetOrderBook?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&maxDepthVolume=&maxDepthValue",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -206,9 +206,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetAllOrders?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&maxDepthVolume=&maxDepthValue",
+							"raw": "{{ir-api-url}}/Public/GetAllOrders?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&maxDepthVolume=&maxDepthValue",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -242,9 +242,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetTradeHistorySummary?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&numberOfHoursInThePastToRetrieve=24",
+							"raw": "{{ir-api-url}}/Public/GetTradeHistorySummary?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&numberOfHoursInThePastToRetrieve=24",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -274,9 +274,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetRecentTrades?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&numberOfRecentTradesToRetrieve=10",
+							"raw": "{{ir-api-url}}/Public/GetRecentTrades?primaryCurrencyCode=Xbt&secondaryCurrencyCode=Aud&numberOfRecentTradesToRetrieve=10",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -306,9 +306,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetFxRates",
+							"raw": "{{ir-api-url}}/Public/GetFxRates",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -324,9 +324,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetOrderMinimumVolumes",
+							"raw": "{{ir-api-url}}/Public/GetOrderMinimumVolumes",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -342,9 +342,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetDepositFees",
+							"raw": "{{ir-api-url}}/Public/GetDepositFees",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -360,9 +360,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetFiatWithdrawalFees",
+							"raw": "{{ir-api-url}}/Public/GetFiatWithdrawalFees",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -378,9 +378,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/Public/GetCryptoWithdrawalFees",
+							"raw": "{{ir-api-url}}/Public/GetCryptoWithdrawalFees",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Public",
@@ -411,9 +411,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetOpenOrders",
+							"raw": "{{ir-api-url}}/Private/GetOpenOrders",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -438,9 +438,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetClosedOrders",
+							"raw": "{{ir-api-url}}/Private/GetClosedOrders",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -465,9 +465,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetClosedFilledOrders",
+							"raw": "{{ir-api-url}}/Private/GetClosedFilledOrders",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -492,9 +492,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetOrderDetails",
+							"raw": "{{ir-api-url}}/Private/GetOrderDetails",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -519,9 +519,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetAccounts",
+							"raw": "{{ir-api-url}}/Private/GetAccounts",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -546,9 +546,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetTransactions",
+							"raw": "{{ir-api-url}}/Private/GetTransactions",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -573,9 +573,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetFiatBankAccounts",
+							"raw": "{{ir-api-url}}/Private/GetFiatBankAccounts",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -600,9 +600,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetDigitalCurrencyDepositAddress",
+							"raw": "{{ir-api-url}}/Private/GetDigitalCurrencyDepositAddress",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -627,9 +627,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetDigitalCurrencyDepositAddresses",
+							"raw": "{{ir-api-url}}/Private/GetDigitalCurrencyDepositAddresses",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -654,9 +654,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetTrades",
+							"raw": "{{ir-api-url}}/Private/GetTrades",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -681,9 +681,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetTradesByOrder",
+							"raw": "{{ir-api-url}}/Private/GetTradesByOrder",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -708,9 +708,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetBrokerageFees",
+							"raw": "{{ir-api-url}}/Private/GetBrokerageFees",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -735,9 +735,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetDigitalCurrencyWithdrawal",
+							"raw": "{{ir-api-url}}/Private/GetDigitalCurrencyWithdrawal",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -762,9 +762,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetFiatWithdrawal",
+							"raw": "{{ir-api-url}}/Private/GetFiatWithdrawal",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -789,9 +789,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetDepositLimits",
+							"raw": "{{ir-api-url}}/Private/GetDepositLimits",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -816,9 +816,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetWithdrawalLimits",
+							"raw": "{{ir-api-url}}/Private/GetWithdrawalLimits",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -843,9 +843,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetPositions",
+							"raw": "{{ir-api-url}}/Private/GetPositions",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -870,9 +870,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetPositionEvents",
+							"raw": "{{ir-api-url}}/Private/GetPositionEvents",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -897,9 +897,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/PlaceLimitOrder",
+							"raw": "{{ir-api-url}}/Private/PlaceLimitOrder",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -924,9 +924,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/PlaceMarketOrder",
+							"raw": "{{ir-api-url}}/Private/PlaceMarketOrder",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -951,9 +951,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/CancelOrder",
+							"raw": "{{ir-api-url}}/Private/CancelOrder",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -978,9 +978,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/CancelOrders",
+							"raw": "{{ir-api-url}}/Private/CancelOrders",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1005,9 +1005,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/SynchDigitalCurrencyDepositAddressWithBlockchain",
+							"raw": "{{ir-api-url}}/Private/SynchDigitalCurrencyDepositAddressWithBlockchain",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1032,9 +1032,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/WithdrawFiatCurrency",
+							"raw": "{{ir-api-url}}/Private/WithdrawFiatCurrency",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1059,9 +1059,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/WithdrawDigitalCurrency",
+							"raw": "{{ir-api-url}}/Private/WithdrawDigitalCurrency",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1086,9 +1086,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/RequestQuote",
+							"raw": "{{ir-api-url}}/Private/RequestQuote",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1113,9 +1113,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/ExecuteQuote",
+							"raw": "{{ir-api-url}}/Private/ExecuteQuote",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1140,9 +1140,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetExecutedDeals",
+							"raw": "{{ir-api-url}}/Private/GetExecutedDeals",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1167,9 +1167,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Private/GetDealDetails",
+							"raw": "{{ir-api-url}}/Private/GetDealDetails",
 							"host": [
-								"{{baseUrl}}"
+								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
@@ -1187,12 +1187,17 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
+							"const cryptoJs = require('crypto-js');",
+							"",
 							"",
 							"const getVariable = (name) => {",
-							"    const value = pm.collectionVariables.get(name);",
+							"",
+							"    // we try to get variable value from a few places",
+							"    // local variables, env variables, collection variables , global variables ",
+							"    const value = pm.variables.get(name);",
 							"",
 							"    if (!value) {",
-							"        throw new Error(`Set ${name} collection variable`)",
+							"        throw new Error(`Set ${name} collection or environment variable`)",
 							"    }",
 							"",
 							"    return value;",
@@ -1200,9 +1205,9 @@
 							"",
 							"const getConfig = () => {",
 							"",
-							"    const baseUrl = getVariable('baseUrl');",
-							"    const apiKey = getVariable('apiKey');",
-							"    const apiSecret = getVariable('apiSecret');",
+							"    const baseUrl = getVariable('ir-api-url');",
+							"    const apiKey = getVariable('ir-api-key');",
+							"    const apiSecret = getVariable('ir-api-secret');",
 							"",
 							"    return { baseUrl, apiKey, apiSecret };",
 							"}",
@@ -1233,8 +1238,8 @@
 							"}",
 							"",
 							"const getSignature = (signatureInput, apiSecret) => {",
-							"    const signer = CryptoJS.HmacSHA256(signatureInput, apiSecret);",
-							"    return signer.toString(CryptoJS.enc.Hex).toUpperCase();",
+							"    const signer = cryptoJs.HmacSHA256(signatureInput, apiSecret);",
+							"    return signer.toString(cryptoJs.enc.Hex).toUpperCase();",
 							"}",
 							"",
 							"const { baseUrl, apiKey, apiSecret } = getConfig();",
@@ -1251,10 +1256,14 @@
 							"",
 							"const signatureInput = getSignatureInput(payload, endpointUrl);",
 							"",
+							"// console.log(signatureInput)",
+							"",
 							"payload.signature = getSignature(signatureInput, apiSecret);",
 							"",
 							"pm.request.headers.add({key: \"Content-Type\", value: \"application/json\"});",
-							"pm.request.body.update(JSON.stringify(payload), 'application/json');",
+							"const new_body = JSON.stringify(payload)",
+							"// console.log(new_body)",
+							"pm.request.body.update(new_body, 'application/json');",
 							"",
 							""
 						]
@@ -1294,17 +1303,17 @@
 	],
 	"variable": [
 		{
-			"key": "baseUrl",
+			"key": "ir-api-url",
 			"value": "https://api.independentreserve.com",
 			"type": "string"
 		},
 		{
-			"key": "apiKey",
+			"key": "ir-api-key",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"key": "apiSecret",
+			"key": "ir-api-secret",
 			"value": "",
 			"type": "string"
 		}
