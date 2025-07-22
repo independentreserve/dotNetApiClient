@@ -1126,7 +1126,7 @@
 					"response": []
 				},
 				{
-					"name": "GetExecutedDeals",
+					"name": "GetExecutedQuotes",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1140,20 +1140,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{ir-api-url}}/Private/GetExecutedDeals",
+							"raw": "{{ir-api-url}}/Private/GetExecutedQuotes",
 							"host": [
 								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
-								"GetExecutedDeals"
+								"GetExecutedQuotes"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GetDealDetails",
+					"name": "GetQuoteDetails",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1167,13 +1167,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{ir-api-url}}/Private/GetDealDetails",
+							"raw": "{{ir-api-url}}/Private/GetQuoteDetails",
 							"host": [
 								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
-								"GetDealDetails"
+								"GetQuoteDetails"
 							]
 						}
 					},
