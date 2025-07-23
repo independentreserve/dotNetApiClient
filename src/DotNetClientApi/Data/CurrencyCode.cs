@@ -54,5 +54,6 @@
         Trump = 46,
         Avax = 47,
         Hype = 48,
+        Pol = 49,
     }
 }
