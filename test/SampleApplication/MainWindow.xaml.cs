@@ -366,6 +366,22 @@ namespace SampleApplication
 
                         await client.CancelOrdersAsync(orderGuids);
                     }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.RequestQuote)
+                    {
+                        await client.RequestQuoteAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ShopOrderType.ToString(), ViewModel.OrderVolume ?? 0, ViewModel.VolumeCurrencyType);
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.ExecuteQuote)
+                    {
+                        await client.ExecuteQuoteAsync(ParseGuid(ViewModel.QuoteGuid));
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetExecutedQuotes)
+                    {
+                        await client.GetExecutedQuotesAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ToTimestampUtc, ViewModel.MaxResultsCount);
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetQuoteDetails)
+                    {
+                        await client.GetQuoteDetailsAsync(ParseGuid(ViewModel.DealGuid));
+                    }
                     
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
                 }

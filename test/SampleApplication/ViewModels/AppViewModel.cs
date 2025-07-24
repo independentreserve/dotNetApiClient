@@ -61,6 +61,7 @@ namespace SampleApplication.ViewModels
         private bool _includePosition;
         private string _withdrawalClientId;
         private string _blockchainTransactionId;
+        private int? _maxResultsCount;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -92,6 +93,7 @@ namespace SampleApplication.ViewModels
             _dealGuid = Guid.NewGuid().ToString();
             _includeTotals = true;
             _includePosition = false;
+            _maxResultsCount = 50;
 
             ApiConfig = apiConfig;
 
@@ -214,6 +216,10 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetCryptoWithdrawalFees2,
                         MethodMetadata.GetPrimaryCurrencyConfig,
                         MethodMetadata.GetPrimaryCurrencyConfig2,
+                        MethodMetadata.RequestQuote,
+                        MethodMetadata.ExecuteQuote,
+                        MethodMetadata.GetExecutedQuotes,
+                        MethodMetadata.GetQuoteDetails,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -867,6 +873,20 @@ namespace SampleApplication.ViewModels
                     OnPropertyChanged();
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - max results count - used by private API method GetExecutedQuotes
+        /// </summary>
+        public int? MaxResultsCount
+        {
+            get { return _maxResultsCount; }
+            set
+            {
+                if (value == _maxResultsCount) return;
+                _maxResultsCount = value;
+                OnPropertyChanged();
             }
         }
 

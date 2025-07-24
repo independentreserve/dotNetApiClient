@@ -1660,6 +1660,147 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<IEnumerable<Transaction>>("/Private/GetTransactionsByHash", data).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Requests a quote for trading
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="orderType">The order type (Buy/Sell)</param>
+        /// <param name="volume">The volume to trade</param>
+        /// <param name="volumeCurrencyType">The volume currency type (Primary/Secondary)</param>
+        /// <returns>A quote object</returns>
+        public Quote RequestQuote(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return RequestQuoteAsync(primaryCurrency, secondaryCurrency, orderType, volume, volumeCurrencyType).Result;
+        }
+
+        /// <summary>
+        /// Requests a quote for trading
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="orderType">The order type (Buy/Sell)</param>
+        /// <param name="volume">The volume to trade</param>
+        /// <param name="volumeCurrencyType">The volume currency type (Primary/Secondary)</param>
+        /// <returns>A quote object</returns>
+        public async Task<Quote> RequestQuoteAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.orderType = orderType;
+            data.volume = volume.ToString(CultureInfo.InvariantCulture);
+            data.volumeCurrencyType = volumeCurrencyType.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<Quote>("/Private/RequestQuote", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Executes a quote
+        /// </summary>
+        /// <param name="quoteGuid">The quote GUID to execute</param>
+        /// <returns>The executed quote details</returns>
+        public QuoteDetails ExecuteQuote(Guid quoteGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return ExecuteQuoteAsync(quoteGuid).Result;
+        }
+
+        /// <summary>
+        /// Executes a quote
+        /// </summary>
+        /// <param name="quoteGuid">The quote GUID to execute</param>
+        /// <returns>The executed quote details</returns>
+        public async Task<QuoteDetails> ExecuteQuoteAsync(Guid quoteGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.quoteGuid = quoteGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<QuoteDetails>("/Private/ExecuteQuote", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets executed quotes
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="toTimestampUtc">The timestamp to retrieve quotes up to</param>
+        /// <param name="maxResultsCount">The maximum number of results to return</param>
+        /// <returns>A collection of executed quotes</returns>
+        public IEnumerable<QuoteDetails> GetExecutedQuotes(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultsCount = null)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return GetExecutedQuotesAsync(primaryCurrency, secondaryCurrency, toTimestampUtc, maxResultsCount).Result;
+        }
+
+        /// <summary>
+        /// Gets executed quotes
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="toTimestampUtc">The timestamp to retrieve quotes up to</param>
+        /// <param name="maxResultsCount">The maximum number of results to return</param>
+        /// <returns>A collection of executed quotes</returns>
+        public async Task<IEnumerable<QuoteDetails>> GetExecutedQuotesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultsCount = null)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            
+            if (toTimestampUtc.HasValue)
+            {
+                data.toTimestampUtc = DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture);
+            }
+            
+            if (maxResultsCount.HasValue)
+            {
+                data.maxResultsCount = maxResultsCount.Value.ToString(CultureInfo.InvariantCulture);
+            }
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<QuoteDetails>>("/Private/GetExecutedQuotes", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets quote details by deal GUID
+        /// </summary>
+        /// <param name="dealGuid">The deal GUID</param>
+        /// <returns>The quote details</returns>
+        public QuoteDetails GetQuoteDetails(Guid dealGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return GetQuoteDetailsAsync(dealGuid).Result;
+        }
+
+        /// <summary>
+        /// Gets quote details by deal GUID
+        /// </summary>
+        /// <param name="dealGuid">The deal GUID</param>
+        /// <returns>The quote details</returns>
+        public async Task<QuoteDetails> GetQuoteDetailsAsync(Guid dealGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.dealGuid = dealGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<QuoteDetails>("/Private/GetQuoteDetails", data).ConfigureAwait(false);
+        }
+
         #endregion //Private API
 
         #region Helpers
