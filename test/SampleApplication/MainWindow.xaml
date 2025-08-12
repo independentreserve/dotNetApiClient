@@ -224,9 +224,9 @@
                     <SampleApplication:TimeInForceComboBox SelectedValue="{Binding TimeInForce}" Width="150"></SampleApplication:TimeInForceComboBox>
                 </StackPanel>
 
-                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=maxResultsCount}">
-                    <TextBlock Style="{StaticResource Label}">Max results count:</TextBlock>
-                    <TextBox Text="{Binding MaxResultsCount, TargetNullValue={x:Static system:String.Empty}}" Width="100"></TextBox>
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=maxResultCount}">
+                    <TextBlock Style="{StaticResource Label}">Max result count:</TextBlock>
+                    <TextBox Text="{Binding MaxResultCount, TargetNullValue={x:Static system:String.Empty}}" Width="100"></TextBox>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="{Binding SelectedMethod, Converter={StaticResource MethodParameterToVisibilityConverter}, ConverterParameter=includeTotals}">

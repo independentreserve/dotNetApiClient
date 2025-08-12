@@ -127,8 +127,8 @@ namespace IndependentReserve.DotNetClientApi
         QuoteDetails ExecuteQuote(Guid quoteGuid);
         Task<QuoteDetails> ExecuteQuoteAsync(Guid quoteGuid);
 
-        IEnumerable<QuoteDetails> GetExecutedQuotes(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultsCount = null);
-        Task<IEnumerable<QuoteDetails>> GetExecutedQuotesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultsCount = null);
+        IEnumerable<QuoteDetails> GetExecutedQuotes(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultCount = null);
+        Task<IEnumerable<QuoteDetails>> GetExecutedQuotesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultCount = null);
 
         QuoteDetails GetQuoteDetails(Guid dealGuid);
         Task<QuoteDetails> GetQuoteDetailsAsync(Guid dealGuid);

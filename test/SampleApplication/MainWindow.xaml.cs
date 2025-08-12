@@ -376,7 +376,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetExecutedQuotes)
                     {
-                        await client.GetExecutedQuotesAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ToTimestampUtc, ViewModel.MaxResultsCount);
+                        await client.GetExecutedQuotesAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ToTimestampUtc, ViewModel.MaxResultCount);
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetQuoteDetails)
                     {

@@ -61,7 +61,7 @@ namespace SampleApplication.ViewModels
         private bool _includePosition;
         private string _withdrawalClientId;
         private string _blockchainTransactionId;
-        private int? _maxResultsCount;
+        private int? _maxResultCount;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -93,7 +93,7 @@ namespace SampleApplication.ViewModels
             _dealGuid = Guid.NewGuid().ToString();
             _includeTotals = true;
             _includePosition = false;
-            _maxResultsCount = 50;
+            _maxResultCount = 50;
 
             ApiConfig = apiConfig;
 
@@ -877,15 +877,15 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
-        /// Method parameter - max results count - used by private API method GetExecutedQuotes
+        /// Method parameter - max result count - used by private API method GetExecutedQuotes
         /// </summary>
-        public int? MaxResultsCount
+        public int? MaxResultCount
         {
-            get { return _maxResultsCount; }
+            get { return _maxResultCount; }
             set
             {
-                if (value == _maxResultsCount) return;
-                _maxResultsCount = value;
+                if (value == _maxResultCount) return;
+                _maxResultCount = value;
                 OnPropertyChanged();
             }
         }

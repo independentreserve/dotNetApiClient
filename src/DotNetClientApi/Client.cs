@@ -1734,13 +1734,13 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="primaryCurrency">The primary currency code</param>
         /// <param name="secondaryCurrency">The secondary currency code</param>
         /// <param name="toTimestampUtc">The timestamp to retrieve quotes up to</param>
-        /// <param name="maxResultsCount">The maximum number of results to return</param>
+        /// <param name="maxResultCount">The maximum number of results to return</param>
         /// <returns>A collection of executed quotes</returns>
-        public IEnumerable<QuoteDetails> GetExecutedQuotes(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultsCount = null)
+        public IEnumerable<QuoteDetails> GetExecutedQuotes(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultCount = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
-            return GetExecutedQuotesAsync(primaryCurrency, secondaryCurrency, toTimestampUtc, maxResultsCount).Result;
+            return GetExecutedQuotesAsync(primaryCurrency, secondaryCurrency, toTimestampUtc, maxResultCount).Result;
         }
 
         /// <summary>
@@ -1749,9 +1749,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <param name="primaryCurrency">The primary currency code</param>
         /// <param name="secondaryCurrency">The secondary currency code</param>
         /// <param name="toTimestampUtc">The timestamp to retrieve quotes up to</param>
-        /// <param name="maxResultsCount">The maximum number of results to return</param>
+        /// <param name="maxResultCount">The maximum number of results to return</param>
         /// <returns>A collection of executed quotes</returns>
-        public async Task<IEnumerable<QuoteDetails>> GetExecutedQuotesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultsCount = null)
+        public async Task<IEnumerable<QuoteDetails>> GetExecutedQuotesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultCount = null)
         {
             ThrowIfDisposed();
             ThrowIfPublicClient();
@@ -1765,9 +1765,9 @@ namespace IndependentReserve.DotNetClientApi
                 data.toTimestampUtc = DateTime.SpecifyKind(toTimestampUtc.Value, DateTimeKind.Utc).ToString("u", CultureInfo.InvariantCulture);
             }
             
-            if (maxResultsCount.HasValue)
+            if (maxResultCount.HasValue)
             {
-                data.maxResultsCount = maxResultsCount.Value.ToString(CultureInfo.InvariantCulture);
+                data.maxResultCount = maxResultCount.Value.ToString(CultureInfo.InvariantCulture);
             }
 
             return await HttpWorker.QueryPrivateAsync<IEnumerable<QuoteDetails>>("/Private/GetExecutedQuotes", data).ConfigureAwait(false);

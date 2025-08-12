@@ -639,7 +639,7 @@ namespace SampleApplication.ViewModels
                 {
                     Name = "GetExecutedQuotes",
                     Description = "GetExecutedQuotes",
-                    Parameters = new[] { "primaryCurrency", "secondaryCurrency", "toTimestampUtc", "maxResultsCount" }
+                    Parameters = new[] { "primaryCurrency", "secondaryCurrency", "toTimestampUtc", "maxResultCount" }
                 };
             }
         }

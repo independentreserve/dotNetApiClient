@@ -1132,7 +1132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"toTimestampUtc\": \"2022-08-01T09:00:00Z\",\n    \"maxResultsCount\": 50\n}",
+							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"toTimestampUtc\": \"2022-08-01T09:00:00Z\",\n    \"maxResultCount\": 50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
