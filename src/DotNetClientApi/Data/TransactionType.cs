@@ -1,63 +1,63 @@
 ﻿namespace IndependentReserve.DotNetClientApi.Data
 {
     /// <summary>
-    /// Defines the possible transaction types.
+    /// The set of possible transaction types. Used in the GetTransactions 'Type' response.
     /// </summary>
     public enum TransactionType
     {
         /// <summary>
-        /// A deposit from an external source.
+        /// A deposit of either fiat or crypto.
         /// </summary>
         Deposit = 0,
 
         /// <summary>
-        /// A withdrawal to an external destination.
+        /// A withdrawal of either fiat or crypto.
         /// </summary>
         Withdrawal = 1,
 
         /// <summary>
-        /// A transaction that is the result of a trade on the exchange.
-        /// A single trade is represented by two Trade transactions: one fiat and ony crypto.
+        /// A transaction that is the result of an order being filled (fully or partially) on the exchange.
+        /// A single trade on the exchange will result in two Trade transactions: one fiat and one crypto.
         /// </summary>
         Trade = 2,
 
         /// <summary>
-        /// Not used, or for system use only.
+        /// For internal use only; will not be seen by clients.
         /// </summary>
         Transfer = 3,
 
         /// <summary>
-        /// Trading fee.
+        /// The fee charged for trading.
         /// </summary>
         Brokerage = 4,
 
         /// <summary>
-        /// A withdrawal fee.
+        /// The fee charged for a fiat or crypto withdrawal.
         /// </summary>
         WithdrawalFee = 5,
 
         /// <summary>
-        /// Not used, or for system use only.
+        /// For internal use only; will not be seen by clients.
         /// </summary>
         BitcoinNetworkFee = 6,
 
         /// <summary>
-        /// Not used, or for system use only.
+        /// Deprecated; will not be seen by clients.
         /// </summary>
         Commission = 7,
 
         /// <summary>
-        /// Tax applied to brokerage and other fees.
+        /// Goods and Services Tax applied to brokerage and other services.
         /// </summary>
         GST = 8,
 
         /// <summary>
-        /// Not used, or for system use only.
+        /// For internal use only; will not be seen by clients.
         /// </summary>
         Unclaimed = 9,
 
         /// <summary>
-        /// Not used, or for system use only.
+        /// Deprecated; will not be seen by clients.
         /// </summary>
         Error = 10,
 
@@ -67,34 +67,34 @@
         DepositFee = 11,
 
         /// <summary>
-        /// Referral commission returned to the referral user.
+        /// Referral commission paid to the user who referred a client.
         /// </summary>
         ReferralCommission = 12,
 
         /// <summary>
-        /// Not used, or for system use only.
+        /// Deprecated; will not be seen by clients.
         /// </summary>
         AccountFee = 13,
 
         /// <summary>
-        /// Annual tax report fee.
+        /// Fee charged for generating certain statements, for example, the annual tax report.
         /// </summary>
         StatementFee = 14,
 
         /// <summary>
-        /// Referral bonus applied to a parent or child user.
+        /// Referral bonus applied to either a referring client or the referred client.
         /// </summary>
         ReferralBonus = 15,
 
         /// <summary>
-        /// Represents buying a crypto asset.
-        /// Both debit and credit transactions will use the Buy transaction type.
+        /// Represents the purchase of a crypto asset.
+        /// Both debit and credit transactions use the Buy transaction type.
         /// </summary>
         Buy = 16,
 
         /// <summary>
-        /// Represents selling a crypto asset.
-        /// Both debit and credit transactions will use the Sell transaction type.
+        /// Represents the sale of a crypto asset.
+        /// Both debit and credit transactions use the Sell transaction type.
         /// </summary>
         Sell = 17,
 
@@ -114,7 +114,7 @@
         PositionLiquidationFee = 20,
 
         /// <summary>
-        /// Leverage trading. Interest applied to the borrowed funds.
+        /// Leverage trading. Interest applied to borrowed funds.
         /// </summary>
         Interest = 21,
 
