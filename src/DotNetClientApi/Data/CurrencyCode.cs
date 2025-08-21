@@ -57,5 +57,7 @@
         Pol = 49,
         Sky = 50,
         Ausd = 51,
+        Bonk = 52,
+        Pengu = 53,
     }
 }
