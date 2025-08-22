@@ -55,5 +55,9 @@
         Avax = 47,
         Hype = 48,
         Pol = 49,
+        Sky = 50,
+        Ausd = 51,
+        Bonk = 52,
+        Pengu = 53,
     }
 }
