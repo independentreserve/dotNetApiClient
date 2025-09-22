@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "7006e776-bd9d-4f04-b1a3-9b7143924681",
-		"name": "Independent Reserve API - temp IR-9026",
+		"_postman_id": "afbd9e52-d17e-4acf-b121-1c02adb98248",
+		"name": "Independent Reserve API",
 		"description": "# Authentication and Private Methods\n\nIn order to access private endpoints, set the `ir-api-key` and `ir-api-secret` environment or collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "436652"
@@ -1126,13 +1126,13 @@
 					"response": []
 				},
 				{
-					"name": "GetExecutedQuotes",
+					"name": "GetExecutedDeals",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"toTimestampUtc\": \"2022-08-01T09:00:00Z\",\n    \"maxResultCount\": 50\n}",
+							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"toTimestamp\": \"2026-08-01T09:00:00Z\",\n    \"maxResultCount\": 50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1140,20 +1140,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{ir-api-url}}/Private/GetExecutedQuotes",
+							"raw": "{{ir-api-url}}/Private/GetExecutedDeals",
 							"host": [
 								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
-								"GetExecutedQuotes"
+								"GetExecutedDeals"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GetQuoteDetails",
+					"name": "GetDealDetails",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1167,13 +1167,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{ir-api-url}}/Private/GetQuoteDetails",
+							"raw": "{{ir-api-url}}/Private/GetDealDetails",
 							"host": [
 								"{{ir-api-url}}"
 							],
 							"path": [
 								"Private",
-								"GetQuoteDetails"
+								"GetDealDetails"
 							]
 						}
 					},

@@ -1,12 +1,13 @@
 /*
   {
     "DealGuid": "b5b0c52c-3100-4c13-abdd-959e99f97075",
-    "CreatedTimestampUtc": "2025-07-24T10:48:07.1368695+00:00",
+    "CreatedTimestamp": "2025-07-24T10:48:07.1368695+00:00",
     "PrimaryCurrencyCode": "Xbt",
     "SecondaryCurrencyCode": "Aud",
     "Side": "Buy",
     "Value": 544.3281,
-    "Volume": 0.01
+    "Volume": 0.01,
+    "Status": "Completed"
   }
 */
 
@@ -17,9 +18,9 @@ namespace IndependentReserve.DotNetClientApi.Data
 {
 
     /// <summary>
-    /// Represents detailed quote information including execution details
+    /// Represents detailed deal information including execution details
     /// </summary>
-    public class QuoteDetails
+    public class DealDetails
     {
         /// <summary>
         /// The deal GUID
@@ -29,7 +30,7 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// <summary>
         /// When the quote was created
         /// </summary>
-        public DateTime CreatedTimestampUtc { get; set; }
+        public DateTimeOffset CreatedTimestamp { get; set; }
 
         /// <summary>
         /// The primary currency code
@@ -55,5 +56,10 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// The volume traded
         /// </summary>
         public decimal Volume { get; set; }
+
+        /// <summary>
+        /// The status of the deal
+        /// </summary>
+        public string Status { get; set; }
     }
 } 

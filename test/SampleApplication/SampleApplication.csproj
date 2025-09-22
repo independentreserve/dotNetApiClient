@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Config\AppSettingsConfigProvider.cs" />
     <Compile Include="Converters\MethodParameterToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateTimeOffsetConverter.cs" />
     <Compile Include="Config\EnvironmentVariableConfigProvider.cs" />
     <Compile Include="Config\IConfigProvider.cs" />
     <Compile Include="CurrencyComboBox.cs" />

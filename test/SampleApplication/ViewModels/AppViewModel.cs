@@ -41,6 +41,7 @@ namespace SampleApplication.ViewModels
         private string _dealGuid;
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
+        private DateTimeOffset? _toTimestamp;
         private string _accountGuid;
         private decimal _withdrawalAmount;
         private string _withdrawalBankAccountName;
@@ -79,6 +80,7 @@ namespace SampleApplication.ViewModels
             _volumeCurrencyType = CurrencyType.Primary;
             _orderGuid = string.Empty;
             _toTimestampUtc = null;
+            _toTimestamp = DateTimeOffset.Now;
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
             _address = null;
@@ -218,8 +220,8 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetPrimaryCurrencyConfig2,
                         MethodMetadata.RequestQuote,
                         MethodMetadata.ExecuteQuote,
-                        MethodMetadata.GetExecutedQuotes,
-                        MethodMetadata.GetQuoteDetails,
+                        MethodMetadata.GetExecutedDeals,
+                        MethodMetadata.GetDealDetails,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -593,6 +595,20 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
+        /// Method parameter - ToTimestamp - used by private API method GetExecutedDeals
+        /// </summary>
+        public DateTimeOffset? ToTimestamp
+        {
+            get { return _toTimestamp; }
+            set
+            {
+                if (value.Equals(_toTimestamp)) return;
+                _toTimestamp = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Method parameter - AccountGuid - used by private API method GetTransactions
         /// </summary>
         public string AccountGuid
@@ -877,7 +893,7 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
-        /// Method parameter - max result count - used by private API method GetExecutedQuotes
+        /// Method parameter - max result count - used by private API method GetExecutedDeals
         /// </summary>
         public int? MaxResultCount
         {

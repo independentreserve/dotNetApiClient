@@ -124,13 +124,13 @@ namespace IndependentReserve.DotNetClientApi
         Quote RequestQuote(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType);
         Task<Quote> RequestQuoteAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType);
 
-        QuoteDetails ExecuteQuote(Guid quoteGuid);
-        Task<QuoteDetails> ExecuteQuoteAsync(Guid quoteGuid);
+        DealDetails ExecuteQuote(Guid quoteGuid);
+        Task<DealDetails> ExecuteQuoteAsync(Guid quoteGuid);
 
-        IEnumerable<QuoteDetails> GetExecutedQuotes(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultCount = null);
-        Task<IEnumerable<QuoteDetails>> GetExecutedQuotesAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTime? toTimestampUtc = null, int? maxResultCount = null);
+        IEnumerable<DealDetails> GetExecutedDeals(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTimeOffset? toTimestamp = null, int? maxResultCount = null);
+        Task<IEnumerable<DealDetails>> GetExecutedDealsAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTimeOffset? toTimestamp = null, int? maxResultCount = null);
 
-        QuoteDetails GetQuoteDetails(Guid dealGuid);
-        Task<QuoteDetails> GetQuoteDetailsAsync(Guid dealGuid);
+        DealDetails GetDealDetails(Guid dealGuid);
+        Task<DealDetails> GetDealDetailsAsync(Guid dealGuid);
     }
 }

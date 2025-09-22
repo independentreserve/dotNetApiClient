@@ -374,13 +374,13 @@ namespace SampleApplication
                     {
                         await client.ExecuteQuoteAsync(ParseGuid(ViewModel.QuoteGuid));
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetExecutedQuotes)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetExecutedDeals)
                     {
-                        await client.GetExecutedQuotesAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ToTimestampUtc, ViewModel.MaxResultCount);
+                        await client.GetExecutedDealsAsync(ViewModel.PrimaryCurrency, ViewModel.SecondaryCurrency, ViewModel.ToTimestamp, ViewModel.MaxResultCount);
                     }
-                    else if (ViewModel.SelectedMethod == MethodMetadata.GetQuoteDetails)
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDealDetails)
                     {
-                        await client.GetQuoteDetailsAsync(ParseGuid(ViewModel.DealGuid));
+                        await client.GetDealDetailsAsync(ParseGuid(ViewModel.DealGuid));
                     }
                     
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);

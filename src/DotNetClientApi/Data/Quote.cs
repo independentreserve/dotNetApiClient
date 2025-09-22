@@ -30,7 +30,7 @@ namespace IndependentReserve.DotNetClientApi.Data
         /// <summary>
         /// When the quote was created
         /// </summary>
-        public DateTime CreatedTimestampUtc { get; set; }
+        public DateTimeOffset CreatedTimestamp { get; set; }
 
         /// <summary>
         /// Maximum age of the quote in milliseconds

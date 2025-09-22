@@ -631,27 +631,27 @@ namespace SampleApplication.ViewModels
             }
         }
 
-        public static MethodMetadata GetExecutedQuotes
+        public static MethodMetadata GetExecutedDeals
         {
             get
             {
                 return new MethodMetadata()
                 {
-                    Name = "GetExecutedQuotes",
-                    Description = "GetExecutedQuotes",
-                    Parameters = new[] { "primaryCurrency", "secondaryCurrency", "toTimestampUtc", "maxResultCount" }
+                    Name = "GetExecutedDeals",
+                    Description = "GetExecutedDeals",
+                    Parameters = new[] { "primaryCurrency", "secondaryCurrency", "toTimestamp", "maxResultCount" }
                 };
             }
         }
 
-        public static MethodMetadata GetQuoteDetails
+        public static MethodMetadata GetDealDetails
         {
             get
             {
                 return new MethodMetadata()
                 {
-                    Name = "GetQuoteDetails",
-                    Description = "GetQuoteDetails",
+                    Name = "GetDealDetails",
+                    Description = "GetDealDetails",
                     Parameters = new[] { "dealGuid" }
                 };
             }
