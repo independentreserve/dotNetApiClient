@@ -7,6 +7,7 @@
     <Application.Resources>
          
         <converters:MethodParameterToVisibilityConverter x:Key="MethodParameterToVisibilityConverter"></converters:MethodParameterToVisibilityConverter>
+        <converters:DateTimeOffsetConverter x:Key="DateTimeOffsetConverter"></converters:DateTimeOffsetConverter>
         
         
         <Style TargetType="ComboBox">

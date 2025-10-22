@@ -41,6 +41,7 @@ namespace SampleApplication.ViewModels
         private string _dealGuid;
         private DateTime? _fromTimestampUtc;
         private DateTime? _toTimestampUtc;
+        private DateTimeOffset? _toTimestamp;
         private string _accountGuid;
         private decimal _withdrawalAmount;
         private string _withdrawalBankAccountName;
@@ -61,6 +62,7 @@ namespace SampleApplication.ViewModels
         private bool _includePosition;
         private string _withdrawalClientId;
         private string _blockchainTransactionId;
+        private int? _maxResultCount;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -78,6 +80,7 @@ namespace SampleApplication.ViewModels
             _volumeCurrencyType = CurrencyType.Primary;
             _orderGuid = string.Empty;
             _toTimestampUtc = null;
+            _toTimestamp = DateTimeOffset.Now;
             _withdrawalAmount = 50;
             _withdrawalBankAccountName = null;
             _address = null;
@@ -92,6 +95,7 @@ namespace SampleApplication.ViewModels
             _dealGuid = Guid.NewGuid().ToString();
             _includeTotals = true;
             _includePosition = false;
+            _maxResultCount = 50;
 
             ApiConfig = apiConfig;
 
@@ -214,6 +218,10 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.GetCryptoWithdrawalFees2,
                         MethodMetadata.GetPrimaryCurrencyConfig,
                         MethodMetadata.GetPrimaryCurrencyConfig2,
+                        MethodMetadata.RequestQuote,
+                        MethodMetadata.ExecuteQuote,
+                        MethodMetadata.GetExecutedDeals,
+                        MethodMetadata.GetDealDetails,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -587,6 +595,20 @@ namespace SampleApplication.ViewModels
         }
 
         /// <summary>
+        /// Method parameter - ToTimestamp - used by private API method GetExecutedDeals
+        /// </summary>
+        public DateTimeOffset? ToTimestamp
+        {
+            get { return _toTimestamp; }
+            set
+            {
+                if (value.Equals(_toTimestamp)) return;
+                _toTimestamp = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Method parameter - AccountGuid - used by private API method GetTransactions
         /// </summary>
         public string AccountGuid
@@ -867,6 +889,20 @@ namespace SampleApplication.ViewModels
                     OnPropertyChanged();
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - max result count - used by private API method GetExecutedDeals
+        /// </summary>
+        public int? MaxResultCount
+        {
+            get { return _maxResultCount; }
+            set
+            {
+                if (value == _maxResultCount) return;
+                _maxResultCount = value;
+                OnPropertyChanged();
             }
         }
 

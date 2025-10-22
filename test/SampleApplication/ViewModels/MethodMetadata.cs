@@ -605,6 +605,58 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata RequestQuote
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "RequestQuote",
+                    Description = "RequestQuote",
+                    Parameters = new[] { "primaryCurrency", "secondaryCurrency", "shopOrderType", "orderVolume", "volumeCurrencyType" }
+                };
+            }
+        }
+
+        public static MethodMetadata ExecuteQuote
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "ExecuteQuote",
+                    Description = "ExecuteQuote",
+                    Parameters = new[] { "quoteGuid" }
+                };
+            }
+        }
+
+        public static MethodMetadata GetExecutedDeals
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetExecutedDeals",
+                    Description = "GetExecutedDeals",
+                    Parameters = new[] { "primaryCurrency", "secondaryCurrency", "toTimestamp", "maxResultCount" }
+                };
+            }
+        }
+
+        public static MethodMetadata GetDealDetails
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDealDetails",
+                    Description = "GetDealDetails",
+                    Parameters = new[] { "dealGuid" }
+                };
+            }
+        }
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;

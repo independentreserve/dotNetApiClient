@@ -120,5 +120,17 @@ namespace IndependentReserve.DotNetClientApi
         Task<IEnumerable<DigitalCurrencyConfiguration>> GetPrimaryCurrencyConfig2();
 
         Task<IEnumerable<Transaction>> GetTransactionsByHash(string network, string transactionId);
+
+        Quote RequestQuote(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType);
+        Task<Quote> RequestQuoteAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType);
+
+        DealDetails ExecuteQuote(Guid quoteGuid);
+        Task<DealDetails> ExecuteQuoteAsync(Guid quoteGuid);
+
+        IEnumerable<DealDetails> GetExecutedDeals(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTimeOffset? toTimestamp = null, int? maxResultCount = null);
+        Task<IEnumerable<DealDetails>> GetExecutedDealsAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTimeOffset? toTimestamp = null, int? maxResultCount = null);
+
+        DealDetails GetDealDetails(Guid dealGuid);
+        Task<DealDetails> GetDealDetailsAsync(Guid dealGuid);
     }
 }

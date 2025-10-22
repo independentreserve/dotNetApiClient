@@ -1660,6 +1660,147 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<IEnumerable<Transaction>>("/Private/GetTransactionsByHash", data).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Requests a quote for trading
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="orderType">The order type (Buy/Sell)</param>
+        /// <param name="volume">The volume to trade</param>
+        /// <param name="volumeCurrencyType">The volume currency type (Primary/Secondary)</param>
+        /// <returns>A quote object</returns>
+        public Quote RequestQuote(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return RequestQuoteAsync(primaryCurrency, secondaryCurrency, orderType, volume, volumeCurrencyType).Result;
+        }
+
+        /// <summary>
+        /// Requests a quote for trading
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="orderType">The order type (Buy/Sell)</param>
+        /// <param name="volume">The volume to trade</param>
+        /// <param name="volumeCurrencyType">The volume currency type (Primary/Secondary)</param>
+        /// <returns>A quote object</returns>
+        public async Task<Quote> RequestQuoteAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, string orderType, decimal volume, CurrencyType volumeCurrencyType)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            data.orderType = orderType;
+            data.volume = volume.ToString(CultureInfo.InvariantCulture);
+            data.volumeCurrencyType = volumeCurrencyType.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<Quote>("/Private/RequestQuote", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Executes a quote
+        /// </summary>
+        /// <param name="quoteGuid">The quote GUID to execute</param>
+        /// <returns>The executed quote details</returns>
+        public DealDetails ExecuteQuote(Guid quoteGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return ExecuteQuoteAsync(quoteGuid).Result;
+        }
+
+        /// <summary>
+        /// Executes a quote
+        /// </summary>
+        /// <param name="quoteGuid">The quote GUID to execute</param>
+        /// <returns>The executed quote details</returns>
+        public async Task<DealDetails> ExecuteQuoteAsync(Guid quoteGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.quoteGuid = quoteGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<DealDetails>("/Private/ExecuteQuote", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets executed deals
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="toTimestamp">The timestamp to retrieve deals up to</param>
+        /// <param name="maxResultCount">The maximum number of results to return</param>
+        /// <returns>A collection of executed deals</returns>
+        public IEnumerable<DealDetails> GetExecutedDeals(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTimeOffset? toTimestamp = null, int? maxResultCount = null)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return GetExecutedDealsAsync(primaryCurrency, secondaryCurrency, toTimestamp, maxResultCount).Result;
+        }
+
+        /// <summary>
+        /// Gets executed deals
+        /// </summary>
+        /// <param name="primaryCurrency">The primary currency code</param>
+        /// <param name="secondaryCurrency">The secondary currency code</param>
+        /// <param name="toTimestamp">The timestamp to retrieve deals up to</param>
+        /// <param name="maxResultCount">The maximum number of results to return</param>
+        /// <returns>A collection of executed deals</returns>
+        public async Task<IEnumerable<DealDetails>> GetExecutedDealsAsync(CurrencyCode primaryCurrency, CurrencyCode secondaryCurrency, DateTimeOffset? toTimestamp = null, int? maxResultCount = null)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.primaryCurrencyCode = primaryCurrency.ToString();
+            data.secondaryCurrencyCode = secondaryCurrency.ToString();
+            
+            if (toTimestamp.HasValue)
+            {
+                data.toTimestamp = toTimestamp.Value.ToUniversalTime().ToString("u", CultureInfo.InvariantCulture);
+            }
+            
+            if (maxResultCount.HasValue)
+            {
+                data.maxResultCount = maxResultCount.Value.ToString(CultureInfo.InvariantCulture);
+            }
+
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<DealDetails>>("/Private/GetExecutedDeals", data).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets deal details by deal GUID
+        /// </summary>
+        /// <param name="dealGuid">The deal GUID</param>
+        /// <returns>The deal details</returns>
+        public DealDetails GetDealDetails(Guid dealGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return GetDealDetailsAsync(dealGuid).Result;
+        }
+
+        /// <summary>
+        /// Gets deal details by deal GUID
+        /// </summary>
+        /// <param name="dealGuid">The deal GUID</param>
+        /// <returns>The deal details</returns>
+        public async Task<DealDetails> GetDealDetailsAsync(Guid dealGuid)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.dealGuid = dealGuid.ToString();
+
+            return await HttpWorker.QueryPrivateAsync<DealDetails>("/Private/GetDealDetails", data).ConfigureAwait(false);
+        }
+
         #endregion //Private API
 
         #region Helpers
