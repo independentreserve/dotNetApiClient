@@ -59,5 +59,6 @@
         Ausd = 51,
         Bonk = 52,
         Pengu = 53,
+        Xaut = 54,
     }
 }
