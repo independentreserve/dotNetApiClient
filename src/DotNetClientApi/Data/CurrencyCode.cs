@@ -60,5 +60,6 @@
         Bonk = 52,
         Pengu = 53,
         Xaut = 54,
+        Audm = 55,
     }
 }
