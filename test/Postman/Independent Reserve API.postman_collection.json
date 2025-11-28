@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "afbd9e52-d17e-4acf-b121-1c02adb98248",
+		"_postman_id": "1756d7c0-9c1e-46fe-ba1e-9a861a36cc63",
 		"name": "Independent Reserve API",
 		"description": "# Authentication and Private Methods\n\nIn order to access private endpoints, set the `ir-api-key` and `ir-api-secret` environment or collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "436652"
+		"_exporter_id": "8540566"
 	},
 	"item": [
 		{
@@ -1070,114 +1070,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "RequestQuote",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"orderType\": \"Buy\",\n    \"volume\": \"0.1\",\n    \"volumeCurrencyType\": \"Primary\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ir-api-url}}/Private/RequestQuote",
-							"host": [
-								"{{ir-api-url}}"
-							],
-							"path": [
-								"Private",
-								"RequestQuote"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ExecuteQuote",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"quoteGuid\": \"ea52df75-47bf-4bd5-955d-28f1e739d34e\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ir-api-url}}/Private/ExecuteQuote",
-							"host": [
-								"{{ir-api-url}}"
-							],
-							"path": [
-								"Private",
-								"ExecuteQuote"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetExecutedDeals",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"toTimestamp\": \"2026-08-01T09:00:00Z\",\n    \"maxResultCount\": 50\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ir-api-url}}/Private/GetExecutedDeals",
-							"host": [
-								"{{ir-api-url}}"
-							],
-							"path": [
-								"Private",
-								"GetExecutedDeals"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetDealDetails",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"dealGuid\": \"e2e8bb12-a899-4d33-8824-4417e85fe236\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ir-api-url}}/Private/GetDealDetails",
-							"host": [
-								"{{ir-api-url}}"
-							],
-							"path": [
-								"Private",
-								"GetDealDetails"
-							]
-						}
-					},
-					"response": []
 				}
 			],
 			"description": "Private methods are accessed via HTTP POST and require a valid authentication token to be passed. Parameters for all private methods, including the three parameters to authenticate the call, must be posted as a JSON object.\n\nSee Pre-request Script to better understand how the authentication works.",
@@ -1273,6 +1165,224 @@
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Request for quote",
+			"item": [
+				{
+					"name": "RequestQuote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"orderType\": \"Buy\",\n    \"volume\": \"0.1\",\n    \"volumeCurrencyType\": \"Primary\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ir-api-url}}/rfq/quote",
+							"host": [
+								"{{ir-api-url}}"
+							],
+							"path": [
+								"rfq",
+								"quote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ExecuteQuote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quoteGuid\": \"ea52df75-47bf-4bd5-955d-28f1e739d34e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ir-api-url}}/rfq/quote/execute",
+							"host": [
+								"{{ir-api-url}}"
+							],
+							"path": [
+								"rfq",
+								"quote",
+								"execute"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetExecutedDeals",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"primaryCurrencyCode\": \"Xbt\",\n    \"secondaryCurrencyCode\": \"Aud\",\n    \"toTimestamp\": \"2026-08-01T09:00:00Z\",\n    \"maxResultCount\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ir-api-url}}/rfq/deal/executed",
+							"host": [
+								"{{ir-api-url}}"
+							],
+							"path": [
+								"rfq",
+								"deal",
+								"executed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDealDetails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dealGuid\": \"e2e8bb12-a899-4d33-8824-4417e85fe236\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ir-api-url}}/rfq/deal/details",
+							"host": [
+								"{{ir-api-url}}"
+							],
+							"path": [
+								"rfq",
+								"deal",
+								"details"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"\r",
+							"\r",
+							"const getVariable = (name) => {\r",
+							"\r",
+							"    // we try to get variable value from a few places\r",
+							"    // local variables, env variables, collection variables , global variables \r",
+							"    const value = pm.variables.get(name);\r",
+							"\r",
+							"    if (!value) {\r",
+							"        throw new Error(`Set ${name} collection or environment variable`)\r",
+							"    }\r",
+							"\r",
+							"    return value;\r",
+							"}\r",
+							"\r",
+							"const getConfig = () => {\r",
+							"\r",
+							"    const baseUrl = getVariable('ir-api-url');\r",
+							"    const apiKey = getVariable('ir-api-key');\r",
+							"    const apiSecret = getVariable('ir-api-secret');\r",
+							"\r",
+							"    return { baseUrl, apiKey, apiSecret };\r",
+							"}\r",
+							"\r",
+							"const getInitialPayload = () => {\r",
+							"    let requestBody = pm.request.body;\r",
+							"    if (requestBody.mode !== 'raw') {\r",
+							"        throw new Error('raw request type expected')\r",
+							"    }\r",
+							"\r",
+							"    return JSON.parse(requestBody.raw);\r",
+							"}\r",
+							"\r",
+							"const getNonce = () => Date.now();\r",
+							"\r",
+							"const getSignatureInput = (payload, endpointUrl) => {\r",
+							"\r",
+							"    const parameters = [endpointUrl];\r",
+							"\r",
+							"    for (const key in payload) {\r",
+							"        const valueByKey = payload[key];\r",
+							"        parameters.push(valueByKey === null ? `${key}=` : Array.isArray(valueByKey) ? `${key}=${valueByKey.join(',')}` : `${key}=${valueByKey}`);\r",
+							"    }\r",
+							"\r",
+							"    const message = parameters.join(',');\r",
+							"\r",
+							"    return message;\r",
+							"}\r",
+							"\r",
+							"const getSignature = (signatureInput, apiSecret) => {\r",
+							"    const signer = cryptoJs.HmacSHA256(signatureInput, apiSecret);\r",
+							"    return signer.toString(cryptoJs.enc.Hex).toUpperCase();\r",
+							"}\r",
+							"\r",
+							"const { baseUrl, apiKey, apiSecret } = getConfig();\r",
+							"\r",
+							"const payload = getInitialPayload();\r",
+							"payload.apiKey = apiKey;\r",
+							"\r",
+							"// expiry can be provided manually, no need to add nonce in this case\r",
+							"if (!payload.hasOwnProperty('expiry')) {\r",
+							"    payload.nonce = getNonce();\r",
+							"}\r",
+							"\r",
+							"const endpointUrl = baseUrl + pm.variables.replaceIn(pm.request.url.getPathWithQuery());\r",
+							"\r",
+							"const signatureInput = getSignatureInput(payload, endpointUrl);\r",
+							"\r",
+							"// console.log(signatureInput)\r",
+							"\r",
+							"payload.signature = getSignature(signatureInput, apiSecret);\r",
+							"\r",
+							"pm.request.headers.add({key: \"Content-Type\", value: \"application/json\"});\r",
+							"const new_body = JSON.stringify(payload)\r",
+							"// console.log(new_body)\r",
+							"pm.request.body.update(new_body, 'application/json');\r",
+							"\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
 						"exec": [
 							""
 						]
