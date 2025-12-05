@@ -1697,7 +1697,7 @@ namespace IndependentReserve.DotNetClientApi
             data.volume = volume.ToString(CultureInfo.InvariantCulture);
             data.volumeCurrencyType = volumeCurrencyType.ToString();
 
-            return await HttpWorker.QueryPrivateAsync<Quote>("/Private/RequestQuote", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<Quote>("/rfq/quote", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1725,7 +1725,7 @@ namespace IndependentReserve.DotNetClientApi
             var data = CreatePrivateRequest();
             data.quoteGuid = quoteGuid.ToString();
 
-            return await HttpWorker.QueryPrivateAsync<DealDetails>("/Private/ExecuteQuote", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<DealDetails>("/rfq/quote/execute", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1770,7 +1770,7 @@ namespace IndependentReserve.DotNetClientApi
                 data.maxResultCount = maxResultCount.Value.ToString(CultureInfo.InvariantCulture);
             }
 
-            return await HttpWorker.QueryPrivateAsync<IEnumerable<DealDetails>>("/Private/GetExecutedDeals", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<IEnumerable<DealDetails>>("/rfq/deal/executed", data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1798,7 +1798,7 @@ namespace IndependentReserve.DotNetClientApi
             var data = CreatePrivateRequest();
             data.dealGuid = dealGuid.ToString();
 
-            return await HttpWorker.QueryPrivateAsync<DealDetails>("/Private/GetDealDetails", data).ConfigureAwait(false);
+            return await HttpWorker.QueryPrivateAsync<DealDetails>("/rfq/deal/details", data).ConfigureAwait(false);
         }
 
         #endregion //Private API
