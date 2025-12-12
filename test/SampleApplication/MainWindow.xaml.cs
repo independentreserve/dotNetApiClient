@@ -352,17 +352,7 @@ namespace SampleApplication
                     }
                     else if (ViewModel.SelectedMethod == MethodMetadata.CancelOrders)
                     {
-                        var orderGuids = ViewModel.OrderGuids.Split(new []{',' }, StringSplitOptions.RemoveEmptyEntries).Select(o =>
-                        {
-                            var str = o.Trim();
-
-                            if (!Guid.TryParse(str, out var guidVal))
-                            {
-                                throw new Exception($"The value '{str}' - is not a valid Guid");
-                            }
-
-                            return guidVal;
-                        }).ToArray();
+                        var orderGuids = GetGuids(ViewModel.OrderGuids);
 
                         await client.CancelOrdersAsync(orderGuids);
                     }
@@ -381,6 +371,11 @@ namespace SampleApplication
                     else if (ViewModel.SelectedMethod == MethodMetadata.GetDealDetails)
                     {
                         await client.GetDealDetailsAsync(ParseGuid(ViewModel.DealGuid));
+                    }
+                    else if (ViewModel.SelectedMethod == MethodMetadata.GetDealTransactions)
+                    {
+                        var dealGuids = GetGuids(ViewModel.DealGuids);
+                        await client.GetDealTransactionsAsync(dealGuids);
                     }
                     
                     ViewModel.LastRequestResponse = FormatJson(client.LastResponseRaw);
@@ -463,6 +458,21 @@ namespace SampleApplication
             }
 
             return ParseGuid(guidString);
+        }
+
+        private static Guid[] GetGuids(string viewModelGuids)
+        {
+            return viewModelGuids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(o =>
+            {
+                var str = o.Trim();
+
+                if (!Guid.TryParse(str, out var guidVal))
+                {
+                    throw new Exception($"The value '{str}' - is not a valid Guid");
+                }
+
+                return guidVal;
+            }).ToArray();
         }
     }
 }

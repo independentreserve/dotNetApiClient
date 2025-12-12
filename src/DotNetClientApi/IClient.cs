@@ -132,5 +132,9 @@ namespace IndependentReserve.DotNetClientApi
 
         DealDetails GetDealDetails(Guid dealGuid);
         Task<DealDetails> GetDealDetailsAsync(Guid dealGuid);
+
+        DealTransactions[] GetDealTransactions(Guid[] rfqDealGuids);
+
+        Task<DealTransactions[]> GetDealTransactionsAsync(Guid[] rfqDealGuids);
     }
 }

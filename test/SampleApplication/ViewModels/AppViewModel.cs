@@ -63,6 +63,7 @@ namespace SampleApplication.ViewModels
         private string _withdrawalClientId;
         private string _blockchainTransactionId;
         private int? _maxResultCount;
+        private string _dealGuids;
 
         public AppViewModel(ApiConfig apiConfig)
         {
@@ -93,6 +94,7 @@ namespace SampleApplication.ViewModels
             _timeInForce = null;
             _quoteGuid = Guid.NewGuid().ToString();
             _dealGuid = Guid.NewGuid().ToString();
+            _dealGuids = string.Empty;
             _includeTotals = true;
             _includePosition = false;
             _maxResultCount = 50;
@@ -222,6 +224,7 @@ namespace SampleApplication.ViewModels
                         MethodMetadata.ExecuteQuote,
                         MethodMetadata.GetExecutedDeals,
                         MethodMetadata.GetDealDetails,
+                        MethodMetadata.GetDealTransactions,
                     }
                     .OrderBy(x => x.Name)
                     .ToArray();
@@ -562,6 +565,20 @@ namespace SampleApplication.ViewModels
             {
                 if (value == _dealGuid) return;
                 _dealGuid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Method parameter - deal guids - used by private API method GetDealTransactions
+        /// </summary>
+        public string DealGuids
+        {
+            get { return _dealGuids; }
+            set
+            {
+                if (value == _dealGuids) return;
+                _dealGuids = value;
                 OnPropertyChanged();
             }
         }
