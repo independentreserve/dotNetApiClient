@@ -1801,6 +1801,34 @@ namespace IndependentReserve.DotNetClientApi
             return await HttpWorker.QueryPrivateAsync<DealDetails>("/rfq/deal/details", data).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Gets transactions related to RFQ deals
+        /// </summary>
+        /// <param name="rfqDealGuids">target RFQ deal GUIDs</param>
+        /// <returns>A set of RFQ deal transactions</returns>
+        public DealTransactions[] GetDealTransactions(Guid[] rfqDealGuids)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+            return GetDealTransactionsAsync(rfqDealGuids).Result;
+        }
+
+        /// <summary>
+        /// Gets transactions related to RFQ deals
+        /// </summary>
+        /// <param name="rfqDealGuids">target RFQ deal GUIDs</param>
+        /// <returns>A set of RFQ deal transactions</returns>
+        public async Task<DealTransactions[]> GetDealTransactionsAsync(Guid[] rfqDealGuids)
+        {
+            ThrowIfDisposed();
+            ThrowIfPublicClient();
+
+            var data = CreatePrivateRequest();
+            data.rfqDealGuids = rfqDealGuids.Select(o => o.ToString()).ToArray();
+
+            return await HttpWorker.QueryPrivateAsync<DealTransactions[]>("/Private/GetDealTransactions", data).ConfigureAwait(false);
+        }
+
         #endregion //Private API
 
         #region Helpers

@@ -657,6 +657,19 @@ namespace SampleApplication.ViewModels
             }
         }
 
+        public static MethodMetadata GetDealTransactions
+        {
+            get
+            {
+                return new MethodMetadata()
+                {
+                    Name = "GetDealTransactions",
+                    Description = "GetDealTransactions",
+                    Parameters = new[] { "dealGuids" }
+                };
+            }
+        }
+
         public override bool Equals(Object obj)
         {
             return obj is MethodMetadata && this == (MethodMetadata) obj;

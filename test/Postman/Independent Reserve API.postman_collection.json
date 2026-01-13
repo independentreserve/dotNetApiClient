@@ -1281,6 +1281,32 @@
 								"rfq",
 								"deal",
 								"details"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDealTransactions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rfqDealGuids\": [\n        \"5053e267-6060-44a8-9ab6-77f36fed86df\",\n        \"309d8b71-868c-4408-9346-c5aca4c3efdb\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ir-api-url}}/Private/GetDealTransactions",
+							"host": [
+								"{{ir-api-url}}"
+							],
+							"path": [
+								"Private",
+								"GetDealTransactions"
 							]
 						}
 					},
