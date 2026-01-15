@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1756d7c0-9c1e-46fe-ba1e-9a861a36cc63",
+		"_postman_id": "16774985-2c33-44c1-a48b-d23ee8b1f343",
 		"name": "Independent Reserve API",
 		"description": "# Authentication and Private Methods\n\nIn order to access private endpoints, set the `ir-api-key` and `ir-api-secret` environment or collection variables.\n\nSee the `Pre-request Script` in the `Private` folder to see how requests are signed before being sent to the server.\n\nThis can be adopted in your own project and migrated to any other programming language.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -1301,13 +1301,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{ir-api-url}}/Private/GetDealTransactions",
+							"raw": "{{ir-api-url}}/rfq/deal/transactions",
 							"host": [
 								"{{ir-api-url}}"
 							],
 							"path": [
-								"Private",
-								"GetDealTransactions"
+								"rfq",
+								"deal",
+								"transactions"
 							]
 						}
 					},
