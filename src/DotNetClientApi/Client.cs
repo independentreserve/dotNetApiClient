@@ -922,6 +922,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves information about your Independent Reserve accounts in digital and fiat currencies
         /// </summary>
+        /// <remarks>
+        /// Only the accounts you hold are returned; an account is created the first time you use its currency, so treat a currency absent from the result as a zero balance
+        /// </remarks>
         public IEnumerable<Account> GetAccounts()
         {
             ThrowIfDisposed();
@@ -933,6 +936,9 @@ namespace IndependentReserve.DotNetClientApi
         /// <summary>
         /// Retrieves information about your Independent Reserve accounts in digital and fiat currencies
         /// </summary>
+        /// <remarks>
+        /// Only the accounts you hold are returned; an account is created the first time you use its currency, so treat a currency absent from the result as a zero balance
+        /// </remarks>
         public async Task<IEnumerable<Account>> GetAccountsAsync()
         {
             ThrowIfDisposed();

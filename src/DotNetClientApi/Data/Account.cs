@@ -3,7 +3,7 @@
 namespace IndependentReserve.DotNetClientApi.Data
 {
     /// <summary>
-    /// Your independent reserve bank account; when you confirm your user account we create accounts for you in digital and fiat currencies
+    /// Your Independent Reserve bank account in one currency; an account is created the first time you use its currency, so you may not have one in every currency
     /// </summary>
     public class Account
     {
